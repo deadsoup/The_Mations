@@ -74,8 +74,13 @@ public class Move : MonoBehaviour {
             
             if (battlecount == 2)
             {
+                bool i = true;
                 Debug.Log("아이템 등장");
-                Item.getItem(Random.Range(1,5));
+                if (i == true)
+                {
+                    Item.getItem();
+                    i = false;
+                }
                 
 
             }

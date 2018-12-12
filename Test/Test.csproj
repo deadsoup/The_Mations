@@ -307,6 +307,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\battle.cs" />
+    <Compile Include="Assets\Scripts\GameEvent.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Monster.cs" />
     <Compile Include="Assets\Scripts\Move.cs" />
     <Compile Include="Assets\Scripts\npc.cs" />
