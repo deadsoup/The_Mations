@@ -6,6 +6,9 @@ public class battle : MonoBehaviour {
 
     int pdamage;
     int edamage;
+
+    float eTime = 10.0f;
+
     public static bool battleaction;
     public static int i; //몬스터 배열 호출
 
@@ -30,6 +33,7 @@ public class battle : MonoBehaviour {
 
         if (npc.actiongage <= 0)
         {
+            npc.actiongage = 0f;
             npc.action = false;
             npc.eAction = true;
             npc.eActiongage = 10f;
@@ -59,6 +63,7 @@ public class battle : MonoBehaviour {
             npc.eAction = true;
             if (npc.eAction == true)
             {
+
                 npc.eActiongage = 10f;
                 npc.actiongage = 10.1f;
             }
@@ -96,10 +101,13 @@ public class battle : MonoBehaviour {
 
         if (npc.eActiongage <= 0)
         {
+            npc.eActiongage = 0f;
             npc.eAction = false;
             npc.action = true;
+            Debug.Log("턴 완료");
             if (npc.action == true)
             {
+                Debug.Log("A = 공격 / S = 스킬 / C = 캐릭터1 / D= 캐릭터2 / Space = 스킵");
                 npc.actiongage = 10.1f;
                 npc.eActiongage = 10f;
             }
@@ -170,17 +178,28 @@ public class battle : MonoBehaviour {
 
 
 
+            
 
-
-            if (npc.eAction == true) // 적 공격
+            if (npc.eAction == true ) // 적 공격
             {
-                if (npc.Hp[i] > 0)
+                
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("적의 턴입니다.");
+                    eTime += 10f;
+                }
+
+
+
+
+                if (npc.Hp[i] > 0 && eTime >= 20.0f)
                 {
                     enemyAttak();
                     Debug.Log("현재 남은 액션 게이지 = " + npc.eActiongage + "다");
                     Debug.Log(npc.name[i] + "은 " + npc.name[c] + "에게 " + edamage + "를 가했다.");
                     Debug.Log(npc.name[c] + "은 " + npc.Hp[c] + "가 남았다.");
                     Debug.Log(npc.eAction);
+                    eTime = 0f;
                 }
             }
 
@@ -199,6 +218,9 @@ public class battle : MonoBehaviour {
                 npc.eAction = false;
                 battleaction = false;
                 npc.huntCount[i]++;
+                npc.actiongage = 10f;
+                npc.eActiongage = 10f;
+
 
                 Debug.Log(npc.name[i]+"를 총"+ npc.huntCount[i] + "마리 해치웠다.");
                 npc.Hp[2] = 50;

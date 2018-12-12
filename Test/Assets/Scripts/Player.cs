@@ -14,6 +14,16 @@ public class Player : MonoBehaviour {
     public float actiongage;
     public int atk;
 
+    public int item1;
+    public int item2;
+
+    public int skill1;
+    public int skill2;
+    public int skill3;
+    public int skill4;
+
+
+
     [Header("2번 캐릭터")]
 
     public string name2;
@@ -24,6 +34,14 @@ public class Player : MonoBehaviour {
     public int evasion2;
     public float actiongage2;
     public int atk2;
+
+    public int item1_2;
+    public int item2_2;
+
+    public int skill1_2;
+    public int skill2_2;
+    public int skill3_2;
+    public int skill4_2;
 
 
     bool action = true;

@@ -13,7 +13,20 @@ public class npc : MonoBehaviour {
     public static int[] evasion = new int[6];
     public static int[] atk = new int[6];
 
+
     public static int[] huntCount = new int[6];
+
+    public static int[] item1 = new int[6];
+    public static int[] item2 = new int[6];
+
+    public static int[] skill1 = new int[6];
+    public static int[] skill2 = new int[6];
+    public static int[] skill3 = new int[6];
+    public static int[] skill4 = new int[6];
+
+
+
+
 
 
     public static float actiongage = 10.0f;
