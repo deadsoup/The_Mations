@@ -5,6 +5,9 @@ using UnityEngine;
 public class GameEvent : MonoBehaviour {
 
 
+    public GameObject battle;
+    public GameObject battlebutton;
+
 
     public static void hpMpRegen() // 10% 회복
     {
@@ -17,8 +20,12 @@ public class GameEvent : MonoBehaviour {
 
 
     }
-    
 
+    public  void battleStart()
+    {
+        battle.SetActive(true);
+        battlebutton.SetActive(false);
+    }
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Move : MonoBehaviour {
 
@@ -14,6 +15,10 @@ public class Move : MonoBehaviour {
 
     int TheBT;
 
+
+    GameObject charHp;
+    GameObject mobHp;
+
     // Use this for initialization
     void Start ()
     {
@@ -21,11 +26,18 @@ public class Move : MonoBehaviour {
         player = GetComponent<Player>();
         battle.battleaction = false;
 
+
+        charHp = GameObject.Find("charHp");
+        mobHp = GameObject.Find("mobHp");
+
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
+        charHp.GetComponent<Text>().text = "체력 : " + npc.Hp[1];
+
 
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -54,21 +66,24 @@ public class Move : MonoBehaviour {
 
 
 
-        if (battle.battleaction == false && Input.GetKeyDown(KeyCode.Space))
+        if (battle.battleaction == false && Input.GetKeyDown(KeyCode.M))
         {
             move++;
             Debug.Log(move + "만큼 이동합니다.");
             battlecount = Random.Range(1, 6);
             battle.i = Random.Range(2, 4);
+            Item.setItem = false;
+            Item.c = false;
+            Item.Q = 0;
 
 
-
-            if (battlecount == 6)
+            if (battlecount == 1)
             {
                 Debug.Log("전투 시작");
                 Debug.Log("A = 공격 / S = 스킬 / C = 캐릭터1 / D= 캐릭터2 / Space = 스킵");
                 battle.battleaction = true;
                 npc.action = true;
+               
 
             }
             
@@ -78,6 +93,12 @@ public class Move : MonoBehaviour {
                 Debug.Log("아이템 등장");
                 if (i == true)
                 {
+                    Item.Q = 10;
+                    Debug.Log("1번 캐릭터에게 아이템을 장착시키겠습니까? --- 1번 클릭 ---");
+                    Debug.Log("2번 캐릭터에게 아이템을 장착시키겠습니까? --- 2번 클릭 ---");
+
+                    Item.i = Random.Range(1, 5);
+                    Debug.Log(Item.i+"번 아이템 등장");
                     Item.getItem();
                     i = false;
                 }
