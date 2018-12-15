@@ -72,6 +72,12 @@ public class Player : MonoBehaviour {
         npc.evasion[1] = evasion;
         npc.atk[1] = atk;
 
+        npc.item1[1] = item1;
+        npc.item2[1] = item2;
+
+
+
+
         npc.name[4] = name2;
         npc.MaxHp[4] = MaxHp2;
         npc.Hp[4] = Hp2;
@@ -79,6 +85,10 @@ public class Player : MonoBehaviour {
         npc.Mp[4] = Mp2;
         npc.evasion[4] = evasion2;
         npc.atk[4] = atk2;
+
+        npc.item1[4] = item1_2;
+        npc.item2[4] = item2_2;
+
 
 
     }

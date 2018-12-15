@@ -23,7 +23,7 @@ public class npc : MonoBehaviour {
     public static int[] skill2 = new int[6];
     public static int[] skill3 = new int[6];
     public static int[] skill4 = new int[6];
-
+    
 
 
 
