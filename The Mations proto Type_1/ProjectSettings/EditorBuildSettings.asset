@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 4b8136d42f7b5784bb6aec06e26c2c44
+  - enabled: 1
+    path: Assets/Scenes/StoryScene.unity
+    guid: ec9ae0a935e693248834a6cfa3508de0
+  - enabled: 1
+    path: Assets/Scenes/CharScene.unity
+    guid: 5e78e399f630d7e44874e461e7f65be7
+  - enabled: 1
+    path: Assets/Scenes/OptionScene.unity
+    guid: 04b2bf8688857ec409b5dc9b6a82de26
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 5b46f1a1a722a5740a48cbde1229f711
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 0a93696daaf42164a850fa4f504ca5a2
+  - enabled: 1
+    path: Assets/Scenes/GameScene 1.unity
+    guid: 0081794aae540ea4398182d44d02e289
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 78713e48420c9984190d72c0f19fd120
+  - enabled: 1
+    path: Assets/Assets1/Scenes/SampleScene1.unity
+    guid: 0a90a9234374d0e4881350dd7b7f0eae
+  - enabled: 1
+    path: Assets/Assets/Scenes/Pyj_GameScene.unity
+    guid: 9d738359ba681714d8adba03d0393628
+  m_configObjects: {}
