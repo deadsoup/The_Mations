@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Test : MonoBehaviour {
     
+
+    //여기는 팀 프로젝트 팀원 1이다 
+
+
+
+
     public struct hero_1
     {
         public string name;
