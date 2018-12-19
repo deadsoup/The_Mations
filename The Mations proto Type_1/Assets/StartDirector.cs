@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class StartDirector : MonoBehaviour {
-    
-    
+
+   public static bool count;
     public void LoadStoryScene()
     {
-        SceneManager.LoadScene("StoryScene");
+            SceneManager.LoadScene("StoryScene");
+        
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+     void Update()
+    {
+        count = false;
         
-        
-
-        
-	}
+    }
 }

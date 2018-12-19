@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Testing : MonoBehaviour {
     public static int count;
@@ -12,30 +13,53 @@ public class Testing : MonoBehaviour {
     public GameObject Next;
     public GameObject Text4;
     public GameObject BattleGo;
+    public GameObject TitleGo;
+    public GameObject Intext;
     
     
+    public void Click3()
+    {
+        if (Option.Coin == 0)
+        {
+            SceneManager.LoadScene("Pyj_GameScene");
+        }
+    }
     public void Click2()
     {
-       
-        SceneManager.LoadScene("Pyj_GameScene");
-        
+        if (Option.Coin == 0)
+        {
+            Intext.SetActive(true);
+        }
+    }
+    public void Click4()
+    {
+        if (Option.Coin == 0)
+        {
+            Intext.SetActive(false);
+        }
     }
     
     public void Click()
     {
-        Next.SetActive(false);
-        HwakDae.SetActive(true);
-        Text4.SetActive(true);
+        if (Option.Coin == 0)
+        {
+            Next.SetActive(false);
+            HwakDae.SetActive(true);
+            Text4.SetActive(true);
+        }
     }
     // Use this for initialization
 	void Start () {
-		
-	}
+        StartDirector.count = true;
+       
+        Option.Coin = 0;
+        count = 0;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-    
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetMouseButtonDown(0) && Option.Coin == 0)
         {
             count++;
         }
@@ -54,5 +78,8 @@ public class Testing : MonoBehaviour {
 
         }
         
+        
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SoundControl : MonoBehaviour {
 
@@ -11,7 +12,10 @@ public class SoundControl : MonoBehaviour {
     int Bgmcount=0;
     int Secount=0;
 
-
+    public void Click31()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
     public void Click1()
     {
         

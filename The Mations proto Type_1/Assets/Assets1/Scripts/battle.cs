@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class battle : MonoBehaviour {
 
+    
     int pdamage;
     int edamage;
 
@@ -376,6 +377,7 @@ public class battle : MonoBehaviour {
                 npc.Hp[3] = 70;
 
                 SceneManager.LoadScene("Pyj_GameScene");
+                QuestDirector. count = 1;
             }
         }
 
