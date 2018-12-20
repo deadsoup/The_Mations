@@ -40,7 +40,7 @@ public class Test3 : MonoBehaviour
 
         JsonData jsonData = JsonMapper.ToJson(playerInfoList);
 
-        File.WriteAllText(Application.dataPath + "/JsonData/PlayerInfoData.json", jsonData.ToString()); 
+        File.WriteAllText(Application.dataPath + "/PlayerInfoData.json", jsonData.ToString()); 
         //파일에 전부 텍스트로 쓴다 (어플리케이션가 설치된 주소를 기록 + "Json파일을 설치할 폴더 위치와 파일명 기입", 그리고 jsonData를 문자열로 해달라)
 
     }
