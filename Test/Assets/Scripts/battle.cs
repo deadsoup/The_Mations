@@ -68,6 +68,8 @@ public class battle : MonoBehaviour {
 
             PlusDamage = 0;
 
+            FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
+
             if (npc.actiongage <= 0)
             {
                 npc.actiongage = 0f;
@@ -95,11 +97,12 @@ public class battle : MonoBehaviour {
         attackButton.SetActive(false);
         targetButton.SetActive(true);
 
+
     }
 
 
 
-        public void skillAttak()
+public void skillAttak()
     {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 5.0f) // 플레이어 공격
         {
@@ -115,7 +118,7 @@ public class battle : MonoBehaviour {
 
             npc.Hp[i] -= pdamage;
 
-
+            FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
 
             if (npc.actiongage <= 0)
             {
@@ -185,8 +188,9 @@ public class battle : MonoBehaviour {
         if (edamage <= 0) { edamage = 0; }
 
         npc.Hp[c] -= edamage;
-        
 
+
+        FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
         if (npc.eActiongage <= 0)
         {
 
@@ -254,6 +258,7 @@ public class battle : MonoBehaviour {
     {
         eTime +=Time.deltaTime;
 
+        
         if (battleaction == true)
         {
             mobHp.SetActive(true);

@@ -19,6 +19,16 @@ public class Move : MonoBehaviour {
     GameObject charHp;
     GameObject mobHp;
 
+    void Test()
+    {
+        print("Test");
+        int i = Random.Range(1000,5000);
+        FloatingTextController.CreateFloatingText(i.ToString(), transform);
+        FloatingTextController.CreateFloatingText2(i.ToString(), transform);
+
+    }
+
+
     // Use this for initialization
     void Start ()
     {
@@ -35,11 +45,18 @@ public class Move : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
+        FloatingTextController.Initialize();
+        FloatingTextController.Initialize2();
         charHp.GetComponent<Text>().text = "체력 : " + npc.Hp[i];
 
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Test();
 
-        if (Input.GetKeyDown(KeyCode.O))
+        }
+
+
+            if (Input.GetKeyDown(KeyCode.O))
         {
             Debug.Log("***********" + npc.name[1] + "의 정보입니다"+"***********");
             Debug.Log("***********"+"현재 최대 체력은  " + npc.MaxHp[1] + "***********");

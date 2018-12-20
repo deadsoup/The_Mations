@@ -21,6 +21,20 @@ public class Item : MonoBehaviour {
     static bool get4_2;
 
 
+    public static int consumEnum;
+
+
+    public static void consum()
+    {
+        if (consumEnum > 0)
+        {
+            GameEvent.hpMpRegen();
+            consumEnum--;
+        }
+
+    }
+
+
 
     public static void getItem()
     {
@@ -227,8 +241,9 @@ public class Item : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+
+        consumEnum = 10;
+}
 	
 	// Update is called once per frame
 	void Update ()
@@ -237,5 +252,14 @@ public class Item : MonoBehaviour {
         {
             getItem();
         }
+
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            consum();
+            Debug.Log("현재 회복약 : 남은 갯수 "+consumEnum);
+        }
+
+
     }
 }
