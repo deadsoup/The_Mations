@@ -1,1 +1,17 @@
-{"Item":[{"Id":0,"Name":"\uAD8C\uCD1D","Text":"\uC774\uAC83\uC740 \uCD1D\uC774\uB2E4.","MaxHp":0,"MaxMp":0,"Str":1,"Dex":0,"Wis":0},{"Id":1,"Name":"\uD5EC\uBA67","Text":"\uBA38\uB9AC\uBCF4\uD638\uAD6C\uB2E4.","MaxHp":10,"MaxMp":0,"Str":0,"Dex":1,"Wis":0},{"Id":2,"Name":"\uAC11\uC637","Text":"\uACBD\uCC30\uBCF4\uD638\uAD6C\uB2E4.","MaxHp":15,"MaxMp":0,"Str":0,"Dex":1,"Wis":0},{"Id":3,"Name":"\uC9C0\uB2A5\uD5A5\uC0C1\uAE30","Text":"\uB611\uB611\uD574\uC9C0\uB294 \uAC83 \uAC19\uB2E4.","MaxHp":0,"MaxMp":0,"Str":0,"Dex":0,"Wis":1}]}
+[{"Id":0,"Type":1,"Name":"\uB2E8\uAC80","Grade":"\uBCF4\uD1B5","Text":"\uC791\uC740 \uCE7C\uC774\uB2E4. \uD53C\uD574\uB7C9 + 1",
+"MaxHp":0,"MaxMp":0,"Str":1,"Dex":0,"Wis":0,"IconName":"W_Dagger001","Stackable":false},
+
+{"Id":1,"Type":1,"Name":"\uD1B1","Grade":"\uBCF4\uD1B5","Text":"\uBAA9\uC7AC\uC6A9 \uD1B1. \uD53C\uD574\uB7C9 + 1",
+"MaxHp":0,"MaxMp":0,"Str":1,"Dex":0,"Wis":0,"IconName":"W_Sword007","Stackable":false},
+
+{"Id":2,"Type":1,"Name":"\uAD8C\uCD1D","Grade":"\uBCF4\uD1B5","Text":"\uC18C\uAD6C\uACBD \uAD8C\uCD1D. \uD53C\uD574\uB7C9 + 2",
+"MaxHp":0,"MaxMp":0,"Str":2,"Dex":0,"Wis":0,"IconName":"W_Gun001","Stackable":false},
+
+{"Id":3,"Type":1,"Name":"\uC7A5\uAC80","Grade":"\uACE0\uAE09","Text":"\uC11C\uC591\uC2DD \uC591\uB0A0\uAC80. \uD53C\uD574\uB7C9 + 3",
+"MaxHp":0,"MaxMp":0,"Str":3,"Dex":0,"Wis":0,"IconName":"W_Sword001","Stackable":false},
+
+{"Id":4,"Type":1,"Name":"\uB808\uC774\uC800\uAC80","Grade":"\uACE0\uAE09","Text":"**\uC6CC\uC988\uC758 \uAD11\uC120\uAC80. \uD53C\uD574\uB7C9 + 3",
+"MaxHp":0,"MaxMp":0,"Str":3,"Dex":0,"Wis":0,"IconName":"W_Sword017","Stackable":false},
+
+{"Id":5,"Type":1,"Name":"\uBCD1\uAC74","Grade":"\uD76C\uADC0","Text":"\uBCD1-\uAC74. \uD53C\uD574\uB7C9 + 4",
+"MaxHp":0,"MaxMp":0,"Str":4,"Dex":0,"Wis":0,"IconName":"I_Cannon01","Stackable":false}]
