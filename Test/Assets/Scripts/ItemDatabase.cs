@@ -6,7 +6,7 @@ using System.IO;
 
 public class ItemDatabase : MonoBehaviour
 {
-    public List<Equip> database = new List<Equip>();
+    public  List<Equip> database = new List<Equip>();
     private JsonData itemData;
 
 
@@ -19,15 +19,18 @@ public class ItemDatabase : MonoBehaviour
         //saveJson();
     }
 
+    
+
     public Equip FetchItemByID(int id)
     {
-        for (int i = 0; i < itemData.Count; i++)
+        for (int i = 0; i < database.Count; i++)
         {
             if (database[i].Id == id)
-                return database[i];
+             return database[i]; 
         }
         return null;
     }
+
     /*
     void saveJson()
     {
@@ -44,7 +47,7 @@ public class ItemDatabase : MonoBehaviour
     }
     */
 
-    
+
     void ContructItemDatabase()
     {
         for (int i = 0; i < itemData.Count; i++)
@@ -63,8 +66,9 @@ public class ItemDatabase : MonoBehaviour
                     (int)itemData[i]["Wis"],
                     itemData[i]["IconName"].ToString(),
                     (bool)itemData[i]["Stackable"]));
-        }
 
+
+        }
     }
 
 }

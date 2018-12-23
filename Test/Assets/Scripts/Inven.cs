@@ -16,7 +16,6 @@ public class Inven : MonoBehaviour
     public static int Dex;
     public static int Wis;
 
-<<<<<<< HEAD
     public Inven(int id, string name, string text, int maxHp, int maxMp, int str, int dex, int wis)
     {
         Id = id;
@@ -39,9 +38,6 @@ public class Inven : MonoBehaviour
     public GameObject InvenSlot;
     public GameObject InvenItem;
     
-
-
-
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
 
@@ -56,8 +52,7 @@ public class Inven : MonoBehaviour
     {
 
         database = GetComponent<ItemDatabase>();
-
-        slotAmount = Random.Range(1,10);
+        slotAmount = 9;
         randomAdd = Random.Range(0, 6);
         randomAdd1 = Random.Range(0, 6);
         randomAdd2 = Random.Range(0, 6);
@@ -71,20 +66,17 @@ public class Inven : MonoBehaviour
         {
             items.Add(new Equip());
             slots.Add(Instantiate(InvenSlot));
+            slots[i].GetComponent<slot>().id = i;
             slots[i].transform.SetParent(Slotpanel.transform);
-
+            //print(new Equip());
 
         }
-        AddItem(randomAdd);
-        AddItem(randomAdd1);
-        AddItem(randomAdd2);
-
+        AddItem(1);
     }
 
     public void AddItem(int id)
     {
         Equip itemToAdd = database.FetchItemByID(id);
-
         if (itemToAdd.Stackable && Check_Item_In_Inventory(itemToAdd))
         {
             for (int i = 0; i < items.Count; i++)
@@ -97,25 +89,35 @@ public class Inven : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < items.Count; i++)
+        else
         {
-            if (items[i].Id == -1)
+            for (int i = 0; i < items.Count; i++)
             {
-                items[i] = itemToAdd;
-                GameObject itemObj = Instantiate(InvenItem);
-                itemObj.transform.SetParent(slots[i].transform);
-                itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
-                itemObj.transform.position = Vector2.zero;
-                itemObj.name = itemToAdd.Name;
-                break;
+                if (items[i].Id == -1)
+                {
+                    items[i] = itemToAdd;
+                    GameObject itemObj = Instantiate(InvenItem);
+                    itemObj.GetComponent<ItemData>().equip = itemToAdd;
+                    itemObj.GetComponent<ItemData>().slot = i;
+                    itemObj.transform.SetParent(slots[i].transform);
+                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                    itemObj.transform.position = Vector2.zero;
+                    itemObj.name = itemToAdd.Name;
+
+                    
+                    npc.Equip_MaxHp.Add(database.database[i].MaxHp);
+                    npc.Equip_MaxMp.Add(itemToAdd.MaxMp);
+                    npc.Equip_Str.Add(itemToAdd.Str);
+                    npc.Equip_Dex.Add(itemToAdd.Dex);
+                    npc.Equip_Wis.Add(itemToAdd.Wis);
+                    break;
 
 
+
+                }
 
             }
-
         }
-
     }
 
     bool Check_Item_In_Inventory(Equip equip)

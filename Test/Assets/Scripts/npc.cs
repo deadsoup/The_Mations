@@ -29,7 +29,17 @@ public class npc : MonoBehaviour {
     public static int[] skill2 = new int[6];
     public static int[] skill3 = new int[6];
     public static int[] skill4 = new int[6];
-    
+
+    public static List<int> Equip_MaxHp = new List<int>();
+    public static List<int> Equip_MaxMp = new List<int>();
+    public static List<int> Equip_Str = new List<int>();
+    public static List<int> Equip_Dex = new List<int>();
+    public static List<int> Equip_Wis = new List<int>();
+
+    ItemDatabase database;
+
+
+
 
 
 
@@ -46,8 +56,10 @@ public class npc : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        database = GetComponent<ItemDatabase>();
+        Debug.Log(database.database[1].Str);
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
