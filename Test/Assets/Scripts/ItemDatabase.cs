@@ -39,12 +39,14 @@ public class ItemDatabase : MonoBehaviour
     /*
     void saveJson()
     {
-        playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0, 0, 1, 0, 0, "W_Dagger001", false));
-        playerInfoList.Add(new Equip(1, 1, "톱", "보통", "목재용 톱. 피해량 + 1", 0, 0, 1, 0, 0, "W_Sword007", false));
-        playerInfoList.Add(new Equip(2, 1, "권총", "보통", "소구경 권총. 피해량 + 2", 0, 0, 2, 0, 0, "W_Gun001", false));
-        playerInfoList.Add(new Equip(3, 1, "장검", "고급", "서양식 양날검. 피해량 + 3", 0, 0, 3, 0, 0, "W_Sword001", false));
-        playerInfoList.Add(new Equip(4, 1, "레이저검", "고급", "**워즈의 광선검. 피해량 + 3", 0, 0, 3, 0, 0, "W_Sword017", false));
-        playerInfoList.Add(new Equip(5, 1, "병건", "희귀", "병-건. 피해량 + 4", 0, 0, 4, 0, 0, "I_Cannon01", false));
+        playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0, 0, 0, 0, 1, 0, 0, "W_Dagger001", false));
+        playerInfoList.Add(new Equip(1, 1, "톱", "보통", "목재용 톱. 피해량 + 1", 0, 0, 0, 0, 1, 0, 0, "W_Sword007", false));
+        playerInfoList.Add(new Equip(2, 1, "권총", "보통", "소구경 권총. 피해량 + 2", 0, 0, 0, 0, 2, 0, 0, "W_Gun001", false));
+        playerInfoList.Add(new Equip(3, 1, "장검", "고급", "서양식 양날검. 피해량 + 3", 0, 0, 0, 0, 3, 0, 0, "W_Sword001", false));
+        playerInfoList.Add(new Equip(4, 1, "레이저검", "고급", "**워즈의 광선검. 피해량 + 3", 0, 0, 0, 0, 3, 0, 0, "W_Sword017", false));
+        playerInfoList.Add(new Equip(5, 1, "병건", "희귀", "병-건. 피해량 + 4", 0, 0, 0, 0, 4, 0, 0, "I_Cannon01", false));
+
+        playerInfoList.Add(new Equip(30, 3, "체력약", "보통", "응급처치약이다. 회복량 + 50", 0, 50, 0, 0, 4, 0, 0, "I_Cannon01", true));
 
         JsonData jsonData = JsonMapper.ToJson(playerInfoList);
 
@@ -64,8 +66,10 @@ public class ItemDatabase : MonoBehaviour
                     itemData[i]["Name"].ToString(),
                     itemData[i]["Grade"].ToString(),
                     itemData[i]["Text"].ToString(), 
-                    (int)itemData[i]["MaxHp"], 
-                    (int)itemData[i]["MaxMp"], 
+                    (int)itemData[i]["MaxHp"],
+                    (int)itemData[i]["Hp"],
+                    (int)itemData[i]["MaxMp"],
+                    (int)itemData[i]["Mp"],
                     (int)itemData[i]["Str"], 
                     (int)itemData[i]["Dex"], 
                     (int)itemData[i]["Wis"],
@@ -87,7 +91,9 @@ public class Equip
     public string Grade;
     public string Text;
     public int MaxHp;
+    public int Hp;
     public int MaxMp;
+    public int Mp;
     public int Str;
     public int Dex;
     public int Wis;
@@ -96,7 +102,7 @@ public class Equip
 
     public Sprite sprite;
 
-    public Equip(int id, int type, string name, string grade, string text, int maxHp, int maxMp, int str, int dex, int wis, string iconName, bool stackable)
+    public Equip(int id, int type, string name, string grade, string text, int maxHp, int hp, int maxMp, int mp, int str, int dex, int wis, string iconName, bool stackable)
     {
         Id = id;
         Type = type;
@@ -104,7 +110,9 @@ public class Equip
         Grade = grade;
         Text = text;
         MaxHp = maxHp;
+        Hp = hp;
         MaxMp = maxMp;
+        Mp = mp;
         Str = str;
         Dex = dex;
         Wis = wis;

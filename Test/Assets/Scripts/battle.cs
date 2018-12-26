@@ -203,7 +203,7 @@ public void skillAttak()
 
     public void enemyAttak()
     {
-        npc.eActiongage -= 3.0f;
+        npc.eActiongage -= 10.0f;
         eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
         int randomDamage = Random.Range(1, 7);

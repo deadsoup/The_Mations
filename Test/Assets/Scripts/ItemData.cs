@@ -9,15 +9,26 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Equip equip;
     public int amount;
     public int slot;
-    public Inven inven;
+    Inven inven;
     private Transform originalParent;
     private Inven inv;
     private Vector2 offset;
 
+    GameObject invenItem;
+
+
     void Start()
     {
         inv = GameObject.Find("Inven").GetComponent<Inven>();
+        invenItem = GameObject.Find("Inven");
+
     }
+
+    public void use()
+    {
+        inv.Use(equip.Id);
+    }
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {

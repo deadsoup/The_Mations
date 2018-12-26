@@ -1,4 +1,5 @@
 {"data": [
-{"Id": 1, "Name":"\uC544\uB9AC\uC218","MaxHp":100,"Hp":100,"MaxMp":100,"Mp":100,"Str":5,"Dex":5,"Wis":5},
-{"Id": 2,"Name":"\uAE40\uC218\uD55C\uBB34","MaxHp":90,"Hp":90,"MaxMp":100,"Mp":100,"Str":6,"Dex":4,"Wis":4}
+{"Id": 1, "Name":"\uC740\uD558","MaxHp":150,"Hp":150,"MaxMp":200,"Mp":200,"Str":20,"Dex":5,"Wis":50},
+{"Id": 2,"Name":"\uD55C\uD604\uC218","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30}
+
 ] } 

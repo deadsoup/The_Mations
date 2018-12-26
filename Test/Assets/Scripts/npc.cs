@@ -41,7 +41,7 @@ public class npc : MonoBehaviour {
 
 
 
-
+    //\uC544\uB9AC\uC218 아리수
 
 
     public static float actiongage = 10.0f;

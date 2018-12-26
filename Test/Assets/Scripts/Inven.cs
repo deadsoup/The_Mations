@@ -37,7 +37,10 @@ public class Inven : MonoBehaviour
 
     public GameObject InvenSlot;
     public GameObject InvenItem;
-    
+
+    public GameObject UsePanel;
+
+
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
 
@@ -70,23 +73,17 @@ public class Inven : MonoBehaviour
             slots[i].name = "slots" + i.ToString();
             slots[i].transform.SetParent(Slotpanel.transform);
             //print(new Equip());
-
         }
-        
-    }
+
+        print(database.FetchItemByID(30).Name);
+            }
 
     private void Update()
     {
         // 아이템추가
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddItem(0);
-        }
-
-        // 아이템 삭제
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            deleteItem("slots0");
+            AddItem(30);
         }
     }
 
@@ -125,7 +122,55 @@ public class Inven : MonoBehaviour
 
     }
 
+    public void Use(int a)
+    {
+        if(a == 30)
+                UsePanel.SetActive(true);
+    }
+    /*
+     * item data 스크립트를 아이템이 들고있늗데
+     * 여기에 함수를 만들어
+     * 게임오브젝트 인벤을 찾아
+     * 그리고 자기가 들고있ㄲ는 스크립트 itemdata에서 그 함수를 실행해
+     * 그 함수는 찾은 인벤이 들고있는 use item을 실행하는 함수
+    */
 
+    public void UsePotion()
+    {
+        Equip itemToAdd = database.FetchItemByID(30);
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].Name == "체력약" && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+            {
+                items[i] = itemToAdd;
+                ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                data.amount--;
+                data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                Add_Status(1, itemToAdd);
+                print(itemToAdd.Hp);
+
+                if (npc.Hp[1] >= npc.MaxHp[1])
+                {
+                    npc.Hp[1] = npc.MaxHp[1];
+                }
+
+
+                if (data.amount <= 0)
+                {
+                            // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                            var children = slots[i].GetComponentInChildren<ItemData>();
+                            GameObject obj = children.gameObject;
+                            Destroy(obj);
+                            // 아이템정보 초기화 (id -1로변경)
+                            items[i] = new Equip();
+                            break;
+                   
+
+                }
+            }
+        }
+    }
 
 
 
@@ -177,7 +222,9 @@ public class Inven : MonoBehaviour
     void Add_Status(int unitIdx, Equip equip)
     {
         npc.Equip_MaxHp[unitIdx] += equip.MaxHp;
+        npc.Hp[unitIdx] += equip.Hp;
         npc.Equip_MaxMp[unitIdx] += equip.MaxMp;
+        npc.Mp[unitIdx] += equip.Mp;
         npc.Equip_Str[unitIdx] += equip.Str;
         npc.Equip_Dex[unitIdx] += equip.Dex;
         npc.Equip_Wis[unitIdx] += equip.Wis;
