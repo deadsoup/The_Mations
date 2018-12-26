@@ -30,13 +30,12 @@ public class npc : MonoBehaviour {
     public static int[] skill3 = new int[6];
     public static int[] skill4 = new int[6];
 
-    public static List<int> Equip_MaxHp = new List<int>();
-    public static List<int> Equip_MaxMp = new List<int>();
-    public static List<int> Equip_Str = new List<int>();
-    public static List<int> Equip_Dex = new List<int>();
-    public static List<int> Equip_Wis = new List<int>();
+    public static int[] Equip_MaxHp = new int[6];
+    public static int[] Equip_MaxMp = new int[6];
+    public static int[] Equip_Str = new int[6];
+    public static int[] Equip_Dex = new int[6];
+    public static int[] Equip_Wis = new int[6];
 
-    ItemDatabase database;
 
 
 
@@ -56,8 +55,6 @@ public class npc : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        database = GetComponent<ItemDatabase>();
-        Debug.Log(database.database[1].Str);
 
     }
 	

@@ -9,7 +9,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Equip equip;
     public int amount;
     public int slot;
-
+    public Inven inven;
     private Transform originalParent;
     private Inven inv;
     private Vector2 offset;
@@ -47,6 +47,15 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
     }
-    
+
+    public void Delete()
+    {
+        Debug.Log("돼지");
+        inven = GameObject.Find("Inven").GetComponent<Inven>();
+        inven.deleteItem("slots0");
+    }
+
+
+
 
 }

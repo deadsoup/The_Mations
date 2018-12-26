@@ -52,7 +52,7 @@ public class Inven : MonoBehaviour
     {
 
         database = GetComponent<ItemDatabase>();
-        slotAmount = 9;
+        slotAmount = 2;
         randomAdd = Random.Range(0, 6);
         randomAdd1 = Random.Range(0, 6);
         randomAdd2 = Random.Range(0, 6);
@@ -67,12 +67,67 @@ public class Inven : MonoBehaviour
             items.Add(new Equip());
             slots.Add(Instantiate(InvenSlot));
             slots[i].GetComponent<slot>().id = i;
+            slots[i].name = "slots" + i.ToString();
             slots[i].transform.SetParent(Slotpanel.transform);
             //print(new Equip());
 
         }
-        AddItem(1);
+        
     }
+
+    private void Update()
+    {
+        // 아이템추가
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AddItem(0);
+        }
+
+        // 아이템 삭제
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            deleteItem("slots0");
+        }
+    }
+
+    public void deleteItem(string name)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (slots[i].name == name)
+            {
+                // 아이템 삭제전 플레이어 능력치 감소
+                Remove_Status(1, items[i]);
+
+                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                var children = slots[i].GetComponentInChildren<ItemData>();
+                GameObject obj = children.gameObject;
+                Destroy(obj);
+                // 아이템정보 초기화 (id -1로변경)
+                items[i] = new Equip();
+                break;
+            }
+
+        }
+
+    }
+
+
+    public void DeleteButton1()
+    {
+        deleteItem("slots0");
+
+    }
+
+    public void DeleteButton2()
+    {
+        deleteItem("slots1");
+
+    }
+
+
+
+
 
     public void AddItem(int id)
     {
@@ -86,6 +141,7 @@ public class Inven : MonoBehaviour
                     ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
                     data.amount++;
                     data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Debug.Log("이미있는 대상");
                 }
             }
         }
@@ -100,16 +156,14 @@ public class Inven : MonoBehaviour
                     itemObj.GetComponent<ItemData>().equip = itemToAdd;
                     itemObj.GetComponent<ItemData>().slot = i;
                     itemObj.transform.SetParent(slots[i].transform);
-                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
-                    itemObj.transform.position = Vector2.zero;
-                    itemObj.name = itemToAdd.Name;
 
-                    
-                    npc.Equip_MaxHp.Add(database.database[i].MaxHp);
-                    npc.Equip_MaxMp.Add(itemToAdd.MaxMp);
-                    npc.Equip_Str.Add(itemToAdd.Str);
-                    npc.Equip_Dex.Add(itemToAdd.Dex);
-                    npc.Equip_Wis.Add(itemToAdd.Wis);
+                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                    //itemObj.transform.position = new Vector2(511, 249.6f);
+                    itemObj.transform.position = slots[i].transform.position;
+                    itemObj.name = itemToAdd.Name;
+                    Debug.Log("없는 대상" + i);
+                   
+                    Add_Status(1, itemToAdd);
                     break;
 
 
@@ -118,6 +172,33 @@ public class Inven : MonoBehaviour
 
             }
         }
+    }
+
+    void Add_Status(int unitIdx, Equip equip)
+    {
+        npc.Equip_MaxHp[unitIdx] += equip.MaxHp;
+        npc.Equip_MaxMp[unitIdx] += equip.MaxMp;
+        npc.Equip_Str[unitIdx] += equip.Str;
+        npc.Equip_Dex[unitIdx] += equip.Dex;
+        npc.Equip_Wis[unitIdx] += equip.Wis;
+
+        Debug.Log(string.Format("hp : {0}, mp : {1}, str : {2}, dex : {3}, wis : {4}", npc.MaxHp[unitIdx], npc.MaxMp[unitIdx],
+            npc.Str[unitIdx], npc.Dex[unitIdx], npc.Wis[unitIdx]));
+    }
+
+    // 아이템 능력치 되돌리는 함수
+    void Remove_Status(int unitIdx, Equip equip)
+    {
+        // 아이템 능력치 해제 및 예외처리
+        if (equip.Id != -1)
+        {
+            npc.Equip_MaxHp[unitIdx] -= equip.MaxHp;
+            npc.Equip_MaxMp[unitIdx] -= equip.MaxMp;
+            npc.Equip_Str[unitIdx] -= equip.Str;
+            npc.Equip_Dex[unitIdx] -= equip.Dex;
+            npc.Equip_Wis[unitIdx] -= equip.Wis;
+        }
+
     }
 
     bool Check_Item_In_Inventory(Equip equip)

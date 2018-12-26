@@ -90,8 +90,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c61b4eef11aac46972842ab79a7485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equip:
+    Id: -1
+    Type: 0
+    Name: 
+    Grade: 
+    Text: 
+    MaxHp: 0
+    MaxMp: 0
+    Str: 0
+    Dex: 0
+    Wis: 0
+    IconName: 
+    Stackable: 0
+    sprite: {fileID: 0}
   amount: 0
   slot: 0
+  inven: {fileID: 0}
 --- !u!114 &875243044386889216
 MonoBehaviour:
   m_ObjectHideFlags: 0

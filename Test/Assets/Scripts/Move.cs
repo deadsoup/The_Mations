@@ -11,7 +11,8 @@ public class Move : MonoBehaviour {
 
     int move;
     int battlecount;
-    
+
+    public Inven inven;
 
     int TheBT;
 
@@ -26,6 +27,7 @@ public class Move : MonoBehaviour {
         FloatingTextController.CreateFloatingText(i.ToString(), transform);
         FloatingTextController.CreateFloatingText2(i.ToString(), transform);
 
+        inven.AddItem(1);
     }
 
 
@@ -63,14 +65,20 @@ public class Move : MonoBehaviour {
             Debug.Log("***********" + "현재 현재 체력은  " + npc.Hp[1] + "***********");
             Debug.Log("***********" + "현재 최대 마나는  " + npc.MaxMp[1] + "***********");
             Debug.Log("***********" + "현재 현재 마나는  " + npc.Mp[1] + "***********");
-            Debug.Log("***********" + "현재 공격력은  " + npc.atk[1] + "***********");
+            Debug.Log("***********" + "현재 힘은  " + npc.Str[1] + "***********");
+            Debug.Log("***********" + "현재 민첩은  " + npc.Dex[1] + "***********");
+            Debug.Log("***********" + "현재 지능은  " + npc.Wis[1] + "***********");
+
+
 
             Debug.Log("***********" + npc.name[4] + "의 정보입니다" + "***********");
             Debug.Log("***********" + "현재 최대 체력은  " + npc.MaxHp[4] + "***********");
             Debug.Log("***********" + "현재 현재 체력은  " + npc.Hp[4] + "***********");
             Debug.Log("***********" + "현재 최대 마나는  " + npc.MaxMp[4] + "***********");
             Debug.Log("***********" + "현재 현재 마나는  " + npc.Mp[4] + "***********");
-            Debug.Log("***********" + "현재 공격력은  " + npc.atk[4] + "***********");
+            Debug.Log("***********" + "현재 힘은  " + npc.Str[4] + "***********");
+            Debug.Log("***********" + "현재 민첩은  " + npc.Dex[4] + "***********");
+            Debug.Log("***********" + "현재 지능은  " + npc.Wis[4] + "***********");
 
 
 

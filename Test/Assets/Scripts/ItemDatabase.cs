@@ -23,13 +23,18 @@ public class ItemDatabase : MonoBehaviour
 
     public Equip FetchItemByID(int id)
     {
+        print("패치아이템");
         for (int i = 0; i < database.Count; i++)
         {
+            print("패치아이템.카운트");
             if (database[i].Id == id)
-             return database[i]; 
+            return database[i]; 
         }
         return null;
     }
+
+
+
 
     /*
     void saveJson()
@@ -73,6 +78,7 @@ public class ItemDatabase : MonoBehaviour
 
 }
 
+[System.Serializable]
 public class Equip
 {
     public int Id;

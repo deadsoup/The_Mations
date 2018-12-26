@@ -17,9 +17,16 @@ public class battle : MonoBehaviour {
     bool diceTriger = true;
 
     public static bool battleaction;
+
+
+
     public static int i; //몬스터 배열 호출
 
     public static int c = 1; //캐릭터 변환
+
+
+    public static int reItems;
+
 
     public GameObject Char1;
     public GameObject Char2;
@@ -28,13 +35,30 @@ public class battle : MonoBehaviour {
     public GameObject skipButton;
     public GameObject targetButton;
 
+    public GameObject reward;
+
+
+
     public GameObject Dice;
     public GameObject actionGage;
     public GameObject eActionGage;
 
-
+    public Inven inven;
 
     GameObject mobHp;
+
+    public GameObject Hp1;
+    public GameObject Mp1;
+    public GameObject Str1;
+    public GameObject Dex1;
+    public GameObject Wis1;
+
+    public GameObject Hp2;
+    public GameObject Mp2;
+    public GameObject Str2;
+    public GameObject Dex2;
+    public GameObject Wis2;
+
 
     public void nomalDice()
     {
@@ -224,6 +248,10 @@ public void skillAttak()
             Char1.SetActive(true);
             Char2.SetActive(false);
             Move.i = c;
+
+            
+
+
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[c] + "다");
         }
 
@@ -242,6 +270,13 @@ public void skillAttak()
             Char1.SetActive(false);
             Move.i = c;
 
+            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[c];
+            Mp2.GetComponent<Text>().text = "체력 : " + npc.Mp[c];
+            Str2.GetComponent<Text>().text = "체력 : " + npc.Str[c];
+            Dex2.GetComponent<Text>().text = "체력 : " + npc.Dex[c];
+            Wis2.GetComponent<Text>().text = "체력 : " + npc.Wis[c];
+
+
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[c] + "다");
         }
     }
@@ -251,6 +286,11 @@ public void skillAttak()
     void Start ()
     {
         mobHp = GameObject.Find("mobHp");
+        Hp1.GetComponent<Text>().text = "체력 : " + npc.Hp[c] + npc.Equip_MaxHp[1];
+        Mp1.GetComponent<Text>().text = "체력 : " + npc.Mp[c] + npc.Equip_MaxMp[1];
+        Str1.GetComponent<Text>().text = "체력 : " + npc.Str[c] + npc.Equip_Str[1];
+        Dex1.GetComponent<Text>().text = "체력 : " + npc.Dex[c] + npc.Equip_Dex[1];
+        Wis1.GetComponent<Text>().text = "체력 : " + npc.Wis[c] + npc.Equip_Wis[1];
     }
 	
 	// Update is called once per frame
@@ -258,7 +298,45 @@ public void skillAttak()
     {
         eTime +=Time.deltaTime;
 
-        
+        if (c== 1)
+        {
+            int playerHp = npc.Hp[c] + npc.Equip_MaxHp[1];
+            int playerMp = npc.Mp[c] + npc.Equip_MaxMp[1];
+            int playerStr = npc.Str[c] + npc.Equip_Str[1];
+            int playerDex = npc.Dex[c] + npc.Equip_Dex[1];
+            int playerWis = npc.Wis[c] + npc.Equip_Wis[1];
+
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+
+
+
+        }
+
+        if (c == 4)
+        {
+            int playerHp = npc.Hp[c] + npc.Equip_MaxHp[1];
+            int playerMp = npc.Mp[c] + npc.Equip_MaxMp[1];
+            int playerStr = npc.Str[c] + npc.Equip_Str[1];
+            int playerDex = npc.Dex[c] + npc.Equip_Dex[1];
+            int playerWis = npc.Wis[c] + npc.Equip_Wis[1];
+
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+
+
+
+        }
+
+
         if (battleaction == true)
         {
             mobHp.SetActive(true);
@@ -398,9 +476,16 @@ public void skillAttak()
                 actionGage.GetComponent<Image>().fillAmount = 1.0f;
                 eActionGage.GetComponent<Image>().fillAmount = 1.0f;
 
+                reward.SetActive(true);
+                reItems = 1;
+                Reward.reward1 = Random.Range(1, 6);
+                Reward.reward2 = Random.Range(1, 6);
+                Reward.reward3 = Random.Range(1, 6);
 
-                npc.Hp[2] = 50;
-                npc.Hp[3] = 70;
+
+
+
+                npc.Hp[i] = npc.MaxHp[i];
                 Dice.SetActive(false);
             }
         }
