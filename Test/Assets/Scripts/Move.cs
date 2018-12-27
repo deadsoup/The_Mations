@@ -16,8 +16,9 @@ public class Move : MonoBehaviour {
 
     int TheBT;
 
-    public static int i = 0;
-    public static int i2 = 1;
+    public static int i;
+    public static int i2;
+    public static int i3;
 
     public Slider Char_1_HpSlider;
     public Slider Char_1_MpSlider;
@@ -63,8 +64,6 @@ public class Move : MonoBehaviour {
         int A = Random.Range(10,12);
 
         battleEvent(A);
-
-
 
     }
 	
@@ -124,6 +123,11 @@ public class Move : MonoBehaviour {
     {
         FloatingTextController.Initialize();
         FloatingTextController.Initialize2();
+
+
+        i = battle.switching[0];
+        i2 = battle.switching[1];
+        i3 = battle.switching[2];
 
         Hpslider(i);
         Mpslider(i);

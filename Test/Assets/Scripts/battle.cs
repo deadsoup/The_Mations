@@ -24,8 +24,8 @@ public class battle : MonoBehaviour {
 
     public static int c = 0; //공격 전환
 
-    public static int switching1 = 0; // 캐릭터 전환
-    public static int switching2 = 1; // 캐릭터 전환
+    public static int[] switching = new int[3]; // 캐릭터 전환
+
 
     public static int reItems;
 
@@ -285,7 +285,7 @@ public class battle : MonoBehaviour {
             
 
 
-            Debug.Log("현재 활동하는 캐릭터는  " + npc.name[c] + "다");
+            Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[0]] + "다");
         }
 
 
@@ -303,14 +303,14 @@ public class battle : MonoBehaviour {
             //Char1.SetActive(false);
             //Move.i = c;
 
-            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching2];
-            Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching2];
-            Str2.GetComponent<Text>().text = "힘 : " + npc.Str[switching2];
-            Dex2.GetComponent<Text>().text = "민첩 : " + npc.Dex[switching2];
-            Wis2.GetComponent<Text>().text = "지능 : " + npc.Wis[switching2];
+            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching[1]];
+            Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching[1]];
+            Str2.GetComponent<Text>().text = "힘 : " + npc.Str[switching[1]];
+            Dex2.GetComponent<Text>().text = "민첩 : " + npc.Dex[switching[1]];
+            Wis2.GetComponent<Text>().text = "지능 : " + npc.Wis[switching[1]];
 
 
-            Debug.Log("현재 활동하는 캐릭터는  " + npc.name[c] + "다");
+            Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[1]] + "다");
         }
     }
     
@@ -318,11 +318,12 @@ public class battle : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Hp1.GetComponent<Text>().text = "체력 : " + (npc.Hp[switching1] + npc.Equip_MaxHp[switching1]);
-        Mp1.GetComponent<Text>().text = "마나 : " + (npc.Mp[switching1] + npc.Equip_MaxMp[switching1]);
-        Str1.GetComponent<Text>().text = "힘 : " + (npc.Str[switching1] + npc.Equip_Str[switching1]);
-        Dex1.GetComponent<Text>().text = "민첩 : " + (npc.Dex[switching1] + npc.Equip_Dex[switching1]);
-        Wis1.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching1] + npc.Equip_Wis[switching1]);
+        //switching[0] = 0; switching[1] = 1; switching[2] = 2;
+        Hp1.GetComponent<Text>().text = "체력 : " + (npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]]);
+        Mp1.GetComponent<Text>().text = "마나 : " + (npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]]);
+        Str1.GetComponent<Text>().text = "힘 : " + (npc.Str[switching[0]] + npc.Equip_Str[switching[0]]);
+        Dex1.GetComponent<Text>().text = "민첩 : " + (npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]]);
+        Wis1.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]]);
     }
 	
 	// Update is called once per frame
@@ -332,11 +333,11 @@ public class battle : MonoBehaviour {
 
         if (c== 0)
         {
-            int playerHp = npc.Hp[switching1] + npc.Equip_MaxHp[switching1];
-            int playerMp = npc.Mp[switching1] + npc.Equip_MaxMp[switching1];
-            int playerStr = npc.Str[switching1] + npc.Equip_Str[switching1];
-            int playerDex = npc.Dex[switching1] + npc.Equip_Dex[switching1];
-            int playerWis = npc.Wis[switching1] + npc.Equip_Wis[switching1];
+            int playerHp = npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]];
+            int playerMp = npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]];
+            int playerStr = npc.Str[switching[0]] + npc.Equip_Str[switching[0]];
+            int playerDex = npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]];
+            int playerWis = npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]];
 
 
             Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
@@ -351,11 +352,11 @@ public class battle : MonoBehaviour {
 
         if (c == 1)
         {
-            int playerHp = npc.Hp[switching2]; //+ npc.Equip_MaxHp[1];
-            int playerMp = npc.Mp[switching2]; //+ npc.Equip_MaxMp[1];
-            int playerStr = npc.Str[switching2];// + npc.Equip_Str[1];
-            int playerDex = npc.Dex[switching2]; //+ npc.Equip_Dex[1];
-            int playerWis = npc.Wis[switching2]; //+ npc.Equip_Wis[1];
+            int playerHp = npc.Hp[switching[1]]; //+ npc.Equip_MaxHp[1];
+            int playerMp = npc.Mp[switching[1]]; //+ npc.Equip_MaxMp[1];
+            int playerStr = npc.Str[switching[1]];// + npc.Equip_Str[1];
+            int playerDex = npc.Dex[switching[1]]; //+ npc.Equip_Dex[1];
+            int playerWis = npc.Wis[switching[1]]; //+ npc.Equip_Wis[1];
 
 
             Hp2.GetComponent<Text>().text = "체력 : " + playerHp;
