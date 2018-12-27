@@ -124,8 +124,7 @@ public class Inven : MonoBehaviour
 
     public void Use(int a)
     {
-        if(a == 30)
-                UsePanel.SetActive(true);
+        if (a == 30) { UsePanel.SetActive(true); }
     }
     /*
      * item data 스크립트를 아이템이 들고있늗데
@@ -208,7 +207,7 @@ public class Inven : MonoBehaviour
                     itemObj.name = itemToAdd.Name;
                     Debug.Log("없는 대상" + i);
                    
-                    Add_Status(1, itemToAdd);
+                    Add_Status(0, itemToAdd);
                     break;
 
 

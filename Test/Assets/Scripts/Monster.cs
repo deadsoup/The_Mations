@@ -40,23 +40,23 @@ public class Monster : MonoBehaviour {
     void Start ()
     {
         
-        npc.name[2] = name;
-        npc.MaxHp[2] = MaxHp;
-        npc.Hp[2] = Hp;
-        npc.MaxMp[2] = MaxMp;
-        npc.Mp[2] = Mp;
-        npc.atk[2] = atk;
+        npc.name[10] = name;
+        npc.MaxHp[10] = MaxHp;
+        npc.Hp[10] = Hp;
+        npc.MaxMp[10] = MaxMp;
+        npc.Mp[10] = Mp;
+        npc.atk[10] = atk;
 
-        npc.huntCount[2] = huntCount;
+        npc.huntCount[11] = huntCount;
 
-        npc.name[3] = name2;
-        npc.MaxHp[3] = MaxHp2;
-        npc.Hp[3] = Hp2;
-        npc.MaxMp[3] = MaxMp2;
-        npc.Mp[3] = Mp2;
-        npc.atk[3] = atk2;
+        npc.name[11] = name2;
+        npc.MaxHp[11] = MaxHp2;
+        npc.Hp[11] = Hp2;
+        npc.MaxMp[11] = MaxMp2;
+        npc.Mp[11] = Mp2;
+        npc.atk[11] = atk2;
 
-        npc.huntCount[3] = huntCount2;
+        npc.huntCount[11] = huntCount2;
 
 
     }

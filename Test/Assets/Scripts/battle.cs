@@ -22,16 +22,22 @@ public class battle : MonoBehaviour {
 
     public static int i; //몬스터 배열 호출
 
-    public static int c = 1; //캐릭터 변환
+    public static int c = 0; //공격 전환
 
+    public static int switching1 = 0; // 캐릭터 전환
+    public static int switching2 = 1; // 캐릭터 전환
 
     public static int reItems;
 
 
     public GameObject Char1;
     public GameObject Char2;
+
     public GameObject attackButton;
+
     public GameObject skillButton;
+    public GameObject unSkillButton;
+
     public GameObject skipButton;
     public GameObject targetButton;
 
@@ -45,7 +51,11 @@ public class battle : MonoBehaviour {
 
     public Inven inven;
 
-    GameObject mobHp;
+    public GameObject mob1;
+    public GameObject mob2;
+
+    public GameObject mobHp;
+    public Slider mob_HpSlider_1;
 
     public GameObject Hp1;
     public GameObject Mp1;
@@ -65,7 +75,7 @@ public class battle : MonoBehaviour {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 3.0f && diceTriger == true)
         {
             int dice = Random.Range(1, 7);
-            if (dice == 1) {PlusDamage = -2;}
+            if (dice == 1) { PlusDamage = -2; }
             if (dice == 2) { PlusDamage = -1; }
             if (dice == 3) { PlusDamage = 0; }
             if (dice == 4) { PlusDamage = 1; }
@@ -85,7 +95,7 @@ public class battle : MonoBehaviour {
             npc.actiongage -= 3.0f;
             actionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
-            pdamage = npc.Str[c] + PlusDamage;
+            pdamage = npc.Str[c]+ npc.Equip_Str[c] + PlusDamage;
             if (pdamage <= 0) { pdamage = 0; }
 
             npc.Hp[i] -= pdamage;
@@ -120,24 +130,34 @@ public class battle : MonoBehaviour {
     {
         attackButton.SetActive(false);
         targetButton.SetActive(true);
+        unSkillButton.SetActive(true);
+
+    }
+
+    public void unSkillStart()
+    {
+        attackButton.SetActive(true);
+        targetButton.SetActive(false);
+        unSkillButton.SetActive(false);
 
 
     }
 
 
 
-public void skillAttak()
+
+    public void skillAttak()
     {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 5.0f) // 플레이어 공격
         {
-            
+
 
             npc.actiongage -= 5.0f;
             actionGage.GetComponent<Image>().fillAmount -= 0.5f;
 
 
 
-            pdamage = npc.Str[c] + 10;
+            pdamage = npc.Str[c] + npc.Equip_Str[c] + 10;
             if (pdamage <= 0) { pdamage = 0; }
 
             npc.Hp[i] -= pdamage;
@@ -169,6 +189,7 @@ public void skillAttak()
 
             attackButton.SetActive(true);
             targetButton.SetActive(false);
+            unSkillButton.SetActive(false);
             Dice.SetActive(false);
 
         }
@@ -178,7 +199,7 @@ public void skillAttak()
     {
         if (npc.action == true && npc.Hp[c] > 0) // 플레이어 공격
         {
-            
+
             npc.actiongage = 0f;
             actionGage.GetComponent<Image>().fillAmount = 0.0f;
 
@@ -199,7 +220,7 @@ public void skillAttak()
 
     }
 
-    
+
 
     public void enemyAttak()
     {
@@ -238,16 +259,28 @@ public void skillAttak()
         }
     }
 
+    public void mob1_Hp ()
+    {
+
+        mob_HpSlider_1.maxValue = npc.MaxHp[i];
+
+        mob_HpSlider_1.value = npc.Hp[i];
+    }
+
+
+
+
+
 
     public void chaneGetta1()
     {
 
-        if (npc.Hp[1] > 0) // 체인지 게타원
+        if (npc.Hp[0] > 0) // 체인지 게타원
         {
-            c = 1;
-            Char1.SetActive(true);
-            Char2.SetActive(false);
-            Move.i = c;
+            c = 0;
+            //Char1.SetActive(true);
+            //Char2.SetActive(false);
+            //Move.i = c;
 
             
 
@@ -263,18 +296,18 @@ public void skillAttak()
     public void chaneGetta2()
     {
 
-        if (npc.Hp[4] > 0) // 체인지 게타투
+        if (npc.Hp[1] > 0) // 체인지 게타투
         {
-            c = 4;
-            Char2.SetActive(true);
-            Char1.SetActive(false);
-            Move.i = c;
+            c = 1;
+            //Char2.SetActive(true);
+            //Char1.SetActive(false);
+            //Move.i = c;
 
-            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[c];
-            Mp2.GetComponent<Text>().text = "체력 : " + npc.Mp[c];
-            Str2.GetComponent<Text>().text = "체력 : " + npc.Str[c];
-            Dex2.GetComponent<Text>().text = "체력 : " + npc.Dex[c];
-            Wis2.GetComponent<Text>().text = "체력 : " + npc.Wis[c];
+            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching2];
+            Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching2];
+            Str2.GetComponent<Text>().text = "힘 : " + npc.Str[switching2];
+            Dex2.GetComponent<Text>().text = "민첩 : " + npc.Dex[switching2];
+            Wis2.GetComponent<Text>().text = "지능 : " + npc.Wis[switching2];
 
 
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[c] + "다");
@@ -285,12 +318,11 @@ public void skillAttak()
     // Use this for initialization
     void Start ()
     {
-        mobHp = GameObject.Find("mobHp");
-        Hp1.GetComponent<Text>().text = "체력 : " + npc.Hp[c] + npc.Equip_MaxHp[1];
-        Mp1.GetComponent<Text>().text = "체력 : " + npc.Mp[c] + npc.Equip_MaxMp[1];
-        Str1.GetComponent<Text>().text = "체력 : " + npc.Str[c] + npc.Equip_Str[1];
-        Dex1.GetComponent<Text>().text = "체력 : " + npc.Dex[c] + npc.Equip_Dex[1];
-        Wis1.GetComponent<Text>().text = "체력 : " + npc.Wis[c] + npc.Equip_Wis[1];
+        Hp1.GetComponent<Text>().text = "체력 : " + (npc.Hp[switching1] + npc.Equip_MaxHp[switching1]);
+        Mp1.GetComponent<Text>().text = "마나 : " + (npc.Mp[switching1] + npc.Equip_MaxMp[switching1]);
+        Str1.GetComponent<Text>().text = "힘 : " + (npc.Str[switching1] + npc.Equip_Str[switching1]);
+        Dex1.GetComponent<Text>().text = "민첩 : " + (npc.Dex[switching1] + npc.Equip_Dex[switching1]);
+        Wis1.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching1] + npc.Equip_Wis[switching1]);
     }
 	
 	// Update is called once per frame
@@ -298,13 +330,13 @@ public void skillAttak()
     {
         eTime +=Time.deltaTime;
 
-        if (c== 1)
+        if (c== 0)
         {
-            int playerHp = npc.Hp[c] + npc.Equip_MaxHp[1];
-            int playerMp = npc.Mp[c] + npc.Equip_MaxMp[1];
-            int playerStr = npc.Str[c] + npc.Equip_Str[1];
-            int playerDex = npc.Dex[c] + npc.Equip_Dex[1];
-            int playerWis = npc.Wis[c] + npc.Equip_Wis[1];
+            int playerHp = npc.Hp[switching1] + npc.Equip_MaxHp[switching1];
+            int playerMp = npc.Mp[switching1] + npc.Equip_MaxMp[switching1];
+            int playerStr = npc.Str[switching1] + npc.Equip_Str[switching1];
+            int playerDex = npc.Dex[switching1] + npc.Equip_Dex[switching1];
+            int playerWis = npc.Wis[switching1] + npc.Equip_Wis[switching1];
 
 
             Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
@@ -317,20 +349,20 @@ public void skillAttak()
 
         }
 
-        if (c == 4)
+        if (c == 1)
         {
-            int playerHp = npc.Hp[c] + npc.Equip_MaxHp[1];
-            int playerMp = npc.Mp[c] + npc.Equip_MaxMp[1];
-            int playerStr = npc.Str[c] + npc.Equip_Str[1];
-            int playerDex = npc.Dex[c] + npc.Equip_Dex[1];
-            int playerWis = npc.Wis[c] + npc.Equip_Wis[1];
+            int playerHp = npc.Hp[switching2] + npc.Equip_MaxHp[1];
+            int playerMp = npc.Mp[switching2] + npc.Equip_MaxMp[1];
+            int playerStr = npc.Str[switching2] + npc.Equip_Str[1];
+            int playerDex = npc.Dex[switching2] + npc.Equip_Dex[1];
+            int playerWis = npc.Wis[switching2] + npc.Equip_Wis[1];
 
 
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
-            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
-            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
-            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+            Hp2.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp2.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str2.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex2.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis2.GetComponent<Text>().text = "지능 : " + playerWis;
 
 
 
@@ -339,6 +371,16 @@ public void skillAttak()
 
         if (battleaction == true)
         {
+            if (i == 10)
+            {
+                mob1.SetActive(true);
+            }
+            if (i == 11)
+            {
+                mob1.SetActive(true);
+                mob2.SetActive(true);
+            }
+
             mobHp.SetActive(true);
             attackButton.SetActive(true);
             skipButton.SetActive(true);
@@ -356,7 +398,10 @@ public void skillAttak()
 
 
 
-            
+            mob1_Hp();
+
+
+
             mobHp.GetComponent<Text>().text = "체력 : " + npc.Hp[i];
 
 
@@ -445,7 +490,7 @@ public void skillAttak()
 
             }
 
-            if (npc.Hp[1] <= 0  && npc.Hp[4] <= 0)
+            if (npc.Hp[0] <= 0  && npc.Hp[1] <= 0)
             {
                 Debug.Log("플레이어 패배");
                 npc.action = false;
@@ -484,7 +529,8 @@ public void skillAttak()
 
 
 
-
+                mob1.SetActive(false);
+                mob2.SetActive(false);
                 npc.Hp[i] = npc.MaxHp[i];
                 Dice.SetActive(false);
             }

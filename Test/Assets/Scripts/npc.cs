@@ -5,22 +5,22 @@ using UnityEngine;
 public class npc : MonoBehaviour {
 
 
-    public static int[] Id = new int[6];
-    public static string[] name = new string[6];
-    public static int[] MaxHp = new int[6];
-    public static int[] Hp = new int[6];
-    public static int[] MaxMp = new int[6];
-    public static int[] Mp = new int[6];
-    public static int[] Str = new int[6];
-    public static int[] Dex = new int[6];
-    public static int[] Wis = new int[6];
+    public static int[] Id = new int[50];
+    public static string[] name = new string[50];
+    public static int[] MaxHp = new int[50];
+    public static int[] Hp = new int[50];
+    public static int[] MaxMp = new int[50];
+    public static int[] Mp = new int[50];
+    public static int[] Str = new int[50];
+    public static int[] Dex = new int[50];
+    public static int[] Wis = new int[50];
 
 
 
-    public static int[] atk = new int[6];
+    public static int[] atk = new int[50];
 
 
-    public static int[] huntCount = new int[6];
+    public static int[] huntCount = new int[50];
 
     public static int[] item1 = new int[6];
     public static int[] item2 = new int[6];
@@ -55,12 +55,10 @@ public class npc : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-
     }
 }

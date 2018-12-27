@@ -96,28 +96,28 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        npc.Id[1] = player.data[0].Id;
-        npc.name[1] = player.data[0].Name;
-        npc.MaxHp[1] = player.data[0].MaxHp;
-        npc.Hp[1] = player.data[0].Hp;
-        npc.MaxMp[1] = player.data[0].MaxMp;
-        npc.Mp[1] = player.data[0].Mp;
-        npc.Str[1] = player.data[0].Str;
-        npc.Dex[1] = player.data[0].Dex;
-        npc.Wis[1] = player.data[0].Wis;
+        npc.Id[0] = player.data[0].Id;
+        npc.name[0] = player.data[0].Name;
+        npc.MaxHp[0] = player.data[0].MaxHp;
+        npc.Hp[0] = player.data[0].Hp;
+        npc.MaxMp[0] = player.data[0].MaxMp;
+        npc.Mp[0] = player.data[0].Mp;
+        npc.Str[0] = player.data[0].Str;
+        npc.Dex[0] = player.data[0].Dex;
+        npc.Wis[0] = player.data[0].Wis;
 
 
 
 
-        npc.Id[4] = player.data[1].Id;
-        npc.name[4] = player.data[1].Name;
-        npc.MaxHp[4] = player.data[1].MaxHp;
-        npc.Hp[4] = player.data[1].Hp;
-        npc.MaxMp[4] = player.data[1].MaxMp;
-        npc.Mp[4] = player.data[1].Mp;
-        npc.Str[4] = player.data[1].Str;
-        npc.Dex[4] = player.data[1].Dex;
-        npc.Wis[4] = player.data[1].Wis;
+        npc.Id[1] = player.data[1].Id;
+        npc.name[1] = player.data[1].Name;
+        npc.MaxHp[1] = player.data[1].MaxHp;
+        npc.Hp[1] = player.data[1].Hp;
+        npc.MaxMp[1] = player.data[1].MaxMp;
+        npc.Mp[1] = player.data[1].Mp;
+        npc.Str[1] = player.data[1].Str;
+        npc.Dex[1] = player.data[1].Dex;
+        npc.Wis[1] = player.data[1].Wis;
 
 
 
