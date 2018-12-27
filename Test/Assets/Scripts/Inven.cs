@@ -94,7 +94,7 @@ public class Inven : MonoBehaviour
             if (slots[i].name == name)
             {
                 // 아이템 삭제전 플레이어 능력치 감소
-                Remove_Status(1, items[i]);
+                Remove_Status(0, items[i]);
 
                 // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
                 var children = slots[i].GetComponentInChildren<ItemData>();
@@ -149,9 +149,9 @@ public class Inven : MonoBehaviour
                 Add_Status(1, itemToAdd);
                 print(itemToAdd.Hp);
 
-                if (npc.Hp[1] >= npc.MaxHp[1])
+                if (npc.Hp[0] >= npc.MaxHp[0])
                 {
-                    npc.Hp[1] = npc.MaxHp[1];
+                    npc.Hp[0] = npc.MaxHp[0];
                 }
 
 

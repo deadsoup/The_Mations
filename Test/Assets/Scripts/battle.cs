@@ -351,11 +351,11 @@ public class battle : MonoBehaviour {
 
         if (c == 1)
         {
-            int playerHp = npc.Hp[switching2] + npc.Equip_MaxHp[1];
-            int playerMp = npc.Mp[switching2] + npc.Equip_MaxMp[1];
-            int playerStr = npc.Str[switching2] + npc.Equip_Str[1];
-            int playerDex = npc.Dex[switching2] + npc.Equip_Dex[1];
-            int playerWis = npc.Wis[switching2] + npc.Equip_Wis[1];
+            int playerHp = npc.Hp[switching2]; //+ npc.Equip_MaxHp[1];
+            int playerMp = npc.Mp[switching2]; //+ npc.Equip_MaxMp[1];
+            int playerStr = npc.Str[switching2];// + npc.Equip_Str[1];
+            int playerDex = npc.Dex[switching2]; //+ npc.Equip_Dex[1];
+            int playerWis = npc.Wis[switching2]; //+ npc.Equip_Wis[1];
 
 
             Hp2.GetComponent<Text>().text = "체력 : " + playerHp;
