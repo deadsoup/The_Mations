@@ -21,7 +21,7 @@ public class LoadDirector : MonoBehaviour {
     }
     public void Click2()
     {
-        SceneManager.LoadScene("Pyj_GameScene");
+        SceneManager.LoadScene("CharScene11");
     }
     public void Click3()
     {

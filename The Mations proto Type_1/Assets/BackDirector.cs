@@ -10,7 +10,7 @@ public class BackDirector : MonoBehaviour {
     }
     public void SkipScene()
     {
-        SceneManager.LoadScene("Pyj_GameScene");
+        SceneManager.LoadScene("CharStoryScene");
     }
     // Use this for initialization
     void Start () {

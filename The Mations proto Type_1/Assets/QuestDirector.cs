@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class QuestDirector : MonoBehaviour
 {
     public static int count;
-    GameObject QuestText;
+    public GameObject QuestText;
     public GameObject QuestCh;
     // Start is called before the first frame update
     void Start()
     {
-        this.QuestText = GameObject.Find("QuestText");
+        
         
     }
 
