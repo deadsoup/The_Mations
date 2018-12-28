@@ -69,6 +69,8 @@ public class battle : MonoBehaviour {
     public GameObject Dex2;
     public GameObject Wis2;
 
+    SKillManager sKillManager;
+
 
     public void nomalDice()
     {
@@ -111,6 +113,7 @@ public class battle : MonoBehaviour {
                 npc.action = false;
                 npc.eAction = true;
                 npc.eActiongage = 10f;
+
             }
 
             Debug.Log("현재 남은 액션 게이지 = " + npc.actiongage + "다");
@@ -224,6 +227,14 @@ public class battle : MonoBehaviour {
 
     public void enemyAttak()
     {
+
+
+        //if (npc.unitCondition[0].condition_Stun == true)
+        //{
+        //     몬스터 턴아무것도 안하고
+        //     npc.unitCondition[0].leftStun -= 1;
+        //}
+
         npc.eActiongage -= 10.0f;
         eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
@@ -282,8 +293,10 @@ public class battle : MonoBehaviour {
             //Char2.SetActive(false);
             //Move.i = c;
 
-            
 
+            sKillManager.UniqueSkill_Set(c);
+            sKillManager.Skill1_Set(c);
+            sKillManager.Skill2_Set(c);
 
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[0]] + "다");
         }
@@ -302,6 +315,10 @@ public class battle : MonoBehaviour {
             //Char2.SetActive(true);
             //Char1.SetActive(false);
             //Move.i = c;
+
+            sKillManager.UniqueSkill_Set(c);
+            sKillManager.Skill1_Set(c);
+            sKillManager.Skill2_Set(c);
 
             Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching[1]];
             Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching[1]];
@@ -324,6 +341,8 @@ public class battle : MonoBehaviour {
         Str1.GetComponent<Text>().text = "힘 : " + (npc.Str[switching[0]] + npc.Equip_Str[switching[0]]);
         Dex1.GetComponent<Text>().text = "민첩 : " + (npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]]);
         Wis1.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]]);
+
+        sKillManager = GameObject.Find("SKillManager").GetComponent<SKillManager>();
     }
 	
 	// Update is called once per frame
@@ -454,9 +473,39 @@ public class battle : MonoBehaviour {
                 }
 
 
+                if (npc.unitCondition[i].condition_Stun == true) // 스턴 상태이상 관련
+                {
+                    eTime = 0f;
+                    npc.eActiongage = 0f;
+                    if (npc.eActiongage < 3.0f)
+                    {
+                        eActionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.eActiongage = 0f;
+                        npc.eAction = false;
+                        npc.action = true;
+                        npc.unitCondition[i].left_Stun--;
+
+                        Debug.Log("턴 완료");
+                        if (npc.action == true)
+                        {
+                            Debug.Log("A = 공격 / S = 스킬 / C = 캐릭터1 / D= 캐릭터2 / Space = 스킵");
+                            npc.actiongage = 10.1f;
+                            npc.eActiongage = 10f;
+
+                            attackButton.SetActive(true);
+                            skipButton.SetActive(true);
+                            if (npc.unitCondition[i].left_Stun <= 0)
+                            {
+                                npc.unitCondition[i].condition_Stun = false;
+                            }
+                        }
+                    }
+                }
 
 
-                if (npc.Hp[i] > 0 && eTime >= 1.0f && npc.eActiongage >= 3.0f)
+
+
+                if (npc.Hp[i] > 0 && eTime >= 1.0f && npc.eActiongage >= 10.0f)
                 {
                     enemyAttak();
                     Debug.Log("현재 남은 액션 게이지 = " + npc.eActiongage + "다");

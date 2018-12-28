@@ -135,7 +135,6 @@ public class Move : MonoBehaviour {
         Hpslider2(i2);
         Mpslider2(i2);
 
-
         charHp.GetComponent<Text>().text = " HP : " + (npc.Hp[i] + npc.Equip_MaxHp[i]) + " / " + (npc.MaxHp[i] + npc.Equip_MaxHp[i]).ToString();
         charMp.GetComponent<Text>().text = " Mp : " + (npc.Mp[i] + npc.Equip_MaxMp[i]) + " / " + (npc.MaxMp[i] + npc.Equip_MaxMp[i]).ToString();
 
