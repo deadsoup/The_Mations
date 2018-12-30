@@ -70,7 +70,7 @@ public class battle : MonoBehaviour {
     public GameObject Wis2;
 
     SKillManager sKillManager;
-
+    npc Npc;
 
     public void nomalDice()
     {
@@ -289,14 +289,22 @@ public class battle : MonoBehaviour {
         if (npc.Hp[0] > 0) // 체인지 게타원
         {
             c = 0;
+            switching[0] = c;
             //Char1.SetActive(true);
             //Char2.SetActive(false);
             //Move.i = c;
-
-
             sKillManager.UniqueSkill_Set(c);
-            sKillManager.Skill1_Set(c);
-            sKillManager.Skill2_Set(c);
+            sKillManager.resetSkill("skillSlot2");
+            sKillManager.resetSkill("skillSlot3");
+            sKillManager.resetSkill("skillSlot4");
+            for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
+            {
+                if (Npc.SkillTriggers[c].skill[i] == true)
+                {
+                    sKillManager.AddSkill(i);
+                    Debug.Log(i);
+                }
+            }
 
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[0]] + "다");
         }
@@ -312,13 +320,22 @@ public class battle : MonoBehaviour {
         if (npc.Hp[1] > 0) // 체인지 게타투
         {
             c = 1;
+            switching[1] = c;
             //Char2.SetActive(true);
             //Char1.SetActive(false);
             //Move.i = c;
-
             sKillManager.UniqueSkill_Set(c);
-            sKillManager.Skill1_Set(c);
-            sKillManager.Skill2_Set(c);
+            sKillManager.resetSkill("skillSlot2");
+            sKillManager.resetSkill("skillSlot3");
+            sKillManager.resetSkill("skillSlot4");
+            for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
+            {
+                if (Npc.SkillTriggers[c].skill[i] == true)
+                {
+                    sKillManager.AddSkill(i);
+                    Debug.Log(i);
+                }
+            }
 
             Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching[1]];
             Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching[1]];
@@ -343,11 +360,28 @@ public class battle : MonoBehaviour {
         Wis1.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]]);
 
         sKillManager = GameObject.Find("SKillManager").GetComponent<SKillManager>();
+        Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
+
+
+        Npc.SkillTriggers[0].skill[1] = true;
+        Npc.SkillTriggers[0].skill[4] = true;
+        Npc.SkillTriggers[1].skill[2] = true;
+
+        Npc.SkillTriggers[1].skill[5] = true;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            for (int i = 0; i < Npc.SkillTriggers[0].skill.Length; i++)
+            {
+                Debug.Log("보유 스킬 번호 :"+i+" 는 "+Npc.SkillTriggers[0].skill[i]);
+            }
+        }
+
         eTime +=Time.deltaTime;
 
         if (c== 0)
@@ -577,7 +611,9 @@ public class battle : MonoBehaviour {
                 Reward.reward2 = Random.Range(1, 6);
                 Reward.reward3 = Random.Range(1, 6);
 
-
+                Reward.skillreward1 = Random.Range(1, 6);
+                Reward.skillreward2 = Random.Range(1, 6);
+                Reward.skillreward3 = Random.Range(1, 6);
 
                 mob1.SetActive(false);
                 mob2.SetActive(false);

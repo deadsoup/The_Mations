@@ -61,7 +61,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void Delete()
     {
-        Debug.Log("돼지");
+        Debug.Log("제거");
         inven = GameObject.Find("Inven").GetComponent<Inven>();
         inven.deleteItem("slots0");
     }

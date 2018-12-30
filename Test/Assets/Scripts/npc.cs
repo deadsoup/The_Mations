@@ -68,8 +68,8 @@ public class npc : MonoBehaviour {
     {
         for (int i = 0; i < SkillTriggers.Length; i++)
         {
-            SkillTriggers[i].skill = new bool[30];
-            if (i == 30)
+            SkillTriggers[i].skill = new bool[15];
+            if (i == 6)
             {
                 break;
             }

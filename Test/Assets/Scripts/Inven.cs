@@ -126,13 +126,7 @@ public class Inven : MonoBehaviour
     {
         if (a == 30) { UsePanel.SetActive(true); }
     }
-    /*
-     * item data 스크립트를 아이템이 들고있늗데
-     * 여기에 함수를 만들어
-     * 게임오브젝트 인벤을 찾아
-     * 그리고 자기가 들고있ㄲ는 스크립트 itemdata에서 그 함수를 실행해
-     * 그 함수는 찾은 인벤이 들고있는 use item을 실행하는 함수
-    */
+
 
     public void UsePotion()
     {
