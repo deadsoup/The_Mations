@@ -18,7 +18,7 @@ public class Option : MonoBehaviour {
 
     public void Click()
     {
-        Coin = 1;
+        
        
         OptionPopup.SetActive(true);
         Close.SetActive(true);
@@ -38,10 +38,11 @@ public class Option : MonoBehaviour {
         Start.SetActive(false);
         Load.SetActive(false);
 
+
     }
     public void Click2()
     {
-        Coin = 0;
+        
         OptionPopup.SetActive(false);
         
         if (StartDirector.count == false)

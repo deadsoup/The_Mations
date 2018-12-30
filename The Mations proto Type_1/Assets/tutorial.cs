@@ -17,12 +17,12 @@ public class tutorial : MonoBehaviour {
     public void TutorialYes()
     {
         Tutorial.SetActive(false);
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("TutoRialScene");
     }
     public void TutorialCancle()
     {
         Tutorial.SetActive(false);
-        SceneManager.LoadScene("CharScene");
+        SceneManager.LoadScene("CharScene11");
     }
     
 	// Use this for initialization
