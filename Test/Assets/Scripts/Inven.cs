@@ -40,6 +40,7 @@ public class Inven : MonoBehaviour
 
     public GameObject UsePanel;
 
+    GameObject UseText;
 
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
@@ -55,15 +56,15 @@ public class Inven : MonoBehaviour
     {
 
         database = GetComponent<ItemDatabase>();
-        slotAmount = 2;
+        slotAmount = 4;
         randomAdd = Random.Range(0, 6);
         randomAdd1 = Random.Range(0, 6);
         randomAdd2 = Random.Range(0, 6);
 
 
-        Invenpanel = GameObject.Find("BackPanel");
+        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
         Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
-
+        UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject ;
 
         for (int i = 0; i < slotAmount; i++)
         {
@@ -110,21 +111,19 @@ public class Inven : MonoBehaviour
     }
 
 
-    public void DeleteButton1()
+    public void DeleteButton(string name)
     {
-        deleteItem("slots0");
-
-    }
-
-    public void DeleteButton2()
-    {
-        deleteItem("slots1");
-
+        deleteItem(name);
     }
 
     public void Use(int a)
     {
-        if (a == 30) { UsePanel.SetActive(true); }
+        Equip itemToAdd = database.FetchItemByID(a);
+        if (a == 30)
+        {
+            UsePanel.SetActive(true);
+            UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
+        }
     }
 
 

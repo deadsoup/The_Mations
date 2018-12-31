@@ -14,6 +14,7 @@ public class Reward : MonoBehaviour
     npc Npc;
     Inven inven;
     SKillManager skill;
+    GameObject AchievementsText;
     public GameObject RewardSlot;
     public GameObject RewardItem;
 
@@ -50,12 +51,14 @@ public class Reward : MonoBehaviour
 
         rewardBase = GetComponent<RewardDatabase>();
 
-        inven = GameObject.Find("Inven").GetComponent<Inven>();
+
+        AchievementsText = GameObject.Find("Canvas").transform.Find("Reward").transform.Find("RewardPanel").transform.Find("Achive").transform.Find("Text").gameObject;
+        inven = GameObject.Find("Canvas").transform.Find("Inven").GetComponent<Inven>();
         skill =GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
         Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
 
-        Rewardpanel = GameObject.Find("RewardPanel");
+        Rewardpanel = GameObject.Find("Canvas").transform.Find("Reward").transform.Find("RewardPanel").gameObject;
         Slotpanel = Rewardpanel.transform.Find("Panel").gameObject;
 
 
@@ -100,6 +103,7 @@ public class Reward : MonoBehaviour
             AddSkill(skillreward1);
             AddSkill(skillreward2);
             AddSkill(skillreward3);
+            AchievementsText.GetComponent<Text>().text = "획득 업적포인트 : " + npc.ArchivePoint[battle.i];
 
             battle.reItems = 0;
         }
@@ -290,7 +294,7 @@ public class Reward : MonoBehaviour
                 GameObject obj = children.gameObject;
                 Destroy(obj);
                 // 아이템정보 초기화 (id -1로변경)
-                rewardItems[i] = new Equip();
+                rewardSkills[i] = new Skill();
                 break;
             }
 
@@ -307,10 +311,6 @@ public class Reward : MonoBehaviour
             deleteItem(i); deleteSkill(i);
             deleteItem(i); deleteSkill(i);
             deleteItem(i); deleteSkill(i);
-            deleteItem(i);
-            deleteItem(i);
-            deleteItem(i);
-            deleteItem(i);
             
             Panel1.SetActive(false); Panel2.SetActive(false); Panel3.SetActive(false); //Panel4.SetActive(false); Panel5.SetActive(false);
            // Panel6.SetActive(false); Panel7.SetActive(false); Panel8.SetActive(false); Panel9.SetActive(false);

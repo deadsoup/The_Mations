@@ -24,7 +24,7 @@ public class npc : MonoBehaviour {
     public static int[] Dex = new int[50];
     public static int[] Wis = new int[50];
 
-
+    public static int[] ArchivePoint = new int[50];
 
     public static int[] atk = new int[50];
 

@@ -72,6 +72,12 @@ public class battle : MonoBehaviour {
     SKillManager sKillManager;
     npc Npc;
 
+    GameObject player1;
+    GameObject player2;
+    GameObject player3;
+
+
+
     public void nomalDice()
     {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 3.0f && diceTriger == true)
@@ -234,19 +240,59 @@ public class battle : MonoBehaviour {
         //     몬스터 턴아무것도 안하고
         //     npc.unitCondition[0].leftStun -= 1;
         //}
+        if (player1.activeInHierarchy == true && player2.activeInHierarchy == false && player3.activeInHierarchy == false)
+        {
+            npc.eActiongage -= 10.0f;
+            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
-        npc.eActiongage -= 10.0f;
-        eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            int randomDamage = Random.Range(1, 7);
 
-        int randomDamage = Random.Range(1, 7);
+            edamage = npc.atk[i] + randomDamage;
+            if (edamage <= 0) { edamage = 0; }
 
-        edamage = npc.atk[i] + randomDamage;
-        if (edamage <= 0) { edamage = 0; }
-
-        npc.Hp[c] -= edamage;
+            npc.Hp[c] -= edamage;
 
 
-        FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+
+        }
+
+        if (player1.activeInHierarchy == true && player2.activeInHierarchy == true && player3.activeInHierarchy == false)
+        {
+            int random = Random.Range(switching[0],2);
+            npc.eActiongage -= 10.0f;
+            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+
+            int randomDamage = Random.Range(1, 7);
+
+            edamage = npc.atk[i] + randomDamage;
+            if (edamage <= 0) { edamage = 0; }
+
+            npc.Hp[random] -= edamage;
+
+
+            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+
+        }
+
+        if (player1.activeInHierarchy == true && player2.activeInHierarchy == true && player3.activeInHierarchy == true)
+        {
+            int random = Random.Range(switching[0], 3);
+            npc.eActiongage -= 10.0f;
+            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+
+            int randomDamage = Random.Range(1, 7);
+
+            edamage = npc.atk[i] + randomDamage;
+            if (edamage <= 0) { edamage = 0; }
+
+            npc.Hp[random] -= edamage;
+
+
+            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+
+        }
+
         if (npc.eActiongage <= 0)
         {
 
@@ -362,13 +408,16 @@ public class battle : MonoBehaviour {
         sKillManager = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
 
-
-
+        player1 = GameObject.Find("Canvas").transform.Find("Getta1").gameObject;
+        player2 = GameObject.Find("Canvas").transform.Find("Getta2").gameObject;
+        player3 = GameObject.Find("Canvas").transform.Find("Getta3").gameObject;
+        /*
         Npc.SkillTriggers[0].skill[1] = true;
         Npc.SkillTriggers[0].skill[4] = true;
         Npc.SkillTriggers[1].skill[2] = true;
 
         Npc.SkillTriggers[1].skill[5] = true;
+        */
     }
 	
 	// Update is called once per frame
@@ -589,6 +638,7 @@ public class battle : MonoBehaviour {
                 npc.action = false;
                 npc.eAction = false;
                 battleaction = false;
+                npc.ArchivePoint[0] += npc.ArchivePoint[i];
                 npc.huntCount[i]++;
                 npc.actiongage = 10f;
                 npc.eActiongage = 10f;

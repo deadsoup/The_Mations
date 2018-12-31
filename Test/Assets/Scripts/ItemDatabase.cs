@@ -36,10 +36,10 @@ public class ItemDatabase : MonoBehaviour
 
 
 
-    /*
+    
     void saveJson()
     {
-        playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0, 0, 0, 0, 1, 0, 0, "W_Dagger001", false));
+        playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0,    0, 0, 0, 1, 0, 0, "W_Dagger001", false));
         playerInfoList.Add(new Equip(1, 1, "톱", "보통", "목재용 톱. 피해량 + 1", 0, 0, 0, 0, 1, 0, 0, "W_Sword007", false));
         playerInfoList.Add(new Equip(2, 1, "권총", "보통", "소구경 권총. 피해량 + 2", 0, 0, 0, 0, 2, 0, 0, "W_Gun001", false));
         playerInfoList.Add(new Equip(3, 1, "장검", "고급", "서양식 양날검. 피해량 + 3", 0, 0, 0, 0, 3, 0, 0, "W_Sword001", false));
@@ -52,7 +52,7 @@ public class ItemDatabase : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + "/ItemData.json", jsonData.ToString());
     }
-    */
+    
 
 
     void ContructItemDatabase()
@@ -99,6 +99,7 @@ public class Equip
     public int Wis;
     public string IconName;
     public bool Stackable;
+
 
     public Sprite sprite;
 
