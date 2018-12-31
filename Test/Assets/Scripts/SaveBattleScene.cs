@@ -14,7 +14,7 @@ public class SaveBattleScene : MonoBehaviour
     npc Npc;
     //GameObject invenslot;
 
-
+        /*
     void saveJson()
     {
         battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]],npc.Hp[battle.switching[0]],
@@ -39,7 +39,7 @@ public class SaveBattleScene : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
     }
-    
+    */
 
 
 
