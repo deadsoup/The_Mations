@@ -38,8 +38,8 @@ public class SaveBattleScene : MonoBehaviour
         JsonData jsonData = JsonMapper.ToJson(battleSave);
 
         File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
-    }
-    */
+    }*/
+    
 
 
 

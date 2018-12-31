@@ -36,7 +36,7 @@ public class ItemDatabase : MonoBehaviour
 
 
 
-    /*
+    
     void saveJson()
     {
         playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0,    0, 0, 0, 1, 0, 0, "W_Dagger001", false));
@@ -52,7 +52,7 @@ public class ItemDatabase : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + "/ItemData.json", jsonData.ToString());
     }
-    */
+    
 
 
     void ContructItemDatabase()
