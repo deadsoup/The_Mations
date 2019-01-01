@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Testing : MonoBehaviour {
+public class Testing : MonoBehaviour { // 튜토리얼 맵설명 
     public static int count;
     public GameObject 텍스트1;
     public GameObject Text2;
@@ -33,7 +33,9 @@ public class Testing : MonoBehaviour {
     public GameObject TitleGo;
     public GameObject Intext;
     public GameObject sun;
-    
+
+    public GameObject[] text = new GameObject[20]; //  이거는 저기 게임 오브젝트를 나열한것
+
     
     public void Click3()
     {
@@ -76,7 +78,14 @@ public class Testing : MonoBehaviour {
        
         Option.Coin = 0;
         count = 0;
-        
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i] = GameObject.Find("Canvas").transform.GetChild(i).gameObject; // 위에서 나열한 게임오브젝트를 캔버스 자식오브젝트 순번대로 찾는 것
+                                                                                  // 현재상황대로 나열하면 Cover1, 확대, 텍스트1, text2 나열이 됨
+        }
+
+
     }
 
     //Cover.SetActive(true);

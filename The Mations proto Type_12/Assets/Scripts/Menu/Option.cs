@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Option : MonoBehaviour {
+public class Option : MonoBehaviour { // 타이틀화면 옵션창 관련
 
-    public GameObject Start;
+    public GameObject start;
     public GameObject Load;
     public GameObject OptionPopup;
     public GameObject Close;
@@ -13,7 +13,14 @@ public class Option : MonoBehaviour {
     public static int Coin;
 
 
-
+    private void Start()
+    {
+        OptionPopup = GameObject.Find("Canvas").transform.Find("OptionsPopup").gameObject;
+        start = GameObject.Find("Canvas").transform.Find("Start").gameObject;
+        Load = GameObject.Find("Canvas").transform.Find("Load").gameObject;
+        Close = OptionPopup.transform.Find("Close").gameObject;
+        TitleGo = OptionPopup.transform.Find("TitleGo").gameObject;
+    }
 
 
     public void Click()
@@ -35,7 +42,7 @@ public class Option : MonoBehaviour {
             TitleGo.SetActive(false);
            
         }
-        Start.SetActive(false);
+        start.SetActive(false);
         Load.SetActive(false);
 
 
@@ -47,7 +54,7 @@ public class Option : MonoBehaviour {
         
         if (StartDirector.count == false)
         {
-            Start.SetActive(true);
+            start.SetActive(true);
             Load.SetActive(true);
         }
     }

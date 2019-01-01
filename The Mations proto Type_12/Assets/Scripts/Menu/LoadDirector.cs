@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadDirector : MonoBehaviour {
+public class LoadDirector : MonoBehaviour { // 타이틀화면 게임로드창 관련
 
-    public GameObject AutoMap;
+    GameObject AutoMap;
     public GameObject StickMap;
     public GameObject AutoClear;
     public GameObject StickClear;
@@ -14,8 +14,9 @@ public class LoadDirector : MonoBehaviour {
     public void LoadCharScene()
     {
         LoadScene.SetActive(true);
+
     }
-   public void Click1()
+    public void Click1()
     {
         LoadScene.SetActive(false);
     }
@@ -29,10 +30,11 @@ public class LoadDirector : MonoBehaviour {
     }
     void Start()
     {
-        //this.AutoMap = GameObject.Find("AutoMap");
-        //this.StickMap = GameObject.Find("StickMap");
-        //this.AutoClear = GameObject.Find("AutoClear");
-        //this.StickClear = GameObject.Find("StickClear");
+        this.AutoMap = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").transform.Find("AutoMap").gameObject;
+        this.StickMap = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").transform.Find("StickMap").gameObject;
+        this.AutoClear = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").transform.Find("AutoClear").gameObject;
+        this.StickClear = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").transform.Find("StickClear").gameObject;
+        LoadScene = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").gameObject;
     }
     void Update()
     {

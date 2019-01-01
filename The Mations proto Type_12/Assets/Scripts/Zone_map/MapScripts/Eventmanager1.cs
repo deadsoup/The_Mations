@@ -30,12 +30,12 @@ public class Eventmanager1 : MonoBehaviour
     {
         if (TutoDirector.Tuto == 1)
         {
-            SceneManager.LoadScene("DH_Battle_Tuto");
+            SceneManager.LoadScene("DH_Battle");
         }
        
         else if  (TutoDirector.Tuto < 1)
         {
             SceneManager.LoadScene("DH_Battle");
         }
-        }
+    }
 }
