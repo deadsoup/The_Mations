@@ -4,42 +4,264 @@ using LitJson;
 using UnityEngine;
 using System.IO;
 
+[System.Serializable]
 public class SaveBattleScene : MonoBehaviour
 {
     public List<BattleInfo> battleSave = new List<BattleInfo>();
+    public List<BattleInfo> battleLoad = new List<BattleInfo>();
+
+    private JsonData battle_Load_System;
+
+
     battle Battle;
     Inven inven;
     GameObject[] invenslot = new GameObject[4];
+    GameObject[] Skillslot = new GameObject[3];
     SKillManager skill;
     npc Npc;
     //GameObject invenslot;
 
-        /*
-    void saveJson()
+    int[] P1_skillID = new int[3];
+    int[] P2_skillID = new int[3];
+    int[] P3_skillID = new int[3];
+
+
+    bool[] P1_skilldata = new bool[15];
+    bool[] P2_skilldata = new bool[15];
+    bool[] P3_skilldata = new bool[15];
+
+
+
+    public void saveJson()
     {
-        battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]],npc.Hp[battle.switching[0]],
-                        npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
-                        npc.ArchivePoint[0],
-                        npc.Equip_MaxHp[battle.switching[0]],npc.Equip_MaxMp[battle.switching[0]],npc.Equip_Str[battle.switching[0]],npc.Equip_Wis[battle.switching[0]],
-                        invenslot[0].transform.GetChild(0).GetComponent<ItemData>().equip.Id, invenslot[0].transform.GetChild(0).GetComponent<ItemData>().amount,
-                        invenslot[1].transform.GetChild(0).GetComponent<ItemData>().equip.Id, invenslot[1].transform.GetChild(0).GetComponent<ItemData>().amount,
-                        invenslot[2].transform.GetChild(0).GetComponent<ItemData>().equip.Id, invenslot[2].transform.GetChild(0).GetComponent<ItemData>().amount,
-                        invenslot[3].transform.GetChild(0).GetComponent<ItemData>().equip.Id, invenslot[3].transform.GetChild(0).GetComponent<ItemData>().amount,
+        int invenslots1_ID = -1;
+        int invenslots1_Amount = 0;
 
-                        );
-        battleSave.Add(new BattleInfo(1, 1, "톱", "보통", "목재용 톱. 피해량 + 1", 0, 0, 0, 0, 1, 0, 0, "W_Sword007", false));
-        battleSave.Add(new BattleInfo(2, 1, "권총", "보통", "소구경 권총. 피해량 + 2", 0, 0, 0, 0, 2, 0, 0, "W_Gun001", false));
-        battleSave.Add(new BattleInfo(3, 1, "장검", "고급", "서양식 양날검. 피해량 + 3", 0, 0, 0, 0, 3, 0, 0, "W_Sword001", false));
-        battleSave.Add(new BattleInfo(4, 1, "레이저검", "고급", "**워즈의 광선검. 피해량 + 3", 0, 0, 0, 0, 3, 0, 0, "W_Sword017", false));
-        battleSave.Add(new BattleInfo(5, 1, "병건", "희귀", "병-건. 피해량 + 4", 0, 0, 0, 0, 4, 0, 0, "I_Cannon01", false));
+        int invenslots2_ID = -1;
+        int invenslots2_Amount = 0;
 
-        battleSave.Add(new BattleInfo(30, 3, "체력약", "보통", "응급처치약이다. 회복량 + 50", 0, 50, 0, 0, 4, 0, 0, "I_Cannon01", true));
+        int invenslots3_ID = -1;
+        int invenslots3_Amount = 0;
 
-        JsonData jsonData = JsonMapper.ToJson(battleSave);
+        int invenslots4_ID = -1;
+        int invenslots4_Amount = 0;
 
-        File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
-    }*/
-    
+        if (invenslot[0].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 1저장");
+            invenslots1_ID = invenslot[0].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            invenslots1_Amount = invenslot[0].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[1].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 2저장");
+            invenslots2_ID = invenslot[1].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            invenslots2_Amount = invenslot[1].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[2].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 3저장");
+            invenslots3_ID = invenslot[2].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            invenslots3_Amount = invenslot[2].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[3].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 4저장");
+            invenslots4_ID = invenslot[3].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            invenslots4_Amount = invenslot[3].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+
+
+        for (int i = 0; i < 15; i++)
+        {
+            if (Npc.SkillTriggers[battle.switching[0]].skill[i] == true)
+            {
+                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[0]].skill[i];
+                if (P1_skillID[0] == -1)
+                {
+                    P1_skillID[0] = i;
+                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                    continue;
+                }
+                if (P1_skillID[0] != -1 && P1_skillID[1] == -1)
+                {
+                    P1_skillID[1] = i;
+                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                    continue;
+                }
+                if (P1_skillID[0] != -1 && P1_skillID[1] != -1 && P1_skillID[2] == -1)
+                {
+                    P1_skillID[2] = i;
+                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                    continue;
+                }
+                Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+            }
+            Debug.Log("포문");
+        }
+        
+
+
+            Debug.Log("저장");
+            battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
+                            npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
+                            npc.ArchivePoint[0],
+                            npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
+                            invenslots1_ID, invenslots1_Amount,
+                            invenslots2_ID, invenslots2_Amount,
+                            invenslots3_ID, invenslots3_Amount,
+                            invenslots4_ID, invenslots4_Amount,
+                            P1_skillID[0],
+                            P1_skillID[1],
+                            P1_skillID[2]
+                            ));
+
+
+            JsonData jsonData = JsonMapper.ToJson(battleSave);
+
+            File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
+        
+    }
+
+    void loadJson()
+    {
+        for(int i = 0; i < battle_Load_System.Count; i++)
+        {
+            battleLoad.Add
+                (new BattleInfo(
+                    (int)battle_Load_System[i]["Id"],
+                    battle_Load_System[i]["Name"].ToString(),
+                    (int)battle_Load_System[i]["MaxHp"],
+                    (int)battle_Load_System[i]["Hp"],
+                    (int)battle_Load_System[i]["MaxMp"],
+                    (int)battle_Load_System[i]["Mp"],
+                    (int)battle_Load_System[i]["Str"],
+                    (int)battle_Load_System[i]["Wis"],
+                    (int)battle_Load_System[i]["ArchivePoint"],
+                    (int)battle_Load_System[i]["Equip_MaxHp"],
+                    (int)battle_Load_System[i]["Equip_MaxMp"],
+                    (int)battle_Load_System[i]["Equip_Str"],
+                    (int)battle_Load_System[i]["Equip_Wis"],
+                    (int)battle_Load_System[i]["Inven1"],
+                    (int)battle_Load_System[i]["Inven1_Amount"],
+                    (int)battle_Load_System[i]["Inven2"],
+                    (int)battle_Load_System[i]["Inven2_Amount"],
+                    (int)battle_Load_System[i]["Inven3"],
+                    (int)battle_Load_System[i]["Inven3_Amount"],
+                    (int)battle_Load_System[i]["Inven4"],
+                    (int)battle_Load_System[i]["Inven4_Amount"],
+                    (int)battle_Load_System[i]["Skill1_ID"],
+                    (int)battle_Load_System[i]["Skill2_ID"],
+                    (int)battle_Load_System[i]["Skill3_ID"]
+                    ));
+        }
+        npc.Id[battle.switching[0]] = battleLoad[0].Id;
+        npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
+        npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
+        npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
+        npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
+        npc.Str[battle.switching[0]] = battleLoad[0].Str;
+        npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
+        npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+        npc.Equip_MaxHp[battle.switching[0]] = battleLoad[0].Equip_MaxHp;
+        npc.Equip_MaxMp[battle.switching[0]] = battleLoad[0].Equip_MaxMp;
+        npc.Equip_Str[battle.switching[0]] = battleLoad[0].Equip_Str;
+        npc.Equip_Wis[battle.switching[0]] = battleLoad[0].Equip_Wis;
+
+        if (battleLoad[0].Inven1 > 30)
+        {
+            for (int i = 0; i < battleLoad[0].Inven1_Amount; i++)
+            {
+                inven.AddItem(battleLoad[0].Inven1);
+                Debug.Log("아이템 생성");
+            }
+        }
+        else if (battleLoad[0].Inven1 == -1)
+        {
+            Debug.Log("아이템 없음");
+        }
+        else
+        {
+            inven.AddItem(battleLoad[0].Inven1);
+            Debug.Log("아이템 생성");
+        }
+
+        if (battleLoad[0].Inven2 > 30)
+        {
+            for (int i = 0; i < battleLoad[0].Inven2_Amount; i++)
+            {
+                inven.AddItem(battleLoad[0].Inven2);
+                Debug.Log("아이템 생성2");
+            }
+        }
+        else if (battleLoad[0].Inven2 == -1)
+        {
+            Debug.Log("아이템 없음");
+        }
+        else
+        {
+            inven.AddItem(battleLoad[0].Inven2);
+            Debug.Log("아이템 생성2");
+
+        }
+
+        if (battleLoad[0].Inven3 > 30)
+        {
+            for (int i = 0; i < battleLoad[0].Inven3_Amount; i++)
+            {
+                inven.AddItem(battleLoad[0].Inven3);
+                Debug.Log("아이템 생성3");
+            }
+        }
+        else if (battleLoad[0].Inven3 == -1)
+        {
+            Debug.Log("아이템 없음");
+        }
+        else
+        {
+            inven.AddItem(battleLoad[0].Inven3);
+            Debug.Log("아이템 생성3");
+
+        }
+
+        
+        if (battleLoad[0].Inven4 > 30)
+        {
+            for (int i = 0; i < battleLoad[0].Inven4_Amount; i++)
+            {
+                inven.AddItem(battleLoad[0].Inven4);
+                Debug.Log("아이템 생성4");
+            }
+        }
+        else if (battleLoad[0].Inven4 == -1)
+        {
+            Debug.Log("아이템 없음");
+        }
+        else
+        {
+            inven.AddItem(battleLoad[0].Inven4);
+            Debug.Log("아이템 생성4");
+
+        }
+
+
+
+        Debug.Log(battleLoad[0].Skill1_ID);
+        Debug.Log(battleLoad[0].Skill2_ID);
+        Debug.Log(battleLoad[0].Skill3_ID);
+        if (battleLoad[0].Skill1_ID > -1)
+            Npc.SkillTriggers[0].skill[battleLoad[0].Skill1_ID] = true;
+        if (battleLoad[0].Skill2_ID > -1)
+            Npc.SkillTriggers[0].skill[battleLoad[0].Skill2_ID] = true;
+        if (battleLoad[0].Skill3_ID > -1)
+            Npc.SkillTriggers[0].skill[battleLoad[0].Skill3_ID] = true;
+
+
+    }
+
 
 
 
@@ -55,10 +277,30 @@ public class SaveBattleScene : MonoBehaviour
         invenslot[1] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
         invenslot[2] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
         invenslot[3] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots3").gameObject;
+
+        Skillslot[0] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot2").gameObject;
+        Skillslot[1] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;
+        Skillslot[2] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
+
+        P1_skillID[0] = -1;
+        P1_skillID[1] = -1;
+        P1_skillID[2] = -1;
+
+        battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/battleSaveData.json"));
+
+        loadJson();
+        Battle.chaneGetta1();
     }
-
+    
+    private void Update()
+    {
+        //if (Input.GetKeyDown(KeyCode.Keypad6))
+       // {
+           // saveJson();
+        //}
+    }
+    
 }
-
 [System.Serializable]
 public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
 {
@@ -90,22 +332,55 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
     public int Inven4_Amount;
 
     public int Skill1_ID;
-    public bool Skill1_Active;
+    //public bool Skill1_Active;
 
     public int Skill2_ID;
-    public bool Skill2_Active;
+    //public bool Skill2_Active;
 
     public int Skill3_ID;
-    public bool Skill3_Active;
-
-
+    //public bool Skill3_Active;
     public BattleInfo(int id, string name, int maxhp, int hp, int maxmp, int mp, int str, int wis, int archivepoint, int equip_maxhp, int equip_maxmp, int equip_str, int equip_wis,
                     int inven1, int inven1_amount, int inven2, int inven2_amount, int inven3, int inven3_amount, int inven4, int inven4_amount,
-                    int skill1_id, bool skill1_active)
+                    int skill1_id, int skill2_id, int skill3_id)
     {
+        Id = id;
+        Name = name;
+        MaxHp = maxhp;
+        Hp = hp;
+        MaxMp = maxmp;
+        Mp = mp;
+        Str = str;
+        Wis = wis;
+        ArchivePoint = archivepoint; // 플레이어의 소지 업적 포인트 [0]에다 저장함
 
+        Equip_MaxHp = equip_maxhp;
+        Equip_MaxMp = equip_maxmp;
+        Equip_Str = equip_str;
+        Equip_Wis = equip_wis;
+
+        Inven1 = inven1;
+        Inven1_Amount = inven1_amount;
+
+        Inven2 = inven2;
+        Inven2_Amount = inven2_amount;
+
+        Inven3 = inven3;
+        Inven3_Amount = inven3_amount;
+
+        Inven4 = inven4;
+        Inven4_Amount = inven4_amount;
+
+        Skill1_ID = skill1_id;
+        //Skill1_Active = skill1_active;
+
+        Skill2_ID = skill2_id;
+        //Skill2_Active = skill2_active;
+
+        Skill3_ID = skill3_id;
+        //Skill3_Active = skill3_active;
 
     }
 
 
 }
+

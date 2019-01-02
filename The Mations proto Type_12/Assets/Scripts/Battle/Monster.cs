@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.IO;
 
 
 public class Monster : MonoBehaviour {
@@ -33,6 +34,33 @@ public class Monster : MonoBehaviour {
 
     public int huntCount2;
     public int ArchivePoint2;
+
+
+    [System.Serializable]
+    class MonsterScript
+    {
+        public MonsterScriptData[] data;
+    }
+
+    [System.Serializable]
+    class MonsterScriptData
+    {
+        public int Id;
+        public string Name;
+        public int MaxHp;
+        public int Hp;
+        public int MaxMp;
+        public int Mp;
+        public int evasion;
+        public int atk;
+    }
+
+    MonsterScript monster;
+
+    private void Awake()
+    {
+        monster = JsonUtility.FromJson<MonsterScript>(File.ReadAllText(Application.dataPath + "/PlayerInfoData.json"));
+    }
 
 
 

@@ -14,6 +14,7 @@ public class ItemDatabase : MonoBehaviour
 
     void Start()
     {
+       
         itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/ItemData.json"));
         ContructItemDatabase();
         //saveJson();

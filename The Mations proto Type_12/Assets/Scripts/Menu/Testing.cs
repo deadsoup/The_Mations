@@ -42,7 +42,8 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
         if (Option.Coin == 0&& TutoDirector.Tuto ==0)
         {
             SceneManager.LoadScene("bin+yong");
-        }else if(TutoDirector.Tuto == 1)
+        }
+        else if(TutoDirector.Tuto == 1)
         {
             SceneManager.LoadScene("TutoRialMapScene");
         }

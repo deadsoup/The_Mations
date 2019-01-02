@@ -7,6 +7,9 @@ public class Battle_Tuto : MonoBehaviour
 {
 
     battle Battle;
+    GameObject[] BattleTuto_Text = new GameObject[6];
+    GameObject LB;
+    GameObject RB;
 
     public void BattleTuto()
     {
@@ -23,10 +26,20 @@ public class Battle_Tuto : MonoBehaviour
         if (TutoDirector.Tuto == 1)
         {
             //SceneManager.LoadScene("TutoRialMapScene"); 몬스터 잡고 나오는 보상창 나가기 눌렀을시 신전환이 됨
+            //TutoDirector.Tuto = 0;
 
         }
 
+        for (int i = 0; i < BattleTuto_Text.Length; i++)
+        {
+            BattleTuto_Text[i] = GameObject.Find("Canvas").transform.Find("BattleTuto_Text").transform.GetChild(i).gameObject;
+        }
+
+
     }
+
+    
+
 
 
 
