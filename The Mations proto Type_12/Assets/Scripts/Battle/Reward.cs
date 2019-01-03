@@ -109,8 +109,10 @@ public class Reward : MonoBehaviour
         }
     }
 
-
-    public void charAddItem_slot1()
+    /// <summary>
+    /// 아이템 전달
+    /// </summary>
+    public void charAddItem_slot1() // 보상 1슬롯의 플레이어1 전달
     {
         for (int i = 0; i < inven.items.Count; i++)
         {
@@ -121,14 +123,50 @@ public class Reward : MonoBehaviour
                 add1.SetActive(false);
                 break;
             }
-            if(inven.items[i].Id != -1)
+            if (inven.items[i].Id != -1)
             {
                 add1.SetActive(true);
             }
         }
     }
-
-    public void charAddItem_slot2()
+    public void char2AddItem_slot1()// 보상 1슬롯의 플레이어2 전달
+    {
+        for (int i = 0; i < inven.items2.Count; i++)
+        {
+            if (inven.items2[i].Id == -1)
+            {
+                charAddItem("RewardSlots0");
+                inven.AddItem2(reward1);
+                add1.SetActive(false);
+                break;
+            }
+            if (inven.items2[i].Id != -1)
+            {
+                add1.SetActive(true);
+            }
+        }
+    }
+    public void char3AddItem_slot1()// 보상 1슬롯의 플레이어3 전달
+    {
+        for (int i = 0; i < inven.items3.Count; i++)
+        {
+            if (inven.items3[i].Id == -1)
+            {
+                charAddItem("RewardSlots0");
+                inven.AddItem3(reward1);
+                add1.SetActive(false);
+                break;
+            }
+            if (inven.items3[i].Id != -1)
+            {
+                add1.SetActive(true);
+            }
+        }
+    }
+    /// <summary>
+    /// ////////////
+    /// </summary>
+    public void charAddItem_slot2()// 보상 2슬롯의 플레이어1 전달
     {
         for (int i = 0; i < inven.items.Count; i++)
         {
@@ -145,8 +183,44 @@ public class Reward : MonoBehaviour
             }
         }
     }
-
-    public void charAddItem_slot3()
+    public void char2AddItem_slot2()// 보상 2슬롯의 플레이어2 전달
+    {
+        for (int i = 0; i < inven.items2.Count; i++)
+        {
+            if (inven.items2[i].Id == -1)
+            {
+                charAddItem("RewardSlots1");
+                inven.AddItem2(reward2);
+                add2.SetActive(false);
+                break;
+            }
+            if (inven.items2[i].Id != -1)
+            {
+                add2.SetActive(true);
+            }
+        }
+    }
+    public void char3AddItem_slot2()// 보상 2슬롯의 플레이어3 전달
+    {
+        for (int i = 0; i < inven.items3.Count; i++)
+        {
+            if (inven.items3[i].Id == -1)
+            {
+                charAddItem("RewardSlots1");
+                inven.AddItem3(reward2);
+                add2.SetActive(false);
+                break;
+            }
+            if (inven.items3[i].Id != -1)
+            {
+                add2.SetActive(true);
+            }
+        }
+    }
+    /// <summary>
+    /// //////////////
+    /// </summary>
+    public void charAddItem_slot3()// 보상 3슬롯의 플레이어1 전달
     {
         for (int i = 0; i < inven.items.Count; i++)
         {
@@ -158,6 +232,40 @@ public class Reward : MonoBehaviour
                 break;
             }
             if (inven.items[i].Id != -1)
+            {
+                add3.SetActive(true);
+            }
+        }
+    }
+    public void char2AddItem_slot3()// 보상 3슬롯의 플레이어2 전달
+    {
+        for (int i = 0; i < inven.items2.Count; i++)
+        {
+            if (inven.items2[i].Id == -1)
+            {
+                charAddItem("RewardSlots2");
+                inven.AddItem2(reward3);
+                add3.SetActive(false);
+                break;
+            }
+            if (inven.items2[i].Id != -1)
+            {
+                add3.SetActive(true);
+            }
+        }
+    }
+    public void char3AddItem_slot3()// 보상 3슬롯의 플레이어3 전달
+    {
+        for (int i = 0; i < inven.items3.Count; i++)
+        {
+            if (inven.items3[i].Id == -1)
+            {
+                charAddItem("RewardSlots2");
+                inven.AddItem3(reward3);
+                add3.SetActive(false);
+                break;
+            }
+            if (inven.items3[i].Id != -1)
             {
                 add3.SetActive(true);
             }
@@ -246,6 +354,196 @@ public class Reward : MonoBehaviour
                         charAddskill("S_rewardSlot2");
                         Npc.SkillTriggers[battle.switching[0]].skill[skillreward3] = true;
                         if (battle.switching[0] == battle.c && npc.Hp[battle.switching[0]] > 0)
+                        {
+                            skill.AddSkill(skillreward3);
+                            Debug.Log(skillreward3);
+                        }
+                        skilladd3.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd3.SetActive(true);
+                }
+            }
+        }
+        if(num == 4)
+        {
+            Battle.chaneGetta2();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+                    if (Npc.SkillTriggers[battle.switching[1]].skill[skillreward1] == true)
+                    {
+                        skilladd1.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot");
+                        Npc.SkillTriggers[battle.switching[1]].skill[skillreward1] = true;
+                        if (battle.switching[1] == battle.c && npc.Hp[battle.switching[1]] > 0)
+                        {
+                            skill.AddSkill(skillreward1);
+                            Debug.Log(skillreward1);
+                        }
+                        skilladd1.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd1.SetActive(true);
+                }
+            }
+        }
+        if (num == 5)
+        {
+            Battle.chaneGetta2();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+
+                    if (Npc.SkillTriggers[battle.switching[1]].skill[skillreward2] == true)
+                    {
+                        skilladd2.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot1");
+                        Npc.SkillTriggers[battle.switching[1]].skill[skillreward2] = true;
+                        if (battle.switching[1] == battle.c && npc.Hp[battle.switching[1]] > 0)
+                        {
+                            skill.AddSkill(skillreward2);
+                            Debug.Log(skillreward2);
+                        };
+                        skilladd2.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd2.SetActive(true);
+                }
+            }
+        }
+        if (num == 6)
+        {
+            Battle.chaneGetta2();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+
+                    if (Npc.SkillTriggers[battle.switching[1]].skill[skillreward3] == true)
+                    {
+                        skilladd3.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot2");
+                        Npc.SkillTriggers[battle.switching[1]].skill[skillreward3] = true;
+                        if (battle.switching[1] == battle.c && npc.Hp[battle.switching[1]] > 0)
+                        {
+                            skill.AddSkill(skillreward3);
+                            Debug.Log(skillreward3);
+                        }
+                        skilladd3.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd3.SetActive(true);
+                }
+            }
+        }
+        if (num == 7)
+        {
+            Battle.chaneGetta3();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+                    if (Npc.SkillTriggers[battle.switching[2]].skill[skillreward1] == true)
+                    {
+                        skilladd1.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot");
+                        Npc.SkillTriggers[battle.switching[2]].skill[skillreward1] = true;
+                        if (battle.switching[2] == battle.c && npc.Hp[battle.switching[2]] > 0)
+                        {
+                            skill.AddSkill(skillreward1);
+                            Debug.Log(skillreward1);
+                        }
+                        skilladd1.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd1.SetActive(true);
+                }
+            }
+        }
+        if (num == 8)
+        {
+            Battle.chaneGetta3();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+
+                    if (Npc.SkillTriggers[battle.switching[2]].skill[skillreward2] == true)
+                    {
+                        skilladd2.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot1");
+                        Npc.SkillTriggers[battle.switching[2]].skill[skillreward2] = true;
+                        if (battle.switching[2] == battle.c && npc.Hp[battle.switching[2]] > 0)
+                        {
+                            skill.AddSkill(skillreward2);
+                            Debug.Log(skillreward2);
+                        };
+                        skilladd2.SetActive(false);
+                        break;
+                    }
+                }
+                if (skill.skills[i].Id != -1)
+                {
+                    skilladd2.SetActive(true);
+                }
+            }
+        }
+        if (num == 9)
+        {
+            Battle.chaneGetta3();
+            for (int i = 0; i < skill.skills.Count; i++)
+            {
+                if (skill.skills[i].Id == -1)
+                {
+
+                    if (Npc.SkillTriggers[battle.switching[2]].skill[skillreward3] == true)
+                    {
+                        skilladd3.SetActive(true);
+                        break;
+                    }
+                    else
+                    {
+                        charAddskill("S_rewardSlot2");
+                        Npc.SkillTriggers[battle.switching[2]].skill[skillreward3] = true;
+                        if (battle.switching[2] == battle.c && npc.Hp[battle.switching[2]] > 0)
                         {
                             skill.AddSkill(skillreward3);
                             Debug.Log(skillreward3);

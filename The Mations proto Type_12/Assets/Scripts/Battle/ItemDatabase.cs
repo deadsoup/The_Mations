@@ -37,7 +37,7 @@ public class ItemDatabase : MonoBehaviour
 
 
 
-    
+    /*
     void saveJson()
     {
         playerInfoList.Add(new Equip(0, 1, "단검", "보통", "작은 칼이다. 피해량 + 1", 0,    0, 0, 0, 1, 0, 0, "W_Dagger001", false));
@@ -53,7 +53,7 @@ public class ItemDatabase : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + "/ItemData.json", jsonData.ToString());
     }
-    
+    */
 
 
     void ContructItemDatabase()
@@ -66,7 +66,8 @@ public class ItemDatabase : MonoBehaviour
                     (int)itemData[i]["Type"],
                     itemData[i]["Name"].ToString(),
                     itemData[i]["Grade"].ToString(),
-                    itemData[i]["Text"].ToString(), 
+                    itemData[i]["Text"].ToString(),
+                    itemData[i]["ItemOption"].ToString(),
                     (int)itemData[i]["MaxHp"],
                     (int)itemData[i]["Hp"],
                     (int)itemData[i]["MaxMp"],
@@ -91,6 +92,7 @@ public class Equip
     public string Name;
     public string Grade;
     public string Text;
+    public string ItemOption;
     public int MaxHp;
     public int Hp;
     public int MaxMp;
@@ -104,13 +106,14 @@ public class Equip
 
     public Sprite sprite;
 
-    public Equip(int id, int type, string name, string grade, string text, int maxHp, int hp, int maxMp, int mp, int str, int dex, int wis, string iconName, bool stackable)
+    public Equip(int id, int type, string name, string grade, string text, string itemoption, int maxHp, int hp, int maxMp, int mp, int str, int dex, int wis, string iconName, bool stackable)
     {
         Id = id;
         Type = type;
         Name = name;
         Grade = grade;
         Text = text;
+        ItemOption = itemoption;
         MaxHp = maxHp;
         Hp = hp;
         MaxMp = maxMp;

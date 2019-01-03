@@ -119,6 +119,16 @@ public class Player : MonoBehaviour {
         npc.Dex[1] = player.data[1].Dex;
         npc.Wis[1] = player.data[1].Wis;
 
+        npc.Id[2] = player.data[2].Id;
+        npc.name[2] = player.data[2].Name;
+        npc.MaxHp[2] = player.data[2].MaxHp;
+        npc.Hp[2] = player.data[2].Hp;
+        npc.MaxMp[2] = player.data[2].MaxMp;
+        npc.Mp[2] = player.data[2].Mp;
+        npc.Str[2] = player.data[2].Str;
+        npc.Dex[2] = player.data[2].Dex;
+        npc.Wis[2] = player.data[2].Wis;
+
 
 
 

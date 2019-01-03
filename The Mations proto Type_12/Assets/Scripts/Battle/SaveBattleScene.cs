@@ -12,10 +12,10 @@ public class SaveBattleScene : MonoBehaviour
 
     private JsonData battle_Load_System;
 
-
+    Party party;
     battle Battle;
     Inven inven;
-    GameObject[] invenslot = new GameObject[4];
+    GameObject[] invenslot = new GameObject[12];
     GameObject[] Skillslot = new GameObject[3];
     SKillManager skill;
     npc Npc;
@@ -46,6 +46,32 @@ public class SaveBattleScene : MonoBehaviour
         int invenslots4_ID = -1;
         int invenslots4_Amount = 0;
 
+
+        int P2_invenslots1_ID = -1;
+        int P2_invenslots1_Amount = 0;
+
+        int P2_invenslots2_ID = -1;
+        int P2_invenslots2_Amount = 0;
+
+        int P2_invenslots3_ID = -1;
+        int P2_invenslots3_Amount = 0;
+
+        int P2_invenslots4_ID = -1;
+        int P2_invenslots4_Amount = 0;
+
+
+        int P3_invenslots1_ID = -1;
+        int P3_invenslots1_Amount = 0;
+
+        int P3_invenslots2_ID = -1;
+        int P3_invenslots2_Amount = 0;
+
+        int P3_invenslots3_ID = -1;
+        int P3_invenslots3_Amount = 0;
+
+        int P3_invenslots4_ID = -1;
+        int P3_invenslots4_Amount = 0;
+
         if (invenslot[0].GetComponentInChildren<ItemData>() != null)
         {
             Debug.Log("인벤슬롯 1저장");
@@ -70,7 +96,60 @@ public class SaveBattleScene : MonoBehaviour
             invenslots4_ID = invenslot[3].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
             invenslots4_Amount = invenslot[3].transform.GetChild(0).GetComponent<ItemData>().amount;
         }
-
+        //
+        // 플레이어 2의 인벤 저장
+        //
+        if (invenslot[4].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 1저장");
+            P2_invenslots1_ID = invenslot[4].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P2_invenslots1_Amount = invenslot[4].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[5].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 2저장");
+            P2_invenslots2_ID = invenslot[5].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P2_invenslots2_Amount = invenslot[5].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[6].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 3저장");
+            P2_invenslots3_ID = invenslot[6].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P2_invenslots3_Amount = invenslot[6].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[7].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 4저장");
+            P2_invenslots4_ID = invenslot[7].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P2_invenslots4_Amount = invenslot[7].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        //
+        // 플레이어 3의 인벤 저장
+        //
+        if (invenslot[8].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 1저장");
+            P3_invenslots1_ID = invenslot[8].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P3_invenslots1_Amount = invenslot[8].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[9].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 2저장");
+            P3_invenslots2_ID = invenslot[9].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P3_invenslots2_Amount = invenslot[9].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[10].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 3저장");
+            P3_invenslots3_ID = invenslot[10].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P3_invenslots3_Amount = invenslot[10].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
+        if (invenslot[11].GetComponentInChildren<ItemData>() != null)
+        {
+            Debug.Log("인벤슬롯 4저장");
+            P3_invenslots4_ID = invenslot[11].transform.GetChild(0).GetComponent<ItemData>().equip.Id;
+            P3_invenslots4_Amount = invenslot[11].transform.GetChild(0).GetComponent<ItemData>().amount;
+        }
 
         for (int i = 0; i < 15; i++)
         {
@@ -101,6 +180,62 @@ public class SaveBattleScene : MonoBehaviour
                 Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
             }
             Debug.Log("포문");
+            ///
+            /// 플레이어 2의 스킬 저장
+            ///
+            if (Npc.SkillTriggers[battle.switching[1]].skill[i] == true)
+            {
+                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[1]].skill[i];
+                if (P2_skillID[0] == -1)
+                {
+                    P2_skillID[0] = i;
+                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                    continue;
+                }
+                if (P2_skillID[0] != -1 && P2_skillID[1] == -1)
+                {
+                    P2_skillID[1] = i;
+                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                    continue;
+                }
+                if (P2_skillID[0] != -1 && P2_skillID[1] != -1 && P2_skillID[2] == -1)
+                {
+                    P2_skillID[2] = i;
+                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                    continue;
+                }
+            }
+            ///
+            /// 플레이어 3의 스킬 저장
+            ///
+            if (Npc.SkillTriggers[battle.switching[2]].skill[i] == true)
+            {
+                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[2]].skill[i];
+                if (P3_skillID[0] == -1)
+                {
+                    P3_skillID[0] = i;
+                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
+                    continue;
+                }
+                if (P3_skillID[0] != -1 && P3_skillID[1] == -1)
+                {
+                    P3_skillID[1] = i;
+                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
+                    continue;
+                }
+                if (P3_skillID[0] != -1 && P3_skillID[1] != -1 && P3_skillID[2] == -1)
+                {
+                    P3_skillID[2] = i;
+                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
+                    continue;
+                }
+            }
         }
         
 
@@ -118,9 +253,33 @@ public class SaveBattleScene : MonoBehaviour
                             P1_skillID[1],
                             P1_skillID[2]
                             ));
+        battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
+                            npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
+                            npc.ArchivePoint[0],
+                            npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
+                            P2_invenslots1_ID, P2_invenslots1_Amount,
+                            P2_invenslots2_ID, P2_invenslots2_Amount,
+                            P2_invenslots3_ID, P2_invenslots3_Amount,
+                            P2_invenslots4_ID, P2_invenslots4_Amount,
+                            P2_skillID[0],
+                            P2_skillID[1],
+                            P2_skillID[2]
+                            ));
+        battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
+                            npc.MaxMp[battle.switching[2]], npc.Mp[battle.switching[2]], npc.Str[battle.switching[2]], npc.Wis[battle.switching[2]],
+                            npc.ArchivePoint[0],
+                            npc.Equip_MaxHp[battle.switching[2]], npc.Equip_MaxMp[battle.switching[2]], npc.Equip_Str[battle.switching[2]], npc.Equip_Wis[battle.switching[2]],
+                            P3_invenslots1_ID, P3_invenslots1_Amount,
+                            P3_invenslots2_ID, P3_invenslots2_Amount,
+                            P3_invenslots3_ID, P3_invenslots3_Amount,
+                            P3_invenslots4_ID, P3_invenslots4_Amount,
+                            P3_skillID[0],
+                            P3_skillID[1],
+                            P3_skillID[2]
+                            ));
 
 
-            JsonData jsonData = JsonMapper.ToJson(battleSave);
+        JsonData jsonData = JsonMapper.ToJson(battleSave);
 
             File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
         
@@ -166,10 +325,12 @@ public class SaveBattleScene : MonoBehaviour
         npc.Str[battle.switching[0]] = battleLoad[0].Str;
         npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
         npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+        /*
         npc.Equip_MaxHp[battle.switching[0]] = battleLoad[0].Equip_MaxHp;
         npc.Equip_MaxMp[battle.switching[0]] = battleLoad[0].Equip_MaxMp;
         npc.Equip_Str[battle.switching[0]] = battleLoad[0].Equip_Str;
         npc.Equip_Wis[battle.switching[0]] = battleLoad[0].Equip_Wis;
+        */
 
         if (battleLoad[0].Inven1 > 30)
         {
@@ -259,6 +420,12 @@ public class SaveBattleScene : MonoBehaviour
         if (battleLoad[0].Skill3_ID > -1)
             Npc.SkillTriggers[0].skill[battleLoad[0].Skill3_ID] = true;
 
+        if (party.player[battle.switching[0]] == true)
+        {
+            party.selectPlayer(0);
+
+        }
+
 
     }
 
@@ -272,11 +439,24 @@ public class SaveBattleScene : MonoBehaviour
         skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
         Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+        party = GameObject.Find("PartySystem").GetComponent<Party>();
 
         invenslot[0] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
         invenslot[1] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
         invenslot[2] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
         invenslot[3] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots3").gameObject;
+
+        invenslot[4] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots4").gameObject;
+        invenslot[5] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots5").gameObject;
+        invenslot[6] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots6").gameObject;
+        invenslot[7] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots7").gameObject;
+
+        invenslot[8] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots8").gameObject;
+        invenslot[9] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots9").gameObject;
+        invenslot[10] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots10").gameObject;
+        invenslot[11] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots11").gameObject;
+
+
 
         Skillslot[0] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot2").gameObject;
         Skillslot[1] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;

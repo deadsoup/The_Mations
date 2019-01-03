@@ -427,8 +427,6 @@ public class SKillManager : MonoBehaviour
 
     public void Idol_UniqueSkill()
     {
-
-
         if (npc.Mp[0] >= 50)
         {
             if (npc.actiongage >= 5f)
