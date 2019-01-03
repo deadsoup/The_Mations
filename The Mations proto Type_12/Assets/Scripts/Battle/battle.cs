@@ -32,6 +32,7 @@ public class battle : MonoBehaviour {
 
     public GameObject Char1;
     public GameObject Char2;
+    public GameObject Char3;
 
     public GameObject attackButton;
 
@@ -83,6 +84,8 @@ public class battle : MonoBehaviour {
     RuntimeAnimatorController Idol;
     RuntimeAnimatorController Nerd;
 
+    GameObject EffectSystem;
+
     public void nomalDice()
     {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 3.0f && diceTriger == true)
@@ -131,6 +134,8 @@ public class battle : MonoBehaviour {
                 Player2.SetTrigger("Atk");
                 FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
             }
+
+            EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
 
             if (npc.actiongage <= 0)
             {
@@ -291,7 +296,8 @@ public class battle : MonoBehaviour {
             npc.Hp[random] -= edamage;
             Monster.SetTrigger("Atk");
 
-            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
+            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
 
         }
 
@@ -308,9 +314,9 @@ public class battle : MonoBehaviour {
 
             npc.Hp[random] -= edamage;
             Monster.SetTrigger("Atk");
-
-            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
-
+            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
+            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
+            if (random == 2) { FloatingTextController.CreateFloatingText4(edamage.ToString(), transform); }
         }
 
         if (npc.eActiongage <= 0)
@@ -382,12 +388,15 @@ public class battle : MonoBehaviour {
 
             Outline char1;
             Outline char2;
+            Outline char3;
 
             char1 = Char1.GetComponent<Outline>();
             char2 = Char2.GetComponent<Outline>();
+            char3 = Char3.GetComponent<Outline>();
 
             char1.effectColor = new Color32(0, 0, 0, 255);
             char2.effectColor = new Color32(0, 0, 0, 0);
+            char3.effectColor = new Color32(0, 0, 0, 0);
 
             for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
             {
@@ -443,12 +452,15 @@ public class battle : MonoBehaviour {
 
             Outline char1;
             Outline char2;
+            Outline char3;
 
             char1 = Char1.GetComponent<Outline>();
             char2 = Char2.GetComponent<Outline>();
+            char3 = Char3.GetComponent<Outline>();
 
             char1.effectColor = new Color32(0, 0, 0, 0);
             char2.effectColor = new Color32(0, 0, 0, 255);
+            char3.effectColor = new Color32(0, 0, 0, 0);
 
 
             for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
@@ -501,6 +513,18 @@ public class battle : MonoBehaviour {
             Invenpanel.transform.GetChild(13).gameObject.SetActive(true);
             Invenpanel.transform.GetChild(14).gameObject.SetActive(true);
 
+            Outline char1;
+            Outline char2;
+            Outline char3;
+
+            char1 = Char1.GetComponent<Outline>();
+            char2 = Char2.GetComponent<Outline>();
+            char3 = Char3.GetComponent<Outline>();
+
+            char1.effectColor = new Color32(0, 0, 0, 0);
+            char2.effectColor = new Color32(0, 0, 0, 0);
+            char3.effectColor = new Color32(0, 0, 0, 255);
+
             for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
             {
                 if (Npc.SkillTriggers[c].skill[i] == true)
@@ -529,9 +553,9 @@ public class battle : MonoBehaviour {
         sKillManager = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
 
-        player1 = GameObject.Find("Canvas").transform.Find("Getta1").gameObject;
-        player2 = GameObject.Find("Canvas").transform.Find("Getta2").gameObject;
-        player3 = GameObject.Find("Canvas").transform.Find("Getta3").gameObject;
+        player1 = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+        player2 = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
+        player3 = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
         /*
         Npc.SkillTriggers[0].skill[1] = true;
         Npc.SkillTriggers[0].skill[4] = true;
@@ -542,11 +566,13 @@ public class battle : MonoBehaviour {
 
         Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
 
-        Player1 = GameObject.Find("Canvas").transform.Find("Getta1").transform.Find("Char1").GetComponent<Animator>();
-        Player2 = GameObject.Find("Canvas").transform.Find("Getta2").transform.Find("Char2").GetComponent<Animator>();
-        Player3 = GameObject.Find("Canvas").transform.Find("Getta3").transform.Find("Char3").GetComponent<Animator>();
+        Player1 = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").GetComponent<Animator>();
+        Player2 = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").GetComponent<Animator>();
+        Player3 = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").GetComponent<Animator>();
 
         Monster = GameObject.Find("Canvas").transform.Find("mob1").GetComponent<Animator>();
+
+        EffectSystem = GameObject.Find("EffectSystem");
 
         Idol = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Idol");
         

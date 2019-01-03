@@ -9,6 +9,8 @@ public class FloatingText : MonoBehaviour
     public Animator animator2;
     public Text damageText;
     public Text damageText2;
+    public Text damageText3;
+    public Text damageText4;
 
 
     // Start is called before the first frame update
@@ -16,9 +18,8 @@ public class FloatingText : MonoBehaviour
     {
         print("Test2");
         AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-        AnimatorClipInfo[] clipInfo2 = animator.GetCurrentAnimatorClipInfo(0);
+        //AnimatorClipInfo[] clipInfo2 = animator.GetCurrentAnimatorClipInfo(0);
         damageText = animator.GetComponent<Text>();
-        damageText2 = animator.GetComponent<Text>();
         Debug.Log(clipInfo.Length);
         Destroy(gameObject, clipInfo[0].clip.length);
     }
@@ -29,14 +30,8 @@ public class FloatingText : MonoBehaviour
         print("SetTest");
         damageText.text = text;
     }
-
-    public void SetText2(string text)
-    {
-        print("SetTest");
-        damageText2.text = text;
-    }
-
-
+    
+    
     // Update is called once per frame
     void Update()
     {

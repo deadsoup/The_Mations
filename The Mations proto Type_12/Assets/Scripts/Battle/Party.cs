@@ -44,13 +44,13 @@ public class Party : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerSlot[0] = GameObject.Find("Canvas").transform.Find("Getta1").gameObject;
-        playerSlot[1] = GameObject.Find("Canvas").transform.Find("Getta2").gameObject;
-        playerSlot[2] = GameObject.Find("Canvas").transform.Find("Getta3").gameObject;
+        playerSlot[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Getta1").gameObject;
+        playerSlot[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
+        playerSlot[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Getta3").gameObject;
 
-        playerSprite[0] = GameObject.Find("Canvas").transform.Find("Getta1").transform.Find("Char1").gameObject;
-        playerSprite[1] = GameObject.Find("Canvas").transform.Find("Getta2").transform.Find("Char2").gameObject;
-        playerSprite[2] = GameObject.Find("Canvas").transform.Find("Getta3").transform.Find("Char3").gameObject;
+        playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
+        playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
+        playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
         print(playerSprite[0].GetComponent<Image>().sprite);
     }
 

@@ -270,7 +270,7 @@ public class Inven : MonoBehaviour
             {
                 if (items[i].Name == "진통제" && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
                 {
-
+                    
                     items[i] = itemToAdd;
                     ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
                     data.amount--;
@@ -407,7 +407,7 @@ public class Inven : MonoBehaviour
                     itemObj.transform.position = slots[i].transform.position;
                     itemObj.name = itemToAdd.Name;
                     Debug.Log("없는 대상" + i);
-
+                   
                     Add_Status(battle.switching[0], itemToAdd);
                     break;
 

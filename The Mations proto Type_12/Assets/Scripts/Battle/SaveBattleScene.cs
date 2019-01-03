@@ -237,22 +237,22 @@ public class SaveBattleScene : MonoBehaviour
                 }
             }
         }
-        
 
 
-            Debug.Log("저장");
-            battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
-                            npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
-                            npc.ArchivePoint[0],
-                            npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
-                            invenslots1_ID, invenslots1_Amount,
-                            invenslots2_ID, invenslots2_Amount,
-                            invenslots3_ID, invenslots3_Amount,
-                            invenslots4_ID, invenslots4_Amount,
-                            P1_skillID[0],
-                            P1_skillID[1],
-                            P1_skillID[2]
-                            ));
+
+        Debug.Log("저장");
+        battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
+                        npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
+                        npc.ArchivePoint[0],
+                        npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
+                        invenslots1_ID, invenslots1_Amount,
+                        invenslots2_ID, invenslots2_Amount,
+                        invenslots3_ID, invenslots3_Amount,
+                        invenslots4_ID, invenslots4_Amount,
+                        P1_skillID[0],
+                        P1_skillID[1],
+                        P1_skillID[2]
+                        ));
         battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
                             npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
                             npc.ArchivePoint[0],
@@ -281,13 +281,13 @@ public class SaveBattleScene : MonoBehaviour
 
         JsonData jsonData = JsonMapper.ToJson(battleSave);
 
-            File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
-        
+        File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
+
     }
 
     void loadJson()
     {
-        for(int i = 0; i < battle_Load_System.Count; i++)
+        for (int i = 0; i < battle_Load_System.Count; i++)
         {
             battleLoad.Add
                 (new BattleInfo(
@@ -388,7 +388,7 @@ public class SaveBattleScene : MonoBehaviour
 
         }
 
-        
+
         if (battleLoad[0].Inven4 > 30)
         {
             for (int i = 0; i < battleLoad[0].Inven4_Amount; i++)
@@ -471,15 +471,15 @@ public class SaveBattleScene : MonoBehaviour
         loadJson();
         Battle.chaneGetta1();
     }
-    
+
     private void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Keypad6))
-       // {
-           // saveJson();
+        // {
+        // saveJson();
         //}
     }
-    
+
 }
 [System.Serializable]
 public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것

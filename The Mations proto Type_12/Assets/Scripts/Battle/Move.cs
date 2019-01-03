@@ -123,7 +123,8 @@ public class Move : MonoBehaviour {
     {
         FloatingTextController.Initialize();
         FloatingTextController.Initialize2();
-
+        FloatingTextController.Initialize3();
+        FloatingTextController.Initialize4();
 
         i = battle.switching[0];
         i2 = battle.switching[1];

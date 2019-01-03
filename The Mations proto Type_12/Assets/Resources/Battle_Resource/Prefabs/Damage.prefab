@@ -166,5 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7432487496022052466}
   animator2: {fileID: 0}
-  damageText: {fileID: 0}
+  damageText: {fileID: 104097907865868238}
   damageText2: {fileID: 0}
+  damageText3: {fileID: 0}
+  damageText4: {fileID: 0}

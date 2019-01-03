@@ -6,6 +6,8 @@ public class FloatingTextController : MonoBehaviour
 {
     public static GameObject popupText;
     public static GameObject popupText2;
+    public static GameObject popupText3;
+    public static GameObject popupText4;
     private static GameObject canvas;
 
 
@@ -35,6 +37,32 @@ public class FloatingTextController : MonoBehaviour
         }
     }
 
+    public static void Initialize3()
+    {
+
+        canvas = GameObject.Find("Canvas");
+        if (!popupText3)
+        {
+            print("Initialize");
+            popupText3 = Resources.Load<GameObject>("Battle_Resource/Prefabs/Damage3");
+
+            //Instantiate(popupText, transform.position, transform.rotation);
+        }
+    }
+
+    public static void Initialize4()
+    {
+
+        canvas = GameObject.Find("Canvas");
+        if (!popupText4)
+        {
+            print("Initialize");
+            popupText4 = Resources.Load<GameObject>("Battle_Resource/Prefabs/Damage4");
+
+            //Instantiate(popupText, transform.position, transform.rotation);
+        }
+    }
+
 
 
 
@@ -53,7 +81,22 @@ public class FloatingTextController : MonoBehaviour
         print("CreateFloatingText");
         GameObject instance = Instantiate(popupText2);
         instance.transform.SetParent(canvas.transform, false);
-        instance.GetComponent<FloatingText>().SetText2(text);
+        instance.GetComponent<FloatingText>().SetText(text);
+    }
+    public static void CreateFloatingText3(string text, Transform location)
+    {
+        print("CreateFloatingText");
+        GameObject instance = Instantiate(popupText3);
+        instance.transform.SetParent(canvas.transform, false);
+        instance.GetComponent<FloatingText>().SetText(text);
+    }
+
+    public static void CreateFloatingText4(string text, Transform location)
+    {
+        print("CreateFloatingText");
+        GameObject instance = Instantiate(popupText4);
+        instance.transform.SetParent(canvas.transform, false);
+        instance.GetComponent<FloatingText>().SetText(text);
     }
 
 
