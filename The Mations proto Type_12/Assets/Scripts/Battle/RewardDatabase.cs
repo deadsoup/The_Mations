@@ -64,6 +64,7 @@ public class RewardDatabase : MonoBehaviour
                     itemData[i]["Name"].ToString(),
                     itemData[i]["Grade"].ToString(),
                     itemData[i]["Text"].ToString(),
+                    itemData[i]["ItemOption"].ToString(),
                     (int)itemData[i]["MaxHp"],
                     (int)itemData[i]["Hp"],
                     (int)itemData[i]["MaxMp"],

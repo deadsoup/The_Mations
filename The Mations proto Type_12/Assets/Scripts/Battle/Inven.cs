@@ -32,6 +32,8 @@ public class Inven : MonoBehaviour
 
     GameObject Invenpanel;
     GameObject Slotpanel;
+    GameObject Slotpanel2;
+    GameObject Slotpanel3;
 
     ItemDatabase database;
 
@@ -45,11 +47,30 @@ public class Inven : MonoBehaviour
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
 
+    public List<Equip> items2 = new List<Equip>();
+    public List<GameObject> slots2 = new List<GameObject>();
+
+    public List<Equip> items3 = new List<Equip>();
+    public List<GameObject> slots3 = new List<GameObject>();
 
     int slotAmount;
     int randomAdd;
     int randomAdd1;
     int randomAdd2;
+
+    int P1_ItemslotCount;
+    int P2_ItemslotCount;
+    int P3_ItemslotCount;
+
+    private void Awake()
+    {
+        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+        Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
+        Slotpanel2 = Invenpanel.transform.Find("Panel2").gameObject;
+        Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
+        UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -62,10 +83,6 @@ public class Inven : MonoBehaviour
         randomAdd2 = Random.Range(0, 6);
 
 
-        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
-        Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
-        UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject ;
-
         for (int i = 0; i < slotAmount; i++)
         {
             items.Add(new Equip());
@@ -73,21 +90,58 @@ public class Inven : MonoBehaviour
             slots[i].GetComponent<slot>().id = i;
             slots[i].name = "slots" + i.ToString();
             slots[i].transform.SetParent(Slotpanel.transform);
-            //print(new Equip());
+
+            items2.Add(new Equip());
+            slots2.Add(Instantiate(InvenSlot));
+            slots2[i].GetComponent<slot>().id = (i + 4);
+            slots2[i].name = "slots" + (i + 4).ToString();
+            slots2[i].transform.SetParent(Slotpanel2.transform);
+
+            items3.Add(new Equip());
+            slots3.Add(Instantiate(InvenSlot));
+            slots3[i].GetComponent<slot>().id = (i + 8);
+            slots3[i].name = "slots" + (i + 8).ToString();
+            slots3[i].transform.SetParent(Slotpanel3.transform);
+            print(i + "번 완료");
         }
 
-        print(database.FetchItemByID(30).Name);
-            }
+        Invenpanel.transform.GetChild(0).gameObject.SetActive(true);
+        Invenpanel.transform.GetChild(1).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(2).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(3).gameObject.SetActive(true);
+        Invenpanel.transform.GetChild(4).gameObject.SetActive(true);
+        Invenpanel.transform.GetChild(5).gameObject.SetActive(true);
+        Invenpanel.transform.GetChild(6).gameObject.SetActive(true);
+        Invenpanel.transform.GetChild(7).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(8).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(9).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(10).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(11).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(12).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(13).gameObject.SetActive(false);
+        Invenpanel.transform.GetChild(14).gameObject.SetActive(false);
+
+
+
+    }
 
     private void Update()
     {
         // 아이템추가
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddItem(30);
+            AddItem(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddItem2(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            AddItem3(1);
         }
     }
-
+    // 아이템 삭제 - 문자열을 사용한다 - "slots0, slots1" 이걸 삭제함
     public void deleteItem(string name)
     {
         for (int i = 0; i < items.Count; i++)
@@ -95,7 +149,7 @@ public class Inven : MonoBehaviour
             if (slots[i].name == name)
             {
                 // 아이템 삭제전 플레이어 능력치 감소
-                Remove_Status(0, items[i]);
+                Remove_Status(battle.switching[0], items[i]);
 
                 // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
                 var children = slots[i].GetComponentInChildren<ItemData>();
@@ -105,21 +159,101 @@ public class Inven : MonoBehaviour
                 items[i] = new Equip();
                 break;
             }
+            if (slots2[i].name == name)
+            {
+                // 아이템 삭제전 플레이어 능력치 감소
+                Remove_Status(battle.switching[1], items2[i]);
+
+                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                var children = slots2[i].GetComponentInChildren<ItemData>();
+                GameObject obj = children.gameObject;
+                Destroy(obj);
+                // 아이템정보 초기화 (id -1로변경)
+                items2[i] = new Equip();
+                break;
+            }
+            if (slots3[i].name == name)
+            {
+                // 아이템 삭제전 플레이어 능력치 감소
+                Remove_Status(battle.switching[2], items3[i]);
+
+                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                var children = slots3[i].GetComponentInChildren<ItemData>();
+                GameObject obj = children.gameObject;
+                Destroy(obj);
+                // 아이템정보 초기화 (id -1로변경)
+                items3[i] = new Equip();
+                break;
+            }
+
+        }
+
+    }
+    public void deleteItem2(string name)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (slots2[i].name == name)
+            {
+                // 아이템 삭제전 플레이어 능력치 감소
+                Remove_Status(battle.switching[1], items2[i]);
+
+                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                var children = slots2[i].GetComponentInChildren<ItemData>();
+                GameObject obj = children.gameObject;
+                Destroy(obj);
+                // 아이템정보 초기화 (id -1로변경)
+                items2[i] = new Equip();
+                break;
+            }
+
+        }
+
+    }
+    public void deleteItem3(string name)
+    {
+        for (int i = 0; i < items3.Count; i++)
+        {
+            if (slots3[i].name == name)
+            {
+                // 아이템 삭제전 플레이어 능력치 감소
+                Remove_Status(battle.switching[2], items3[i]);
+
+                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                var children = slots3[i].GetComponentInChildren<ItemData>();
+                GameObject obj = children.gameObject;
+                Destroy(obj);
+                // 아이템정보 초기화 (id -1로변경)
+                items3[i] = new Equip();
+                break;
+            }
 
         }
 
     }
 
 
+    //위의 아이템 삭제 함수를 버튼화 시킨 것
+
     public void DeleteButton(string name)
     {
         deleteItem(name);
     }
+    public void DeleteButton2(string name)
+    {
+        deleteItem2(name);
+    }
+    public void DeleteButton3(string name)
+    {
+        deleteItem3(name);
+    }
+
+    //각 플레이어마다 아이템 사용하는 법
 
     public void Use(int a)
     {
         Equip itemToAdd = database.FetchItemByID(a);
-        if (a == 30)
+        if (a == 51)
         {
             UsePanel.SetActive(true);
             UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
@@ -127,38 +261,112 @@ public class Inven : MonoBehaviour
     }
 
 
-    public void UsePotion()
+    public void UsePotion() // 플레이어1의 사용하기
     {
-        Equip itemToAdd = database.FetchItemByID(30);
-
-        for (int i = 0; i < items.Count; i++)
+        Equip itemToAdd = database.FetchItemByID(51);
+        if (Slotpanel.activeInHierarchy == true)
         {
-            if (items[i].Name == "체력약" && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+            for (int i = 0; i < items.Count; i++)
             {
-                items[i] = itemToAdd;
-                ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
-                data.amount--;
-                data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
-                Add_Status(1, itemToAdd);
-                print(itemToAdd.Hp);
-
-                if (npc.Hp[0] >= npc.MaxHp[0])
+                if (items[i].Name == "진통제" && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
                 {
-                    npc.Hp[0] = npc.MaxHp[0];
+                    
+                    items[i] = itemToAdd;
+                    ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[0], itemToAdd);
+                    print(itemToAdd.Hp);
+
+                    if (npc.Hp[battle.switching[0]] >= npc.MaxHp[battle.switching[0]])
+                    {
+                        npc.Hp[battle.switching[0]] = npc.MaxHp[battle.switching[0]];
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items[i] = new Equip();
+                        break;
+
+
+                    }
                 }
 
 
-                if (data.amount <= 0)
-                {
-                            // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
-                            var children = slots[i].GetComponentInChildren<ItemData>();
-                            GameObject obj = children.gameObject;
-                            Destroy(obj);
-                            // 아이템정보 초기화 (id -1로변경)
-                            items[i] = new Equip();
-                            break;
-                   
 
+            }
+        }
+        if (Slotpanel2.activeInHierarchy == true) // 플레이어2의 사용하기
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                if (items2[i].Name == "진통제" && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    items2[i] = itemToAdd;
+                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[1], itemToAdd);
+                    print(itemToAdd.Hp);
+
+                    if (npc.Hp[battle.switching[1]] >= npc.MaxHp[battle.switching[1]])
+                    {
+                        npc.Hp[battle.switching[1]] = npc.MaxHp[battle.switching[1]];
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots2[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items2[i] = new Equip();
+                        break;
+
+
+                    }
+                }
+            }
+        }
+        if (Slotpanel3.activeInHierarchy == true) // 플레이어 3의 사용하기
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                if (items3[i].Name == "진통제" && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    items3[i] = itemToAdd;
+                    ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[2], itemToAdd);
+                    print(itemToAdd.Hp);
+
+                    if (npc.Hp[battle.switching[2]] >= npc.MaxHp[battle.switching[2]])
+                    {
+                        npc.Hp[battle.switching[2]] = npc.MaxHp[battle.switching[2]];
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots3[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items3[i] = new Equip();
+                        break;
+
+
+                    }
                 }
             }
         }
@@ -200,7 +408,7 @@ public class Inven : MonoBehaviour
                     itemObj.name = itemToAdd.Name;
                     Debug.Log("없는 대상" + i);
                    
-                    Add_Status(0, itemToAdd);
+                    Add_Status(battle.switching[0], itemToAdd);
                     break;
 
 
@@ -211,10 +419,118 @@ public class Inven : MonoBehaviour
         }
     }
 
+    public void AddItem2(int id)
+    {
+        Equip itemToAdd = database.FetchItemByID(id);
+        if (itemToAdd.Stackable && Check_Item_In_Inventory(itemToAdd))
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                if (items2[i].Id == id)
+                {
+                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount++;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Debug.Log("이미있는 대상");
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                Debug.Log("첫 포문 입장" + i);
+                if (items2[i].Id == -1)
+                {
+                    Debug.Log("이프문 입장" + i);
+                    if (P2_ItemslotCount < 4)
+                    {
+                        Debug.Log("두번째 이프문 입장" + i);
+                        P2_ItemslotCount++;
+                        items2[i] = itemToAdd;
+                        GameObject itemObj = Instantiate(InvenItem);
+                        itemObj.GetComponent<ItemData>().equip = itemToAdd;
+                        itemObj.GetComponent<ItemData>().slot = i;
+                        itemObj.transform.SetParent(slots2[i].transform);
+
+                        itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                        //itemObj.transform.position = new Vector2(511, 249.6f);
+                        itemObj.transform.position = slots2[i].transform.position;
+                        itemObj.name = itemToAdd.Name;
+                        Debug.Log("없는 대상" + i);
+
+                        Add_Status(battle.switching[1], itemToAdd);
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("캐릭터 2의 아이템창 꽉 참");
+                        break;
+                    }
+                }
+
+            }
+        }
+    }
+
+    public void AddItem3(int id)
+    {
+        Equip itemToAdd = database.FetchItemByID(id);
+        if (itemToAdd.Stackable && Check_Item_In_Inventory(itemToAdd))
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                if (items3[i].Id == id)
+                {
+                    ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount++;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Debug.Log("이미있는 대상");
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                if (items3[i].Id == -1)
+                {
+
+                    if (P3_ItemslotCount < 4)
+                    {
+                        P3_ItemslotCount++;
+                        items3[i] = itemToAdd;
+                        GameObject itemObj = Instantiate(InvenItem);
+                        itemObj.GetComponent<ItemData>().equip = itemToAdd;
+                        itemObj.GetComponent<ItemData>().slot = i;
+                        itemObj.transform.SetParent(slots3[i].transform);
+
+                        itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                        //itemObj.transform.position = new Vector2(511, 249.6f);
+                        itemObj.transform.position = slots3[i].transform.position;
+                        itemObj.name = itemToAdd.Name;
+                        Debug.Log("없는 대상" + i);
+
+                        Add_Status(battle.switching[2], itemToAdd);
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("캐릭터 3의 아이템창 꽉 참");
+                        break;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
     void Add_Status(int unitIdx, Equip equip)
     {
         npc.Equip_MaxHp[unitIdx] += equip.MaxHp;
-        npc.Hp[unitIdx] += equip.Hp;
+        npc.Hp[unitIdx] += (int)(equip.Hp * (npc.MaxHp[unitIdx] + npc.Equip_MaxHp[unitIdx]) * 0.01f);
         npc.Equip_MaxMp[unitIdx] += equip.MaxMp;
         npc.Mp[unitIdx] += equip.Mp;
         npc.Equip_Str[unitIdx] += equip.Str;

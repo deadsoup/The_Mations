@@ -61,9 +61,9 @@ public class Move : MonoBehaviour {
 
 
         mobHp = GameObject.Find("mobHp");
-        int A = Random.Range(10,12);
+        int random = Random.Range(10,20);
 
-        battleEvent(A);
+        battleEvent(random);
 
     }
 	

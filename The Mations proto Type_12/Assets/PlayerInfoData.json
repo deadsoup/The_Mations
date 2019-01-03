@@ -1,11 +1,1 @@
-{"data": [
-
-{"Id": 0, "Name":"\uC740\uD558","MaxHp":150,"Hp":150,"MaxMp":200,"Mp":200,"Str":20,"Dex":5,"Wis":50},
-{"Id": 1,"Name":"\uD55C\uD604\uC218","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30},
-{"Id": 2,"Name":"003","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30},
-{"Id": 3,"Name":"004","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30},
-{"Id": 4,"Name":"005","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30},
-{"Id": 5,"Name":"000","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":30,"Dex":4,"Wis":30}
-
-
-] } 
+{"data":[{"ID":0,"Name":"\uC740\uD558","MaxHp":150,"Hp":150,"MaxMp":200,"Mp":200,"Str":20,"Dex":5,"Wis":50},{"ID":1,"Name":"\uD55C\uD604\uC218","MaxHp":200,"Hp":200,"MaxMp":150,"Mp":150,"Str":25,"Dex":4,"Wis":25},{"ID":2,"Name":"\uD558\uCE20","MaxHp":150,"Hp":150,"MaxMp":150,"Mp":150,"Str":30,"Dex":5,"Wis":30}]}

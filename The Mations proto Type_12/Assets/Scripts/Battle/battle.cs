@@ -63,11 +63,6 @@ public class battle : MonoBehaviour {
     public GameObject Dex1;
     public GameObject Wis1;
 
-    public GameObject Hp2;
-    public GameObject Mp2;
-    public GameObject Str2;
-    public GameObject Dex2;
-    public GameObject Wis2;
 
     SKillManager sKillManager;
     npc Npc;
@@ -76,7 +71,17 @@ public class battle : MonoBehaviour {
     GameObject player2;
     GameObject player3;
 
+    GameObject Invenpanel;
 
+    Animator Player1;
+
+    Animator Player2;
+
+    Animator Player3;
+
+    Animator Monster;
+    RuntimeAnimatorController Idol;
+    RuntimeAnimatorController Nerd;
 
     public void nomalDice()
     {
@@ -110,7 +115,22 @@ public class battle : MonoBehaviour {
 
             PlusDamage = 0;
 
-            FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
+            if (c == 0)
+            {
+                Debug.Log("모션 진입");
+                Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                Player1.SetTrigger("Atk");
+                FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
+            }
+            if (c == 1)
+            {
+                Debug.Log("모션 진입");
+                Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                Player2.SetTrigger("Atk");
+                FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
+            }
 
             if (npc.actiongage <= 0)
             {
@@ -251,7 +271,7 @@ public class battle : MonoBehaviour {
             if (edamage <= 0) { edamage = 0; }
 
             npc.Hp[c] -= edamage;
-
+            Monster.SetTrigger("Atk");
 
             FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
 
@@ -269,7 +289,7 @@ public class battle : MonoBehaviour {
             if (edamage <= 0) { edamage = 0; }
 
             npc.Hp[random] -= edamage;
-
+            Monster.SetTrigger("Atk");
 
             FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
 
@@ -287,7 +307,7 @@ public class battle : MonoBehaviour {
             if (edamage <= 0) { edamage = 0; }
 
             npc.Hp[random] -= edamage;
-
+            Monster.SetTrigger("Atk");
 
             FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
 
@@ -332,7 +352,7 @@ public class battle : MonoBehaviour {
     public void chaneGetta1()
     {
 
-        if (npc.Hp[0] > 0) // 체인지 게타원
+        if (npc.Hp[switching[0]] > 0) // 체인지 게타원
         {
             c = 0;
             switching[0] = c;
@@ -343,6 +363,32 @@ public class battle : MonoBehaviour {
             sKillManager.resetSkill("skillSlot2");
             sKillManager.resetSkill("skillSlot3");
             sKillManager.resetSkill("skillSlot4");
+
+            Invenpanel.transform.GetChild(0).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(1).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(2).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(3).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(4).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(5).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(6).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(7).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(8).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(9).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(10).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(11).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(12).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(13).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(14).gameObject.SetActive(false);
+
+            Outline char1;
+            Outline char2;
+
+            char1 = Char1.GetComponent<Outline>();
+            char2 = Char2.GetComponent<Outline>();
+
+            char1.effectColor = new Color32(0, 0, 0, 255);
+            char2.effectColor = new Color32(0, 0, 0, 0);
+
             for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
             {
                 if (Npc.SkillTriggers[c].skill[i] == true)
@@ -363,7 +409,7 @@ public class battle : MonoBehaviour {
     public void chaneGetta2()
     {
 
-        if (npc.Hp[1] > 0) // 체인지 게타투
+        if (npc.Hp[switching[1]] > 0) // 체인지 게타투
         {
             c = 1;
             switching[1] = c;
@@ -374,6 +420,37 @@ public class battle : MonoBehaviour {
             sKillManager.resetSkill("skillSlot2");
             sKillManager.resetSkill("skillSlot3");
             sKillManager.resetSkill("skillSlot4");
+
+            Invenpanel.transform.GetChild(1).gameObject.SetActive(true);
+
+            Invenpanel.transform.GetChild(0).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(2).gameObject.SetActive(false);
+
+            Invenpanel.transform.GetChild(3).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(4).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(5).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(6).gameObject.SetActive(false);
+
+            Invenpanel.transform.GetChild(7).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(8).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(9).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(10).gameObject.SetActive(true);
+
+            Invenpanel.transform.GetChild(11).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(12).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(13).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(14).gameObject.SetActive(false);
+
+            Outline char1;
+            Outline char2;
+
+            char1 = Char1.GetComponent<Outline>();
+            char2 = Char2.GetComponent<Outline>();
+
+            char1.effectColor = new Color32(0, 0, 0, 0);
+            char2.effectColor = new Color32(0, 0, 0, 255);
+
+
             for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
             {
                 if (Npc.SkillTriggers[c].skill[i] == true)
@@ -383,20 +460,64 @@ public class battle : MonoBehaviour {
                 }
             }
 
-            Hp2.GetComponent<Text>().text = "체력 : " + npc.Hp[switching[1]];
-            Mp2.GetComponent<Text>().text = "마나 : " + npc.Mp[switching[1]];
-            Str2.GetComponent<Text>().text = "힘 : " + npc.Str[switching[1]];
-            Dex2.GetComponent<Text>().text = "민첩 : " + npc.Dex[switching[1]];
-            Wis2.GetComponent<Text>().text = "지능 : " + npc.Wis[switching[1]];
 
 
             Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[1]] + "다");
         }
     }
-    
+
+    public void chaneGetta3()
+    {
+
+        if (npc.Hp[switching[2]] > 0) // 체인지 게타3
+        {
+            c = 2;
+            switching[2] = c;
+            //Char2.SetActive(true);
+            //Char1.SetActive(false);
+            //Move.i = c;
+            sKillManager.UniqueSkill_Set(c);
+            sKillManager.resetSkill("skillSlot2");
+            sKillManager.resetSkill("skillSlot3");
+            sKillManager.resetSkill("skillSlot4");
+
+            Invenpanel.transform.GetChild(2).gameObject.SetActive(true);
+
+            Invenpanel.transform.GetChild(0).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(1).gameObject.SetActive(false);
+
+            Invenpanel.transform.GetChild(3).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(4).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(5).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(6).gameObject.SetActive(false);
+
+            Invenpanel.transform.GetChild(7).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(8).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(9).gameObject.SetActive(false);
+            Invenpanel.transform.GetChild(10).gameObject.SetActive(false);
+
+            Invenpanel.transform.GetChild(11).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(12).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(13).gameObject.SetActive(true);
+            Invenpanel.transform.GetChild(14).gameObject.SetActive(true);
+
+            for (int i = 0; i < Npc.SkillTriggers[c].skill.Length; i++)
+            {
+                if (Npc.SkillTriggers[c].skill[i] == true)
+                {
+                    sKillManager.AddSkill(i);
+                    Debug.Log(i);
+                }
+            }
+
+
+            Debug.Log("현재 활동하는 캐릭터는  " + npc.name[switching[2]] + "다");
+        }
+    }
+
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         //switching[0] = 0; switching[1] = 1; switching[2] = 2;
         Hp1.GetComponent<Text>().text = "체력 : " + (npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]]);
@@ -418,6 +539,20 @@ public class battle : MonoBehaviour {
 
         Npc.SkillTriggers[1].skill[5] = true;
         */
+
+        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+
+        Player1 = GameObject.Find("Canvas").transform.Find("Getta1").transform.Find("Char1").GetComponent<Animator>();
+        Player2 = GameObject.Find("Canvas").transform.Find("Getta2").transform.Find("Char2").GetComponent<Animator>();
+        Player3 = GameObject.Find("Canvas").transform.Find("Getta3").transform.Find("Char3").GetComponent<Animator>();
+
+        Monster = GameObject.Find("Canvas").transform.Find("mob1").GetComponent<Animator>();
+
+        Idol = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Idol");
+        
+        Nerd = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Nerd");
+
+
     }
 	
 	// Update is called once per frame
@@ -454,18 +589,36 @@ public class battle : MonoBehaviour {
 
         if (c == 1)
         {
-            int playerHp = npc.Hp[switching[1]]; //+ npc.Equip_MaxHp[1];
-            int playerMp = npc.Mp[switching[1]]; //+ npc.Equip_MaxMp[1];
-            int playerStr = npc.Str[switching[1]];// + npc.Equip_Str[1];
-            int playerDex = npc.Dex[switching[1]]; //+ npc.Equip_Dex[1];
-            int playerWis = npc.Wis[switching[1]]; //+ npc.Equip_Wis[1];
+            int playerHp = npc.Hp[switching[1]] + npc.Equip_MaxHp[switching[1]];
+            int playerMp = npc.Mp[switching[1]] + npc.Equip_MaxMp[switching[1]];
+            int playerStr = npc.Str[switching[1]] + npc.Equip_Str[switching[1]];
+            int playerDex = npc.Dex[switching[1]] + npc.Equip_Dex[switching[1]];
+            int playerWis = npc.Wis[switching[1]] + npc.Equip_Wis[switching[1]];
 
 
-            Hp2.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp2.GetComponent<Text>().text = "마나 : " + playerMp;
-            Str2.GetComponent<Text>().text = "힘 : " + playerStr;
-            Dex2.GetComponent<Text>().text = "민첩 : " + playerDex;
-            Wis2.GetComponent<Text>().text = "지능 : " + playerWis;
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+
+
+
+        }
+
+        if (c == 2)
+        {
+            int playerHp = npc.Hp[switching[2]] + npc.Equip_MaxHp[switching[2]];
+            int playerMp = npc.Mp[switching[2]] + npc.Equip_MaxMp[switching[2]];
+            int playerStr = npc.Str[switching[2]] + npc.Equip_Str[switching[2]];
+            int playerDex = npc.Dex[switching[2]] + npc.Equip_Dex[switching[2]];
+            int playerWis = npc.Wis[switching[2]] + npc.Equip_Wis[switching[2]];
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
 
 
 
@@ -474,14 +627,46 @@ public class battle : MonoBehaviour {
 
         if (battleaction == true)
         {
+            Debug.Log(i+"번의 몬스터 등장 !");
             if (i == 10)
             {
-                mob1.SetActive(true);
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_PolizerDog");
             }
             if (i == 11)
             {
-                mob1.SetActive(true);
-                mob2.SetActive(true);
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_PolizerBird");
+            }
+            if (i == 12)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_Zoombie");
+            }
+            if (i == 13)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_PolizerSlaughterTiger");
+            }
+            if (i == 14)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_Boss_DarkHon");
+            }
+            if (i == 15)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_soldier01");
+            }
+            if (i == 16)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_Mothgirl");
+            }
+            if (i == 17)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_monitoringRobot");
+            }
+            if (i == 18)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_Wearwolf");
+            }
+            if (i == 19)
+            {
+                mob1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Monster/Monster_Boss_Fireman");
             }
 
             mobHp.SetActive(true);

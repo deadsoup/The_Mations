@@ -166,10 +166,12 @@ public class SaveBattleScene : MonoBehaviour
         npc.Str[battle.switching[0]] = battleLoad[0].Str;
         npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
         npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+        /*
         npc.Equip_MaxHp[battle.switching[0]] = battleLoad[0].Equip_MaxHp;
         npc.Equip_MaxMp[battle.switching[0]] = battleLoad[0].Equip_MaxMp;
         npc.Equip_Str[battle.switching[0]] = battleLoad[0].Equip_Str;
         npc.Equip_Wis[battle.switching[0]] = battleLoad[0].Equip_Wis;
+        */
 
         if (battleLoad[0].Inven1 > 30)
         {
