@@ -1,9 +1,1 @@
-[{"Id":0,
-"Name":"\uC740\uD558",
-"MaxHp":150,"Hp":101,"MaxMp":200,"Mp":150,"Str":20,"Wis":50,"ArchivePoint":400,
-"Equip_MaxHp":0,"Equip_MaxMp":0,"Equip_Str":23,"Equip_Wis":0,
-"Inven1":5,"Inven1_Amount":0,
-"Inven2":3,"Inven2_Amount":0,
-"Inven3":5,"Inven3_Amount":0,
-"Inven4":4,"Inven4_Amount":0,
-"Skill1_ID":1,"Skill2_ID":3,"Skill3_ID":4}]
+[{"Id":0,"Name":"\uC740\uD558","MaxHp":150,"Hp":115,"MaxMp":200,"Mp":100,"Str":20,"Wis":50,"ArchivePoint":500,"Equip_MaxHp":0,"Equip_MaxMp":0,"Equip_Str":37,"Equip_Wis":0,"Inven1":5,"Inven1_Amount":0,"Inven2":4,"Inven2_Amount":0,"Inven3":5,"Inven3_Amount":0,"Inven4":4,"Inven4_Amount":0,"Skill1_ID":1,"Skill2_ID":3,"Skill3_ID":4}]

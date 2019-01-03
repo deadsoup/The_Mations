@@ -64,7 +64,9 @@ public class SoundControl : MonoBehaviour {
 	void Update ()
     {
         this.Bgmamount.GetComponent<Text>().text = Bgmcount.ToString();
+        this.Bgmamount.GetComponent<Text>().fontSize = 35;
         this.Seamount.GetComponent<Text>().text = Secount.ToString();
+        this.Seamount.GetComponent<Text>().fontSize = 35;
 
     }
 }

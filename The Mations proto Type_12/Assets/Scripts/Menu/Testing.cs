@@ -76,7 +76,9 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
     // Use this for initialization
 	void Start () {
         StartDirector.count = true;
-       
+        MapInfomation.Mapcount = 3;
+
+
         Option.Coin = 0;
         count = 0;
 

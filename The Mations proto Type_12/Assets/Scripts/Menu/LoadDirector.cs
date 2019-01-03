@@ -37,18 +37,24 @@ public class LoadDirector : MonoBehaviour { // 타이틀화면 게임로드창 �
         LoadScene = GameObject.Find("Canvas").transform.Find("Load").transform.Find("LoadScene").gameObject;
     }
     void Update()
-    {
-        this.AutoMap.GetComponent<Text>().text = "Map          " +
+    { //\r\n 는 텍스트줄을 다음줄로 가는 것
+        this.AutoMap.GetComponent<Text>().text = "Map" +
+            "\r\n" + 000 + "          NoData";
+        this.AutoMap.GetComponent<Text>().fontSize = 23;
 
-            "              " + 000 + "          NoData";
-        this.StickMap.GetComponent<Text>().text = "Map          " +
 
-            "              " + 000+ "          NoData";
-        this.AutoClear.GetComponent<Text>().text = "Clear Tile          " +
 
-            "              " + 000 + "          NoData";
-        this.StickClear.GetComponent<Text>().text = "Clear Tile          " +
+        this.StickMap.GetComponent<Text>().text = "Map" +
+            "\r\n" + 000+ "           NoData";
+        this.StickMap.GetComponent<Text>().fontSize = 23;
 
-            "              " + 000 + "          NoData";
+
+        this.AutoClear.GetComponent<Text>().text = "Clear Tile" +
+            "\r\n" + 000 + "          NoData";
+        this.AutoClear.GetComponent<Text>().fontSize = 23;
+
+        this.StickClear.GetComponent<Text>().text = "Clear Tile" +
+            "\r\n" + 000 + "          NoData";
+        this.StickClear.GetComponent<Text>().fontSize = 23;
     }
 }

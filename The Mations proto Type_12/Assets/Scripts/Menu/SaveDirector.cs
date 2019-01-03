@@ -53,19 +53,24 @@ public class SaveDirector : MonoBehaviour
     }
     void Update()
     {
-        this.AutoMap.GetComponent<Text>().text = "Map          " +
+        this.AutoMap.GetComponent<Text>().text = "Map" +
+            "\r\n" + 000 + "          NoData";
+        this.AutoMap.GetComponent<Text>().fontSize = 23;
 
-            "              " + 000 + "          NoData";
-        this.StickMap.GetComponent<Text>().text = "Map          " +
 
-            "              " + 000 + "          NoData";
-        this.AutoClear.GetComponent<Text>().text = "Clear Tile          " +
 
-            "              " + 000 + "          NoData";
-        this.StickClear.GetComponent<Text>().text = "Clear Tile          " +
+        this.StickMap.GetComponent<Text>().text = "Map" +
+            "\r\n" + 000 + "           NoData";
+        this.StickMap.GetComponent<Text>().fontSize = 23;
 
-            "              " + 000 + "          NoData";
-        
+
+        this.AutoClear.GetComponent<Text>().text = "Clear Tile" +
+            "\r\n" + 000 + "          NoData";
+        this.AutoClear.GetComponent<Text>().fontSize = 23;
+
+        this.StickClear.GetComponent<Text>().text = "Clear Tile" +
+            "\r\n" + 000 + "          NoData";
+        this.StickClear.GetComponent<Text>().fontSize = 23;
     }
 
 }
