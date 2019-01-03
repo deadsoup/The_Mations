@@ -343,6 +343,7 @@
     <Compile Include="Assets\Scripts\Battle\slot.cs" />
     <Compile Include="Assets\Scripts\Menu\BackDirector.cs" />
     <Compile Include="Assets\Scripts\Menu\Battle.cs" />
+    <Compile Include="Assets\Scripts\Menu\CharInfo.cs" />
     <Compile Include="Assets\Scripts\Menu\CharStory.cs" />
     <Compile Include="Assets\Scripts\Menu\CharUiDirector.cs" />
     <Compile Include="Assets\Scripts\Menu\GameResolution.cs" />

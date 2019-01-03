@@ -49,20 +49,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
         }
     }
    
-    public void Click2()
-    {
-        if (Option.Coin == 0)
-        {
-            Intext.SetActive(true);
-        }
-    }
-    public void Click4()
-    {
-        if (Option.Coin == 0)
-        {
-            Intext.SetActive(false);
-        }
-    }
+
     
     public void Click()
     {
@@ -76,7 +63,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
     // Use this for initialization
 	void Start () {
         StartDirector.count = true;
-        MapInfomation.Mapcount = 3;
+        MapInfomation.Mapcount = 2;
 
 
         Option.Coin = 0;
