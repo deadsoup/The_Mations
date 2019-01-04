@@ -23,7 +23,7 @@ public class QuestDirector : MonoBehaviour
         // QuestDirector.count = 9;
         // QuestDirector.count = 10;
         // QuestDirector.count = 11;
-        QuestDirector.count = 3;
+        QuestDirector.count = 12;
 
     }
 
@@ -32,78 +32,78 @@ public class QuestDirector : MonoBehaviour
     {
         if (count == 0)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
         }
         else if (count == 1)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 2)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 3)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 4)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 5)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 6)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 7)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 8)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 9)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 10)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 11)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
 
         }
         else if (count == 12)
         {
-            this.QuestText.GetComponent<Text>().text = "정화된 지역구 수(" + count + " / 12)";
+            this.QuestText.GetComponent<Text>().text = "정화된 지역구 (" + count + " / 12)";
             this.QuestText.GetComponent<Text>().fontSize = 19;
             QuestEffect.SetActive(true);
         }

@@ -328,7 +328,7 @@
     <Compile Include="Assets\Scripts\Battle\Item.cs" />
     <Compile Include="Assets\Scripts\Battle\ItemData.cs" />
     <Compile Include="Assets\Scripts\Battle\ItemDatabase.cs" />
-    <Compile Include="Assets\Scripts\Battle\Monster.cs" />
+    <Compile Include="Assets\Scripts\Battle\MonsterData.cs" />
     <Compile Include="Assets\Scripts\Battle\Move.cs" />
     <Compile Include="Assets\Scripts\Battle\npc.cs" />
     <Compile Include="Assets\Scripts\Battle\Party.cs" />
@@ -346,6 +346,7 @@
     <Compile Include="Assets\Scripts\Menu\CharInfo.cs" />
     <Compile Include="Assets\Scripts\Menu\CharStory.cs" />
     <Compile Include="Assets\Scripts\Menu\CharUiDirector.cs" />
+    <Compile Include="Assets\Scripts\Menu\Fade.cs" />
     <Compile Include="Assets\Scripts\Menu\GameResolution.cs" />
     <Compile Include="Assets\Scripts\Menu\Info.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadDirector.cs" />
@@ -359,6 +360,7 @@
     <Compile Include="Assets\Scripts\Menu\StartDirector.cs" />
     <Compile Include="Assets\Scripts\Menu\Testing.cs" />
     <Compile Include="Assets\Scripts\Menu\Testing2.cs" />
+    <Compile Include="Assets\Scripts\Menu\textcon.cs" />
     <Compile Include="Assets\Scripts\Menu\Tuto.cs" />
     <Compile Include="Assets\Scripts\Menu\tutorial.cs" />
     <Compile Include="Assets\Scripts\Menu\TutoServe.cs" />
