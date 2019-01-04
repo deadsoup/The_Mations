@@ -76,6 +76,25 @@ public class SKillManager : MonoBehaviour
 
     int slotAmount;
 
+    void load()
+    {
+        string filePath = Application.streamingAssetsPath + "/SkillData.json";
+        string jsonString;
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) { }
+            jsonString = reader.text;
+        }
+        else
+        {
+            jsonString = File.ReadAllText(filePath);
+        }
+        skilldata = JsonMapper.ToObject(jsonString);
+    }
+
+
+
     void Start()
     {
         slotAmount = 3;
@@ -94,7 +113,8 @@ public class SKillManager : MonoBehaviour
         Slotpanel = SkillPanel.transform.Find("slotPanel").gameObject;
 
 
-        skilldata = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/SkillData.json"));
+        //skilldata = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/SkillData.json"));
+        load();
         ContructSkill();
 
 

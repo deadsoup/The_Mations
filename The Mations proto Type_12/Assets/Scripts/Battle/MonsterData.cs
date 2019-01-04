@@ -9,13 +9,32 @@ using System.IO;
 public class MonsterData : MonoBehaviour
 {
     public List<Monster> MonsterList = new List<Monster>();
-    private JsonData MonsterDatabase;
+    public JsonData MonsterDatabase;
+
+    void load()
+    {
+        string filePath = Application.streamingAssetsPath + "/MonsterScriptData.json";
+        string jsonString;
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) { }
+            jsonString = reader.text;
+        }
+        else
+        {
+            jsonString = File.ReadAllText(filePath);
+        }
+        MonsterDatabase = JsonMapper.ToObject(jsonString);
+    }
+
 
 
     private void Start()
     {
         Debug.Log("느그 이름은 " + npc.name[(0 + 10)]);
-        MonsterDatabase = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/MonsterScriptData.json"));
+        //MonsterDatabase = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/MonsterScriptData.json"));
+        load();
         ContructMonsterDatabase();
         UpdateMobdata();
         Debug.Log("느그 이름은 " + npc.name[(0 + 10)]);

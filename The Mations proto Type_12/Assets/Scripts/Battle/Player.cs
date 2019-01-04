@@ -6,58 +6,16 @@ using System.IO;
 
 public class Player : MonoBehaviour {
 
-    [Header("1번 캐릭터")]
-    public string name;
-    public int MaxHp;
-    public int Hp;
-    public int MaxMp;
-    public int Mp;
-    public int evasion;
-    public float actiongage;
-    public int atk;
-
-    public int item1;
-    public int item2;
-
-    public int skill1;
-    public int skill2;
-    public int skill3;
-    public int skill4;
-
-
-
-    [Header("2번 캐릭터")]
-
-    public string name2;
-    public int MaxHp2;
-    public int Hp2;
-    public int MaxMp2;
-    public int Mp2;
-    public int evasion2;
-    public float actiongage2;
-    public int atk2;
-
-    public int item1_2;
-    public int item2_2;
-
-    public int skill1_2;
-    public int skill2_2;
-    public int skill3_2;
-    public int skill4_2;
-
-
-    bool action = true;
-
 
 
     [System.Serializable]
-    class PlayerScript
+    public class PlayerScript
     {
         public PlayerScripttData[] data;
     }
 
     [System.Serializable]
-    class PlayerScripttData
+    public class PlayerScripttData
     {
         public int Id;
         public string Name;
@@ -69,8 +27,8 @@ public class Player : MonoBehaviour {
         public int Dex;
         public int Wis;
     }
-
-    PlayerScript player;
+     
+    public PlayerScript player;
 
 
 
@@ -87,15 +45,33 @@ public class Player : MonoBehaviour {
         return npc.actiongage;
     }
     */
-
-
-    void Awake()
+    void load()
     {
-        player = JsonUtility.FromJson<PlayerScript>(File.ReadAllText(Application.dataPath + "/PlayerInfoData.json"));
+        string filePath = Application.streamingAssetsPath + "/PlayerInfoData.json";
+        string jsonString;
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) { }
+            jsonString = reader.text;
+        }
+        else
+        {
+            jsonString = File.ReadAllText(filePath);
+        }
+        player = JsonUtility.FromJson<PlayerScript>(jsonString);
     }
+
+
+
+
     // Use this for initialization
     void Start ()
     {
+        Debug.Log(Application.persistentDataPath + "/Json/PlayerInfoData.json");
+        //player = JsonUtility.FromJson<PlayerScript>(File.ReadAllText(Application.persistentDataPath + "/Json/PlayerInfoData.json"));
+        load();
+
         npc.Id[0] = player.data[0].Id;
         npc.name[0] = player.data[0].Name;
         npc.MaxHp[0] = player.data[0].MaxHp;

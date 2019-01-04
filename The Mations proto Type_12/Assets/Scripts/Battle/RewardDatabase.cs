@@ -12,9 +12,28 @@ public class RewardDatabase : MonoBehaviour
 
     public List<Equip> playerInfoList = new List<Equip>();
 
+    void load()
+    {
+        string filePath = Application.streamingAssetsPath + "/ItemData.json";
+        string jsonString;
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) { }
+            jsonString = reader.text;
+        }
+        else
+        {
+            jsonString = File.ReadAllText(filePath);
+        }
+        itemData = JsonMapper.ToObject(jsonString);
+    }
+
+
     void Start()
     {
-        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/ItemData.json"));
+        //itemData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/ItemData.json"));
+        load();
         ContructItemDatabase();
         //saveJson();
     }

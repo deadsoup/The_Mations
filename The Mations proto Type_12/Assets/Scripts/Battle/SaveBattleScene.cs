@@ -279,11 +279,24 @@ public class SaveBattleScene : MonoBehaviour
                             ));
 
 
-        JsonData jsonData = JsonMapper.ToJson(battleSave);
+        if (!Directory.Exists(Application.persistentDataPath + "/Json"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/Json");
+        }
 
-        File.WriteAllText(Application.dataPath + "/battleSaveData.json", jsonData.ToString());
+
+        JsonData jsonData = JsonMapper.ToJson(battleSave);
+        File.WriteAllText(Application.persistentDataPath + "/Json/battleSaveData.json", jsonData.ToString());
+        
 
     }
+
+
+
+
+
+
+
 
     void loadJson()
     {
@@ -325,12 +338,6 @@ public class SaveBattleScene : MonoBehaviour
         npc.Str[battle.switching[0]] = battleLoad[0].Str;
         npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
         npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
-        /*
-        npc.Equip_MaxHp[battle.switching[0]] = battleLoad[0].Equip_MaxHp;
-        npc.Equip_MaxMp[battle.switching[0]] = battleLoad[0].Equip_MaxMp;
-        npc.Equip_Str[battle.switching[0]] = battleLoad[0].Equip_Str;
-        npc.Equip_Wis[battle.switching[0]] = battleLoad[0].Equip_Wis;
-        */
 
         if (battleLoad[0].Inven1 > 30)
         {
@@ -429,7 +436,22 @@ public class SaveBattleScene : MonoBehaviour
 
     }
 
-
+    void load()
+    {
+        string filePath = Application.persistentDataPath + "/Json/battleSaveData.json";
+        string jsonString;
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            WWW reader = new WWW(filePath);
+            while (!reader.isDone) { }
+            jsonString = reader.text;
+        }
+        else
+        {
+            jsonString = File.ReadAllText(filePath);
+        }
+        battle_Load_System = JsonMapper.ToObject(jsonString);
+    }
 
 
     // Start is called before the first frame update
@@ -465,9 +487,9 @@ public class SaveBattleScene : MonoBehaviour
         P1_skillID[0] = -1;
         P1_skillID[1] = -1;
         P1_skillID[2] = -1;
-
-        battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/battleSaveData.json"));
-
+        battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
+        //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
+        //load();
         loadJson();
         Battle.chaneGetta1();
     }

@@ -12805,34 +12805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690faff82473ca342a38353c26f0860e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uC544\uB9AC\uC218"
-  MaxHp: 100
-  Hp: 100
-  MaxMp: 50
-  Mp: 50
-  evasion: 1
-  actiongage: 10
-  atk: 20
-  item1: 0
-  item2: 0
-  skill1: 0
-  skill2: 0
-  skill3: 0
-  skill4: 0
-  name2: "\uAE40\uC218\uD55C\uBB34"
-  MaxHp2: 80
-  Hp2: 80
-  MaxMp2: 0
-  Mp2: 0
-  evasion2: 2
-  actiongage2: 10
-  atk2: 25
-  item1_2: 0
-  item2_2: 0
-  skill1_2: 0
-  skill2_2: 0
-  skill3_2: 0
-  skill4_2: 0
+  player:
+    data: []
 --- !u!4 &1199892246
 Transform:
   m_ObjectHideFlags: 0
