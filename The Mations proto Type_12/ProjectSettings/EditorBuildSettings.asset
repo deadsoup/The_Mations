@@ -5,33 +5,39 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 4b8136d42f7b5784bb6aec06e26c2c44
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/StoryScene.unity
     guid: ec9ae0a935e693248834a6cfa3508de0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 5b46f1a1a722a5740a48cbde1229f711
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/bin+yong.unity
     guid: 659b15016e9add244b2cba647d68884b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TutoRialMapScene.unity
     guid: 673e8387651c9ed4c83f10c8c74b1edb
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CharScene11.unity
     guid: 55d855cc272300849b108bc1b87ac7c2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CharStoryScene.unity
     guid: 5cb927c56b54fc842907eaf3b63ffe8f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: a02cec14bca003f41a1135ae9d357fb5
   - enabled: 1
     path: Assets/Scenes/DH_Battle.unity
     guid: 63b69de4820ebd649b871755f5bd958f
+  - enabled: 1
+    path: Assets/Scenes/PassWayScenes/Passway.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/PassWayScenes/TestWorldMap.unity
+    guid: 802c59ecbb918754db6adf570c447618
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

@@ -36,7 +36,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
 
     public GameObject[] text = new GameObject[20]; //  이거는 저기 게임 오브젝트를 나열한것
 
-    
+    /*
     public void Click3()
     {
         if (Option.Coin == 0&& TutoDirector.Tuto ==0)
@@ -48,7 +48,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
             SceneManager.LoadScene("TutoRialMapScene");
         }
     }
-   
+   */
 
     
     public void Click()
@@ -63,7 +63,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
     // Use this for initialization
 	void Start () {
         StartDirector.count = true;
-        MapInfomation.Mapcount = 2;
+        //MapInfomation.Mapcount = 2;
 
 
         Option.Coin = 0;
@@ -186,7 +186,7 @@ public class Testing : MonoBehaviour { // 튜토리얼 맵설명
             Text19.SetActive(false);
             sun.SetActive(false);
             Cover.SetActive(true);
-            TutoDirector.Tuto = 1;
+            //TutoDirector.Tuto = 1;
         }
 
 

@@ -164,6 +164,6 @@ public class CharUiDirector : MonoBehaviour
     public void Start()
     {
         StartDirector.count = true;
-        TutoDirector.Tuto = 0;
+        //TutoDirector.Tuto = 0;
     }
 }
