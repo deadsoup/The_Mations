@@ -352,6 +352,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Plugins/LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -366,9 +369,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJson">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Plugins/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>

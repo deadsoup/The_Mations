@@ -86,6 +86,8 @@ public class battle : MonoBehaviour {
 
     GameObject EffectSystem;
 
+
+
     public void nomalDice()
     {
         if (npc.action == true && npc.Hp[c] > 0 && npc.actiongage >= 3.0f && diceTriger == true)
@@ -134,6 +136,9 @@ public class battle : MonoBehaviour {
                 Player2.SetTrigger("Atk");
                 FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
             }
+
+
+
 
             EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
 
@@ -349,11 +354,6 @@ public class battle : MonoBehaviour {
 
         mob_HpSlider_1.value = npc.Hp[i];
     }
-
-
-
-
-
 
     public void chaneGetta1()
     {
@@ -574,6 +574,8 @@ public class battle : MonoBehaviour {
 
         EffectSystem = GameObject.Find("EffectSystem");
 
+
+        
         Idol = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Idol");
         
         Nerd = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Nerd");
@@ -591,6 +593,21 @@ public class battle : MonoBehaviour {
                 Debug.Log("보유 스킬 번호 :"+i+" 는 "+Npc.SkillTriggers[0].skill[i]);
             }
         }
+
+
+        if (EffectSystem.transform.GetChild(0).GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Exit") == true)
+        {
+            GameObject nomal = EffectSystem.transform.GetChild(0).gameObject;
+            Destroy(nomal);
+            
+            GameObject Set = Instantiate(nomal);
+            Set.transform.SetParent(EffectSystem.transform);
+            Set.transform.position = EffectSystem.transform.position;
+            Set.name = "30_0";
+
+        }
+
+
 
         eTime +=Time.deltaTime;
 
