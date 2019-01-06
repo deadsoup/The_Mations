@@ -578,9 +578,9 @@ public class battle : MonoBehaviour {
         Monster = GameObject.Find("Canvas").transform.Find("mob1").GetComponent<Animator>();
 
         EffectSystem = GameObject.Find("EffectSystem");
-        touchProtect[0] = GameObject.Find("Canvas").transform.Find("touchProterct").gameObject;
-        touchProtect[1] = GameObject.Find("Canvas").transform.Find("touchProterct2").gameObject;
-        touchProtect[2] = GameObject.Find("Canvas").transform.Find("touchProterct3").gameObject;
+        touchProtect[0] = GameObject.Find("Canvas").transform.Find("touchProtect").gameObject;
+        touchProtect[1] = GameObject.Find("Canvas").transform.Find("touchProtect2").gameObject;
+        touchProtect[2] = GameObject.Find("Canvas").transform.Find("touchProtect3").gameObject;
 
         Idol = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Idol");
         
@@ -777,27 +777,35 @@ public class battle : MonoBehaviour {
                 /// 상태이상 해제관련
                 /// 
                 /// 스턴 관련
-                if (npc.unitCondition[switching[0]].left_Stun <= 0)
+                if (npc.unitCondition[switching[0]].condition_Stun == true)
                 {
-                    touchProtect[0].SetActive(false);
-                    npc.unitCondition[switching[0]].condition_Stun = false;
-                    playerDeactivate[0] = false;
+                    if (npc.unitCondition[switching[0]].left_Stun <= 0)
+                    {
+                        touchProtect[0].SetActive(false);
+                        npc.unitCondition[switching[0]].condition_Stun = false;
+                        playerDeactivate[0] = false;
+                    }
                 }
 
-                if (npc.unitCondition[switching[1]].left_Stun <= 0)
+                if (npc.unitCondition[switching[1]].condition_Stun == true)
                 {
-                    touchProtect[1].SetActive(false);
-                    npc.unitCondition[switching[1]].condition_Stun = false;
-                    playerDeactivate[1] = false;
+                    if (npc.unitCondition[switching[1]].left_Stun <= 0)
+                    {
+                        touchProtect[1].SetActive(false);
+                        npc.unitCondition[switching[1]].condition_Stun = false;
+                        playerDeactivate[1] = false;
+                    }
                 }
 
-                if (npc.unitCondition[switching[2]].left_Stun <= 0)
+                if (npc.unitCondition[switching[2]].condition_Stun == true)
                 {
-                    touchProtect[2].SetActive(false);
-                    npc.unitCondition[switching[2]].condition_Stun = false;
-                    playerDeactivate[2] = false;
+                    if (npc.unitCondition[switching[2]].left_Stun <= 0)
+                    {
+                        touchProtect[2].SetActive(false);
+                        npc.unitCondition[switching[2]].condition_Stun = false;
+                        playerDeactivate[2] = false;
+                    }
                 }
-
 
 
                 /// 상태이상 발동관련

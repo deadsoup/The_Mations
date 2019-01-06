@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Skill
@@ -102,8 +103,12 @@ public class SKillManager : MonoBehaviour
         stun_per = 20;
 
         party = GameObject.Find("PartySystem").GetComponent<Party>();
-        actionGage = GameObject.Find("Canvas").transform.Find("actionGage").gameObject;
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            actionGage = GameObject.Find("Canvas").transform.Find("actionGage").gameObject;
+        }
         //skillButton[0].onClick.AddListener(skill1);
         //skillButton1.onClick.RemoveAllListeners();
 
@@ -132,7 +137,7 @@ public class SKillManager : MonoBehaviour
 
 
 
-        Debug.Log("스킬 트리거 체크" + Npc.SkillTriggers[0].skill[4]);
+       // Debug.Log("스킬 트리거 체크" + Npc.SkillTriggers[0].skill[4]);
     }
 
     void Update()
@@ -269,179 +274,6 @@ public class SKillManager : MonoBehaviour
         }
 
     }
-
-
-
-    /*
-    public void Skill1_Set(int num) //  해당 캐릭터[번호].스킬[번호]의 획득여부 
-    {
-        
-        for (int i = 0; i < party.playerSlot.Length; i++)
-        {
-            if (battle.switching[i] == battle.switching[num])
-            {
-                if (battle.switching[num] == npc.Id[0])
-                { bool[] trigger = new bool[30];
-                    if (Npc.SkillTriggers[i].skill[1] == true)
-                    {
-                        print(battle.switching[num]);
-                        print(Npc.SkillTriggers[i].skill[1]);
-                        skillButton[1].onClick.RemoveAllListeners();
-                        P1_skillON[1] = true;
-                        trigger[1] = true;
-                        skillButton[1].onClick.AddListener(Skill1_Noname);
-                        skillButton[1].name = "테스트 스킬1";
-                        Debug.Log("스킬 트리거"+i+"스킬 1번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[2] == true && trigger[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[2]);
-                        skillButton[1].onClick.RemoveAllListeners();
-                        P1_skillON[1] = true;
-                        trigger[2] = true;
-                        skillButton[1].onClick.AddListener(Skill2_Noname);
-                        skillButton[1].name = "테스트 스킬2";
-                        Debug.Log("스킬 트리거" + i + "스킬 2번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[3] == true && trigger[1] == true && trigger[2] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[3]);
-                        skillButton[1].onClick.RemoveAllListeners();
-                        P1_skillON[1] = true;
-                        skillButton[1].onClick.AddListener(Skill2_Noname);
-                        skillButton[1].name = "테스트 스킬3";
-                        Debug.Log("스킬 트리거" + i + "스킬 3번");
-                    }
-                }
-
-                if (battle.switching[num] == npc.Id[1])
-                {
-                    bool[] trigger = new bool[30];
-                    if (Npc.SkillTriggers[i].skill[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[1]);
-                        P2_skillON[1] = true;
-                        trigger[1] = true;
-                        skillButton[1].onClick.RemoveAllListeners();
-                        skillButton[1].onClick.AddListener(Skill1_Noname);
-                        skillButton[1].name = "테스트 스킬1";
-                        Debug.Log("스킬 트리거" + i + "스킬 1번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[2] == true && trigger[1] == true)
-                    {
-                        print(battle.switching[num]);
-                        print(Npc.SkillTriggers[i].skill[2]);
-                        P2_skillON[1] = true;
-                        skillButton[1].onClick.RemoveAllListeners();
-                        skillButton[1].onClick.AddListener(Skill2_Noname);
-                        skillButton[1].name = "테스트 스킬2";
-                        Debug.Log("스킬 트리거" + i + "스킬 2번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[3] == true && trigger[1] == true && trigger[2] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[3]);
-                        skillButton[1].onClick.RemoveAllListeners();
-                        P1_skillON[1] = true;
-                        skillButton[1].onClick.AddListener(Skill2_Noname);
-                        skillButton[1].name = "테스트 스킬3";
-                        Debug.Log("스킬 트리거" + i + "스킬 3번");
-                    }
-                }
-
-            }
-
-
-        }
-
-    }
-
-    public void Skill2_Set(int num)
-    {
-        for (int i = 0; i < party.playerSlot.Length; i++)
-        {
-            if (battle.switching[i] == battle.switching[num])
-            {
-                if (battle.switching[num] == 0)
-                {
-                    bool[] trigger = new bool[30];
-                    if (Npc.SkillTriggers[i].skill[1] == true && P1_skillON[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[1]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P1_skillON[2] = true;
-                        trigger[1] = true;
-                        skillButton[2].onClick.AddListener(Skill1_Noname);
-                        skillButton[2].name = "테스트 스킬1";
-                        Debug.Log("스킬 트리거" + i + "스킬 1번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[2] == true && P1_skillON[1] == true && trigger[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[2]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P1_skillON[2] = true;
-                        trigger[2] = true;
-                        skillButton[2].onClick.AddListener(Skill2_Noname);
-                        skillButton[2].name = "테스트 스킬2";
-                        Debug.Log("스킬 트리거" + i + "스킬 2번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[3] == true && P1_skillON[1] == true && trigger[1] == true && trigger[2] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[3]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P1_skillON[2] = true;
-                        trigger[3] = true;
-                        skillButton[2].onClick.AddListener(Skill2_Noname);
-                        skillButton[2].name = "테스트 스킬3";
-                        Debug.Log("스킬 트리거" + i + "스킬 3번");
-                    }
-                }
-
-                if (battle.switching[num] == 1)
-                {
-                    bool[] trigger = new bool[30];
-                    if (Npc.SkillTriggers[i].skill[1] == true && P2_skillON[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[1]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P2_skillON[2] = true;
-                        trigger[1] = true;
-                        skillButton[2].onClick.AddListener(Skill1_Noname);
-                        skillButton[2].name = "테스트 스킬1";
-                        Debug.Log("스킬 트리거" + i + "스킬 1번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[2] == true && P2_skillON[1] == true && trigger[1] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[2]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P2_skillON[2] = true;
-                        skillButton[2].onClick.AddListener(Skill2_Noname);
-                        skillButton[2].name = "테스트 스킬2";
-                        Debug.Log("스킬 트리거" + i + "스킬 2번");
-                    }
-                    if (Npc.SkillTriggers[i].skill[3] == true && P1_skillON[1] == true && trigger[1] == true && trigger[2] == true)
-                    {
-                        print(Npc.SkillTriggers[i].skill[3]);
-                        skillButton[2].onClick.RemoveAllListeners();
-                        P1_skillON[2] = true;
-                        trigger[3] = true;
-                        skillButton[2].onClick.AddListener(Skill2_Noname);
-                        skillButton[2].name = "테스트 스킬3";
-                        Debug.Log("스킬 트리거" + i + "스킬 3번");
-                    }
-                }
-
-            }
-
-
-        }
-
-    }
-    */
-
-
-
-
-
 
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LitJson;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class SaveBattleScene : MonoBehaviour
@@ -302,7 +303,7 @@ public class SaveBattleScene : MonoBehaviour
 
 
 
-    void loadJson()
+    public void loadJson()
     {
         for (int i = 0; i < battle_Load_System.Count; i++)
         {
@@ -464,7 +465,11 @@ public class SaveBattleScene : MonoBehaviour
         inven = GameObject.Find("Canvas").transform.Find("Inven").GetComponent<Inven>();
         skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
-        Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+        }
+    
         party = GameObject.Find("PartySystem").GetComponent<Party>();
 
         invenslot[0] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
@@ -495,7 +500,7 @@ public class SaveBattleScene : MonoBehaviour
         //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
         //load();
         loadJson();
-        Battle.chaneGetta1();
+        //Battle.chaneGetta1();
     }
 
     private void Update()

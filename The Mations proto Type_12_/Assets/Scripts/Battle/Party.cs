@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Party : MonoBehaviour
 {
@@ -24,7 +25,10 @@ public class Party : MonoBehaviour
                     {
                         playerSlot[PS].GetComponent<PlayerSlot1>().slotCharge = true;
                         battle.switching[PS] = num;
-                        playerSprite[PS].GetComponent<Image>().sprite = CharSprite[num];
+                        if (SceneManager.GetActiveScene().name == "DH_Battle")
+                        {
+                            playerSprite[PS].GetComponent<Image>().sprite = CharSprite[num];
+                        }
                         break;
                     }
                     else if (playerSlot[0].GetComponent<PlayerSlot1>().slotCharge == true && playerSlot[1].GetComponent<PlayerSlot1>().slotCharge == true && playerSlot[2].GetComponent<PlayerSlot1>().slotCharge == true)
@@ -51,7 +55,7 @@ public class Party : MonoBehaviour
         playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
         playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
         playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
-        print(playerSprite[0].GetComponent<Image>().sprite);
+        //print(playerSprite[0].GetComponent<Image>().sprite);
     }
 
     // Update is called once per frame
