@@ -335,6 +335,11 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Skill3_ID"]
                     ));
         }
+
+        npc.Equip_Str[battle.switching[0]] = 0;
+        npc.Equip_Wis[battle.switching[0]] = 0;
+
+
         npc.Id[battle.switching[0]] = battleLoad[0].Id;
         npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
         npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
@@ -344,7 +349,7 @@ public class SaveBattleScene : MonoBehaviour
         npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
         npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
 
-        if (battleLoad[0].Inven1 > 30)
+        if (battleLoad[0].Inven1 > 56)
         {
             for (int i = 0; i < battleLoad[0].Inven1_Amount; i++)
             {
@@ -362,7 +367,7 @@ public class SaveBattleScene : MonoBehaviour
             Debug.Log("아이템 생성");
         }
 
-        if (battleLoad[0].Inven2 > 30)
+        if (battleLoad[0].Inven2 > 56)
         {
             for (int i = 0; i < battleLoad[0].Inven2_Amount; i++)
             {
@@ -381,7 +386,7 @@ public class SaveBattleScene : MonoBehaviour
 
         }
 
-        if (battleLoad[0].Inven3 > 30)
+        if (battleLoad[0].Inven3 > 56)
         {
             for (int i = 0; i < battleLoad[0].Inven3_Amount; i++)
             {
@@ -401,7 +406,7 @@ public class SaveBattleScene : MonoBehaviour
         }
 
 
-        if (battleLoad[0].Inven4 > 30)
+        if (battleLoad[0].Inven4 > 56)
         {
             for (int i = 0; i < battleLoad[0].Inven4_Amount; i++)
             {
@@ -420,11 +425,9 @@ public class SaveBattleScene : MonoBehaviour
 
         }
 
-
-
-        Debug.Log(battleLoad[0].Skill1_ID);
-        Debug.Log(battleLoad[0].Skill2_ID);
-        Debug.Log(battleLoad[0].Skill3_ID);
+        Debug.Log(battleLoad[0].Equip_Str);
+        Debug.Log(npc.Equip_Str[battle.switching[0]]);
+        //Debug.Log(battleLoad[0].Skill1_ID);
         if (battleLoad[0].Skill1_ID > -1)
             Npc.SkillTriggers[0].skill[battleLoad[0].Skill1_ID] = true;
         if (battleLoad[0].Skill2_ID > -1)

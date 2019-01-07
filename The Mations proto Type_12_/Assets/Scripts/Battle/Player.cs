@@ -57,7 +57,7 @@ public class Player : MonoBehaviour {
         }
         else
         {
-            jsonString = File.ReadAllText(filePath);
+            jsonString = File.ReadAllText(Application.streamingAssetsPath + "/PlayerInfoData.json");
         }
         player = JsonUtility.FromJson<PlayerScript>(jsonString);
     }
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        Debug.Log(Application.persistentDataPath + "/Json/PlayerInfoData.json");
+        //Debug.Log(Application.persistentDataPath + "/Json/PlayerInfoData.json");
         //player = JsonUtility.FromJson<PlayerScript>(File.ReadAllText(Application.persistentDataPath + "/Json/PlayerInfoData.json"));
         load();
 

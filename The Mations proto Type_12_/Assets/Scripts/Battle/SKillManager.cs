@@ -10,11 +10,27 @@ using UnityEngine.SceneManagement;
 public class Skill
 {
     public int Id;
+    public string Name;
+    public int Need_MP;
+    public string Damage;
+    public string Target;
+    public string Attribute; // 속성
+    public string Abnomal; // 상태이상
+    public string Text;
+
+    
     public Sprite sprite;
 
-    public Skill(int id)
+    public Skill(int id, string name, int need_mp, string damage, string target, string attribute, string abnomal, string text)
     {
         Id = id;
+        Name = name;
+        Need_MP = need_mp;
+        Damage = damage;
+        Target = target;
+        Attribute = attribute;
+        Abnomal = abnomal;
+        Text = text;
 
         sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/" + Id);
     }
@@ -41,6 +57,10 @@ public class SKillManager : MonoBehaviour
 
     public Button[] skillButton = new Button[4];
 
+    internal Animator SkillScene;
+    internal Animator SkillScene2;
+    internal Animator SkillScene3;
+    internal RuntimeAnimatorController SkillScene_Animator;
 
     Party party;
     npc Npc;
@@ -53,6 +73,13 @@ public class SKillManager : MonoBehaviour
     public GameObject skill;
 
     public List<Skill> SkillList = new List<Skill>();
+
+    internal GameObject[] playerSprite = new GameObject[3];
+
+
+
+
+
 
     public Skill SkillByID(int id)
     {
@@ -68,7 +95,16 @@ public class SKillManager : MonoBehaviour
     {
         for (int i = 0; i < skilldata.Count; i++)
         {
-            SkillList.Add(new Skill((int)skilldata[i]["Id"]));
+            SkillList.Add(new Skill(
+                (int)skilldata[i]["Id"],
+                skilldata[i]["Name"].ToString(),
+                (int)skilldata[i]["Need_Mp"],
+                skilldata[i]["Damage"].ToString(),
+                skilldata[i]["Target"].ToString(),
+                skilldata[i]["Attribute"].ToString(),
+                skilldata[i]["Abnomal"].ToString(),
+                skilldata[i]["Text"].ToString()
+                ));
         }
     }
 
@@ -104,6 +140,14 @@ public class SKillManager : MonoBehaviour
 
         party = GameObject.Find("PartySystem").GetComponent<Party>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
+        playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
+        playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
+        playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
+        SkillScene = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>();
+        SkillScene2 = GameObject.Find("SkillScene").transform.Find("SkillAnimator2").GetComponent<Animator>();
+        SkillScene3 = GameObject.Find("SkillScene").transform.Find("SkillAnimator3").GetComponent<Animator>();
+        SkillScene_Animator = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>().runtimeAnimatorController;
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
@@ -166,6 +210,15 @@ public class SKillManager : MonoBehaviour
                     skillButton[0].name = "힘숨찐 고유스킬";
                     skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
                 }
+
+                if (battle.switching[num] == 2)
+                {
+                    skillButton[0].onClick.RemoveAllListeners();
+                    skillButton[0].onClick.AddListener(Dog_UniqueSkill);
+                    skillButton[0].name = "개 고유스킬";
+                    skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+                }
+
 
             }
 
@@ -294,6 +347,8 @@ public class SKillManager : MonoBehaviour
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
 
+                    SkillScene.SetTrigger("Atk");
+
                     if (npc.Hp[battle.switching[0]] >= (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]))
                     { npc.Hp[battle.switching[0]] = (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]); }
 
@@ -302,6 +357,7 @@ public class SKillManager : MonoBehaviour
 
                     if (npc.Hp[battle.switching[2]] >= (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                     { npc.Hp[battle.switching[2]] = (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]); }
+
                 }
                 else if (npc.Hp[battle.switching[0]] == (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) && npc.Hp[battle.switching[1]] == (npc.MaxHp[battle.switching[1]] + npc.Equip_MaxHp[battle.switching[1]]) && npc.Hp[battle.switching[2]] == (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
@@ -345,6 +401,9 @@ public class SKillManager : MonoBehaviour
                     Debug.Log("스턴 실패");
                     FloatingTextController.CreateFloatingText(40.ToString(), transform);
                 }
+
+                SkillScene2.SetTrigger("Atk");
+
             }
             else
             {
@@ -356,6 +415,64 @@ public class SKillManager : MonoBehaviour
             Debug.Log("마나 부족");
         }
     }
+
+    public void Dog_UniqueSkill()
+    {
+        if (npc.Mp[2] >= 100)
+        {
+            if (npc.actiongage >= 5f)
+            {
+
+                npc.Mp[2] -= 100;
+                actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                npc.actiongage -= 5f;
+                FloatingTextController.CreateFloatingText2("변신", transform);
+                playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Dog/Player_Dog_idle");
+
+                skillButton[0].onClick.RemoveAllListeners();
+                skillButton[0].onClick.AddListener(Dog_UniqueSkill2);
+                skillButton[0].name = "개 고유스킬2";
+                skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+
+                SkillScene3.SetTrigger("Atk");
+
+            }
+            else
+            {
+                Debug.Log("행동력 부족");
+            }
+        }
+        else
+        {
+            Debug.Log("마나 부족");
+        }
+    }
+
+    public void Dog_UniqueSkill2()
+    {
+        if (npc.Mp[2] >= 0)
+        {
+            if (npc.actiongage >= 5f)
+            {
+                Debug.Log("개 스킬 발동");
+                npc.Mp[2] -= 0;
+                actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                npc.actiongage -= 5f;
+                npc.Hp[battle.i] -= 40;
+            }
+            else
+            {
+                Debug.Log("행동력 부족");
+            }
+        }
+        else
+        {
+            Debug.Log("마나 부족");
+        }
+    }
+
+
+
 
     public void Skill_Noname(int id)
     {

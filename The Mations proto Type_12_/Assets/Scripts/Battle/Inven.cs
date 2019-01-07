@@ -44,6 +44,16 @@ public class Inven : MonoBehaviour
 
     GameObject UseText;
 
+    GameObject InfoPanel;
+    Image ItemIcon;
+    Text Title;
+    Text Type;
+    Text Grade;
+    Text Option;
+    Text Text;
+
+
+
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
 
@@ -69,6 +79,13 @@ public class Inven : MonoBehaviour
         Slotpanel2 = Invenpanel.transform.Find("Panel2").gameObject;
         Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
         UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
+        InfoPanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("ItemInfo").gameObject;
+        ItemIcon = InfoPanel.transform.GetChild(0).GetComponent<Image>();
+        Title = InfoPanel.transform.GetChild(1).GetComponent<Text>();
+        Type = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+        Grade = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+        Option = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+        Text = InfoPanel.transform.GetChild(5).GetComponent<Text>();
     }
 
 
@@ -130,15 +147,15 @@ public class Inven : MonoBehaviour
         // 아이템추가
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddItem(1);
+            AddItem(51);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AddItem2(1);
+            AddItem2(51);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            AddItem3(1);
+            AddItem3(51);
         }
     }
     // 아이템 삭제 - 문자열을 사용한다 - "slots0, slots1" 이걸 삭제함
@@ -157,6 +174,7 @@ public class Inven : MonoBehaviour
                 Destroy(obj);
                 // 아이템정보 초기화 (id -1로변경)
                 items[i] = new Equip();
+                InfoPanel.SetActive(false);
                 break;
             }
             if (slots2[i].name == name)
@@ -170,6 +188,7 @@ public class Inven : MonoBehaviour
                 Destroy(obj);
                 // 아이템정보 초기화 (id -1로변경)
                 items2[i] = new Equip();
+                InfoPanel.SetActive(false);
                 break;
             }
             if (slots3[i].name == name)
@@ -183,69 +202,12 @@ public class Inven : MonoBehaviour
                 Destroy(obj);
                 // 아이템정보 초기화 (id -1로변경)
                 items3[i] = new Equip();
+                InfoPanel.SetActive(false);
                 break;
             }
 
         }
 
-    }
-    public void deleteItem2(string name)
-    {
-        for (int i = 0; i < items.Count; i++)
-        {
-            if (slots2[i].name == name)
-            {
-                // 아이템 삭제전 플레이어 능력치 감소
-                Remove_Status(battle.switching[1], items2[i]);
-
-                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
-                var children = slots2[i].GetComponentInChildren<ItemData>();
-                GameObject obj = children.gameObject;
-                Destroy(obj);
-                // 아이템정보 초기화 (id -1로변경)
-                items2[i] = new Equip();
-                break;
-            }
-
-        }
-
-    }
-    public void deleteItem3(string name)
-    {
-        for (int i = 0; i < items3.Count; i++)
-        {
-            if (slots3[i].name == name)
-            {
-                // 아이템 삭제전 플레이어 능력치 감소
-                Remove_Status(battle.switching[2], items3[i]);
-
-                // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
-                var children = slots3[i].GetComponentInChildren<ItemData>();
-                GameObject obj = children.gameObject;
-                Destroy(obj);
-                // 아이템정보 초기화 (id -1로변경)
-                items3[i] = new Equip();
-                break;
-            }
-
-        }
-
-    }
-
-
-    //위의 아이템 삭제 함수를 버튼화 시킨 것
-
-    public void DeleteButton(string name)
-    {
-        deleteItem(name);
-    }
-    public void DeleteButton2(string name)
-    {
-        deleteItem2(name);
-    }
-    public void DeleteButton3(string name)
-    {
-        deleteItem3(name);
     }
 
     //각 플레이어마다 아이템 사용하는 법
@@ -407,8 +369,11 @@ public class Inven : MonoBehaviour
                     itemObj.transform.position = slots[i].transform.position;
                     itemObj.name = itemToAdd.Name;
                     Debug.Log("없는 대상" + i);
-                   
-                    Add_Status(battle.switching[0], itemToAdd);
+
+                    if (items[i].Id < 50)
+                    {
+                        Add_Status(battle.switching[0], itemToAdd);
+                    }
                     break;
 
 
@@ -422,7 +387,7 @@ public class Inven : MonoBehaviour
     public void AddItem2(int id)
     {
         Equip itemToAdd = database.FetchItemByID(id);
-        if (itemToAdd.Stackable && Check_Item_In_Inventory(itemToAdd))
+        if (itemToAdd.Stackable && Check_Item_In_Inventory2(itemToAdd))
         {
             for (int i = 0; i < items2.Count; i++)
             {
@@ -459,7 +424,10 @@ public class Inven : MonoBehaviour
                         itemObj.name = itemToAdd.Name;
                         Debug.Log("없는 대상" + i);
 
-                        Add_Status(battle.switching[1], itemToAdd);
+                        if (items2[i].Id < 50)
+                        {
+                            Add_Status(battle.switching[1], itemToAdd);
+                        }
                         break;
                     }
                     else
@@ -476,7 +444,7 @@ public class Inven : MonoBehaviour
     public void AddItem3(int id)
     {
         Equip itemToAdd = database.FetchItemByID(id);
-        if (itemToAdd.Stackable && Check_Item_In_Inventory(itemToAdd))
+        if (itemToAdd.Stackable && Check_Item_In_Inventory3(itemToAdd))
         {
             for (int i = 0; i < items3.Count; i++)
             {
@@ -510,8 +478,11 @@ public class Inven : MonoBehaviour
                         itemObj.transform.position = slots3[i].transform.position;
                         itemObj.name = itemToAdd.Name;
                         Debug.Log("없는 대상" + i);
-
-                        Add_Status(battle.switching[2], itemToAdd);
+                        if(items3[i].Id < 50)
+                        {
+                            Add_Status(battle.switching[2], itemToAdd);
+                        }
+                        
                         break;
                     }
                     else
@@ -524,6 +495,92 @@ public class Inven : MonoBehaviour
             }
         }
     }
+
+    public void CheckStatus(string name)
+    {
+        InfoPanel.SetActive(true);
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (slots[i].name == name)
+            {
+                ItemIcon.sprite = items[i].sprite;
+                Title.text = items[i].Name;
+                if (items[i].Type == 1)
+                {
+                    Type.text = "무기";
+                }
+                if (items[i].Type == 2)
+                {
+                    Type.text = "갑옷";
+                }
+                if (items[i].Type == 3)
+                {
+                    Type.text = "소비품";
+                }
+                Grade.text = items[i].Grade;
+                Option.text = items[i].ItemOption;
+                Text.text = items[i].Text;
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                break;
+            }
+
+            if (slots2[i].name == name)
+            {
+                ItemIcon.sprite = items2[i].sprite;
+                Title.text = items2[i].Name;
+                if (items[i].Type == 1)
+                {
+                    Type.text = "무기";
+                }
+                if (items[i].Type == 2)
+                {
+                    Type.text = "갑옷";
+                }
+                if (items[i].Type == 3)
+                {
+                    Type.text = "소비품";
+                }
+                Grade.text = items2[i].Grade;
+                Option.text = items2[i].ItemOption;
+                Text.text = items2[i].Text;
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                break;
+            }
+            if (slots3[i].name == name)
+            {
+                ItemIcon.sprite = items3[i].sprite;
+                Title.text = items3[i].Name;
+                if (items[i].Type == 1)
+                {
+                    Type.text = "무기";
+                }
+                if (items[i].Type == 2)
+                {
+                    Type.text = "갑옷";
+                }
+                if (items[i].Type == 3)
+                {
+                    Type.text = "소비품";
+                }
+                Grade.text = items3[i].Grade;
+                Option.text = items3[i].ItemOption;
+                Text.text = items3[i].Text;
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                break;
+            }
+
+
+        }
+           
+
+    }
+
+   
+
+
 
 
 
@@ -561,6 +618,26 @@ public class Inven : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             if (items[i].Id == equip.Id)
+                return true;
+
+        }
+        return false;
+    }
+    bool Check_Item_In_Inventory2(Equip equip)
+    {
+        for (int i = 0; i < items2.Count; i++)
+        {
+            if (items2[i].Id == equip.Id)
+                return true;
+
+        }
+        return false;
+    }
+    bool Check_Item_In_Inventory3(Equip equip)
+    {
+        for (int i = 0; i < items3.Count; i++)
+        {
+            if (items3[i].Id == equip.Id)
                 return true;
 
         }
