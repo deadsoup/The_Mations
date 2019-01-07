@@ -146,7 +146,7 @@ public class Move : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.U))
         {
             Test();
-
+            GameEvent.hpMpRegen();
         }
 
 

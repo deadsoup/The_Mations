@@ -18,7 +18,14 @@ public class battle : MonoBehaviour {
 
     public static bool battleaction;
 
-    bool[] playerDeactivate = new bool[3]; 
+    bool[] playerDeactivate = new bool[3];
+
+    public bool[] playerAbnomal_strbuff = new bool[3];
+    public bool[] playerAbnomal_allbuff = new bool[3];
+    public bool[] playerAbnomal_burn = new bool[3];
+
+    public bool monsterAbnomal_sleep;
+    public bool monsterAbnomal_burn;
 
 
     public static int i; //몬스터 배열 호출
@@ -116,7 +123,7 @@ public class battle : MonoBehaviour {
             npc.actiongage -= 3.0f;
             actionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
-            pdamage = npc.Str[c]+ npc.Equip_Str[c] + PlusDamage;
+            pdamage = npc.Str[c]+ npc.Equip_Str[c] + npc.BuffStr[c] + npc.Allbuff[c]+ PlusDamage;
             if (pdamage <= 0) { pdamage = 0; }
 
             npc.Hp[i] -= pdamage;
@@ -257,7 +264,6 @@ public class battle : MonoBehaviour {
 
         attackButton.SetActive(false);
         skipButton.SetActive(false);
-        targetButton.SetActive(false);
 
 
     }
@@ -876,9 +882,54 @@ public class battle : MonoBehaviour {
                         }
                     }
                 }
+                //// 상태이상 버프  힘
+                for (int i = 0; i < 3; i++)
+                {
+                    if (npc.unitCondition[switching[i]].condition_StrBuff == true && playerAbnomal_strbuff[switching[i]] == true)
+                    {
+                        Debug.Log("버프 발동");
+                        npc.unitCondition[switching[i]].left_StrBuff--;
+                        playerAbnomal_strbuff[switching[i]] = false;
+                        Debug.Log(switching[i] + "의 힘버프 상태" + npc.unitCondition[switching[i]].left_StrBuff);
+                        if (npc.unitCondition[switching[i]].left_StrBuff <= 0)
+                        {
+                            npc.unitCondition[switching[i]].condition_StrBuff = false;
+                            playerAbnomal_strbuff[switching[i]] = false;
+                            npc.BuffStr[switching[i]] = 0;
+                            Debug.Log("힘 버프 종료" + npc.BuffStr[switching[i]]);
+                        }
+                    }
+                }
+
+                //// 상태이상 버프  올버프
+
+                for (int i = 0; i < 3; i++)
+                {
+                    if (npc.unitCondition[switching[i]].condition_AllBuff == true && playerAbnomal_allbuff[switching[i]] == true)
+                    {
+                        npc.unitCondition[switching[i]].left_AllBuff--;
+                        playerAbnomal_allbuff[switching[i]] = false;
+                        if (npc.unitCondition[switching[i]].left_AllBuff <= 0)
+                        {
+                            npc.unitCondition[switching[i]].condition_AllBuff = false;
+                            playerAbnomal_allbuff[switching[i]] = false;
+                            npc.Allbuff[switching[0]] = 0;
+                            npc.Allbuff[switching[1]] = 0;
+                            npc.Allbuff[switching[2]] = 0;
+                            Debug.Log("강화 버프 종료" + npc.Allbuff[switching[i]]);
+                        }
+                    }
+                }
+
+
+
+
+
+
             }
 
 
+            
 
 
 
@@ -929,7 +980,50 @@ public class battle : MonoBehaviour {
                     }
                 }
 
+                if (npc.unitCondition[i].condition_Sleep == true) // 수면 상태이상 관련
+                {
+                    eTime = 0f;
+                    npc.eActiongage = 0f;
+                    if (npc.eActiongage < 3.0f)
+                    {
+                        eActionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.eActiongage = 0f;
+                        npc.eAction = false;
+                        npc.action = true;
+                        npc.unitCondition[i].left_Sleep--;
 
+                        Debug.Log("턴 완료");
+                        if (npc.action == true)
+                        {
+                            Debug.Log("A = 공격 / S = 스킬 / C = 캐릭터1 / D= 캐릭터2 / Space = 스킵");
+                            npc.actiongage = 10.1f;
+                            npc.eActiongage = 10f;
+
+                            attackButton.SetActive(true);
+                            skipButton.SetActive(true);
+                            if (npc.unitCondition[i].left_Sleep <= 0)
+                            {
+                                npc.unitCondition[i].condition_Sleep = false;
+                            }
+                        }
+                    }
+                }
+
+
+                if (npc.unitCondition[i].condition_Burn == true) // 화상 상태이상 관련
+                {
+                    npc.unitCondition[i].left_Burn--;
+                    npc.Hp[i] -= 20;
+                    Debug.Log("턴 완료");
+                    FloatingTextController.CreateFloatingText("화상 !!" + 20.ToString(), transform);
+                    monsterAbnomal_burn = false;
+                    if (npc.unitCondition[i].left_Burn <= 0)
+                    {
+                        Debug.Log("화상 완료");
+                        npc.unitCondition[i].condition_Burn = false;
+                        monsterAbnomal_burn = false;
+                    }
+                }
 
 
                 if (npc.Hp[i] > 0 && eTime >= 1.0f && npc.eActiongage >= 10.0f)
@@ -940,6 +1034,14 @@ public class battle : MonoBehaviour {
                     Debug.Log(npc.name[c] + "은 " + npc.Hp[c] + "가 남았다.");
                     Debug.Log(npc.eAction);
                     eTime = 0f;
+
+                    playerAbnomal_strbuff[0] = true;
+                    playerAbnomal_strbuff[1] = true;
+                    playerAbnomal_strbuff[2] = true;
+                    playerAbnomal_allbuff[0] = true;
+                    playerAbnomal_allbuff[1] = true;
+                    playerAbnomal_allbuff[2] = true;
+
                 }
 
                 else if (npc.eActiongage < 3.0f)
@@ -955,8 +1057,12 @@ public class battle : MonoBehaviour {
                         npc.actiongage = 10.1f;
                         npc.eActiongage = 10f;
 
-
-
+                        playerAbnomal_strbuff[0] = true;
+                        playerAbnomal_strbuff[1] = true;
+                        playerAbnomal_strbuff[2] = true;
+                        playerAbnomal_allbuff[0] = true;
+                        playerAbnomal_allbuff[1] = true;
+                        playerAbnomal_allbuff[2] = true;
 
                         attackButton.SetActive(true);
                         skipButton.SetActive(true);

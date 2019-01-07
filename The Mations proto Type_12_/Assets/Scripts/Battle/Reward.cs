@@ -698,6 +698,7 @@ public class Reward : MonoBehaviour
         {
             if (rewardSkills[i].Id == -1)
             {
+                Debug.Log("진입");
                 rewardSkills[i] = skillToAdd;
                 GameObject itemObj = Instantiate(RewardSkill);
                 itemObj.GetComponent<SkillData>().skill = skillToAdd;

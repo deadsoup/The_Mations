@@ -11,12 +11,12 @@ public class GameEvent : MonoBehaviour {
 
     public static void hpMpRegen() // 10% 회복
     {
-        Debug.Log((int)(npc.MaxHp[1] * 0.1f) + "체력 회복 ");
-        Debug.Log(npc.Hp[1] + "체력 존재 ");
-        npc.Hp[1] += (int)(npc.MaxHp[1] * 0.1f);
-        npc.Mp[1] += (int)(npc.MaxMp[1] * 0.1f);
-        if (npc.Hp[1] >= npc.MaxHp[1]) { npc.Hp[1] = npc.MaxHp[1]; }
-        if (npc.Mp[1] >= npc.MaxMp[1]) { npc.Mp[1] = npc.MaxMp[1]; }
+        Debug.Log((int)(npc.MaxHp[0] * 0.1f) + "체력 회복 ");
+        Debug.Log(npc.Hp[0] + "체력 존재 ");
+        npc.Hp[0] += (int)(npc.MaxHp[0] * 0.1f);
+        npc.Mp[0] += (int)(npc.MaxMp[0] * 0.1f);
+        if (npc.Hp[0] >= npc.MaxHp[0]) { npc.Hp[0] = npc.MaxHp[0]; }
+        if (npc.Mp[0] >= npc.MaxMp[0]) { npc.Mp[0] = npc.MaxMp[0]; }
 
 
     }
