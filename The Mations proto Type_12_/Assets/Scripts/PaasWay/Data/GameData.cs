@@ -38,6 +38,8 @@ namespace DataInfo
         // 스테이지 최대 맵 크기
         public int endPassageIdx;
 
+        public bool FirstClear;
+
         // 배경맵 이미지 리소스주소
         public string backgroundResources;
         // 미니맵 이미지 리소스주소

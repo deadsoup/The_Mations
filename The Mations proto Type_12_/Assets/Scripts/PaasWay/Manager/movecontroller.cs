@@ -5,6 +5,7 @@ using UnityEngine;
 public class movecontroller : MonoBehaviour {
     bool lbutton = false;
     bool rbutton = false;
+    
 
     private float moveSpeed = 10.0f;
  
@@ -38,7 +39,7 @@ public class movecontroller : MonoBehaviour {
         {
             transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
         }
-       
+
 	}
     /*
     private void OnTriggerEnter2D(Collider2D collision)

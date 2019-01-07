@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+[System.Serializable]
 public class StageManager : MonoBehaviour
 {
     public GameObject PrefabButton;
@@ -11,7 +13,11 @@ public class StageManager : MonoBehaviour
 
     public List<Button> StageButtons;
 
-    private bool Setonce;
+    //public GameObject[] StageButton = new GameObject[13];
+
+
+    public bool Setonce;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,27 +30,7 @@ public class StageManager : MonoBehaviour
     {
         if(Setonce == false)
         {
-            SetStageButton();
-        }
-    }
-
-    private void SetStageButton()
-    {
-        int count = GameManager.instance.StageInfos.Count;
-
-        for(int i = 0; i < count; i++)
-        {
-            GameObject tempObj = Instantiate(PrefabButton, ButtonGroup.transform);
-
-            int tempNum = i;
-
-            tempObj.name = "Stage " + tempNum.ToString();
-            tempObj.GetComponentInChildren<Text>().text = "Stage " + tempNum.ToString();
-            tempObj.GetComponent<Button>().onClick.AddListener(() => GameManager.instance.InStage(tempNum));
-            StageButtons.Add(tempObj.GetComponent<Button>());
-
-            if(Setonce == false)
-            Setonce = true;
+           // SetStageButton();
         }
     }
 }

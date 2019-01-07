@@ -45,7 +45,7 @@ public class CharStory : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("TestWorldMap");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

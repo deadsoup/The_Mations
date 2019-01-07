@@ -23,7 +23,9 @@ public class QuestDirector : MonoBehaviour
         // QuestDirector.count = 9;
         // QuestDirector.count = 10;
         // QuestDirector.count = 11;
-        QuestDirector.count = 12;
+        //QuestDirector.count = 0;
+
+        //if (GameManager.instance.StageInfos[0].FirstClear == true)
 
     }
 
@@ -107,7 +109,7 @@ public class QuestDirector : MonoBehaviour
             this.QuestText.GetComponent<Text>().fontSize = 19;
             QuestEffect.SetActive(true);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 }

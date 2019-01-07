@@ -21,6 +21,8 @@ public class DataIO : MonoBehaviour
         else if (instance != this)
             Destroy(this.gameObject);
 
+        DontDestroyOnLoad(this.gameObject);
+
         StartCoroutine(Process("StagelnfoReal.xml"));
     }
 
@@ -104,6 +106,7 @@ public class DataIO : MonoBehaviour
                     StageInfo.endPassageIdx = int.Parse(child.Attributes.GetNamedItem("EndPassage").Value);
                     StageInfo.backgroundResources = child.Attributes.GetNamedItem("BackgroundName").Value;
                     StageInfo.minimapResources = child.Attributes.GetNamedItem("MinimapName").Value;
+                    StageInfo.FirstClear = false;
 
                     for (int i = 0; i < 16; i++)
                     {

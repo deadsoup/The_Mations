@@ -97,7 +97,7 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // 텍스트 지울떄 지워도됩니다.
-        text.text = string.Format("현재통로 : {0}, 현재스테이지 : {1}", currPassage.ToString(), currStage + 1);
+        text.text = string.Format(" 현재스테이지 : {1}", currPassage.ToString(), currStage);
 
     }
     // 해당 통로에 진입할떄 이벤트 트리거가
@@ -155,11 +155,11 @@ public class MapManager : MonoBehaviour
     {
         GameObject group = GameObject.Find("Pminimap");
 
-        float startX = -27.7f;
-        float startY = 30.4f;
+        float startX = -87.7f;
+        float startY = 22.2f;
 
-        float intervalX = 18.5f;
-        float intervalY = 19.7f;
+        float intervalX = 57f;
+        float intervalY = -39f;
 
         // 미니맵 정보 16개 세팅
         for (int i = 0; i < 16; i++)
@@ -212,7 +212,14 @@ public class MapManager : MonoBehaviour
     // 월드맵씬
     public void ExitBattleScene()
     {
-        SceneManager.LoadScene("TestWorldMap");
+        if(GameManager.instance.StageInfos[currStage].FirstClear == false)
+        {
+            GameManager.instance.StageInfos[currStage].FirstClear = true;
+            QuestDirector.count += 1;
+            
+        }
+
+        SceneManager.LoadScene("GameScene");
     }
 
 }
