@@ -33,15 +33,14 @@ public class TutoDirector : MonoBehaviour
         {
             tutocount++;
         }
-        if (TutoDirector.Tuto == 2)
+        /*if (TutoDirector.Tuto == 2)
         {
             Batu15.SetActive(true);
             RButton.SetActive(true);
             LButton.SetActive(true);
-        }
-        else if (TutoDirector.Tuto == 1)
+        }*/
+        if (TutoDirector.Tuto == 1)
         {
-
             if (TutoDirector.tutocount == 1)
             {
                 MoveTu1.SetActive(true);

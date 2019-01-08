@@ -38,20 +38,9 @@ public class World : MonoBehaviour
         }
         if (CharUiDirector.Character == 3)
         {
-            Character2.SetActive(true);
-        }
-        if (CharUiDirector.Character == 4)
-        {
             Character3.SetActive(true);
         }
-        if (CharUiDirector.Character == 5)
-        {
-            Character4.SetActive(true);
-        }
-        if (CharUiDirector.Character == 6)
-        {
-            Character5.SetActive(true);
-        }
+        
 
     }
    

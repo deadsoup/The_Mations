@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class EventTriggr : MonoBehaviour
@@ -16,4 +17,6 @@ public class EventTriggr : MonoBehaviour
     {
         MapManager.instance.StartEventTrg();
     }
+    
+
 }

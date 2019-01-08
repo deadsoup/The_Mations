@@ -8,7 +8,7 @@ public class TutoServe : MonoBehaviour
     void Start()
     {
         TutoDirector.Tuto = 2;
-        DontDestroyOnLoad(gameObject);
+       
     }
 
     // Update is called once per frame

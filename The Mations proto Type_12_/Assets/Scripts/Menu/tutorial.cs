@@ -14,6 +14,10 @@ public class tutorial : MonoBehaviour { //게임 시작 후 나오는 게임배�
     {
         Tutorial.SetActive(true);
     }
+    public void GoTutoPassWay()
+    {
+        SceneManager.LoadScene("TutoPassWay");
+    }
     public void TutorialYes()
     {
         Tutorial.SetActive(false);

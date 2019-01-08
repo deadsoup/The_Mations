@@ -9,6 +9,14 @@ public class CharCount : MonoBehaviour
     public void Click(int a)
     {
        Charcount = a;
+
+
+        //DontDestroyOnLoad(this.gameObject);
+
+    }
+    public void Clickno(int a)
+    {
+        Charcount = a;
         //DontDestroyOnLoad(this.gameObject);
 
     }

@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestDirector : MonoBehaviour
 {
     public static int count;
     public GameObject QuestText;
     public GameObject QuestEffect;
+
+
+    public void EndingGo()
+    {
+        SceneManager.LoadScene("EndingCredit");
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +29,13 @@ public class QuestDirector : MonoBehaviour
         // QuestDirector.count = 8;
         // QuestDirector.count = 9;
         // QuestDirector.count = 10;
-        // QuestDirector.count = 11;
+        // QuestDirector.count = 12;
         //QuestDirector.count = 0;
 
         //if (GameManager.instance.StageInfos[0].FirstClear == true)
 
     }
+
 
     // Update is called once per frame
     void Update()

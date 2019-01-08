@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 namespace ParkYJ.Coroutine
 {
+    
     public class Fade : MonoBehaviour
     {
+        public GameObject Tutorial;
+        public GameObject TipingText;
         public float animTime = 2f;
         private Image fadeImage;
         private float start = 0f;
@@ -15,10 +20,13 @@ namespace ParkYJ.Coroutine
         private float end2 = 0f;
         private float time2 = 0f;
         private bool isPlaying = false;
-        public GameObject Button;
-       
+        
+        public GameObject Fade1;
+        public GameObject Fade2;
 
-       void Awake()                                                                                                                                                                                                                       
+
+
+        void Awake()                                                                                                                                                                                                                       
         {
             fadeImage = GetComponent<Image>();
         }
@@ -29,11 +37,14 @@ namespace ParkYJ.Coroutine
             
             StartCoroutine(PlayFadeout());
 
+            TipingText.SetActive(false);
+            Tutorial.SetActive(true);
+            //Fade2.SetActive(true);
         }
      
         IEnumerator PlayFadeout()
         {
-            Button.SetActive(false);
+            Fade1.SetActive(false);
             isPlaying = true;
 
             Color color = fadeImage.color;
@@ -49,7 +60,8 @@ namespace ParkYJ.Coroutine
 
             }
             isPlaying = false;
-          
+            
+
 
         }
       
