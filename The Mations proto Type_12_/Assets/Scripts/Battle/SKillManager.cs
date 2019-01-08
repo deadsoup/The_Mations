@@ -119,7 +119,7 @@ public class SKillManager : MonoBehaviour
         skilldata = JsonMapper.ToObject(jsonString);
     }
 
-
+    public GameObject[] Effect = new GameObject[9];
 
     void Start()
     {
@@ -348,6 +348,17 @@ public class SKillManager : MonoBehaviour
                     if (npc.Hp[battle.switching[2]] >= (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                     { npc.Hp[battle.switching[2]] = (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]); }
 
+                    GameObject itemObj = Instantiate(Effect[0]);
+                    /*
+                    itemObj.transform.SetParent(slots[i].transform);
+
+                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                    //itemObj.transform.position = new Vector2(511, 249.6f);
+                    itemObj.transform.position = slots[i].transform.position;
+                    itemObj.name = itemToAdd.Name;
+                    */
+
+
                 }
                 else if (npc.Hp[battle.switching[0]] == (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) && npc.Hp[battle.switching[1]] == (npc.MaxHp[battle.switching[1]] + npc.Equip_MaxHp[battle.switching[1]]) && npc.Hp[battle.switching[2]] == (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
@@ -416,7 +427,7 @@ public class SKillManager : MonoBehaviour
                 npc.Mp[2] -= 100;
                 actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                 npc.actiongage -= 5f;
-                FloatingTextController.CreateFloatingText2("변신", transform);
+                FloatingTextController.CreateFloatingText4("변신", transform);
                 playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Dog/Player_Dog_idle");
 
                 skillButton[0].onClick.RemoveAllListeners();

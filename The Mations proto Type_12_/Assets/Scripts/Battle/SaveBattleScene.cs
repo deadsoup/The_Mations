@@ -335,113 +335,130 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Skill3_ID"]
                     ));
         }
+        //
+        /// 
+        battle.switching[0] = battleLoad[0].Id;// 캐릭터 슬롯의 데이터값을 캐릭터의 ID로 설정
+        battle.switching[1] = battleLoad[1].Id;
+        battle.switching[2] = battleLoad[2].Id;
 
-        npc.Equip_Str[battle.switching[0]] = 0;
+        npc.Equip_Str[battle.switching[0]] = 0; // 장비의 능력치를 0으로 바꾼다.
         npc.Equip_Wis[battle.switching[0]] = 0;
 
+        npc.Equip_Str[battle.switching[1]] = 0;
+        npc.Equip_Wis[battle.switching[1]] = 0;
 
-        npc.Id[battle.switching[0]] = battleLoad[0].Id;
-        npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
-        npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
-        npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
-        npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
-        npc.Str[battle.switching[0]] = battleLoad[0].Str;
-        npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
-        npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+        npc.Equip_Str[battle.switching[2]] = 0;
+        npc.Equip_Wis[battle.switching[2]] = 0;
 
-        if (battleLoad[0].Inven1 > 56)
+
+        for (int i = 0; i < battleLoad.Count; i++)
         {
-            for (int i = 0; i < battleLoad[0].Inven1_Amount; i++)
+            npc.Id[battle.switching[i]] = battleLoad[i].Id; // 능력치 호출
+            npc.MaxHp[battle.switching[i]] = battleLoad[i].MaxHp;
+            npc.Hp[battle.switching[i]] = battleLoad[i].Hp;
+            npc.MaxMp[battle.switching[i]] = battleLoad[i].MaxMp;
+            npc.Mp[battle.switching[i]] = battleLoad[i].Mp;
+            npc.Str[battle.switching[i]] = battleLoad[i].Str;
+            npc.Wis[battle.switching[i]] = battleLoad[i].Wis;
+            npc.ArchivePoint[i] = battleLoad[i].ArchivePoint;
+        }
+
+
+
+        for (int Num = 0; Num < battleLoad.Count; Num++)
+        {
+            //인벤토리1번
+            if (battleLoad[Num].Inven1 > 56) //
             {
-                inven.AddItem(battleLoad[0].Inven1);
+                for (int i = 0; i < battleLoad[Num].Inven1_Amount; i++)
+                {
+                    inven.AddItem(battleLoad[Num].Inven1);
+                    Debug.Log("아이템 생성");
+                }
+            }
+            else if (battleLoad[Num].Inven1 == -1) { Debug.Log("아이템 없음"); }
+            else
+            {
+                inven.AddItem(battleLoad[Num].Inven1);
                 Debug.Log("아이템 생성");
             }
-        }
-        else if (battleLoad[0].Inven1 == -1)
-        {
-            Debug.Log("아이템 없음");
-        }
-        else
-        {
-            inven.AddItem(battleLoad[0].Inven1);
-            Debug.Log("아이템 생성");
-        }
-
-        if (battleLoad[0].Inven2 > 56)
-        {
-            for (int i = 0; i < battleLoad[0].Inven2_Amount; i++)
+            //인벤토리2번
+            if (battleLoad[Num].Inven2 > 56)
             {
-                inven.AddItem(battleLoad[0].Inven2);
+                for (int i = 0; i < battleLoad[Num].Inven2_Amount; i++)
+                {
+                    inven.AddItem(battleLoad[Num].Inven2);
+                    Debug.Log("아이템 생성2");
+                }
+            }
+            else if (battleLoad[Num].Inven2 == -1) { Debug.Log("아이템 없음"); }
+            else
+            {
+                inven.AddItem(battleLoad[Num].Inven2);
                 Debug.Log("아이템 생성2");
+
             }
-        }
-        else if (battleLoad[0].Inven2 == -1)
-        {
-            Debug.Log("아이템 없음");
-        }
-        else
-        {
-            inven.AddItem(battleLoad[0].Inven2);
-            Debug.Log("아이템 생성2");
-
-        }
-
-        if (battleLoad[0].Inven3 > 56)
-        {
-            for (int i = 0; i < battleLoad[0].Inven3_Amount; i++)
+            //인벤토리3번
+            if (battleLoad[Num].Inven3 > 56)
             {
-                inven.AddItem(battleLoad[0].Inven3);
+                for (int i = 0; i < battleLoad[Num].Inven3_Amount; i++)
+                {
+                    inven.AddItem(battleLoad[Num].Inven3);
+                    Debug.Log("아이템 생성3");
+                }
+            }
+            else if (battleLoad[Num].Inven3 == -1) { Debug.Log("아이템 없음"); }
+            else
+            {
+                inven.AddItem(battleLoad[Num].Inven3);
                 Debug.Log("아이템 생성3");
+
             }
-        }
-        else if (battleLoad[0].Inven3 == -1)
-        {
-            Debug.Log("아이템 없음");
-        }
-        else
-        {
-            inven.AddItem(battleLoad[0].Inven3);
-            Debug.Log("아이템 생성3");
 
-        }
-
-
-        if (battleLoad[0].Inven4 > 56)
-        {
-            for (int i = 0; i < battleLoad[0].Inven4_Amount; i++)
+            //인벤토리4번
+            if (battleLoad[Num].Inven4 > 56)
             {
-                inven.AddItem(battleLoad[0].Inven4);
+                for (int i = 0; i < battleLoad[Num].Inven4_Amount; i++)
+                {
+                    inven.AddItem(battleLoad[Num].Inven4);
+                    Debug.Log("아이템 생성4");
+                }
+            }
+            else if (battleLoad[Num].Inven4 == -1) { Debug.Log("아이템 없음"); }
+            else
+            {
+                inven.AddItem(battleLoad[Num].Inven4);
                 Debug.Log("아이템 생성4");
+
             }
         }
-        else if (battleLoad[0].Inven4 == -1)
-        {
-            Debug.Log("아이템 없음");
-        }
-        else
-        {
-            inven.AddItem(battleLoad[0].Inven4);
-            Debug.Log("아이템 생성4");
 
-        }
+
+
 
         Debug.Log(battleLoad[0].Equip_Str);
         Debug.Log(npc.Equip_Str[battle.switching[0]]);
         //Debug.Log(battleLoad[0].Skill1_ID);
-        if (battleLoad[0].Skill1_ID > -1)
-            Npc.SkillTriggers[0].skill[battleLoad[0].Skill1_ID] = true;
-        if (battleLoad[0].Skill2_ID > -1)
-            Npc.SkillTriggers[0].skill[battleLoad[0].Skill2_ID] = true;
-        if (battleLoad[0].Skill3_ID > -1)
-            Npc.SkillTriggers[0].skill[battleLoad[0].Skill3_ID] = true;
 
-        if (party.player[battle.switching[0]] == true)
+        for (int Num = 0; Num < battleLoad.Count; Num++)
         {
-            party.selectPlayer(0);
-
+            if (battleLoad[Num].Skill1_ID > -1)
+                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill1_ID] = true;
+            if (battleLoad[Num].Skill2_ID > -1)
+                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill2_ID] = true;
+            if (battleLoad[Num].Skill3_ID > -1)
+                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill3_ID] = true;
         }
+        /*
+        for (int Num = 0; Num < 10; Num++)
+        {
+            if (party.player[battle.switching[Num]] == true)
+            {
+                party.selectPlayer(battle.switching[Num]);
 
-
+            }
+        }
+        */
     }
 
     void load()
@@ -506,13 +523,6 @@ public class SaveBattleScene : MonoBehaviour
         //Battle.chaneGetta1();
     }
 
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.Keypad6))
-        // {
-        // saveJson();
-        //}
-    }
 
 }
 [System.Serializable]

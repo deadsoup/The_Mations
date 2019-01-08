@@ -35,7 +35,6 @@ public class Move : MonoBehaviour {
     public GameObject charHp2;
     public GameObject charMp2;
 
-
     public GameObject charHp3;
     public GameObject charMp3;
 
@@ -99,7 +98,21 @@ public class Move : MonoBehaviour {
         Char_2_MpSlider.value = (npc.Mp[i2] + npc.Equip_MaxMp[i2]);
     }
 
+    void Hpslider3(int i3)
+    {
+        Char_3_HpSlider.maxValue = (npc.MaxHp[i3] + npc.Equip_MaxHp[i3]);
 
+        Char_3_HpSlider.value = (npc.Hp[i3] + npc.Equip_MaxHp[i3]);
+
+    }
+
+    void Mpslider3(int i3)
+    {
+        Char_3_MpSlider.maxValue = (npc.MaxMp[i3] + npc.Equip_MaxMp[i3]);
+
+
+        Char_3_MpSlider.value = (npc.Mp[i3] + npc.Equip_MaxMp[i3]);
+    }
 
 
 
@@ -136,12 +149,19 @@ public class Move : MonoBehaviour {
         Hpslider2(i2);
         Mpslider2(i2);
 
+        Hpslider3(i3);
+        Mpslider3(i3);
+
         charHp.GetComponent<Text>().text = " HP : " + (npc.Hp[i] + npc.Equip_MaxHp[i]) + " / " + (npc.MaxHp[i] + npc.Equip_MaxHp[i]).ToString();
         charMp.GetComponent<Text>().text = " Mp : " + (npc.Mp[i] + npc.Equip_MaxMp[i]) + " / " + (npc.MaxMp[i] + npc.Equip_MaxMp[i]).ToString();
 
 
         charHp2.GetComponent<Text>().text = " HP : " + (npc.Hp[i2] + npc.Equip_MaxHp[i2]) + " / " + (npc.MaxHp[i2] + npc.Equip_MaxHp[i2]).ToString();
         charMp2.GetComponent<Text>().text = " Mp : " + (npc.Mp[i2] + npc.Equip_MaxMp[i2]) + " / " + (npc.MaxMp[i2] + npc.Equip_MaxMp[i2]).ToString();
+
+        charHp3.GetComponent<Text>().text = " HP : " + (npc.Hp[i3] + npc.Equip_MaxHp[i3]) + " / " + (npc.MaxHp[i3] + npc.Equip_MaxHp[i3]).ToString();
+        charMp3.GetComponent<Text>().text = " Mp : " + (npc.Mp[i3] + npc.Equip_MaxMp[i3]) + " / " + (npc.MaxMp[i3] + npc.Equip_MaxMp[i3]).ToString();
+
 
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -176,55 +196,5 @@ public class Move : MonoBehaviour {
 
 
         }
-
-
-
-
-        /*
-                if (battle.battleaction == false && Input.GetKeyDown(KeyCode.M))
-                {
-                    move++;
-                    Debug.Log(move + "만큼 이동합니다.");
-                    battlecount = Random.Range(1, 6);
-                    battle.i = Random.Range(2, 4);
-                    Item.setItem = false;
-                    Item.c = false;
-                    Item.Q = 0;
-
-
-                    
-
-                    if (battlecount == 2)
-                    {
-                        bool i = true;
-                        Debug.Log("아이템 등장");
-                        if (i == true)
-                        {
-                            Item.Q = 10;
-                            Debug.Log("1번 캐릭터에게 아이템을 장착시키겠습니까? --- 1번 클릭 ---");
-                            Debug.Log("2번 캐릭터에게 아이템을 장착시키겠습니까? --- 2번 클릭 ---");
-
-                            Item.i = Random.Range(1, 5);
-                            Debug.Log(Item.i+"번 아이템 등장");
-                            Item.getItem();
-                            i = false;
-                        }
-
-
-                    }
-
-
-                    if (battlecount == 3)
-                    {
-                        Debug.Log("체력과 마나를 10% 회복합니다.");
-                        GameEvent.hpMpRegen();
-
-
-                    }
-
-
-
-                }
-                */
     }
 }

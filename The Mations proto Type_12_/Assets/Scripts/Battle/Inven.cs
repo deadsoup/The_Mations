@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Inven : MonoBehaviour
 {
@@ -53,6 +54,10 @@ public class Inven : MonoBehaviour
     Text Text;
 
 
+    battle Battle;
+    npc Npc;
+
+    Button useButton;
 
     public List<Equip> items = new List<Equip>();
     public List<GameObject> slots = new List<GameObject>();
@@ -80,12 +85,18 @@ public class Inven : MonoBehaviour
         Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
         UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
         InfoPanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("ItemInfo").gameObject;
-        ItemIcon = InfoPanel.transform.GetChild(0).GetComponent<Image>();
-        Title = InfoPanel.transform.GetChild(1).GetComponent<Text>();
-        Type = InfoPanel.transform.GetChild(2).GetComponent<Text>();
-        Grade = InfoPanel.transform.GetChild(3).GetComponent<Text>();
-        Option = InfoPanel.transform.GetChild(4).GetComponent<Text>();
-        Text = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+        ItemIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+        Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+        Type = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+        Grade = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+        Option = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+        Text = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+            Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+        }
     }
 
 
@@ -98,7 +109,7 @@ public class Inven : MonoBehaviour
         randomAdd = Random.Range(0, 6);
         randomAdd1 = Random.Range(0, 6);
         randomAdd2 = Random.Range(0, 6);
-
+        useButton = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Yes").GetComponent<Button>();
 
         for (int i = 0; i < slotAmount; i++)
         {
@@ -148,14 +159,23 @@ public class Inven : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AddItem(51);
+            AddItem(52);
+            AddItem(53);
+            AddItem(54);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             AddItem2(51);
+            AddItem2(52);
+            AddItem2(53);
+            AddItem2(54);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             AddItem3(51);
+            AddItem3(52);
+            AddItem3(53);
+            AddItem3(54);
         }
     }
     // 아이템 삭제 - 문자열을 사용한다 - "slots0, slots1" 이걸 삭제함
@@ -211,6 +231,11 @@ public class Inven : MonoBehaviour
     }
 
     //각 플레이어마다 아이템 사용하는 법
+    public void Off()
+    {
+        UsePanel.SetActive(false);
+    }
+
 
     public void Use(int a)
     {
@@ -219,20 +244,51 @@ public class Inven : MonoBehaviour
         {
             UsePanel.SetActive(true);
             UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
+            useButton.onClick.RemoveAllListeners();
+            useButton.onClick.AddListener(UsePotion_Hp_51);
+            useButton.onClick.AddListener(Off);
+        }
+        if (a == 52)
+        {
+            UsePanel.SetActive(true);
+            UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
+            useButton.onClick.RemoveAllListeners();
+            useButton.onClick.AddListener(UsePotion_Hp_52);
+            useButton.onClick.AddListener(Off);
+        }
+        if (a == 53)
+        {
+            UsePanel.SetActive(true);
+            UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
+            useButton.onClick.RemoveAllListeners();
+            useButton.onClick.AddListener(UsePotion_Hp_53);
+            useButton.onClick.AddListener(Off);
+        }
+        if (a == 54)
+        {
+            UsePanel.SetActive(true);
+            UseText.GetComponent<Text>().text = itemToAdd.Text + "\r\n 아이템을 사용하겠습니까? ";
+            useButton.onClick.RemoveAllListeners();
+            useButton.onClick.AddListener(UsePotion_Hp_54);
+            useButton.onClick.AddListener(Off);
         }
     }
 
 
-    public void UsePotion() // 플레이어1의 사용하기
+    public void UsePotion_Hp_51() // 플레이어1의 사용하기
     {
         Equip itemToAdd = database.FetchItemByID(51);
         if (Slotpanel.activeInHierarchy == true)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].Name == "진통제" && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                if (items[i].Id == 51 && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
                 {
-                    
+                    if (npc.Hp[battle.switching[0]] >= npc.MaxHp[battle.switching[0]])
+                    {
+                        break;
+                    }
+
                     items[i] = itemToAdd;
                     ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
                     data.amount--;
@@ -240,11 +296,24 @@ public class Inven : MonoBehaviour
                     Add_Status(battle.switching[0], itemToAdd);
                     print(itemToAdd.Hp);
 
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
                     if (npc.Hp[battle.switching[0]] >= npc.MaxHp[battle.switching[0]])
                     {
                         npc.Hp[battle.switching[0]] = npc.MaxHp[battle.switching[0]];
                     }
-
 
                     if (data.amount <= 0)
                     {
@@ -255,20 +324,15 @@ public class Inven : MonoBehaviour
                         // 아이템정보 초기화 (id -1로변경)
                         items[i] = new Equip();
                         break;
-
-
                     }
                 }
-
-
-
             }
         }
         if (Slotpanel2.activeInHierarchy == true) // 플레이어2의 사용하기
         {
             for (int i = 0; i < items2.Count; i++)
             {
-                if (items2[i].Name == "진통제" && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                if (items2[i].Id ==51 && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
                 {
                     items2[i] = itemToAdd;
                     ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
@@ -276,6 +340,20 @@ public class Inven : MonoBehaviour
                     data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
                     Add_Status(battle.switching[1], itemToAdd);
                     print(itemToAdd.Hp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
 
                     if (npc.Hp[battle.switching[1]] >= npc.MaxHp[battle.switching[1]])
                     {
@@ -296,13 +374,17 @@ public class Inven : MonoBehaviour
 
                     }
                 }
+                if (npc.Hp[battle.switching[1]] >= npc.MaxHp[battle.switching[1]])
+                {
+                    break;
+                }
             }
         }
         if (Slotpanel3.activeInHierarchy == true) // 플레이어 3의 사용하기
         {
             for (int i = 0; i < items3.Count; i++)
             {
-                if (items3[i].Name == "진통제" && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                if (items3[i].Id == 51 && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
                 {
                     items3[i] = itemToAdd;
                     ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
@@ -311,11 +393,535 @@ public class Inven : MonoBehaviour
                     Add_Status(battle.switching[2], itemToAdd);
                     print(itemToAdd.Hp);
 
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
                     if (npc.Hp[battle.switching[2]] >= npc.MaxHp[battle.switching[2]])
                     {
                         npc.Hp[battle.switching[2]] = npc.MaxHp[battle.switching[2]];
                     }
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots3[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items3[i] = new Equip();
+                        break;
+                    }
+                }
+                if (npc.Hp[battle.switching[2]] >= npc.MaxHp[battle.switching[2]])
+                {
+                    break;
+                }
 
+            }
+        }
+    }
+
+    public void UsePotion_Hp_52() // 플레이어1의 사용하기
+    {
+        Equip itemToAdd = database.FetchItemByID(52);
+        if (Slotpanel.activeInHierarchy == true)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Id == 52 && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    if (npc.Hp[battle.switching[0]] >= npc.MaxHp[battle.switching[0]])
+                    {
+                        break;
+                    }
+
+                    items[i] = itemToAdd;
+                    ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[0], itemToAdd);
+                    print(itemToAdd.Hp);
+
+
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
+                    if (npc.Hp[battle.switching[0]] >= npc.MaxHp[battle.switching[0]])
+                    {
+                        npc.Hp[battle.switching[0]] = npc.MaxHp[battle.switching[0]];
+                    }
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items[i] = new Equip();
+                        break;
+                    }
+                }
+            }
+        }
+        if (Slotpanel2.activeInHierarchy == true) // 플레이어2의 사용하기
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                if (items2[i].Id == 52 && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    items2[i] = itemToAdd;
+                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[1], itemToAdd);
+                    print(itemToAdd.Hp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
+                    if (npc.Hp[battle.switching[1]] >= npc.MaxHp[battle.switching[1]])
+                    {
+                        npc.Hp[battle.switching[1]] = npc.MaxHp[battle.switching[1]];
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots2[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items2[i] = new Equip();
+                        break;
+
+
+                    }
+                }
+                if (npc.Hp[battle.switching[1]] >= npc.MaxHp[battle.switching[1]])
+                {
+                    break;
+                }
+            }
+        }
+        if (Slotpanel3.activeInHierarchy == true) // 플레이어 3의 사용하기
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                if (items3[i].Id == 52 && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    items3[i] = itemToAdd;
+                    ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    Add_Status(battle.switching[2], itemToAdd);
+                    print(itemToAdd.Hp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+                    if (npc.Hp[battle.switching[2]] >= npc.MaxHp[battle.switching[2]])
+                    {
+                        npc.Hp[battle.switching[2]] = npc.MaxHp[battle.switching[2]];
+                    }
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots3[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items3[i] = new Equip();
+                        break;
+                    }
+                }
+                if (npc.Hp[battle.switching[2]] >= npc.MaxHp[battle.switching[2]])
+                {
+                    break;
+                }
+
+            }
+        }
+    }
+
+    public void UsePotion_Hp_53() // 플레이어1의 사용하기
+    {
+        Equip itemToAdd = database.FetchItemByID(53);
+        if (Slotpanel.activeInHierarchy == true)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                print("아이템 53 사용 진입");
+                if (items[i].Id == 53 && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("아이템 53 사용 진입2");
+                    if (npc.Mp[battle.switching[0]] >= npc.MaxMp[battle.switching[0]])
+                    {
+                        print("브레이크 진입");
+                        break;
+                    }
+                    items[i] = itemToAdd;
+                    ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    npc.Mp[battle.switching[0]] += (int)(0.3f * (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]));
+                    //Add_Status(battle.switching[0], itemToAdd);
+                    print(itemToAdd.Mp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+                    if (npc.Mp[battle.switching[0]] >= npc.MaxMp[battle.switching[0]])
+                    {
+                        npc.Mp[battle.switching[0]] = npc.MaxMp[battle.switching[0]];
+                    }
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items[i] = new Equip();
+                        break;
+                    }
+                }
+            }
+        }
+        if (Slotpanel2.activeInHierarchy == true) // 플레이어2의 사용하기
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                print("플레이어 2아이템 53 사용 진입");
+                if (items2[i].Id == 53 && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("플레이어 2아이템 53 사용 진입2");
+                    if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                    {
+                        print("브레이크");
+                        break;
+                    }
+                    items2[i] = itemToAdd;
+                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    npc.Mp[battle.switching[1]] += (int)(0.3f * (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]));
+                    //Add_Status(battle.switching[1], itemToAdd);
+                    print(itemToAdd.Mp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
+                    if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                    {
+                        npc.Mp[battle.switching[1]] = npc.MaxMp[battle.switching[1]];
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots2[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items2[i] = new Equip();
+                        break;
+
+
+                    }
+                }
+                if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                {
+                    break;
+                }
+            }
+        }
+        if (Slotpanel3.activeInHierarchy == true) // 플레이어 3의 사용하기
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                print("플레이어 3 아이템 53 사용 진입");
+                if (items3[i].Id == 53 && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("플레이어 3 아이템 53 사용 진입2");
+                    if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                    {
+                        print("브레이크");
+                        break;
+                    }
+                    items3[i] = itemToAdd;
+                    ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    npc.Mp[battle.switching[2]] += (int)(0.3f * (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]));
+                    //Add_Status(battle.switching[2], itemToAdd);
+                    print(itemToAdd.Mp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
+
+                    if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                    {
+                        npc.Mp[battle.switching[2]] = npc.MaxMp[battle.switching[2]];
+                    }
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots3[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items3[i] = new Equip();
+                        break;
+                    }
+                }
+                if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                {
+                    break;
+                }
+
+            }
+        }
+    }
+
+    public void UsePotion_Hp_54() // 플레이어1의 사용하기
+    {
+        Equip itemToAdd = database.FetchItemByID(54);
+        if (Slotpanel.activeInHierarchy == true)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                print("아이템 54 사용 진입");
+                if (items[i].Id == 54 && slots[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("아이템 54 사용 진입2");
+                    if (npc.Mp[battle.switching[0]] >= npc.MaxMp[battle.switching[0]])
+                    {
+                        print("브레이크 진입");
+                        break;
+                    }
+
+                    items[i] = itemToAdd;
+                    ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                    npc.Mp[battle.switching[0]] += (int)(0.5f * (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]));
+                    print("마나 회복" + (int)(0.5f * (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]])));
+                    print("현재 마나  " + npc.Mp[battle.switching[0]]);
+
+
+                    //Add_Status(battle.switching[0], itemToAdd);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.Mp[battle.switching[0]] >= npc.MaxMp[battle.switching[0]])
+                    {
+                        npc.Mp[battle.switching[0]] = npc.MaxMp[battle.switching[0]];
+                    }
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items[i] = new Equip();
+                        break;
+                    }
+                }
+            }
+        }
+        if (Slotpanel2.activeInHierarchy == true) // 플레이어2의 사용하기
+        {
+            for (int i = 0; i < items2.Count; i++)
+            {
+                print("아이템 54 사용 진입 플레이어2");
+                if (items2[i].Id == 54 && slots2[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("아이템 54 사용 진입2 플레이어2");
+                    if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                    {
+                        print("브레이크 진입");
+                        break;
+                    }
+                    items2[i] = itemToAdd;
+                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+
+                    npc.Mp[battle.switching[1]] += (int)(0.5f * (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]));
+                    //Add_Status(battle.switching[1], itemToAdd);
+                    print(itemToAdd.Mp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+
+                    if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                    {
+                        npc.Mp[battle.switching[1]] = npc.MaxMp[battle.switching[1]];
+                    }
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
+
+                    if (data.amount <= 0)
+                    {
+                        // slot 밑에있는 아이템 오브젝트 찾기 및 삭제
+                        var children = slots2[i].GetComponentInChildren<ItemData>();
+                        GameObject obj = children.gameObject;
+                        Destroy(obj);
+                        // 아이템정보 초기화 (id -1로변경)
+                        items2[i] = new Equip();
+                        break;
+
+
+                    }
+                }
+                if (npc.Mp[battle.switching[1]] >= npc.MaxMp[battle.switching[1]])
+                {
+                    break;
+                }
+            }
+        }
+        if (Slotpanel3.activeInHierarchy == true) // 플레이어 3의 사용하기
+        {
+            for (int i = 0; i < items3.Count; i++)
+            {
+                print("아이템 54 사용 진입 플레이어3");    
+                if (items3[i].Id == 54 && slots3[i].transform.GetChild(0).GetComponent<ItemData>().amount >= 0)
+                {
+                    print("아이템 54 사용 진입2 플레이어3");
+                    if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                    {
+                        print("브레이크 진입");
+                        break;
+                    }
+                    items3[i] = itemToAdd;
+                    ItemData data = slots3[i].transform.GetChild(0).GetComponent<ItemData>();
+                    data.amount--;
+                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+
+                    npc.Mp[battle.switching[2]] += (int)(0.5f * (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]));
+                    //Add_Status(battle.switching[2], itemToAdd);
+                    print(itemToAdd.Mp);
+
+                    npc.actiongage -= 2.0f;
+                    Battle.actionGage.GetComponent<Image>().fillAmount -= 0.2f;
+
+                    if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                    {
+                        npc.Mp[battle.switching[2]] = npc.MaxMp[battle.switching[2]];
+                    }
+
+                    if (npc.actiongage <= 0)
+                    {
+                        npc.actiongage = 0f;
+                        Battle.actionGage.GetComponent<Image>().fillAmount = 0f;
+                        npc.action = false;
+                        npc.eAction = true;
+                        npc.eActiongage = 10f;
+
+                    }
 
                     if (data.amount <= 0)
                     {
@@ -326,15 +932,16 @@ public class Inven : MonoBehaviour
                         // 아이템정보 초기화 (id -1로변경)
                         items3[i] = new Equip();
                         break;
-
-
                     }
                 }
+                if (npc.Mp[battle.switching[2]] >= npc.MaxMp[battle.switching[2]])
+                {
+                    break;
+                }
+
             }
         }
     }
-
-
 
     public void AddItem(int id)
     {
@@ -587,9 +1194,9 @@ public class Inven : MonoBehaviour
     void Add_Status(int unitIdx, Equip equip)
     {
         npc.Equip_MaxHp[unitIdx] += equip.MaxHp;
-        npc.Hp[unitIdx] += (int)(equip.Hp * (npc.MaxHp[unitIdx] + npc.Equip_MaxHp[unitIdx]) * 0.01f);
+        npc.Hp[unitIdx] += (int)((equip.Hp * 0.01f) * (npc.MaxHp[unitIdx] + npc.Equip_MaxHp[unitIdx]));
         npc.Equip_MaxMp[unitIdx] += equip.MaxMp;
-        npc.Mp[unitIdx] += equip.Mp;
+        npc.Mp[unitIdx] += (int)((equip.Mp * 0.01f) * (npc.MaxMp[unitIdx] + npc.Equip_MaxMp[unitIdx]));
         npc.Equip_Str[unitIdx] += equip.Str;
         npc.Equip_Dex[unitIdx] += equip.Dex;
         npc.Equip_Wis[unitIdx] += equip.Wis;

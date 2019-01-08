@@ -83,8 +83,6 @@ public class Player : MonoBehaviour {
         npc.Wis[0] = player.data[0].Wis;
 
 
-
-
         npc.Id[1] = player.data[1].Id;
         npc.name[1] = player.data[1].Name;
         npc.MaxHp[1] = player.data[1].MaxHp;
