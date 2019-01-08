@@ -7,30 +7,6 @@ using UnityEngine.SceneManagement;
 public class Inven : MonoBehaviour
 {
 
-    /*
-    public static int Id ;
-    public static string Name;
-    public static string Text;
-    public static int MaxHp;
-    public static int MaxMp;
-    public static int Str;
-    public static int Dex;
-    public static int Wis;
-
-    public Inven(int id, string name, string text, int maxHp, int maxMp, int str, int dex, int wis)
-    {
-        Id = id;
-        Name = name;
-        Text = text;
-        MaxHp = maxHp;
-        MaxMp = maxMp;
-        Str = str;
-        Dex = dex;
-        Wis = wis;
-    }
-    */
-    //public List<Inven> InvenList = new List<Inven>();
-
     GameObject Invenpanel;
     GameObject Slotpanel;
     GameObject Slotpanel2;
@@ -993,59 +969,60 @@ public class Inven : MonoBehaviour
 
     public void AddItem2(int id)
     {
-        Equip itemToAdd = database.FetchItemByID(id);
-        if (itemToAdd.Stackable && Check_Item_In_Inventory2(itemToAdd))
-        {
-            for (int i = 0; i < items2.Count; i++)
+            Equip itemToAdd = database.FetchItemByID(id);
+            if (itemToAdd.Stackable && Check_Item_In_Inventory2(itemToAdd))
             {
-                if (items2[i].Id == id)
+                for (int i = 0; i < items2.Count; i++)
                 {
-                    ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
-                    data.amount++;
-                    data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
-                    Debug.Log("이미있는 대상");
+                    if (items2[i].Id == id)
+                    {
+                        ItemData data = slots2[i].transform.GetChild(0).GetComponent<ItemData>();
+                        data.amount++;
+                        data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                        Debug.Log("이미있는 대상");
+                    }
                 }
             }
-        }
-        else
-        {
-            for (int i = 0; i < items2.Count; i++)
+            else
             {
-                Debug.Log("첫 포문 입장" + i);
-                if (items2[i].Id == -1)
+                for (int i = 0; i < items2.Count; i++)
                 {
-                    Debug.Log("이프문 입장" + i);
-                    if (P2_ItemslotCount < 4)
+                    Debug.Log("첫 포문 입장" + i);
+                    if (items2[i].Id == -1)
                     {
-                        Debug.Log("두번째 이프문 입장" + i);
-                        P2_ItemslotCount++;
-                        items2[i] = itemToAdd;
-                        GameObject itemObj = Instantiate(InvenItem);
-                        itemObj.GetComponent<ItemData>().equip = itemToAdd;
-                        itemObj.GetComponent<ItemData>().slot = i;
-                        itemObj.transform.SetParent(slots2[i].transform);
-
-                        itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
-                        //itemObj.transform.position = new Vector2(511, 249.6f);
-                        itemObj.transform.position = slots2[i].transform.position;
-                        itemObj.name = itemToAdd.Name;
-                        Debug.Log("없는 대상" + i);
-
-                        if (items2[i].Id < 50)
+                        Debug.Log("이프문 입장" + i);
+                        if (P2_ItemslotCount < 4)
                         {
-                            Add_Status(battle.switching[1], itemToAdd);
-                        }
-                        break;
-                    }
-                    else
-                    {
-                        Debug.Log("캐릭터 2의 아이템창 꽉 참");
-                        break;
-                    }
-                }
+                            Debug.Log("두번째 이프문 입장" + i);
+                            P2_ItemslotCount++;
+                            items2[i] = itemToAdd;
+                            GameObject itemObj = Instantiate(InvenItem);
+                            itemObj.GetComponent<ItemData>().equip = itemToAdd;
+                            itemObj.GetComponent<ItemData>().slot = i;
+                            itemObj.transform.SetParent(slots2[i].transform);
 
+                            itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                            //itemObj.transform.position = new Vector2(511, 249.6f);
+                            itemObj.transform.position = slots2[i].transform.position;
+                            itemObj.name = itemToAdd.Name;
+                            Debug.Log("없는 대상" + i);
+
+                            if (items2[i].Id < 50)
+                            {
+                                Add_Status(battle.switching[1], itemToAdd);
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Log("캐릭터 2의 아이템창 꽉 참");
+                            break;
+                        }
+                    }
+
+                }
             }
-        }
+        
     }
 
     public void AddItem3(int id)
@@ -1103,6 +1080,12 @@ public class Inven : MonoBehaviour
         }
     }
 
+    public void Off2()
+    {
+        InfoPanel.SetActive(false);
+    }
+
+
     public void CheckStatus(string name)
     {
         InfoPanel.SetActive(true);
@@ -1129,6 +1112,7 @@ public class Inven : MonoBehaviour
                 Text.text = items[i].Text;
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(Off2);
                 break;
             }
 
@@ -1153,6 +1137,7 @@ public class Inven : MonoBehaviour
                 Text.text = items2[i].Text;
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(Off2);
                 break;
             }
             if (slots3[i].name == name)
@@ -1176,6 +1161,7 @@ public class Inven : MonoBehaviour
                 Text.text = items3[i].Text;
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.RemoveAllListeners();
                 InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(delegate () { deleteItem(name); });
+                InfoPanel.transform.Find("Delete0").GetComponent<Button>().onClick.AddListener(Off2);
                 break;
             }
 

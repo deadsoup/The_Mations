@@ -50,7 +50,15 @@ public class SKillManager : MonoBehaviour
 
     internal GameObject[] playerSprite = new GameObject[3];
 
-    
+    GameObject InfoPanel;
+    Image SkillIcon;
+    Text Title;
+    Text Need_Mp;
+    Text Damage;
+    Text Target;
+    Text Attribute;
+    Text Text;
+
 
     /*
     void saveJson()
@@ -143,10 +151,18 @@ public class SKillManager : MonoBehaviour
         {
             actionGage = GameObject.Find("Canvas").transform.Find("actionGage").gameObject;
         }
-        //skillButton[0].onClick.AddListener(skill1);
-        //skillButton1.onClick.RemoveAllListeners();
 
-        //Npc.SkillTriggers[0].skill[1] = true;
+        InfoPanel = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("SkillInfo").gameObject;
+        SkillIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+        Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+        Need_Mp = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+        Damage = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+        Target = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+        Attribute = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+        Text = InfoPanel.transform.GetChild(7).GetComponent<Text>();
+
+
+
 
         SkillPanel = GameObject.Find("Panel");
         Slotpanel = SkillPanel.transform.Find("slotPanel").gameObject;
@@ -178,6 +194,97 @@ public class SKillManager : MonoBehaviour
     {
 
     }
+
+    public void Off()
+    {
+        InfoPanel.SetActive(false);
+    }
+
+    public void CheckStatus(string name)
+    {
+        InfoPanel.SetActive(true);
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (slots[i].name == name)
+            {
+                SkillIcon.sprite = skills[i].sprite;
+                Title.text = skills[i].Name;
+
+                Need_Mp.text = "소모 마나량 " + skills[i].Need_MP.ToString();
+                Damage.text = skills[i].Damage;
+                Target.text = skills[i].Target;
+                Attribute.text = skills[i].Attribute;
+                Text.text = skills[i].Text;
+
+                InfoPanel.transform.Find("Delete").gameObject.SetActive(true);
+                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.RemoveAllListeners();
+                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(delegate () { deleteSkill(name); });
+                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(Off);
+                break;
+            }
+
+
+
+        }
+
+
+    }
+
+    public void CheckStatus_Uniqe()
+    {
+        InfoPanel.SetActive(true);
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (skillButton[0].name == "아이돌 고유스킬")
+            {
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+                Title.text = skills[i].Name;
+
+                Need_Mp.text = skills[i].Need_MP.ToString();
+                Damage.text = skills[i].Damage;
+                Target.text = skills[i].Target;
+                Attribute.text = skills[i].Attribute;
+                Text.text = skills[i].Text;
+
+                InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
+                break;
+            }
+
+            if (skillButton[0].name == "힘숨찐 고유스킬")
+            {
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+                Title.text = skills[i].Name;
+
+                Need_Mp.text = skills[i].Need_MP.ToString();
+                Damage.text = skills[i].Damage;
+                Target.text = skills[i].Target;
+                Attribute.text = skills[i].Attribute;
+                Text.text = skills[i].Text;
+
+                InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
+                break;
+            }
+
+            if (skillButton[0].name == "개 고유스킬")
+            {
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+                Title.text = skills[i].Name;
+
+                Need_Mp.text = skills[i].Need_MP.ToString();
+                Damage.text = skills[i].Damage;
+                Target.text = skills[i].Target;
+                Attribute.text = skills[i].Attribute;
+                Text.text = skills[i].Text;
+
+                InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
+                break;
+            }
+
+        }
+    }
+
+
+
 
     public void UniqueSkill_Set(int num)
     {
