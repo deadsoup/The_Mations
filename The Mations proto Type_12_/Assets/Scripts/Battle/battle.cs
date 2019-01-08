@@ -98,11 +98,14 @@ public class battle : MonoBehaviour {
     internal RuntimeAnimatorController Idol;
     internal RuntimeAnimatorController Nerd;
     internal RuntimeAnimatorController Dog;
+    internal RuntimeAnimatorController Dog_Trnas;
 
     internal GameObject EffectSystem;
     internal GameObject[] touchProtect = new GameObject[3];
 
     bool[] charActive = new bool[3];
+
+    public bool Dog_TransForm;
 
     EnemySkill enemySkill;
     int dice;
@@ -167,6 +170,7 @@ public class battle : MonoBehaviour {
                     Player1.SetTrigger("Atk");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
 
+
                 }
                 if (c == 1)
                 {
@@ -179,9 +183,18 @@ public class battle : MonoBehaviour {
                 if (c == 2)
                 {
                     Debug.Log("개 모션 진입");
-                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                    Player1.SetTrigger("Atk");
+                    if (Dog_TransForm == true)
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player1.SetTrigger("Atk");
+                    }
+                    else
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player1.SetTrigger("Atk");
+                    }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
             }
@@ -208,9 +221,18 @@ public class battle : MonoBehaviour {
                 if (c == 2)
                 {
                     Debug.Log("모션 진입");
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                    Player2.SetTrigger("Atk");
+                    if (Dog_TransForm == true)
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player2.SetTrigger("Atk");
+                    }
+                    else
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player2.SetTrigger("Atk");
+                    }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
             }
@@ -237,72 +259,22 @@ public class battle : MonoBehaviour {
                 if (c == 2)
                 {
                     Debug.Log("모션 진입");
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                    Player3.SetTrigger("Atk");
+                    if (Dog_TransForm == true)
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player3.SetTrigger("Atk");
+                    }
+                    else
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player3.SetTrigger("Atk");
+                    }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
             }
-            if (charActive[1] == true)
-            {
-                if (c == 0)
-                {
-                    Debug.Log("모션 진입");
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
-                    Player2.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-
-                }
-                if (c == 1)
-                {
-                    Debug.Log("모션 진입");
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
-                    Player2.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-                }
-                if (c == 2)
-                {
-                    Debug.Log("모션 진입");
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                    Player2.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-                }
-            }
-            if (charActive[2] == true)
-            {
-                if (c == 0)
-                {
-                    Debug.Log("모션 진입");
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
-                    Player3.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-
-                }
-                if (c == 1)
-                {
-                    Debug.Log("모션 진입");
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
-                    Player3.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-                }
-                if (c == 2)
-                {
-                    Debug.Log("모션 진입");
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
-                    Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                    Player3.SetTrigger("Atk");
-                    FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
-                }
-            }
-
-
-
-
+            
             EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
 
             if (npc.actiongage <= 0)
@@ -422,6 +394,34 @@ public class battle : MonoBehaviour {
 
             npc.Hp[switching[0]] -= edamage;
             Monster.SetTrigger("Atk");
+            if (switching[0] == 0)
+            {
+                Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                Player1.SetTrigger("Hit");
+
+            }
+            if (switching[0] == 1)
+            {
+                Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char1.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                Player1.SetTrigger("Hit");
+            }
+            if (switching[0] == 2)
+            {
+                if (Dog_TransForm == true)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                    Player1.SetTrigger("Hit");
+                }
+                else
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                    Player1.SetTrigger("Hit");
+                }
+            }
 
             FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
 
@@ -429,7 +429,8 @@ public class battle : MonoBehaviour {
 
         if (player1.activeSelf == true && player2.activeSelf == true && player3.activeSelf == false)
         {
-            int random = Random.Range(0,2);
+            int random = 50;
+            int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
             eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
@@ -438,11 +439,74 @@ public class battle : MonoBehaviour {
             edamage = npc.atk[i] + randomDamage;
             if (edamage <= 0) { edamage = 0; }
 
-            npc.Hp[random] -= edamage;
             Monster.SetTrigger("Atk");
+            if (random >= randomTarget)
+            {
+                npc.Hp[switching[0]] -= edamage;
+                if (switching[0] == 0)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player1.SetTrigger("Hit");
 
-            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
-            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
+                }
+                if (switching[0] == 1)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player1.SetTrigger("Hit");
+                }
+                if (switching[0] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player1.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player1.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            }
+            else if (random < randomTarget)
+            {
+                npc.Hp[switching[1]] -= edamage;
+                if (switching[1] == 0)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player2.SetTrigger("Hit");
+
+                }
+                if (switching[1] == 1)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player2.SetTrigger("Hit");
+                }
+                if (switching[1] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player2.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player2.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText3(edamage.ToString(), transform);
+            }
+
 
         }
 
@@ -459,9 +523,102 @@ public class battle : MonoBehaviour {
 
             npc.Hp[random] -= edamage;
             Monster.SetTrigger("Atk");
-            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
-            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
-            if (random == 2) { FloatingTextController.CreateFloatingText4(edamage.ToString(), transform); }
+            if (random == 0)
+            {
+                if (switching[0] == 0)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player1.SetTrigger("Hit");
+
+                }
+                if (switching[0] == 1)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player1.SetTrigger("Hit");
+                }
+                if (switching[0] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player1.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player1.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            }
+            if (random == 1)
+            {
+                if (switching[1] == 0)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player2.SetTrigger("Hit");
+
+                }
+                if (switching[1] == 1)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player2.SetTrigger("Hit");
+                }
+                if (switching[1] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player2.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player2.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText3(edamage.ToString(), transform);
+            }
+            if (random == 2)
+            {
+                if (switching[2] == 0)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player3.SetTrigger("Hit");
+
+                }
+                if (switching[2] == 1)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player3.SetTrigger("Hit");
+                }
+                if (switching[2] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player3.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player3.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText4(edamage.ToString(), transform);
+            }
         }
 
         if (player1.activeSelf == false && player2.activeSelf == true && player3.activeSelf == false)
@@ -476,8 +633,36 @@ public class battle : MonoBehaviour {
 
             npc.Hp[switching[1]] -= edamage;
             Monster.SetTrigger("Atk");
+            if (switching[1] == 0)
+            {
+                Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                Player2.SetTrigger("Hit");
 
-            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            }
+            if (switching[1] == 1)
+            {
+                Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                Player2.SetTrigger("Hit");
+            }
+            if (switching[1] == 2)
+            {
+                if (Dog_TransForm == true)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                    Player2.SetTrigger("Hit");
+                }
+                else
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                    Player2.SetTrigger("Hit");
+                }
+            }
+
+            FloatingTextController.CreateFloatingText3(edamage.ToString(), transform);
 
         }
 
@@ -493,14 +678,42 @@ public class battle : MonoBehaviour {
 
             npc.Hp[switching[2]] -= edamage;
             Monster.SetTrigger("Atk");
+            if (switching[2] == 0)
+            {
+                Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                Player3.SetTrigger("Hit");
 
-            FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            }
+            if (switching[2] == 1)
+            {
+                Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                Player3.SetTrigger("Hit");
+            }
+            if (switching[2] == 2)
+            {
+                if (Dog_TransForm == true)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                    Player3.SetTrigger("Hit");
+                }
+                else
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                    Player3.SetTrigger("Hit");
+                }
+            }
+            FloatingTextController.CreateFloatingText4(edamage.ToString(), transform);
 
         }
 
         if (player1.activeSelf == false && player2.activeSelf == true && player3.activeSelf == true)
         {
-            int random = Random.Range(1, 3);
+            int random = 50;
+            int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
             eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
@@ -509,17 +722,80 @@ public class battle : MonoBehaviour {
             edamage = npc.atk[i] + randomDamage;
             if (edamage <= 0) { edamage = 0; }
 
-            npc.Hp[random] -= edamage;
-            Monster.SetTrigger("Atk");
+            if (random >= randomTarget)
+            {
+                npc.Hp[switching[1]] -= edamage;
+                Monster.SetTrigger("Atk");
+                if (switching[1] == 0)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player2.SetTrigger("Hit");
 
-            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
-            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
+                }
+                if (switching[1] == 1)
+                {
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player2.SetTrigger("Hit");
+                }
+                if (switching[1] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player2.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player2.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText3(edamage.ToString(), transform);
+            }
+            else if (random < randomTarget)
+            {
+                npc.Hp[switching[2]] -= edamage;
+                if (switching[2] == 0)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player3.SetTrigger("Hit");
+
+                }
+                if (switching[2] == 1)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player3.SetTrigger("Hit");
+                }
+                if (switching[2] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player3.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player3.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText4(edamage.ToString(), transform);
+            }
 
         }
 
         if (player1.activeSelf == true && player2.activeSelf == false && player3.activeSelf == true)
         {
             int random = 50;
+            int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
             eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
@@ -527,19 +803,75 @@ public class battle : MonoBehaviour {
 
             edamage = npc.atk[i] + randomDamage;
             if (edamage <= 0) { edamage = 0; }
-
-            if (random >= Random.Range(1, 101))
-            {
-                npc.Hp[switching[0]] -= edamage;
-            }
-            else if (random < Random.Range(1, 101))
-            {
-                npc.Hp[switching[2]] -= edamage;
-            }
             Monster.SetTrigger("Atk");
 
-            if (random == 0) { FloatingTextController.CreateFloatingText2(edamage.ToString(), transform); }
-            if (random == 1) { FloatingTextController.CreateFloatingText3(edamage.ToString(), transform); }
+            if (random >= randomTarget)
+            {
+                npc.Hp[switching[0]] -= edamage;
+                if (switching[0] == 0)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player1.SetTrigger("Hit");
+
+                }
+                if (switching[0] == 1)
+                {
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char1.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player1.SetTrigger("Hit");
+                }
+                if (switching[0] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player1.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player1.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText2(edamage.ToString(), transform);
+            }
+            else if (random < randomTarget)
+            {
+                npc.Hp[switching[2]] -= edamage;
+                if (switching[2] == 0)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
+                    Player3.SetTrigger("Hit");
+
+                }
+                if (switching[2] == 1)
+                {
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                    Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
+                    Player3.SetTrigger("Hit");
+                }
+                if (switching[2] == 2)
+                {
+                    if (Dog_TransForm == true)
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
+                        Player3.SetTrigger("Hit");
+                    }
+                    else
+                    {
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = null;
+                        Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
+                        Player3.SetTrigger("Hit");
+                    }
+                }
+                FloatingTextController.CreateFloatingText4(edamage.ToString(), transform);
+            }
+
 
         }
 
@@ -881,6 +1213,8 @@ public class battle : MonoBehaviour {
         Nerd = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Nerd");
 
         Dog = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Dog");
+
+        Dog_Trnas = Resources.Load<RuntimeAnimatorController>("Battle_Resource/Animations/Dog_Trans");
 
         DiceAni_ = Resources.Load<RuntimeAnimatorController>("Battle_Resource/dice/DiceAni");
 

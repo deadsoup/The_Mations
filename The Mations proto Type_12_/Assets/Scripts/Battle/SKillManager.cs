@@ -428,13 +428,14 @@ public class SKillManager : MonoBehaviour
                 actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                 npc.actiongage -= 5f;
                 FloatingTextController.CreateFloatingText4("변신", transform);
-                playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Dog/Player_Dog_idle");
+                playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Dog/Player_HatzTransform_idle");
 
                 skillButton[0].onClick.RemoveAllListeners();
                 skillButton[0].onClick.AddListener(Dog_UniqueSkill2);
                 skillButton[0].name = "개 고유스킬2";
                 skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
 
+                Battle.Dog_TransForm = true;
                 SkillScene3.SetTrigger("Atk");
 
             }
