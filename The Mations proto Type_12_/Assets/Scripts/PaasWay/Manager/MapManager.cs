@@ -155,11 +155,11 @@ public class MapManager : MonoBehaviour
     {
         GameObject group = GameObject.Find("Pminimap");
 
-        float startX = -87.7f;
-        float startY = 22.2f;
+        float startX = -75.3f;
+        float startY = 57.2f;
 
-        float intervalX = 57f;
-        float intervalY = -39f;
+        float intervalX = 50.2f;
+        float intervalY = 34.9f;
 
         // 미니맵 정보 16개 세팅
         for (int i = 0; i < 16; i++)
@@ -216,6 +216,7 @@ public class MapManager : MonoBehaviour
         {
             GameManager.instance.StageInfos[currStage].FirstClear = true;
             QuestDirector.count += 1;
+
             
         }
 

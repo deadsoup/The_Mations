@@ -28,7 +28,7 @@ public class Door : MonoBehaviour
             collision.transform.position = (originPos.position - destPos);
 
             // 처음 세이프존 진입시 미니맵 클리어 체크
-            if(MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].ClearMap == false)
+            if (MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].ClearMap == false)
             {
                 MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].ClearMap = true;
             }
@@ -38,4 +38,5 @@ public class Door : MonoBehaviour
             Debug.Log("통로 이동");
         }
     }
+      
 }

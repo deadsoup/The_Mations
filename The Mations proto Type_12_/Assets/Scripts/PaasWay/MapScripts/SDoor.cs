@@ -74,19 +74,25 @@ public class SDoor : MonoBehaviour
             // 이벤트 트리거 체크
             MapManager.instance.CheckEventTrg();
         }
+       
     }
 
     // 갈림길에서 선택해서 통로이동
     public void SetNextPassage(int nextPassage)
     {
 
-        GameObject player = GameObject.Find("player");
+    
+        
+            GameObject player = GameObject.Find("Player");
 
-        MapManager.instance.currPassage = MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].nextPassage[nextPassage];
-        MapManager.instance.playerPos.position = (originPos.position - destPos);
-        MapManager.instance.CheckEventTrg();
+            MapManager.instance.currPassage = MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].nextPassage[nextPassage];
+            MapManager.instance.playerPos.position = (originPos.position - destPos);
+            MapManager.instance.CheckEventTrg();
 
-        //// 미니맵 p아이콘 이동
-        MapManager.instance.moveP(MapManager.instance.currPassage);
+            //// 미니맵 p아이콘 이동
+            MapManager.instance.moveP(MapManager.instance.currPassage);
+        
+     
     }
+
 }

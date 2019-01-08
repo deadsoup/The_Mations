@@ -18,6 +18,9 @@ public class MapInfomation : MonoBehaviour
    
     void Start()
     {
+        //맵인포메이션 맵카운트를 맵매니저스크립트 끝줄에 넣은뒤 해당번호를가지고 통로맵을 들어가고
+        //그 통로맵을 클리어 시 해당하는 번호에따라 맵매니저에서 또다른 번호를 조건으로 줘서
+        //해당 번호가되면 클리어한 구의 버튼을 삭제해준다!! 이러면 구현가능
         MapInfomation.Mapcount = -1;
         /*StageMgr = GameObject.Find("StageMgr");
         BG = GameObject.Find("Canvas").transform.Find("Intext").transform.Find("ButtonGroup").gameObject;

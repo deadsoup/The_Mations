@@ -29,5 +29,6 @@ public class BSDoor : MonoBehaviour
             MapManager.instance.CheckEventTrg();
             Debug.Log("통로 이동");
         }
+     
     }
 }

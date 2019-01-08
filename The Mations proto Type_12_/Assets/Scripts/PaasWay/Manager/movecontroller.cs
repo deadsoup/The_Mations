@@ -5,6 +5,8 @@ using UnityEngine;
 public class movecontroller : MonoBehaviour {
     bool lbutton = false;
     bool rbutton = false;
+
+    public Animation animation;
     
 
     private float moveSpeed = 10.0f;
@@ -28,15 +30,18 @@ public class movecontroller : MonoBehaviour {
     {
         rbutton = false;
     }
+
     // Update is called once per frame
     void Update () {
 
         if (lbutton)
         {
-            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
+            transform.rotation = new Quaternion(0, 180, 0, 0);
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
         }
         if(rbutton)
         {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
             transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
         }
 

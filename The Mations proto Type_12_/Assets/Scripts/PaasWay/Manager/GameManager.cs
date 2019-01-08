@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     // 통로 데이터 처리하는 변수묶음
     public List<StageInfo> StageInfos = new List<StageInfo>();
+    // 월드맵과 연결시켜주고 해당 번호에 해당하는 id 값을 불러오고 
+    //배틀씬에 들어가면 월드맵ID에따라 몬스터Id(랜덤),보상id 출력 부탁욤
 
     // 플레이어 마지막 위치 저장하는 변수
     public Vector3 lastPos;
