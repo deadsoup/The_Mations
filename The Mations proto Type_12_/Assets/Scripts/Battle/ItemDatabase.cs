@@ -142,7 +142,7 @@ public class Equip
         IconName = iconName;
         Stackable = stackable;
 
-        sprite = Resources.Load<Sprite>("Battle_Resource/Textures/" + iconName);
+        sprite = Resources.Load<Sprite>("item_image/" + iconName);
     }
 
     public Equip()

@@ -6,24 +6,7 @@ using System.IO;
 using LitJson;
 using UnityEngine.SceneManagement;
 
-[System.Serializable]
-public class Skill
-{
-    public int Id;
-    public Sprite sprite;
 
-    public Skill(int id)
-    {
-        Id = id;
-
-        sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/" + Id);
-    }
-    public Skill()
-    {
-        Id = -1;
-    }
-
-}
 
 public class SKillManager : MonoBehaviour
 {
@@ -32,6 +15,10 @@ public class SKillManager : MonoBehaviour
     public int stun_per;
     public int sleep_per;
     public int burn_per;
+    public int blood_per;
+    public int Allbuff_Per;
+    public int Strbuff_Per;
+
     private JsonData skilldata;
 
     bool[] P1_skillON = new bool[4];
@@ -41,9 +28,15 @@ public class SKillManager : MonoBehaviour
 
     public Button[] skillButton = new Button[4];
 
+    internal Animator SkillScene;
+    internal Animator SkillScene2;
+    internal Animator SkillScene3;
+    internal RuntimeAnimatorController SkillScene_Animator;
 
     Party party;
     npc Npc;
+    battle Battle;
+
     GameObject actionGage;
 
     GameObject SkillPanel;
@@ -53,6 +46,29 @@ public class SKillManager : MonoBehaviour
     public GameObject skill;
 
     public List<Skill> SkillList = new List<Skill>();
+    public List<Skill> SkillList2_save = new List<Skill>();
+
+    internal GameObject[] playerSprite = new GameObject[3];
+
+    
+
+    /*
+    void saveJson()
+    {
+        SkillList2_save.Add(new Skill(0, "파이로", 40,"20과 20", "적군", "단일", "화상", "불마법"));
+        SkillList2_save.Add(new Skill(1, "레인보우", 30, "없음", "아군", "단일", "없음", "자가버프마법"));
+        SkillList2_save.Add(new Skill(2, "악몽", 80,"없음", "적군", "단일", "수면", "수면마법"));
+        SkillList2_save.Add(new Skill(3, "마나링", 150, "없음", "아군", "광역", "없음","마나회복 마법"));
+        SkillList2_save.Add(new Skill(4, "버닝", 200, "없음",  "아군", "광역", "없음",  "광역버프"));
+        SkillList2_save.Add(new Skill(5, "온니 원", 100,"150", "적군", "단일", "없음", "뚝배기"));
+
+        JsonData jsonData = JsonMapper.ToJson(SkillList2_save);
+
+        File.WriteAllText(Application.streamingAssetsPath + "/SkillData.json", jsonData.ToString());
+    }
+   */
+
+
 
     public Skill SkillByID(int id)
     {
@@ -64,11 +80,20 @@ public class SKillManager : MonoBehaviour
         return null;
     }
 
-    void ContructSkill()
+    public void ContructSkill()
     {
         for (int i = 0; i < skilldata.Count; i++)
         {
-            SkillList.Add(new Skill((int)skilldata[i]["Id"]));
+            SkillList.Add(new Skill(
+                (int)skilldata[i]["Id"],
+                skilldata[i]["Name"].ToString(),
+                (int)skilldata[i]["Need_MP"],
+                skilldata[i]["Damage"].ToString(),
+                skilldata[i]["Target"].ToString(),
+                skilldata[i]["Attribute"].ToString(),
+                skilldata[i]["Abnomal"].ToString(),
+                skilldata[i]["Text"].ToString()
+                ));
         }
     }
 
@@ -94,7 +119,7 @@ public class SKillManager : MonoBehaviour
         skilldata = JsonMapper.ToObject(jsonString);
     }
 
-
+    public GameObject[] Effect = new GameObject[9];
 
     void Start()
     {
@@ -104,6 +129,15 @@ public class SKillManager : MonoBehaviour
 
         party = GameObject.Find("PartySystem").GetComponent<Party>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+        Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+
+        playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
+        playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
+        playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
+        SkillScene = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>();
+        SkillScene2 = GameObject.Find("SkillScene").transform.Find("SkillAnimator2").GetComponent<Animator>();
+        SkillScene3 = GameObject.Find("SkillScene").transform.Find("SkillAnimator3").GetComponent<Animator>();
+        SkillScene_Animator = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>().runtimeAnimatorController;
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
@@ -117,7 +151,7 @@ public class SKillManager : MonoBehaviour
         SkillPanel = GameObject.Find("Panel");
         Slotpanel = SkillPanel.transform.Find("slotPanel").gameObject;
 
-
+        //saveJson();
         //skilldata = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/SkillData.json"));
         load();
         ContructSkill();
@@ -166,6 +200,15 @@ public class SKillManager : MonoBehaviour
                     skillButton[0].name = "힘숨찐 고유스킬";
                     skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
                 }
+
+                if (battle.switching[num] == 2)
+                {
+                    skillButton[0].onClick.RemoveAllListeners();
+                    skillButton[0].onClick.AddListener(Dog_UniqueSkill);
+                    skillButton[0].name = "개 고유스킬";
+                    skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+                }
+
 
             }
 
@@ -294,6 +337,8 @@ public class SKillManager : MonoBehaviour
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
 
+                    SkillScene.SetTrigger("Atk");
+
                     if (npc.Hp[battle.switching[0]] >= (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]))
                     { npc.Hp[battle.switching[0]] = (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]); }
 
@@ -302,6 +347,18 @@ public class SKillManager : MonoBehaviour
 
                     if (npc.Hp[battle.switching[2]] >= (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                     { npc.Hp[battle.switching[2]] = (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]); }
+
+                    GameObject itemObj = Instantiate(Effect[0]);
+                    /*
+                    itemObj.transform.SetParent(slots[i].transform);
+
+                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                    //itemObj.transform.position = new Vector2(511, 249.6f);
+                    itemObj.transform.position = slots[i].transform.position;
+                    itemObj.name = itemToAdd.Name;
+                    */
+
+
                 }
                 else if (npc.Hp[battle.switching[0]] == (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) && npc.Hp[battle.switching[1]] == (npc.MaxHp[battle.switching[1]] + npc.Equip_MaxHp[battle.switching[1]]) && npc.Hp[battle.switching[2]] == (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
@@ -345,6 +402,9 @@ public class SKillManager : MonoBehaviour
                     Debug.Log("스턴 실패");
                     FloatingTextController.CreateFloatingText(40.ToString(), transform);
                 }
+
+                SkillScene2.SetTrigger("Atk");
+
             }
             else
             {
@@ -357,32 +417,274 @@ public class SKillManager : MonoBehaviour
         }
     }
 
+    public void Dog_UniqueSkill()
+    {
+        if (npc.Mp[2] >= 100)
+        {
+            if (npc.actiongage >= 5f)
+            {
+
+                npc.Mp[2] -= 100;
+                actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                npc.actiongage -= 5f;
+                FloatingTextController.CreateFloatingText4("변신", transform);
+                playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_HatzTransform_idle");
+
+                skillButton[0].onClick.RemoveAllListeners();
+                skillButton[0].onClick.AddListener(Dog_UniqueSkill2);
+                skillButton[0].name = "개 고유스킬2";
+                skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+
+                Battle.Dog_TransForm = true;
+                SkillScene3.SetTrigger("Atk");
+
+            }
+            else
+            {
+                Debug.Log("행동력 부족");
+            }
+        }
+        else
+        {
+            Debug.Log("마나 부족");
+        }
+    }
+
+    public void Dog_UniqueSkill2()
+    {
+        if (npc.Mp[2] >= 0)
+        {
+            if (npc.actiongage >= 5f)
+            {
+                Debug.Log("개 스킬 발동");
+                npc.Mp[2] -= 0;
+                actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                npc.actiongage -= 5f;
+                npc.Hp[battle.i] -= 40;
+            }
+            else
+            {
+                Debug.Log("행동력 부족");
+            }
+        }
+        else
+        {
+            Debug.Log("마나 부족");
+        }
+    }
+
+
+
+
     public void Skill_Noname(int id)
     {
         if (id == 1)
         {
-            Debug.Log("테스트스킬1");
+            if (npc.Mp[battle.c] >= 40)
+            {
+                burn_per = 100;
+                if (npc.actiongage >= 5f)
+                {
+                    if (burn_per >= Random.Range(1, 101))
+                    {
+                        npc.Mp[battle.c] -= 40;
+                        Battle.monsterAbnomal_burn = true;
+                        npc.unitCondition[battle.i].condition_Burn = true;
+                        npc.unitCondition[battle.i].left_Burn = 2;
+                        actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                        npc.actiongage -= 5f;
+                        Debug.Log("불탐 성공");
+                        FloatingTextController.CreateFloatingText("화상 !!", transform);
+                    }
+
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            else
+            {
+                Debug.Log("마나 부족");
+            }
+
         }
+
+
         if (id == 2)
         {
-            Debug.Log("테스트스킬2");
+            if (npc.Mp[battle.c] >= 30)
+            {
+                if (npc.actiongage >= 5f)
+                {
+                    npc.Mp[battle.c] -= 30;
+                    npc.unitCondition[battle.c].condition_StrBuff = true;
+                    npc.unitCondition[battle.c].left_StrBuff = 2;
+                    actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                    npc.BuffStr[battle.c] = 20;
+                    FloatingTextController.CreateFloatingText2("공격력 증가", transform);
+                }
+                else if (npc.BuffStr[battle.c] == 20)
+                {
+                    Debug.Log("이미 버프 상태");
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            
+            else
+            {
+                Debug.Log("마나 부족");
+            }
+
         }
+
+
         if (id == 3)
         {
-            Debug.Log("테스트스킬3");
+            if (npc.Mp[battle.c] >= 80)
+            {
+                sleep_per = 100;
+                if (npc.actiongage >= 5f)
+                {
+                    if (sleep_per >= Random.Range(1, 101))
+                    {
+                        npc.Mp[battle.c] -= 80;
+                        npc.unitCondition[battle.i].condition_Sleep = true;
+                        npc.unitCondition[battle.i].left_Sleep = 2;
+                        actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                        npc.actiongage -= 5f;
+                        Debug.Log("수면 성공");
+                        FloatingTextController.CreateFloatingText("수면 !!" + 40.ToString(), transform);
+                    }
+                    else
+                    {
+                        npc.Mp[battle.c] -= 100;
+                        npc.actiongage -= 5f;
+                        Debug.Log("수면 실패");
+                    }
+
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            else
+            {
+                Debug.Log("마나 부족");
+            }
         }
+
+
+
         if (id == 4)
         {
-            Debug.Log("테스트스킬4");
+            if (npc.Mp[0] >= 150)
+            {
+                if (npc.actiongage >= 5f)
+                {
+                    if (npc.Mp[battle.switching[0]] < (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]])
+                        || npc.Mp[battle.switching[1]] < (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]])
+                        || npc.Mp[battle.switching[2]] < (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
+                    {
+                        npc.Mp[0] -= 150;
+                        npc.Mp[battle.switching[0]] += 50;
+                        npc.Mp[battle.switching[1]] += 50;
+                        npc.Mp[battle.switching[2]] += 50;
+                        actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                        npc.actiongage -= 5f;
+
+
+                        if (npc.Mp[battle.switching[0]] >= (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]))
+                        { npc.Mp[battle.switching[0]] = (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]); }
+
+                        if (npc.Mp[battle.switching[1]] >= (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]))
+                        { npc.Mp[battle.switching[1]] = (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]); }
+
+                        if (npc.Mp[battle.switching[2]] >= (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
+                        { npc.Mp[battle.switching[2]] = (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]); }
+
+                    }
+                    else if (npc.Mp[battle.switching[0]] == (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]) && npc.Mp[battle.switching[1]] == (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]) && npc.Mp[battle.switching[2]] == (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
+                    {
+                        Debug.Log("모든 캐릭터 풀마나");
+                    }
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            else
+            {
+                Debug.Log("마나 부족");
+            }
         }
+
+
         if (id == 5)
         {
-            Debug.Log("테스트스킬5");
+            if (npc.Mp[battle.c] >= 200)
+            {
+                if (npc.actiongage >= 5f)
+                {
+                    npc.Mp[battle.c] -= 200;
+                    npc.unitCondition[battle.c].condition_AllBuff = true;
+                    npc.unitCondition[battle.c].left_AllBuff = 2;
+                    actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                    npc.Allbuff[battle.switching[0]] = 20;
+                    npc.Allbuff[battle.switching[1]] = 20;
+                    npc.Allbuff[battle.switching[2]] = 20;
+                    FloatingTextController.CreateFloatingText2("전 능력 강화", transform);
+                    FloatingTextController.CreateFloatingText3("전 능력 강화", transform);
+                    FloatingTextController.CreateFloatingText4("전 능력 강화", transform);
+
+
+                }
+                else if (npc.Allbuff[battle.c] == 20)
+                {
+                    Debug.Log("이미 버프 상태");
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            else
+            {
+                Debug.Log("마나 부족");
+            }
         }
+
+
         if (id == 6)
         {
-            Debug.Log("테스트스킬6");
+            if (npc.Mp[battle.c] >= 100)
+            {
+                if (npc.actiongage >= 5f)
+                {
+                    npc.Mp[battle.c] -= 100;
+                    actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                    npc.actiongage -= 5f;
+                    npc.Hp[battle.i] -= 150;
+                    Debug.Log("수면 성공");
+                    FloatingTextController.CreateFloatingText("싱귤러 스크라이크" + 150.ToString(), transform);
+                }
+                else
+                {
+                    Debug.Log("행동력 부족");
+                }
+            }
+            else
+            {
+                Debug.Log("마나 부족");
+            }
         }
+
+
         if (id == 7)
         {
             Debug.Log("테스트스킬7");
@@ -395,38 +697,40 @@ public class SKillManager : MonoBehaviour
 
     }
 
-    public void Skill2_Noname()
-    {
-        Debug.Log("테스트스킬2");
-    }
 
-    public void Skill3_Noname()
-    {
-        Debug.Log("테스트스킬3");
-    }
+}
 
-    public void Skill4_Noname()
-    {
-        Debug.Log("테스트스킬4");
-    }
-    public void Skill5_Noname()
-    {
-        Debug.Log("테스트스킬5");
-    }
+[System.Serializable]
+public class Skill
+{
+    public int Id;
+    public string Name;
+    public int Need_MP;
+    public string Damage;
+    public string Target;
+    public string Attribute;
+    public string Abnomal; 
+    public string Text;
 
-    public void Skill6_Noname()
-    {
-        Debug.Log("테스트스킬6");
-    }
 
-    public void Skill7_Noname()
-    {
-        Debug.Log("테스트스킬7");
-    }
+    public Sprite sprite;
 
-    public void Skill8_Noname()
+    public Skill(int id, string name, int need_mp, string damage, string target, string attribute, string abnomal, string text)
     {
-        Debug.Log("테스트스킬8");
+        Id = id;
+        Name = name;
+        Need_MP = need_mp;
+        Damage = damage;
+        Target = target;
+        Attribute = attribute;
+        Abnomal = abnomal;
+        Text = text;
+
+        sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/" + Id);
+    }
+    public Skill()
+    {
+        Id = -1;
     }
 
 }

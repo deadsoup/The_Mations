@@ -22,6 +22,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         inv = GameObject.Find("Inven").GetComponent<Inven>();
         invenItem = GameObject.Find("Inven");
 
+        amount = 1;
     }
 
     public void use()

@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{1F6CFAF8-73EE-B66C-80D7-B86922364125}</ProjectGuid>
+    <ProjectGuid>{0A51EE75-8624-E250-B103-6CCBD2FBFDC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -61,161 +61,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AchievementStepTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AchievementUnlockedTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AdCompleteTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AdOfferTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AdSkipTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AdStartTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\AnalyticsEventTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\ChatMessageSentTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\CutsceneSkipTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\CutsceneStartTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\FirstInteractionTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\GameOverTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\GameStartTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\IAPTransactionTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\ItemAcquiredTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\ItemSpentTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelCompleteTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelFailTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelQuitTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelSkipTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelStartTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\LevelUpTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\PostAdActionTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\PushNotificationClickTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\PushNotificationEnableTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\ScreenVisitTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\SocialShareAcceptTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\SocialShareTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\StoreItemClickTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\StoreOpenedTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\TutorialCompleteTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\TutorialSkipTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\TutorialStartTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\TutorialStepTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.analytics@3.2.2\Tests\Editor\Unity.Analytics.StandardEvents\UserSignupTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\AssemblyInfo.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\External\SemVersion.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\External\SemVersionExtension.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Common\ApplicationUtil.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Common\OperationSignal.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Common\Resources.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Common\ThreadedDelay.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\IAddOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\IBaseOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\IListOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\IOperationFactory.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\IRemoveOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Interfaces\ISearchOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\OperationFactory.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\Package.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageAssetPostprocessor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageCollection.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageError.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageFilter.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageGroupOrigins.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageInfo.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageInfoListExtensions.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageJsonHelper.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageListExtensions.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageOrigin.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageSearchFilter.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageState.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Packages\PackageTag.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmAddOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmBaseOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmListOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmOperationFactory.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmRemoveOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\Services\Upm\UpmSearchOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Common\Alert.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Common\LoadingSpinner.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Common\PopupField.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Common\UIUtils.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Common\VersionItem.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\Interfaces\IPackageManagerExtension.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageAddFromUrlField.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageDetails.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageFiltering.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageGroup.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageItem.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageList.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageManagerExtensions.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageManagerPrefs.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageManagerToolbar.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageManagerWindow.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageSearchToolbar.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Sources\UI\PackageStatusBar.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\AssemblyInfo.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Common\PackageSets.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Common\UITests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Mock\MockAddOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Mock\MockListOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Mock\MockOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Mock\MockRemoveOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Mock\MockSearchOperation.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\MockOperationFactory.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Packages\PackageBaseTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Packages\PackageCollectionTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Packages\PackageInfoTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Packages\PackageSearchTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\Services\Packages\PackageTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\UI\PackageDetailsTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Tests\Editor\UI\PackageManagerWindowTests.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\DropdownOptionListDrawer.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\EditorCoroutine.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\GlyphInfoDrawer.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\KerningPairDrawer.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\SpriteInfoDrawer.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TextAlignmentDrawer.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_BaseEditorPanel.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_BaseShaderGUI.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_BitmapShaderGUI.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_ColorGradientAssetMenu.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_ColorGradientEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_DropdownEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_EditorPanel.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_EditorUtility.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_FontAssetEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_InputFieldEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_MeshRendererEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_PackageUtilities.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_PostBuildProcessHandler.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_ProjectTextSettings.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_ResourcesLoader.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SDFShaderGUI.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SettingsEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SpriteAssetEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SpriteAssetImporter.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SpriteAssetMenu.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_StyleAssetMenu.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_StyleSheetEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SubMesh_Editor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_SubMeshUI_Editor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_UiEditorPanel.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMP_UIStyleManager.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_ContextMenus.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_CreateObjectMenu.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_EditorShaderUtilities.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_FontAssetCreatorWindow.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_FontPlugin.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_SortingLayerHelper.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_TextContainerEditor.cs" />
-    <Compile Include="Assets\Library\PackageCache\com.unity.textmeshpro@1.3.0\Scripts\Editor\TMPro_TexturePostProcessor.cs" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageGroup.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageSearchToolbar.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageAddFromUrlField.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Styles\Main_Light.uss" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageStatusBar.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageManagerToolbar.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageManagerWindow.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Styles\Main_Dark.uss" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageItem.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\Alert.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageDetails.uxml" />
-    <None Include="Assets\Library\PackageCache\com.unity.package-manager-ui@2.0.3\Editor\Resources\Templates\PackageList.uxml" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -444,62 +305,44 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements.Editor">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="LitJson">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/LitJson.dll</HintPath>
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Assets/LitJson.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
+    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Assets/JMO Assets/Editor/JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Assets/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    <Reference Include="JMOAssets">
+      <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
@@ -531,20 +374,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{919BF9EB-017C-AADB-12BD-E3D96A2FE67B}</Project>
+      <Project>{1F31911F-B4F4-930A-03C8-9C2A5A698E5C}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{3B8D530E-BDEB-885B-3F90-CFFEC34C4A99}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
-      <Project>{DAD482FF-CB62-F979-8F66-710772B45FA3}</Project>
-      <Name>Unity.CollabProxy.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
-      <Project>{E0350C90-9F9D-618C-A395-A4FF1B684079}</Project>
-      <Name>Unity.Analytics.DataPrivacy</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

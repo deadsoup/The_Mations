@@ -8,8 +8,10 @@ public class Party : MonoBehaviour
 {
     internal bool[] player = new bool[6]; //  캐릭터 셀렉트에서 사용하면 될듯
     internal GameObject[] playerSlot = new GameObject[3]; // 캐릭터 슬롯 즉 전투캐릭터슬롯 1,2,3 말하는거임
-    internal GameObject[] playerSprite = new GameObject[3]; // 전투캐릭터1,2,3의 스프라이트
+    public GameObject[] playerSprite = new GameObject[3]; // 전투캐릭터1,2,3의 스프라이트
     public Sprite[] CharSprite = new Sprite[3]; // 저장시킨 스프라이트 이미지들  | playerSprite로 가져올거임
+    public int CharSelectNum;
+
     public void selectPlayer(int num)
     {
         for (int i = 0; i < player.Length; i++)
@@ -17,7 +19,7 @@ public class Party : MonoBehaviour
             if (i == num)
             {
                 player[i] = true;
-
+                CharSelectNum++;
                 for (int PS = 0; PS < playerSlot.Length; PS++)
                 {
                     //if (playerSlot[PS].GetComponent<PlayerSlot1>().slotCharge == false)
@@ -27,7 +29,11 @@ public class Party : MonoBehaviour
                         battle.switching[PS] = num;
                         if (SceneManager.GetActiveScene().name == "DH_Battle")
                         {
+                            Debug.Log("캐릭터 스프라이트 호출");
                             playerSprite[PS].GetComponent<Image>().sprite = CharSprite[num];
+                            Debug.Log(PS);
+                            Debug.Log(playerSprite[PS].GetComponent<Image>().sprite);
+                            Debug.Log(CharSprite[num]);
                         }
                         break;
                     }
@@ -46,7 +52,7 @@ public class Party : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerSlot[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Getta1").gameObject;
         playerSlot[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
@@ -55,7 +61,22 @@ public class Party : MonoBehaviour
         playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
         playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
         playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
-        //print(playerSprite[0].GetComponent<Image>().sprite);
+        print(playerSprite[0].GetComponent<Image>().sprite);
+
+        
+        GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+        Image.SetActive(true);
+        GameObject Image2 = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
+        Image2.SetActive(true);
+        GameObject Image3 = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
+        Image3.SetActive(true);
+        
+
+
+
+        //selectPlayer(2);
+        //selectPlayer(1);
+        //selectPlayer(0);
     }
 
     // Update is called once per frame

@@ -15,6 +15,12 @@ public struct UnitCondition
 
     public bool condition_Blood;
     public int left_Blood;
+
+    public bool condition_StrBuff;
+    public int left_StrBuff;
+
+    public bool condition_AllBuff;
+    public int left_AllBuff;
 }
 
 public class npc : MonoBehaviour {
@@ -27,6 +33,13 @@ public class npc : MonoBehaviour {
     public static int[] MaxMp = new int[50];
     public static int[] Mp = new int[50];
     public static int[] Str = new int[50];
+
+    public static int[] BuffStr = new int[50];
+    public static int[] BuffWis = new int[50];
+
+
+    public static int[] Allbuff = new int[50];
+
     public static int[] Dex = new int[50];
     public static int[] Wis = new int[50];
 
