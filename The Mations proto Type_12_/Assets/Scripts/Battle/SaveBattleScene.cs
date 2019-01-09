@@ -13,6 +13,10 @@ public class SaveBattleScene : MonoBehaviour
 
     private JsonData battle_Load_System;
 
+    GameObject[] player = new GameObject[3];
+
+
+
     Party party;
     battle Battle;
     Inven inven;
@@ -178,12 +182,16 @@ public class SaveBattleScene : MonoBehaviour
                     Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
                     continue;
                 }
-                Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                else{ break; }
             }
+
             Debug.Log("포문");
-            ///
-            /// 플레이어 2의 스킬 저장
-            ///
+        }
+        ///
+        /// 플레이어 2의 스킬 저장
+        ///
+        for (int i = 0; i < 15; i++)
+        {
             if (Npc.SkillTriggers[battle.switching[1]].skill[i] == true)
             {
                 P1_skilldata[i] = Npc.SkillTriggers[battle.switching[1]].skill[i];
@@ -208,10 +216,14 @@ public class SaveBattleScene : MonoBehaviour
                     Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
                     continue;
                 }
+                else { break; }
             }
-            ///
-            /// 플레이어 3의 스킬 저장
-            ///
+        }
+        ///
+        /// 플레이어 3의 스킬 저장
+        ///
+        for (int i = 0; i < 15; i++)
+        {
             if (Npc.SkillTriggers[battle.switching[2]].skill[i] == true)
             {
                 P1_skilldata[i] = Npc.SkillTriggers[battle.switching[2]].skill[i];
@@ -219,7 +231,6 @@ public class SaveBattleScene : MonoBehaviour
                 {
                     P3_skillID[0] = i;
                     Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
                     continue;
                 }
                 if (P3_skillID[0] != -1 && P3_skillID[1] == -1)
@@ -236,13 +247,15 @@ public class SaveBattleScene : MonoBehaviour
                     Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
                     continue;
                 }
+                else { break; }
             }
         }
-
-
+        
 
         Debug.Log("저장");
-        battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
+        if (player[0].activeSelf == true)
+        {
+            battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
                         npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
                         npc.ArchivePoint[0],
                         npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
@@ -252,21 +265,48 @@ public class SaveBattleScene : MonoBehaviour
                         invenslots4_ID, invenslots4_Amount,
                         P1_skillID[0],
                         P1_skillID[1],
-                        P1_skillID[2]
+                        P1_skillID[2],
+                        npc.SkillPoint
                         ));
-        battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
-                            npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
-                            npc.ArchivePoint[0],
-                            npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
-                            P2_invenslots1_ID, P2_invenslots1_Amount,
-                            P2_invenslots2_ID, P2_invenslots2_Amount,
-                            P2_invenslots3_ID, P2_invenslots3_Amount,
-                            P2_invenslots4_ID, P2_invenslots4_Amount,
-                            P2_skillID[0],
-                            P2_skillID[1],
-                            P2_skillID[2]
-                            ));
-        battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
+        }
+        else if (player[0].activeSelf == false)
+        {
+            battleSave.Add(new BattleInfo(9, "없음", 0, 0,0,0,0,0,
+                        npc.ArchivePoint[0],
+                        0,0,0 , 0,0,-1,0, 0, -1, 0, -1,0,0,0,0, npc.SkillPoint
+                        ));
+
+        }
+
+        if (player[1].activeSelf == true)
+        {
+            battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
+                                npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
+                                npc.ArchivePoint[0],
+                                npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
+                                P2_invenslots1_ID, P2_invenslots1_Amount,
+                                P2_invenslots2_ID, P2_invenslots2_Amount,
+                                P2_invenslots3_ID, P2_invenslots3_Amount,
+                                P2_invenslots4_ID, P2_invenslots4_Amount,
+                                P2_skillID[0],
+                                P2_skillID[1],
+                                P2_skillID[2],
+                                npc.SkillPoint
+                                ));
+        }
+        else if (player[1].activeSelf == false)
+        {
+            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                        npc.ArchivePoint[0],
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                        ));
+
+        }
+
+
+        if (player[2].activeSelf == true)
+        {
+            battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
                             npc.MaxMp[battle.switching[2]], npc.Mp[battle.switching[2]], npc.Str[battle.switching[2]], npc.Wis[battle.switching[2]],
                             npc.ArchivePoint[0],
                             npc.Equip_MaxHp[battle.switching[2]], npc.Equip_MaxMp[battle.switching[2]], npc.Equip_Str[battle.switching[2]], npc.Equip_Wis[battle.switching[2]],
@@ -276,9 +316,18 @@ public class SaveBattleScene : MonoBehaviour
                             P3_invenslots4_ID, P3_invenslots4_Amount,
                             P3_skillID[0],
                             P3_skillID[1],
-                            P3_skillID[2]
+                            P3_skillID[2],
+                            npc.SkillPoint
                             ));
+        }
+        else if (player[2].activeSelf == false)
+        {
+            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                        npc.ArchivePoint[0],
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                        ));
 
+        }
 
         if (!Directory.Exists(Application.persistentDataPath + "/Json"))
         {
@@ -295,13 +344,6 @@ public class SaveBattleScene : MonoBehaviour
 
 
     }
-
-
-
-
-
-
-
 
     public void loadJson()
     {
@@ -332,7 +374,8 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Inven4_Amount"],
                     (int)battle_Load_System[i]["Skill1_ID"],
                     (int)battle_Load_System[i]["Skill2_ID"],
-                    (int)battle_Load_System[i]["Skill3_ID"]
+                    (int)battle_Load_System[i]["Skill3_ID"],
+                    (int)battle_Load_System[i]["SkillPoint"]
                     ));
         }
         //
@@ -341,14 +384,24 @@ public class SaveBattleScene : MonoBehaviour
         battle.switching[1] = battleLoad[1].Id;
         battle.switching[2] = battleLoad[2].Id;
 
+        npc.SkillPoint = battleLoad[0].SkillPoint;
+
         npc.Equip_Str[battle.switching[0]] = 0; // 장비의 능력치를 0으로 바꾼다.
         npc.Equip_Wis[battle.switching[0]] = 0;
 
-        npc.Equip_Str[battle.switching[1]] = 0;
-        npc.Equip_Wis[battle.switching[1]] = 0;
+        party.num = battleLoad[0].Id;
 
-        npc.Equip_Str[battle.switching[2]] = 0;
-        npc.Equip_Wis[battle.switching[2]] = 0;
+        if (player[1].activeSelf == true)
+        {
+            npc.Equip_Str[battle.switching[1]] = 0;
+            npc.Equip_Wis[battle.switching[1]] = 0;
+        }
+
+        if (player[2].activeSelf == true)
+        {
+            npc.Equip_Str[battle.switching[2]] = 0;
+            npc.Equip_Wis[battle.switching[2]] = 0;
+        }
 
 
         for (int i = 0; i < battleLoad.Count; i++)
@@ -365,75 +418,94 @@ public class SaveBattleScene : MonoBehaviour
 
 
 
-        for (int Num = 0; Num < battleLoad.Count; Num++)
+        for (int Num = 0; Num < battleLoad.Count; Num++) // 0번 1번 2번
         {
             //인벤토리1번
             if (battleLoad[Num].Inven1 > 56) //
             {
                 for (int i = 0; i < battleLoad[Num].Inven1_Amount; i++)
                 {
-                    inven.AddItem(battleLoad[Num].Inven1);
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
+                    if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
+                    if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                     Debug.Log("아이템 생성");
                 }
             }
             else if (battleLoad[Num].Inven1 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                inven.AddItem(battleLoad[Num].Inven1);
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
+                if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
+                if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                 Debug.Log("아이템 생성");
             }
+
+
             //인벤토리2번
             if (battleLoad[Num].Inven2 > 56)
             {
                 for (int i = 0; i < battleLoad[Num].Inven2_Amount; i++)
                 {
-                    inven.AddItem(battleLoad[Num].Inven2);
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
+                    if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
+                    if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                     Debug.Log("아이템 생성2");
                 }
             }
             else if (battleLoad[Num].Inven2 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                inven.AddItem(battleLoad[Num].Inven2);
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
+                if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
+                if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                 Debug.Log("아이템 생성2");
 
             }
+
+
             //인벤토리3번
             if (battleLoad[Num].Inven3 > 56)
             {
                 for (int i = 0; i < battleLoad[Num].Inven3_Amount; i++)
                 {
-                    inven.AddItem(battleLoad[Num].Inven3);
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven3);
+                    if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven3); }
+                    if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven3); }
                     Debug.Log("아이템 생성3");
                 }
             }
             else if (battleLoad[Num].Inven3 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                inven.AddItem(battleLoad[Num].Inven3);
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven3);
+                if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven3); }
+                if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven3); }
                 Debug.Log("아이템 생성3");
 
             }
+
 
             //인벤토리4번
             if (battleLoad[Num].Inven4 > 56)
             {
                 for (int i = 0; i < battleLoad[Num].Inven4_Amount; i++)
                 {
-                    inven.AddItem(battleLoad[Num].Inven4);
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
+                    if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
+                    if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                     Debug.Log("아이템 생성4");
                 }
             }
             else if (battleLoad[Num].Inven4 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                inven.AddItem(battleLoad[Num].Inven4);
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
+                if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
+                if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                 Debug.Log("아이템 생성4");
 
             }
         }
-
-
 
 
         Debug.Log(battleLoad[0].Equip_Str);
@@ -442,12 +514,33 @@ public class SaveBattleScene : MonoBehaviour
 
         for (int Num = 0; Num < battleLoad.Count; Num++)
         {
-            if (battleLoad[Num].Skill1_ID > -1)
-                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill1_ID] = true;
-            if (battleLoad[Num].Skill2_ID > -1)
-                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill2_ID] = true;
-            if (battleLoad[Num].Skill3_ID > -1)
-                Npc.SkillTriggers[Num].skill[battleLoad[Num].Skill3_ID] = true;
+            if (Num == 0)
+            {
+                if (battleLoad[Num].Skill1_ID > -1)
+                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
+                if (battleLoad[Num].Skill2_ID > -1)
+                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
+                if (battleLoad[Num].Skill3_ID > -1)
+                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+            }
+            if (Num == 1)
+            {
+                if (battleLoad[Num].Skill1_ID > -1)
+                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
+                if (battleLoad[Num].Skill2_ID > -1)
+                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
+                if (battleLoad[Num].Skill3_ID > -1)
+                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+            }
+            if (Num == 2)
+            {
+                if (battleLoad[Num].Skill1_ID > -1)
+                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
+                if (battleLoad[Num].Skill2_ID > -1)
+                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
+                if (battleLoad[Num].Skill3_ID > -1)
+                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+            }
         }
         /*
         for (int Num = 0; Num < 10; Num++)
@@ -492,6 +585,11 @@ public class SaveBattleScene : MonoBehaviour
     
         party = GameObject.Find("PartySystem").GetComponent<Party>();
 
+        player[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+        player[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
+        player[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
+
+
         invenslot[0] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
         invenslot[1] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
         invenslot[2] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
@@ -516,10 +614,20 @@ public class SaveBattleScene : MonoBehaviour
         P1_skillID[0] = -1;
         P1_skillID[1] = -1;
         P1_skillID[2] = -1;
+
+        P2_skillID[0] = -1;
+        P2_skillID[1] = -1;
+        P2_skillID[2] = -1;
+
+        P3_skillID[0] = -1;
+        P3_skillID[1] = -1;
+        P3_skillID[2] = -1;
         battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
         //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
         //load();
         loadJson();
+        print("현재 첫 캐릭터의 아이디는 무엇"+party.num);
+        party.playerSelect1(party.num);
         //Battle.chaneGetta1();
     }
 
@@ -563,9 +671,12 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
 
     public int Skill3_ID;
     //public bool Skill3_Active;
+
+    public int SkillPoint;
+
     public BattleInfo(int id, string name, int maxhp, int hp, int maxmp, int mp, int str, int wis, int archivepoint, int equip_maxhp, int equip_maxmp, int equip_str, int equip_wis,
                     int inven1, int inven1_amount, int inven2, int inven2_amount, int inven3, int inven3_amount, int inven4, int inven4_amount,
-                    int skill1_id, int skill2_id, int skill3_id)
+                    int skill1_id, int skill2_id, int skill3_id, int skillpoint)
     {
         Id = id;
         Name = name;
@@ -602,6 +713,8 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
 
         Skill3_ID = skill3_id;
         //Skill3_Active = skill3_active;
+
+        SkillPoint = skillpoint;
 
     }
 

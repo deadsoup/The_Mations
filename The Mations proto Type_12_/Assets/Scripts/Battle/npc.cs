@@ -23,6 +23,7 @@ public struct UnitCondition
     public int left_AllBuff;
 }
 
+
 public class npc : MonoBehaviour {
 
 
@@ -53,6 +54,8 @@ public class npc : MonoBehaviour {
     public static int[] item1 = new int[6];
     public static int[] item2 = new int[6];
 
+    public static int SkillPoint;
+
     public struct skillTrigger
     {
         public bool[] skill; // 스킬의 개수
@@ -70,11 +73,6 @@ public class npc : MonoBehaviour {
     public  static UnitCondition[] unitCondition = new UnitCondition[50];
 
     
-
-    
-
-    //\uC544\uB9AC\uC218 아리수
-
 
     public static float actiongage = 10.0f;
     public static float eActiongage = 10.0f;

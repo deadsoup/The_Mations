@@ -21,20 +21,13 @@ public class DataIO : MonoBehaviour
         else if (instance != this)
             Destroy(this.gameObject);
 
-        DontDestroyOnLoad(this.gameObject);
-
         StartCoroutine(Process("StagelnfoReal.xml"));
-    }
 
-    private void Start()
-    {
- 
-        
 
     }
 
     // 데이터저장
-    public static void Write(List<StageInfo> StageInfo, string filePath)
+    public void Write(List<StageInfo> StageInfo, string filePath)
     {
         XmlDocument Document = new XmlDocument();
         XmlElement ItemListElement = Document.CreateElement("StageInfo");
@@ -46,19 +39,31 @@ public class DataIO : MonoBehaviour
         {
             XmlElement StageElement = Document.CreateElement("StageList");
 
-            StageElement.SetAttribute("Index",index.ToString());
+            StageElement.SetAttribute("Index", index.ToString());
             StageElement.SetAttribute("StartPassage", stageData.startPassageIdx.ToString());
             StageElement.SetAttribute("EndPassage", stageData.endPassageIdx.ToString());
             StageElement.SetAttribute("BackgroundName", stageData.backgroundResources);
             StageElement.SetAttribute("MinimapName", stageData.minimapResources);
 
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 3; i++)
+            {
+                StageElement.SetAttribute("MonsterNum_" + i.ToString(), stageData.MonsterList[i].ToString());
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                StageElement.SetAttribute("BranchiText_" + i.ToString(), stageData.BranchiText[i]);
+            }
+
+            for (int i = 0; i < 16; i++)
             {
                 StageElement.SetAttribute("PassageName_" + i.ToString(), stageData.passageInfos[i].name);
                 StageElement.SetAttribute("prevePassage_" + i.ToString(), stageData.passageInfos[i].prevPassage.ToString());
-                for(int j = 0; j < 3; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    StageElement.SetAttribute("nextPassage_" + i.ToString() + "_" + j.ToString(), stageData.passageInfos[i].nextPassage[j].ToString());
+                    if (stageData.passageInfos[i].nextPassage.Count > j)
+                        StageElement.SetAttribute("nextPassage_" + i.ToString() + "_" + j.ToString(), stageData.passageInfos[i].nextPassage[j].ToString());
+                    else
+                        StageElement.SetAttribute("nextPassage_" + i.ToString() + "_" + j.ToString(), (-1).ToString());
                 }
             }
 
@@ -66,7 +71,10 @@ public class DataIO : MonoBehaviour
             index++;
             ItemListElement.AppendChild(StageElement);
         }
-        Document.Save(filePath);
+
+        string filename = SetStr(filePath);
+
+        Document.Save(filename);
     }
 
     // 데이터 읽기
@@ -107,6 +115,18 @@ public class DataIO : MonoBehaviour
                     StageInfo.backgroundResources = child.Attributes.GetNamedItem("BackgroundName").Value;
                     StageInfo.minimapResources = child.Attributes.GetNamedItem("MinimapName").Value;
                     StageInfo.FirstClear = false;
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int temp = int.Parse(child.Attributes.GetNamedItem("MonsterNum_" + i.ToString()).Value);
+                        if (temp != -1)
+                            StageInfo.MonsterList.Add(temp);
+                    }
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        StageInfo.BranchiText.Add(child.Attributes.GetNamedItem("BranchiText_" + i.ToString()).Value);
+                    }
 
                     for (int i = 0; i < 16; i++)
                     {
@@ -159,6 +179,32 @@ public class DataIO : MonoBehaviour
 
             //Debug.Log("Read Content :" + www.text);
             Read(www.text);
+        }
+    }
+
+
+    private string SetStr(string fileName)
+    {
+        //strPath += ("file:///");
+        string strPath = string.Empty;
+
+#if (UNITY_EDITOR || UNITY_STANDALONE_WIN) 
+        {
+
+            strPath += (Application.streamingAssetsPath + "/" + fileName);
+        }
+#elif UNITY_ANDROID
+            strPath = "jar:file://" + Application.dataPath + "!/assets/" + fileName;
+#endif
+        {
+            //WWW www = new WWW(strPath);
+
+            //while (!www.isDone)
+            //{
+            //    Debug.Log("데이터로드중");
+            //}
+
+            return strPath;
         }
     }
 }

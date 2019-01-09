@@ -288,39 +288,30 @@ public class SKillManager : MonoBehaviour
 
     public void UniqueSkill_Set(int num)
     {
-        for (int i = 0; i < party.playerSlot.Length; i++)
+        if (num == 0)
         {
-            if (battle.switching[i] == battle.switching[num])
-            {
-                if (battle.switching[num] == 0)
-                {
-                    skillButton[0].onClick.RemoveAllListeners();
-                    skillButton[0].onClick.AddListener(Idol_UniqueSkill);
-                    skillButton[0].name = "아이돌 고유스킬";
-                    skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
-                }
-
-                if (battle.switching[num] == 1)
-                {
-                    skillButton[0].onClick.RemoveAllListeners();
-                    skillButton[0].onClick.AddListener(Nerd_UniqueSkill);
-                    skillButton[0].name = "힘숨찐 고유스킬";
-                    skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
-                }
-
-                if (battle.switching[num] == 2)
-                {
-                    skillButton[0].onClick.RemoveAllListeners();
-                    skillButton[0].onClick.AddListener(Dog_UniqueSkill);
-                    skillButton[0].name = "개 고유스킬";
-                    skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
-                }
-
-
-            }
-
-
+            skillButton[0].onClick.RemoveAllListeners();
+            skillButton[0].onClick.AddListener(Idol_UniqueSkill);
+            skillButton[0].name = "아이돌 고유스킬";
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
         }
+
+        if (num == 1)
+        {
+            skillButton[0].onClick.RemoveAllListeners();
+            skillButton[0].onClick.AddListener(Nerd_UniqueSkill);
+            skillButton[0].name = "힘숨찐 고유스킬";
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+        }
+
+        if (num == 2)
+        {
+            skillButton[0].onClick.RemoveAllListeners();
+            skillButton[0].onClick.AddListener(Dog_UniqueSkill);
+            skillButton[0].name = "개 고유스킬";
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+        }
+
 
     }
 
@@ -535,7 +526,21 @@ public class SKillManager : MonoBehaviour
                 actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                 npc.actiongage -= 5f;
                 FloatingTextController.CreateFloatingText4("변신", transform);
-                playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_HatzTransform_idle");
+
+                if (playerSprite[0].GetComponent<Image>().sprite == Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_Hatz_idle"))
+                {
+                    playerSprite[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_HatzTransform_idle");
+                }
+
+                if (playerSprite[1].GetComponent<Image>().sprite == Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_Hatz_idle"))
+                {
+                    playerSprite[1].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_HatzTransform_idle");
+                }
+
+                if (playerSprite[2].GetComponent<Image>().sprite == Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_Hatz_idle"))
+                {
+                    playerSprite[2].GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharAnimation/Hearts/Player_HatzTransform_idle");
+                }
 
                 skillButton[0].onClick.RemoveAllListeners();
                 skillButton[0].onClick.AddListener(Dog_UniqueSkill2);

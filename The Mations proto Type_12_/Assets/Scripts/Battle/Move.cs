@@ -9,6 +9,8 @@ public class Move : MonoBehaviour {
 
     Player player;
 
+    GameObject[] playerSlot = new GameObject[3];
+
     int move;
     int battlecount;
 
@@ -38,6 +40,8 @@ public class Move : MonoBehaviour {
     public GameObject charHp3;
     public GameObject charMp3;
 
+    public static int mobIdx;
+
 
     GameObject mobHp;
 
@@ -54,15 +58,23 @@ public class Move : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        playerSlot[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+        playerSlot[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
+        playerSlot[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
         starbattle = GetComponent<battle>();
         player = GetComponent<Player>();
         battle.battleaction = false;
 
 
         mobHp = GameObject.Find("mobHp");
-        int random = Random.Range(10,20);
 
-        battleEvent(random);
+        //int random = Random.Range(10,20);
+        //battleEvent(random);
+
+        mobIdx = Random.Range(10, 20);
+
+        battleEvent(mobIdx);
+
 
     }
 	
@@ -130,7 +142,6 @@ public class Move : MonoBehaviour {
 
     }
 
-
     // Update is called once per frame
     void Update ()
     {
@@ -143,24 +154,32 @@ public class Move : MonoBehaviour {
         i2 = battle.switching[1];
         i3 = battle.switching[2];
 
-        Hpslider(i);
-        Mpslider(i);
+        if (playerSlot[0].activeSelf == true)
+        {
+            Hpslider(i);
+            Mpslider(i);
 
-        Hpslider2(i2);
-        Mpslider2(i2);
+            charHp.GetComponent<Text>().text = " HP : " + (npc.Hp[i] + npc.Equip_MaxHp[i]) + " / " + (npc.MaxHp[i] + npc.Equip_MaxHp[i]).ToString();
+            charMp.GetComponent<Text>().text = " Mp : " + (npc.Mp[i] + npc.Equip_MaxMp[i]) + " / " + (npc.MaxMp[i] + npc.Equip_MaxMp[i]).ToString();
+        }
 
-        Hpslider3(i3);
-        Mpslider3(i3);
+        if (playerSlot[1].activeSelf == true)
+        {
+            Hpslider2(i2);
+            Mpslider2(i2);
 
-        charHp.GetComponent<Text>().text = " HP : " + (npc.Hp[i] + npc.Equip_MaxHp[i]) + " / " + (npc.MaxHp[i] + npc.Equip_MaxHp[i]).ToString();
-        charMp.GetComponent<Text>().text = " Mp : " + (npc.Mp[i] + npc.Equip_MaxMp[i]) + " / " + (npc.MaxMp[i] + npc.Equip_MaxMp[i]).ToString();
+            charHp2.GetComponent<Text>().text = " HP : " + (npc.Hp[i2] + npc.Equip_MaxHp[i2]) + " / " + (npc.MaxHp[i2] + npc.Equip_MaxHp[i2]).ToString();
+            charMp2.GetComponent<Text>().text = " Mp : " + (npc.Mp[i2] + npc.Equip_MaxMp[i2]) + " / " + (npc.MaxMp[i2] + npc.Equip_MaxMp[i2]).ToString();
+        }
 
+        if (playerSlot[2].activeSelf == true)
+        {
+            Hpslider3(i3);
+            Mpslider3(i3);
 
-        charHp2.GetComponent<Text>().text = " HP : " + (npc.Hp[i2] + npc.Equip_MaxHp[i2]) + " / " + (npc.MaxHp[i2] + npc.Equip_MaxHp[i2]).ToString();
-        charMp2.GetComponent<Text>().text = " Mp : " + (npc.Mp[i2] + npc.Equip_MaxMp[i2]) + " / " + (npc.MaxMp[i2] + npc.Equip_MaxMp[i2]).ToString();
-
-        charHp3.GetComponent<Text>().text = " HP : " + (npc.Hp[i3] + npc.Equip_MaxHp[i3]) + " / " + (npc.MaxHp[i3] + npc.Equip_MaxHp[i3]).ToString();
-        charMp3.GetComponent<Text>().text = " Mp : " + (npc.Mp[i3] + npc.Equip_MaxMp[i3]) + " / " + (npc.MaxMp[i3] + npc.Equip_MaxMp[i3]).ToString();
+            charHp3.GetComponent<Text>().text = " HP : " + (npc.Hp[i3] + npc.Equip_MaxHp[i3]) + " / " + (npc.MaxHp[i3] + npc.Equip_MaxHp[i3]).ToString();
+            charMp3.GetComponent<Text>().text = " Mp : " + (npc.Mp[i3] + npc.Equip_MaxMp[i3]) + " / " + (npc.MaxMp[i3] + npc.Equip_MaxMp[i3]).ToString();
+        }
 
 
         if (Input.GetKeyDown(KeyCode.U))

@@ -38,12 +38,17 @@ namespace DataInfo
         // 스테이지 최대 맵 크기
         public int endPassageIdx;
 
-        public bool FirstClear;
-
         // 배경맵 이미지 리소스주소
         public string backgroundResources;
         // 미니맵 이미지 리소스주소
         public string minimapResources;
+
+        public bool FirstClear;
+
+        // 몬스터 목록
+        public List<int> MonsterList = new List<int>();
+        // 갈림길 멘트
+        public List<string> BranchiText = new List<string>();
 
         // 통로 정보들 관리하는 목록
         public List<PassageInfo> passageInfos = new List<PassageInfo>();

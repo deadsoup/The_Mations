@@ -45,11 +45,8 @@ public class battle : MonoBehaviour {
 
     public GameObject attackButton;
 
-    public GameObject skillButton;
-    public GameObject unSkillButton;
 
     public GameObject skipButton;
-    public GameObject targetButton;
 
     public GameObject reward;
 
@@ -138,7 +135,7 @@ public class battle : MonoBehaviour {
             if (dice == 6)
             { PlusDamage = 3; DiceAni.SetTrigger("6"); }
 
-            
+
 
 
             print(dice);
@@ -153,7 +150,7 @@ public class battle : MonoBehaviour {
             npc.actiongage -= 3.0f;
             actionGage.GetComponent<Image>().fillAmount -= 0.3f;
 
-            pdamage = npc.Str[c]+ npc.Equip_Str[c] + npc.BuffStr[c] + npc.Allbuff[c]+ PlusDamage;
+            pdamage = npc.Str[c] + npc.Equip_Str[c] + npc.BuffStr[c] + npc.Allbuff[c] + PlusDamage;
             if (pdamage <= 0) { pdamage = 0; }
 
             npc.Hp[i] -= pdamage;
@@ -274,7 +271,7 @@ public class battle : MonoBehaviour {
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
             }
-            
+
             EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
 
             if (npc.actiongage <= 0)
@@ -342,8 +339,6 @@ public class battle : MonoBehaviour {
             Debug.Log(npc.action);
 
             attackButton.SetActive(true);
-            targetButton.SetActive(false);
-            unSkillButton.SetActive(false);
             Dice.SetActive(false);
 
         }
@@ -373,19 +368,12 @@ public class battle : MonoBehaviour {
 
     }
 
-    public void enemyAttak()
+    public void enemyAttak() // 적 공격 맞았을 시
     {
-
-
-        //if (npc.unitCondition[0].condition_Stun == true)
-        //{
-        //     몬스터 턴아무것도 안하고
-        //     npc.unitCondition[0].leftStun -= 1;
-        //}
         if (player1.activeSelf == true && player2.activeSelf == false && player3.activeSelf == false)
         {
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -432,7 +420,7 @@ public class battle : MonoBehaviour {
             int random = 50;
             int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -514,14 +502,18 @@ public class battle : MonoBehaviour {
         {
             int random = Random.Range(0, 3);
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
+
+
+            Debug.Log("적의 현재 타겟은 " + random);
+
 
             int randomDamage = Random.Range(1, 7);
 
             edamage = npc.atk[i] + randomDamage;
             if (edamage <= 0) { edamage = 0; }
 
-            npc.Hp[random] -= edamage;
+            npc.Hp[switching[random]] -= edamage;
             Monster.SetTrigger("Atk");
             if (random == 0)
             {
@@ -624,7 +616,7 @@ public class battle : MonoBehaviour {
         if (player1.activeSelf == false && player2.activeSelf == true && player3.activeSelf == false)
         {
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -669,7 +661,7 @@ public class battle : MonoBehaviour {
         if (player1.activeSelf == false && player2.activeSelf == false && player3.activeSelf == true)
         {
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -715,7 +707,7 @@ public class battle : MonoBehaviour {
             int random = 50;
             int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -797,7 +789,7 @@ public class battle : MonoBehaviour {
             int random = 50;
             int randomTarget = Random.Range(1, 101);
             npc.eActiongage -= 10.0f;
-            eActionGage.GetComponent<Image>().fillAmount -= 0.3f;
+            eActionGage.GetComponent<Image>().fillAmount -= 1.0f;
 
             int randomDamage = Random.Range(1, 7);
 
@@ -900,7 +892,7 @@ public class battle : MonoBehaviour {
         }
     }
 
-    public void mob1_Hp ()
+    public void mob1_Hp()
     {
 
         mob_HpSlider_1.maxValue = npc.MaxHp[i];
@@ -908,7 +900,7 @@ public class battle : MonoBehaviour {
         mob_HpSlider_1.value = npc.Hp[i];
     }
 
-    public void Player_Dead()
+    public void Player_Dead() // 사망 시
     {
         if (npc.Hp[switching[0]] <= 0)
         {
@@ -931,51 +923,24 @@ public class battle : MonoBehaviour {
         }
 
 
-
-
-
     }
 
     public void chaneGetta1()
     {
 
-        if (npc.Hp[switching[0]] > 0 && playerDeactivate[0]==false) // 체인지 게타원
-        {/*
-            for (int i = 0; i < 6; i++)
-            {
-                if (party.player[0] == true && player1.activeSelf == false && party.playerSlot[0].GetComponent<PlayerSlot1>().slotCharge == true)
-                {
-                    c = 0;
-                    player1.SetActive(true);
-                    Debug.Log("0번 캐릭터 ");
-                    break;
-                }
-                if (party.player[1] == true && player1.activeSelf == false  && party.playerSlot[0].GetComponent<PlayerSlot1>().slotCharge == true)
-                {
-                    c = 1;
-                    player1.SetActive(true);
-                    Debug.Log("1번 캐릭터 ");
-                    break;
-                }
-                if (party.player[2] == true && player1.activeSelf == false  && party.playerSlot[0].GetComponent<PlayerSlot1>().slotCharge == true)
-                {
-                    c = 2;
-                    player1.SetActive(true);
-                    Debug.Log("2번 캐릭터 ");
-                    break;
-                }
-            }
-            */
+        if (npc.Hp[switching[0]] > 0 && playerDeactivate[0] == false) // 체인지 게타원
+        {
             charActive[0] = true;
             charActive[1] = false;
             charActive[2] = false;
 
             c = switching[0];
-            switching[0] = c;
+            //switching[0] = c;
             //Char1.SetActive(true);
             //Char2.SetActive(false);
             //Move.i = c;
             sKillManager.UniqueSkill_Set(c);
+            Debug.Log(c + "캐릭터 번호");
             sKillManager.resetSkill("skillSlot2");
             sKillManager.resetSkill("skillSlot3");
             sKillManager.resetSkill("skillSlot4");
@@ -1057,7 +1022,8 @@ public class battle : MonoBehaviour {
 
 
             c = switching[1];
-            switching[1] = c;
+            Debug.Log(c + "캐릭터 번호");
+            //switching[1] = c;
             //Char2.SetActive(true);
             //Char1.SetActive(false);
             //Move.i = c;
@@ -1146,7 +1112,8 @@ public class battle : MonoBehaviour {
 
 
             c = switching[2];
-            switching[2] = c;
+            Debug.Log(c + "캐릭터 번호");
+            //switching[2] = c;
             //Char2.SetActive(true);
             //Char1.SetActive(false);
             //Move.i = c;
@@ -1202,6 +1169,87 @@ public class battle : MonoBehaviour {
     }
 
 
+    public void Status1()
+    {
+        StopAllCoroutines();
+        StartCoroutine(player1_Status());
+    }
+    public void Status2()
+    {
+        StopAllCoroutines();
+        StartCoroutine(player2_Status());
+    }
+    public void Status3()
+    {
+        StopAllCoroutines();
+        StartCoroutine(player3_Status());
+    }
+
+
+    public IEnumerator player1_Status()
+    {
+        while (true)
+        {
+            int playerHp = npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]];
+            int playerMp = npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]];
+            int playerStr = npc.Str[switching[0]] + npc.Equip_Str[switching[0]];
+            int playerDex = npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]];
+            int playerWis = npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]];
+
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+            yield return new WaitForSeconds(1);
+
+        }
+    }
+
+    public IEnumerator player2_Status()
+    {
+        while (true)
+        {
+            int playerHp = npc.Hp[switching[1]] + npc.Equip_MaxHp[switching[1]];
+            int playerMp = npc.Mp[switching[1]] + npc.Equip_MaxMp[switching[1]];
+            int playerStr = npc.Str[switching[1]] + npc.Equip_Str[switching[1]];
+            int playerDex = npc.Dex[switching[1]] + npc.Equip_Dex[switching[1]];
+            int playerWis = npc.Wis[switching[1]] + npc.Equip_Wis[switching[1]];
+
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+            yield return new WaitForSeconds(1);
+
+        }
+    }
+
+
+    public IEnumerator player3_Status()
+    {
+        while (true)
+        {
+            int playerHp = npc.Hp[switching[2]] + npc.Equip_MaxHp[switching[2]];
+            int playerMp = npc.Mp[switching[2]] + npc.Equip_MaxMp[switching[2]];
+            int playerStr = npc.Str[switching[2]] + npc.Equip_Str[switching[2]];
+            int playerDex = npc.Dex[switching[2]] + npc.Equip_Dex[switching[2]];
+            int playerWis = npc.Wis[switching[2]] + npc.Equip_Wis[switching[2]];
+
+
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
+            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
+            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
+            yield return new WaitForSeconds(1);
+
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -1250,17 +1298,20 @@ public class battle : MonoBehaviour {
         //player1.transform.Find("Char2").GetComponent<Image>().sprite = party.playerSprite[1].GetComponent<Image>().sprite;
         //player1.transform.Find("Char3").GetComponent<Image>().sprite = party.playerSprite[2].GetComponent<Image>().sprite;
 
+        print("현재 첫 캐릭터의 아이디는 무엇" + party.num);
+        //party.selectPlayer(party.num);
+
+        //party.playerSelect1(party.num);
+
+
 
         //party.selectPlayer(2);
         //party.selectPlayer(1);
         //party.selectPlayer(0);
-        chaneGetta3();
-        chaneGetta2();
-        chaneGetta1();
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -1283,11 +1334,11 @@ public class battle : MonoBehaviour {
 
         }
 
-        if (Dice2.active == true && Dice.transform.Find("DiceAni").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End") == true)
+        if (Dice.transform.GetChild(1).GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End") == true)
         {
-            Dice2.SetActive(false);
             
-            GameObject nomal = GameObject.Find("Canvas").transform.Find("Dice").transform.Find("DiceAni").gameObject;
+            
+            GameObject nomal = Dice.transform.GetChild(1).gameObject;
             Destroy(nomal);
 
             GameObject Set = Instantiate(nomal);
@@ -1296,69 +1347,13 @@ public class battle : MonoBehaviour {
             DiceAni.runtimeAnimatorController = null;
             diceTriger = false;
             Dice.SetActive(false);
-            
+            Dice2.SetActive(false);
+
         }
 
 
 
         eTime +=Time.deltaTime;
-
-        if (c== 0)
-        {
-            int playerHp = npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]];
-            int playerMp = npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]];
-            int playerStr = npc.Str[switching[0]] + npc.Equip_Str[switching[0]];
-            int playerDex = npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]];
-            int playerWis = npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]];
-
-
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
-            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
-            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
-            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
-
-
-
-        }
-
-        if (c == 1)
-        {
-            int playerHp = npc.Hp[switching[1]] + npc.Equip_MaxHp[switching[1]];
-            int playerMp = npc.Mp[switching[1]] + npc.Equip_MaxMp[switching[1]];
-            int playerStr = npc.Str[switching[1]] + npc.Equip_Str[switching[1]];
-            int playerDex = npc.Dex[switching[1]] + npc.Equip_Dex[switching[1]];
-            int playerWis = npc.Wis[switching[1]] + npc.Equip_Wis[switching[1]];
-
-
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
-            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
-            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
-            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
-
-
-
-        }
-
-        if (c == 2)
-        {
-            int playerHp = npc.Hp[switching[2]] + npc.Equip_MaxHp[switching[2]];
-            int playerMp = npc.Mp[switching[2]] + npc.Equip_MaxMp[switching[2]];
-            int playerStr = npc.Str[switching[2]] + npc.Equip_Str[switching[2]];
-            int playerDex = npc.Dex[switching[2]] + npc.Equip_Dex[switching[2]];
-            int playerWis = npc.Wis[switching[2]] + npc.Equip_Wis[switching[2]];
-
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
-            Str1.GetComponent<Text>().text = "힘 : " + playerStr;
-            Dex1.GetComponent<Text>().text = "민첩 : " + playerDex;
-            Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
-
-
-
-        }
-
 
         if (battleaction == true)
         {
@@ -1548,7 +1543,6 @@ public class battle : MonoBehaviour {
 
                             Debug.Log("턴 완료");
 
-
                             if (npc.actiongage <= 0)
                             {
                                 npc.actiongage = 0f;
@@ -1556,13 +1550,12 @@ public class battle : MonoBehaviour {
                                 npc.action = false;
                                 npc.eAction = true;
                                 npc.eActiongage = 10f;
-
-
                             }
 
                         }
                     }
                 }
+
                 //// 상태이상 버프  힘
                 for (int i = 0; i < 3; i++)
                 {
@@ -1769,7 +1762,17 @@ public class battle : MonoBehaviour {
                 npc.action = false;
                 npc.eAction = false;
                 battleaction = false;
+
+
                 npc.ArchivePoint[0] += npc.ArchivePoint[i];
+
+                if(npc.ArchivePoint[0] >= 1000)
+                {
+                    npc.ArchivePoint[0] -= 1000;
+                    npc.SkillPoint++;
+                }
+
+
                 npc.huntCount[i]++;
                 npc.actiongage = 10f;
                 npc.eActiongage = 10f;

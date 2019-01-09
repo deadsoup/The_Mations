@@ -128,10 +128,27 @@ public class MapManager : MonoBehaviour
         Debug.Log(StageInfo.passageInfos[currPassage].name);
 
         // 전투, 이벤트 시작처리
-        var rnd = Random.Range(0, 2);
+        int rnd = Random.Range(0, 2);
         if (rnd == 0)
         {
-            var SetEvent = Random.Range(0, 2);
+            int SetEvent = 0;
+
+
+            //####################
+            // 이벤트 트리거 완성되면
+            // 주석풀어야함
+
+            // 스테이지 1이상 6이하
+            //if (currStage <= 6 && currStage >= 1)
+            //{
+            //    SetEvent = Random.Range(0, 5); // 이벤트 번호 0 ~ 4
+            //}
+            //// 스테이지 7이상 12이하
+            //else if(currStage <= 12 && currStage >= 7)
+            //{
+            //    SetEvent = Random.Range(5, 10); // 이벤트 번호 5 ~ 9
+            //}
+
             Eventmanager1.instance.EventText(SetEvent);
             Debug.Log("이벤트 출력" + SetEvent.ToString());
         }
@@ -142,6 +159,8 @@ public class MapManager : MonoBehaviour
             // 게임매니저한테 정보를 넘김 (중간정보 세이브기능)
             GameManager.instance.SaveData(StageInfo, currStage, currPassage);
 
+            Move.mobIdx = StageInfo.MonsterList[Random.Range(0, StageInfo.MonsterList.Count)] + 10;
+            Debug.Log("몬스터 번호 : " + Move.mobIdx.ToString());
             Eventmanager1.instance.BatteEvent();
             Debug.Log("전투 출력");
         }

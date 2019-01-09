@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SDoor : MonoBehaviour
 {
@@ -59,6 +60,8 @@ public class SDoor : MonoBehaviour
                     for (int i = 1; i < count + 1; i++)
                     {
                         MapManager.instance.BranchiButton[i].gameObject.SetActive(true);
+                        MapManager.instance.BranchiButton[i].gameObject.GetComponentInChildren<Text>().text =
+                            MapManager.instance.StageInfo.BranchiText[i - 1];
                     }
 
                     //int randomIdx = Random.Range(0, MapManager.instance.StageInfo.passageInfos[MapManager.instance.currPassage].nextPassage.Count);
