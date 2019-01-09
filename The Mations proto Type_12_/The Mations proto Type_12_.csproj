@@ -245,6 +245,9 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets/LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -259,9 +262,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJson">
-      <HintPath>Assets/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\unity\mscorlib.dll</HintPath>
@@ -315,16 +315,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\EndingManager.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
-    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Resources\Battle_Resource\Effect\Skill\Loving_you\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\Resources\Battle_Resource\Effect\Skill\only_one\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\Resources\Battle_Resource\Effect\Skill\Pyrokinesis\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Scripts\Battle\battle.cs" />
     <Compile Include="Assets\Scripts\Battle\Battle_Tuto.cs" />
     <Compile Include="Assets\Scripts\Battle\EnemySkill.cs" />
@@ -355,6 +348,7 @@
     <Compile Include="Assets\Scripts\Menu\CharManager.cs" />
     <Compile Include="Assets\Scripts\Menu\CharStory.cs" />
     <Compile Include="Assets\Scripts\Menu\CharUiDirector.cs" />
+    <Compile Include="Assets\Scripts\Menu\Ending.cs" />
     <Compile Include="Assets\Scripts\Menu\Fade.cs" />
     <Compile Include="Assets\Scripts\Menu\GameResolution.cs" />
     <Compile Include="Assets\Scripts\Menu\Info.cs" />
@@ -396,11 +390,8 @@
     <Compile Include="Assets\SlotChange.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\JMO Assets\!JMO Assets Readme.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
-    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\Resources\Battle_Resource\Effect\Skill\Dark_berserker\CFX3 Multiply Color.shader" />
+    <None Include="Assets\Resources\Battle_Resource\Effect\Skill\Dark_berserker\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\Resources\Json\ItemData.json" />
     <None Include="Assets\Resources\Json\MonsterScriptData.json" />
     <None Include="Assets\Resources\Json\PlayerInfoData.json" />
@@ -410,7 +401,9 @@
     <None Include="Assets\StreamingAssets\MonsterScriptData.json" />
     <None Include="Assets\StreamingAssets\PlayerInfoData.json" />
     <None Include="Assets\StreamingAssets\SkillData.json" />
+    <None Include="Assets\StreamingAssets\Stagelnfo.xml" />
     <None Include="Assets\StreamingAssets\StagelnfoReal.xml" />
+    <None Include="Assets\StreamingAssets\Stagelnfo_backup.xml" />
     <None Include="Assets\StreamingAssets\battleSaveData.json" />
     <None Include="Packages\com.unity.ads\package.json" />
     <None Include="Packages\com.unity.analytics\package.json" />

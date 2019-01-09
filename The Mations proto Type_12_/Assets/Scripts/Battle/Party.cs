@@ -179,7 +179,7 @@ public class Party : MonoBehaviour
             playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
             Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
         }
-
+        /*
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
             if (!Directory.Exists(Application.persistentDataPath + "/Json"))
@@ -193,7 +193,7 @@ public class Party : MonoBehaviour
             }
 
         }
-
+        */
 
 
 

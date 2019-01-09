@@ -137,36 +137,54 @@ public class SKillManager : MonoBehaviour
 
         party = GameObject.Find("PartySystem").GetComponent<Party>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
-        Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            playerSprite[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
+            playerSprite[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
+            playerSprite[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
 
-        playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
-        playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
-        playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
-        SkillScene = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>();
-        SkillScene2 = GameObject.Find("SkillScene").transform.Find("SkillAnimator2").GetComponent<Animator>();
-        SkillScene3 = GameObject.Find("SkillScene").transform.Find("SkillAnimator3").GetComponent<Animator>();
-        SkillScene_Animator = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>().runtimeAnimatorController;
+
+
+            InfoPanel = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("SkillInfo").gameObject;
+            SkillIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+            Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+            Need_Mp = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+            Damage = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+            Target = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+            Attribute = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+            Text = InfoPanel.transform.GetChild(7).GetComponent<Text>();
+
+        }
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
+            playerSprite[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
+            playerSprite[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
+            playerSprite[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").transform.Find("Char3").gameObject;
+            SkillScene = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>();
+            SkillScene2 = GameObject.Find("SkillScene").transform.Find("SkillAnimator2").GetComponent<Animator>();
+            SkillScene3 = GameObject.Find("SkillScene").transform.Find("SkillAnimator3").GetComponent<Animator>();
+            SkillScene_Animator = GameObject.Find("SkillScene").transform.Find("SkillAnimator").GetComponent<Animator>().runtimeAnimatorController;
+
+            Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
             actionGage = GameObject.Find("Canvas").transform.Find("actionGage").gameObject;
+
+
+            InfoPanel = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("SkillInfo").gameObject;
+            SkillIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+            Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+            Need_Mp = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+            Damage = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+            Target = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+            Attribute = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+            Text = InfoPanel.transform.GetChild(7).GetComponent<Text>();
+
+
+
+
+            SkillPanel = GameObject.Find("Panel");
+            Slotpanel = SkillPanel.transform.Find("slotPanel").gameObject;
         }
-
-        InfoPanel = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("SkillInfo").gameObject;
-        SkillIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
-        Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
-        Need_Mp = InfoPanel.transform.GetChild(3).GetComponent<Text>();
-        Damage = InfoPanel.transform.GetChild(4).GetComponent<Text>();
-        Target = InfoPanel.transform.GetChild(5).GetComponent<Text>();
-        Attribute = InfoPanel.transform.GetChild(6).GetComponent<Text>();
-        Text = InfoPanel.transform.GetChild(7).GetComponent<Text>();
-
-
-
-
-        SkillPanel = GameObject.Find("Panel");
-        Slotpanel = SkillPanel.transform.Find("slotPanel").gameObject;
-
         //saveJson();
         //skilldata = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/SkillData.json"));
         load();

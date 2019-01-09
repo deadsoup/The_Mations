@@ -353,10 +353,12 @@ public class SaveBattleScene : MonoBehaviour
 
 
         // 통로맵씬 전환
-        GameManager.instance.LoadPassaway();
-
-
     }
+    public void Loadway()
+    {
+        GameManager.instance.LoadPassaway();
+    }
+
 
     public void loadJson()
     {
@@ -652,42 +654,85 @@ public class SaveBattleScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inven = GameObject.Find("Canvas").transform.Find("Inven").GetComponent<Inven>();
-        skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
-        Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            inven = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").GetComponent<Inven>();
+            skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
+            Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
+
+            party = GameObject.Find("PartySystem").GetComponent<Party>();
+
+            player[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
+            player[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
+            player[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
+
+
+            invenslot[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
+            invenslot[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
+            invenslot[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
+            invenslot[3] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots3").gameObject;
+
+            invenslot[4] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots4").gameObject;
+            invenslot[5] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots5").gameObject;
+            invenslot[6] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots6").gameObject;
+            invenslot[7] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots7").gameObject;
+
+            invenslot[8] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots8").gameObject;
+            invenslot[9] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots9").gameObject;
+            invenslot[10] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots10").gameObject;
+            invenslot[11] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots11").gameObject;
+
+
+
+            Skillslot[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot2").gameObject;
+            Skillslot[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;
+            Skillslot[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
+
+            GameObject Panel = GameObject.Find("Canvas").transform.Find("Status").gameObject;
+            //Panel.SetActive(false);
+
+        }
+
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
+            inven = GameObject.Find("Canvas").transform.Find("Inven").GetComponent<Inven>();
+            skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
+            Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
+
             Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+
+            party = GameObject.Find("PartySystem").GetComponent<Party>();
+
+            player[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+            player[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
+            player[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
+
+
+            invenslot[0] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
+            invenslot[1] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
+            invenslot[2] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
+            invenslot[3] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots3").gameObject;
+
+            invenslot[4] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots4").gameObject;
+            invenslot[5] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots5").gameObject;
+            invenslot[6] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots6").gameObject;
+            invenslot[7] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots7").gameObject;
+
+            invenslot[8] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots8").gameObject;
+            invenslot[9] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots9").gameObject;
+            invenslot[10] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots10").gameObject;
+            invenslot[11] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots11").gameObject;
+
+
+
+            Skillslot[0] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot2").gameObject;
+            Skillslot[1] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;
+            Skillslot[2] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
+
         }
-    
-        party = GameObject.Find("PartySystem").GetComponent<Party>();
-
-        player[0] = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
-        player[1] = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
-        player[2] = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
-
-
-        invenslot[0] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
-        invenslot[1] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
-        invenslot[2] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots2").gameObject;
-        invenslot[3] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots3").gameObject;
-
-        invenslot[4] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots4").gameObject;
-        invenslot[5] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots5").gameObject;
-        invenslot[6] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots6").gameObject;
-        invenslot[7] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel2").transform.Find("slots7").gameObject;
-
-        invenslot[8] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots8").gameObject;
-        invenslot[9] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots9").gameObject;
-        invenslot[10] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots10").gameObject;
-        invenslot[11] = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel3").transform.Find("slots11").gameObject;
-
-
-
-        Skillslot[0] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot2").gameObject;
-        Skillslot[1] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;
-        Skillslot[2] = GameObject.Find("Canvas").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
 
         P1_skillID[0] = -1;
         P1_skillID[1] = -1;
@@ -700,18 +745,40 @@ public class SaveBattleScene : MonoBehaviour
         P3_skillID[0] = -1;
         P3_skillID[1] = -1;
         P3_skillID[2] = -1;
-        battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
-        //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
-        //load();
-        loadJson();
-        print("현재 첫 캐릭터의 아이디는 무엇"+party.num);
+
+
+        if (!Directory.Exists(Application.persistentDataPath + "/Json"))
+        {
+            print("캐릭터 생성 완료 ");
+            if (player[party.num] == true)
+            {
+                print("1번 캐릭 생성");
+                playerSelect1(party.num);
+            }
+        }
 
         if (Directory.Exists(Application.persistentDataPath + "/Json") == true)
         {
+            battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
+            //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
+            //load();
+            loadJson();
+            print("현재 첫 캐릭터의 아이디는 무엇" + party.num);
+
+
             print("발동");
-            playerSelect1(Player1_ID);
-            playerSelect2(Player2_ID);
-            playerSelect3(Player3_ID);
+            if (Player1_ID != 9)
+            {
+                playerSelect1(Player1_ID);
+            }
+            if (Player2_ID != 9)
+            {
+                playerSelect2(Player2_ID);
+            }
+            if (Player3_ID != 9)
+            {
+                playerSelect3(Player3_ID);
+            }
 
             if (Player1_ID == 9) { player[0].SetActive(false); }
             if (Player2_ID == 9) { player[1].SetActive(false); }

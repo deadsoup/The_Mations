@@ -8,6 +8,7 @@ public class CharInfo : MonoBehaviour
 {
     
     public GameObject Point;
+
     public GameObject Point2;
     public GameObject Point3;
     public GameObject Str1;
@@ -23,6 +24,15 @@ public class CharInfo : MonoBehaviour
     public GameObject Wiz2;
     public GameObject Str3;
     public GameObject Wiz3;
+
+    public GameObject Hp;
+    public GameObject Mp;
+    public GameObject Str;
+    public GameObject Wis;
+
+    SlotChange slotChange;
+
+
     // Start is called before the first frame update
     public void StatUP1()
     {
@@ -154,9 +164,16 @@ public class CharInfo : MonoBehaviour
 
     void Start()
     {
-        
-        
-       this.Str1.GetComponent<Text>().text = " "+2+0;
+        slotChange = GameObject.Find("PartySystem").GetComponent<SlotChange>();
+
+        Hp = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(0).gameObject;
+        Mp = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(1).gameObject;
+        Str = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(2).gameObject;
+        Wis = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(3).gameObject;
+        Point = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(4).gameObject;
+
+
+        this.Str1.GetComponent<Text>().text = " "+2+0;
         this.Wiz1.GetComponent<Text>().text = " "+5+0;
         this.Str2.GetComponent<Text>().text = " "+3+0;
         this.Wiz2.GetComponent<Text>().text = " "+3+0;
@@ -169,11 +186,21 @@ public class CharInfo : MonoBehaviour
         this.Mp2.GetComponent<Text>().text = " " + 150;
         this.Hp3.GetComponent<Text>().text = " " + 250;
         this.Mp3.GetComponent<Text>().text = " " + 100;
+
+        /*
+        Hp.GetComponent<Text>().text = "체력 : " + (npc.Hp[slotChange.ChangeChar] + npc.Equip_MaxHp[slotChange.ChangeChar]);
+        Mp.GetComponent<Text>().text = "마나 : " + (npc.Mp[slotChange.ChangeChar] + npc.Equip_MaxMp[slotChange.ChangeChar]);
+        Str.GetComponent<Text>().text = "힘 : " + (npc.Str[slotChange.ChangeChar] + npc.Equip_Str[slotChange.ChangeChar]);
+        Wis.GetComponent<Text>().text = "지능 : " + (npc.Wis[slotChange.ChangeChar] + npc.Equip_Wis[slotChange.ChangeChar]);
+        Point.GetComponent<Text>().text = "포인트 : " + npc.SkillPoint;
+        */
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         this.Point.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";
         this.Point2.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";
         this.Point3.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";

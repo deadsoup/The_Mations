@@ -8,7 +8,7 @@ public class SlotChange : MonoBehaviour
 {
     bool[] playerDeactivate = new bool[3];
 
-    int ChangeChar;
+    public int ChangeChar;
 
     public  int[] switching = new int[3];
 
@@ -21,9 +21,9 @@ public class SlotChange : MonoBehaviour
     public GameObject Hp;
     public GameObject Mp;
     public GameObject Str;
-    public GameObject Dex;
     public GameObject Wis;
 
+    GameObject Status;
 
     internal SKillManager sKillManager;
     internal npc Npc;
@@ -39,8 +39,7 @@ public class SlotChange : MonoBehaviour
 
         if (npc.Hp[switching[0]] > 0 && playerDeactivate[0] == false) // 체인지 게타원
         {
-            ChangeChar = 0;
-            switching[0] = ChangeChar;
+            ChangeChar = switching[0];
 
             Char1.SetActive(true);
             Char2.SetActive(false);
@@ -92,8 +91,8 @@ public class SlotChange : MonoBehaviour
 
         if (npc.Hp[switching[1]] > 0 && playerDeactivate[1] == false) // 체인지 게타투
         {
-            ChangeChar = 1;
-            switching[1] = ChangeChar;
+            ChangeChar = switching[1];
+
             Char1.SetActive(false);
             Char2.SetActive(true);
             Char3.SetActive(false);
@@ -143,8 +142,8 @@ public class SlotChange : MonoBehaviour
 
         if (npc.Hp[switching[2]] > 0 && playerDeactivate[2] == false) // 체인지 게타3
         {
-            ChangeChar = 2;
-            switching[2] = ChangeChar;
+            ChangeChar = switching[2];
+
             Char1.SetActive(false);
             Char2.SetActive(false);
             Char3.SetActive(true);
@@ -193,22 +192,28 @@ public class SlotChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         //switching[0] = 0; switching[1] = 1; switching[2] = 2;
+        /*
         Hp.GetComponent<Text>().text = "체력 : " + (npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]]);
         Mp.GetComponent<Text>().text = "마나 : " + (npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]]);
         Str.GetComponent<Text>().text = "힘 : " + (npc.Str[switching[0]] + npc.Equip_Str[switching[0]]);
-        Dex.GetComponent<Text>().text = "민첩 : " + (npc.Dex[switching[0]] + npc.Equip_Dex[switching[0]]);
         Wis.GetComponent<Text>().text = "지능 : " + (npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]]);
-
+        */
+        
         sKillManager = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
 
-        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+        Invenpanel = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+
+        Status = GameObject.Find("Canvas").transform.Find("Status").gameObject;
+
+        Status.SetActive(false);
 
 
         Char1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/idoll");
         Char2.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/JJintta");
-        Char3.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/Skill_Pyrokinesis");
+        Char3.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/Dog");
 
     }
 

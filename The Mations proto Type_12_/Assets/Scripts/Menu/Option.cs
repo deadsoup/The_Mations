@@ -13,11 +13,15 @@ public class Option : MonoBehaviour { // 타이틀화면 옵션창 관련
     public static int Coin;
 
 
-    private void Start()
+    void Start()
     {
         OptionPopup = GameObject.Find("Canvas").transform.Find("Option").transform.Find("OptionsPopup").gameObject;
-        start = GameObject.Find("Canvas").transform.Find("Start").gameObject;
-        Load = GameObject.Find("Canvas").transform.Find("Load").gameObject;
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            start = GameObject.Find("Canvas").transform.Find("Start").gameObject;
+
+            Load = GameObject.Find("Canvas").transform.Find("Load").gameObject;
+        }
         Close = OptionPopup.transform.Find("Close").gameObject;
         TitleGo = OptionPopup.transform.Find("TitleGo").gameObject;
     }

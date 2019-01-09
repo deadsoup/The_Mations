@@ -55,24 +55,45 @@ public class Inven : MonoBehaviour
 
     private void Awake()
     {
-        Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
-        Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
-        Slotpanel2 = Invenpanel.transform.Find("Panel2").gameObject;
-        Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
-        UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
-        InfoPanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("ItemInfo").gameObject;
-        ItemIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
-        Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
-        Type = InfoPanel.transform.GetChild(3).GetComponent<Text>();
-        Grade = InfoPanel.transform.GetChild(4).GetComponent<Text>();
-        Option = InfoPanel.transform.GetChild(5).GetComponent<Text>();
-        Text = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            Invenpanel = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+            Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
+            Slotpanel2 = Invenpanel.transform.Find("Panel2").gameObject;
+            Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
+
+
+            UseText = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
+            InfoPanel = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("ItemInfo").gameObject;
+            ItemIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+            Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+            Type = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+            Grade = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+            Option = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+            Text = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+
+            useButton = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Yes").GetComponent<Button>();
+        }
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
-            Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+            Invenpanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").gameObject;
+            Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
+            Slotpanel2 = Invenpanel.transform.Find("Panel2").gameObject;
+            Slotpanel3 = Invenpanel.transform.Find("Panel3").gameObject;
+            UseText = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Text").gameObject;
+            InfoPanel = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("ItemInfo").gameObject;
+            ItemIcon = InfoPanel.transform.GetChild(1).GetComponent<Image>();
+            Title = InfoPanel.transform.GetChild(2).GetComponent<Text>();
+            Type = InfoPanel.transform.GetChild(3).GetComponent<Text>();
+            Grade = InfoPanel.transform.GetChild(4).GetComponent<Text>();
+            Option = InfoPanel.transform.GetChild(5).GetComponent<Text>();
+            Text = InfoPanel.transform.GetChild(6).GetComponent<Text>();
+
             Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
+            useButton = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Yes").GetComponent<Button>();
         }
+        Npc = GameObject.Find("EventSystem").GetComponent<npc>();
     }
 
 
@@ -85,7 +106,7 @@ public class Inven : MonoBehaviour
         randomAdd = Random.Range(0, 6);
         randomAdd1 = Random.Range(0, 6);
         randomAdd2 = Random.Range(0, 6);
-        useButton = GameObject.Find("Canvas").transform.Find("Inven").transform.Find("BackPanel").transform.Find("UsePanel").transform.Find("Yes").GetComponent<Button>();
+        
 
         for (int i = 0; i < slotAmount; i++)
         {

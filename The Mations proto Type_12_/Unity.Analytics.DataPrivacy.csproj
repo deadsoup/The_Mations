@@ -275,6 +275,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets/LitJson.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -295,9 +298,6 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>C:/Users/zere4/Documents/GitHub/The_Mations/The Mations proto Type_12_/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="LitJson">
-      <HintPath>Assets/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\unity\mscorlib.dll</HintPath>
@@ -333,11 +333,8 @@
     <Compile Include="Packages\com.unity.analytics\DataPrivacy\DataPrivacyButton.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\JMO Assets\!JMO Assets Readme.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
-    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
-    <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
+    <None Include="Assets\Resources\Battle_Resource\Effect\Skill\Dark_berserker\CFX3 Multiply Color.shader" />
+    <None Include="Assets\Resources\Battle_Resource\Effect\Skill\Dark_berserker\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\Resources\Json\ItemData.json" />
     <None Include="Assets\Resources\Json\MonsterScriptData.json" />
     <None Include="Assets\Resources\Json\PlayerInfoData.json" />
@@ -347,7 +344,9 @@
     <None Include="Assets\StreamingAssets\MonsterScriptData.json" />
     <None Include="Assets\StreamingAssets\PlayerInfoData.json" />
     <None Include="Assets\StreamingAssets\SkillData.json" />
+    <None Include="Assets\StreamingAssets\Stagelnfo.xml" />
     <None Include="Assets\StreamingAssets\StagelnfoReal.xml" />
+    <None Include="Assets\StreamingAssets\Stagelnfo_backup.xml" />
     <None Include="Assets\StreamingAssets\battleSaveData.json" />
     <None Include="Packages\com.unity.ads\package.json" />
     <None Include="Packages\com.unity.analytics\package.json" />
