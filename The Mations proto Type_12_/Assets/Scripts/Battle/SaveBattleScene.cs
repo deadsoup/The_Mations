@@ -4,6 +4,7 @@ using LitJson;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class SaveBattleScene : MonoBehaviour
@@ -15,7 +16,9 @@ public class SaveBattleScene : MonoBehaviour
 
     GameObject[] player = new GameObject[3];
 
-
+    int Player1_ID;
+    int Player2_ID;
+    int Player3_ID;
 
     Party party;
     battle Battle;
@@ -156,98 +159,108 @@ public class SaveBattleScene : MonoBehaviour
             P3_invenslots4_Amount = invenslot[11].transform.GetChild(0).GetComponent<ItemData>().amount;
         }
 
-        for (int i = 0; i < 15; i++)
+        if (player[0].activeSelf == true)
         {
-            if (Npc.SkillTriggers[battle.switching[0]].skill[i] == true)
+            for (int i = 0; i < 15; i++)
             {
-                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[0]].skill[i];
-                if (P1_skillID[0] == -1)
+                if (Npc.SkillTriggers[battle.switching[0]].skill[i] == true)
                 {
-                    P1_skillID[0] = i;
-                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
-                    continue;
+                    P1_skilldata[i] = Npc.SkillTriggers[battle.switching[0]].skill[i];
+                    if (P1_skillID[0] == -1)
+                    {
+                        P1_skillID[0] = i;
+                        Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                        continue;
+                    }
+                    if (P1_skillID[0] != -1 && P1_skillID[1] == -1)
+                    {
+                        P1_skillID[1] = i;
+                        Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                        continue;
+                    }
+                    if (P1_skillID[0] != -1 && P1_skillID[1] != -1 && P1_skillID[2] == -1)
+                    {
+                        P1_skillID[2] = i;
+                        Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
+                        continue;
+                    }
+                    else { break; }
                 }
-                if (P1_skillID[0] != -1 && P1_skillID[1] == -1)
-                {
-                    P1_skillID[1] = i;
-                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
-                    continue;
-                }
-                if (P1_skillID[0] != -1 && P1_skillID[1] != -1 && P1_skillID[2] == -1)
-                {
-                    P1_skillID[2] = i;
-                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P1_skilldata[i]);
-                    continue;
-                }
-                else{ break; }
-            }
 
-            Debug.Log("포문");
+                Debug.Log("포문");
+            }
         }
         ///
         /// 플레이어 2의 스킬 저장
         ///
-        for (int i = 0; i < 15; i++)
+        if (player[1].activeSelf == true)
         {
-            if (Npc.SkillTriggers[battle.switching[1]].skill[i] == true)
+            for (int i = 0; i < 15; i++)
             {
-                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[1]].skill[i];
-                if (P2_skillID[0] == -1)
+                if (Npc.SkillTriggers[battle.switching[1]].skill[i] == true)
                 {
-                    P2_skillID[0] = i;
-                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
-                    continue;
+                    P1_skilldata[i] = Npc.SkillTriggers[battle.switching[1]].skill[i];
+                    if (P2_skillID[0] == -1)
+                    {
+                        P2_skillID[0] = i;
+                        Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                        continue;
+                    }
+                    else if (P2_skillID[0] != -1 && P2_skillID[1] == -1)
+                    {
+                        P2_skillID[1] = i;
+                        Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                        continue;
+                    }
+                    else if (P2_skillID[0] != -1 && P2_skillID[1] != -1 && P2_skillID[2] == -1)
+                    {
+                        P2_skillID[2] = i;
+                        Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
+                        continue;
+                    }
+                    else { break; }
+
                 }
-                if (P2_skillID[0] != -1 && P2_skillID[1] == -1)
-                {
-                    P2_skillID[1] = i;
-                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
-                    continue;
-                }
-                if (P2_skillID[0] != -1 && P2_skillID[1] != -1 && P2_skillID[2] == -1)
-                {
-                    P2_skillID[2] = i;
-                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P2_skilldata[i]);
-                    continue;
-                }
-                else { break; }
             }
         }
         ///
         /// 플레이어 3의 스킬 저장
         ///
-        for (int i = 0; i < 15; i++)
+        if (player[2].activeSelf == true)
         {
-            if (Npc.SkillTriggers[battle.switching[2]].skill[i] == true)
+            for (int i = 0; i < 15; i++)
             {
-                P1_skilldata[i] = Npc.SkillTriggers[battle.switching[2]].skill[i];
-                if (P3_skillID[0] == -1)
+                if (Npc.SkillTriggers[battle.switching[2]].skill[i] == true)
                 {
-                    P3_skillID[0] = i;
-                    Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    continue;
+                    P1_skilldata[i] = Npc.SkillTriggers[battle.switching[2]].skill[i];
+                    if (P3_skillID[0] == -1)
+                    {
+                        P3_skillID[0] = i;
+                        Debug.Log(0 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        continue;
+                    }
+                    else if (P3_skillID[0] != -1 && P3_skillID[1] == -1)
+                    {
+                        P3_skillID[1] = i;
+                        Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
+                        continue;
+                    }
+                    else if (P3_skillID[0] != -1 && P3_skillID[1] != -1 && P3_skillID[2] == -1)
+                    {
+                        P3_skillID[2] = i;
+                        Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
+                        Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
+                        continue;
+                    }
+                    else { break; }
                 }
-                if (P3_skillID[0] != -1 && P3_skillID[1] == -1)
-                {
-                    P3_skillID[1] = i;
-                    Debug.Log(1 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
-                    continue;
-                }
-                if (P3_skillID[0] != -1 && P3_skillID[1] != -1 && P3_skillID[2] == -1)
-                {
-                    P3_skillID[2] = i;
-                    Debug.Log(2 + "번의 슬롯 스킬의 아이디는 :" + i);
-                    Debug.Log(i + "번의 스킬은 현재 :" + P3_skilldata[i]);
-                    continue;
-                }
-                else { break; }
             }
         }
         
@@ -389,7 +402,9 @@ public class SaveBattleScene : MonoBehaviour
         npc.Equip_Str[battle.switching[0]] = 0; // 장비의 능력치를 0으로 바꾼다.
         npc.Equip_Wis[battle.switching[0]] = 0;
 
-        party.num = battleLoad[0].Id;
+        Player1_ID = battleLoad[0].Id;
+        Player2_ID = battleLoad[1].Id;
+        Player3_ID = battleLoad[2].Id;
 
         if (player[1].activeSelf == true)
         {
@@ -523,25 +538,34 @@ public class SaveBattleScene : MonoBehaviour
                 if (battleLoad[Num].Skill3_ID > -1)
                 { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
             }
-            if (Num == 1)
+            if (player[1].activeSelf == true)
             {
-                if (battleLoad[Num].Skill1_ID > -1)
-                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
-                if (battleLoad[Num].Skill2_ID > -1)
-                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
-                if (battleLoad[Num].Skill3_ID > -1)
-                { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+                if (Num == 1)
+                {
+                    if (battleLoad[Num].Skill1_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
+                    if (battleLoad[Num].Skill2_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
+                    if (battleLoad[Num].Skill3_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+                }
             }
-            if (Num == 2)
+            if (player[2].activeSelf == true)
             {
-                if (battleLoad[Num].Skill1_ID > -1)
-                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
-                if (battleLoad[Num].Skill2_ID > -1)
-                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
-                if (battleLoad[Num].Skill3_ID > -1)
-                { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                if (Num == 2)
+                {
+                    if (battleLoad[Num].Skill1_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
+                    if (battleLoad[Num].Skill2_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
+                    if (battleLoad[Num].Skill3_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                }
             }
+
         }
+
+
         /*
         for (int Num = 0; Num < 10; Num++)
         {
@@ -572,12 +596,66 @@ public class SaveBattleScene : MonoBehaviour
     }
 
 
+    public void playerSelect1(int Adebt)
+    {
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            party.player[Adebt] = true;
+            if (player[0].GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+                Image.SetActive(true);
+                player[0].GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[0] = Adebt;
+                player[0].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
+
+                Battle.chaneGetta1();
+            }
+        }
+    }
+
+    public void playerSelect2(int Adebt)
+    {
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            party.player[Adebt] = true;
+            if (player[1].GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+                Image.SetActive(true);
+                player[1].GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[1] = Adebt;
+                player[1].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
+
+                Battle.chaneGetta1();
+            }
+        }
+    }
+
+    public void playerSelect3(int Adebt)
+    {
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
+        {
+            party.player[Adebt] = true;
+            if (player[2].GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+                Image.SetActive(true);
+                player[2].GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[2] = Adebt;
+                player[2].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
+
+                Battle.chaneGetta1();
+            }
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         inven = GameObject.Find("Canvas").transform.Find("Inven").GetComponent<Inven>();
         skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
             Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
@@ -627,7 +705,18 @@ public class SaveBattleScene : MonoBehaviour
         //load();
         loadJson();
         print("현재 첫 캐릭터의 아이디는 무엇"+party.num);
-        party.playerSelect1(party.num);
+
+        if (Directory.Exists(Application.persistentDataPath + "/Json") == true)
+        {
+            print("발동");
+            playerSelect1(Player1_ID);
+            playerSelect2(Player2_ID);
+            playerSelect3(Player3_ID);
+
+            if (Player1_ID == 9) { player[0].SetActive(false); }
+            if (Player2_ID == 9) { player[1].SetActive(false); }
+            if (Player3_ID == 9) { player[2].SetActive(false); }
+        }
         //Battle.chaneGetta1();
     }
 

@@ -8,7 +8,7 @@ public class Info : MonoBehaviour
     public GameObject Info1;
     public GameObject Information;
     public GameObject Information2;
-   // public GameObject Information3; 캐릭터 3번나오면 주석풀면됨
+    public GameObject Information3; 
 
 
     public void ClickInfo()
@@ -23,17 +23,17 @@ public class Info : MonoBehaviour
     {
         Information.SetActive(true);
         Information2.SetActive(false);
-        //Information3.SetActive(false);
+        Information3.SetActive(false);
     }
     public void ClickChar2()
     {
         Information2.SetActive(true);
         Information.SetActive(false);
-        //Information3.SetActive(false);
+        Information3.SetActive(false);
     }
     public void ClickChar3()
     {
-        //Information3.SetActive(true);
+        Information3.SetActive(true);
         Information2.SetActive(false);
         Information.SetActive(false);
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class battle : MonoBehaviour {
 
@@ -99,6 +100,9 @@ public class battle : MonoBehaviour {
 
     internal GameObject EffectSystem;
     internal GameObject[] touchProtect = new GameObject[3];
+
+    internal GameObject[] playerSlot = new GameObject[3];
+
 
     bool[] charActive = new bool[3];
 
@@ -1250,6 +1254,10 @@ public class battle : MonoBehaviour {
         }
     }
 
+
+
+
+
     // Use this for initialization
     void Start()
     {
@@ -1305,7 +1313,6 @@ public class battle : MonoBehaviour {
 
 
 
-        //party.selectPlayer(2);
         //party.selectPlayer(1);
         //party.selectPlayer(0);
     }

@@ -31,13 +31,18 @@ public class MapManager : MonoBehaviour
     public int currPassage;
 
     // 세이프존 체크
-    //public bool IsSafe
+    //public bool IsSafe;
+
 
     // 미니맵 초록불
     public GameObject clearPassage;
     // 미니맵 클리어?? 체크용 변수
     public List<GameObject> clearPassages = new List<GameObject>();
 
+    // 받아올 백그라운드 이미지
+    public Sprite bgSprite;
+    // 적용할 백그라운드
+    public SpriteRenderer bgRenderer;
     // 받아올 미니맵 이미지
     public Sprite newSprite;
     // 적용할 미니맵 이미지
@@ -70,7 +75,6 @@ public class MapManager : MonoBehaviour
         currPassage = GameManager.instance.lastPassage;
 
         // 맵매니저에 필요한 정보를 게임 매니저로 부터 할당
-        // Load역할이 되는거심니다.
         StageInfo = GameManager.instance.StageInfos[currStage];
 
         eventObj = GameObject.Find("EventTriggr");
@@ -85,6 +89,10 @@ public class MapManager : MonoBehaviour
 
         // 전투에서 돌아올때 현재 이벤트 트리거 체크
         CheckEventTrg();
+
+        // 백그라운드 할당
+        bgSprite = Resources.Load<Sprite>(StageInfo.backgroundResources);
+        bgRenderer.sprite = bgSprite;
 
         // 미니맵 리소스(이미지)할당
         newSprite = Resources.Load<Sprite>(StageInfo.minimapResources);
@@ -138,16 +146,16 @@ public class MapManager : MonoBehaviour
             // 이벤트 트리거 완성되면
             // 주석풀어야함
 
-            // 스테이지 1이상 6이하
-            //if (currStage <= 6 && currStage >= 1)
-            //{
-            //    SetEvent = Random.Range(0, 5); // 이벤트 번호 0 ~ 4
-            //}
+            //스테이지 1이상 6이하
+            if (currStage <= 6 && currStage >= 1)
+            {
+               SetEvent = Random.Range(0, 5); // 이벤트 번호 0 ~ 4
+            }
             //// 스테이지 7이상 12이하
-            //else if(currStage <= 12 && currStage >= 7)
-            //{
-            //    SetEvent = Random.Range(5, 10); // 이벤트 번호 5 ~ 9
-            //}
+            else if(currStage <= 12 && currStage >= 7)
+            {
+              SetEvent = Random.Range(5, 10); // 이벤트 번호 5 ~ 9
+            }
 
             Eventmanager1.instance.EventText(SetEvent);
             Debug.Log("이벤트 출력" + SetEvent.ToString());
@@ -159,7 +167,14 @@ public class MapManager : MonoBehaviour
             // 게임매니저한테 정보를 넘김 (중간정보 세이브기능)
             GameManager.instance.SaveData(StageInfo, currStage, currPassage);
 
-            Move.mobIdx = StageInfo.MonsterList[Random.Range(0, StageInfo.MonsterList.Count)] + 10;
+            Move.mobIdx = StageInfo.MonsterList[Random.Range(0, StageInfo.MonsterList.Count)];
+            if(Move.mobIdx == -1)
+            {
+                Move.mobIdx = StageInfo.MonsterList[0];
+            }
+
+            Move.mobIdx += 10;
+
             Debug.Log("몬스터 번호 : " + Move.mobIdx.ToString());
             Eventmanager1.instance.BatteEvent();
             Debug.Log("전투 출력");
@@ -235,9 +250,9 @@ public class MapManager : MonoBehaviour
         {
             GameManager.instance.StageInfos[currStage].FirstClear = true;
             QuestDirector.count += 1;
-
-            
         }
+
+        DataIO.instance.Save(GameManager.instance.StageInfos, "Stagelnfo.xml");
 
         SceneManager.LoadScene("GameScene");
     }

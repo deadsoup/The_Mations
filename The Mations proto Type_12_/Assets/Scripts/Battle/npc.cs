@@ -64,11 +64,11 @@ public class npc : MonoBehaviour {
     skillTrigger SkillTrigger;
     public skillTrigger[] SkillTriggers = new skillTrigger[6]; // 캐릭터의 보유 스킬 
 
-    public static int[] Equip_MaxHp = new int[6];
-    public static int[] Equip_MaxMp = new int[6];
-    public static int[] Equip_Str = new int[6];
-    public static int[] Equip_Dex = new int[6];
-    public static int[] Equip_Wis = new int[6];
+    public static int[] Equip_MaxHp = new int[10];
+    public static int[] Equip_MaxMp = new int[10];
+    public static int[] Equip_Str = new int[10];
+    public static int[] Equip_Dex = new int[10];
+    public static int[] Equip_Wis = new int[10];
 
     public  static UnitCondition[] unitCondition = new UnitCondition[50];
 

@@ -71,7 +71,7 @@ public class Move : MonoBehaviour {
         //int random = Random.Range(10,20);
         //battleEvent(random);
 
-        mobIdx = Random.Range(10, 20);
+        //mobIdx = Random.Range(10, 20);
 
         battleEvent(mobIdx);
 

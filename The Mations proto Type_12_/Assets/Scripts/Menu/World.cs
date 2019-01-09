@@ -17,8 +17,10 @@ public class World : MonoBehaviour
     {
         SceneManager.LoadScene("bin+yong");
     }
-    private void Start()
+    public void Start()
     {
+       //테스트용 나중에 지워야됨 
+       // npc.ArchivePoint[0] = 200;
         StartDirector.count = true;
         //battle.reItems = 1;
 

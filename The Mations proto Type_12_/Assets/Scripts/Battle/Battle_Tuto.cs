@@ -46,7 +46,7 @@ public class Battle_Tuto : MonoBehaviour
     void Start()
     {
         Battle = GameObject.Find("Battle").transform.Find("battle").GetComponent<battle>();
-        Battle.chaneGetta1();
+        //Battle.chaneGetta1();
     }
 
     // Update is called once per frame

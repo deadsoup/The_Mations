@@ -21,13 +21,20 @@ public class DataIO : MonoBehaviour
         else if (instance != this)
             Destroy(this.gameObject);
 
-        StartCoroutine(Process("StagelnfoReal.xml"));
-
+        StartCoroutine(Process("Stagelnfo.xml"));
 
     }
 
+    private void Update()
+    {
+        //if(Input.GetKeyDown(KeyCode.Alpha8))
+        //{
+        //    Save(GameManager.instance.StageInfos, "Stagelnfo.xml");
+        //}
+    }
+
     // 데이터저장
-    public void Write(List<StageInfo> StageInfo, string filePath)
+    public void Save(List<StageInfo> StageInfo, string filePath)
     {
         XmlDocument Document = new XmlDocument();
         XmlElement ItemListElement = Document.CreateElement("StageInfo");
@@ -44,6 +51,8 @@ public class DataIO : MonoBehaviour
             StageElement.SetAttribute("EndPassage", stageData.endPassageIdx.ToString());
             StageElement.SetAttribute("BackgroundName", stageData.backgroundResources);
             StageElement.SetAttribute("MinimapName", stageData.minimapResources);
+            StageElement.SetAttribute("Clear", stageData.FirstClear.ToString());
+
 
             for (int i = 0; i < 3; i++)
             {
@@ -75,6 +84,8 @@ public class DataIO : MonoBehaviour
         string filename = SetStr(filePath);
 
         Document.Save(filename);
+
+        Debug.Log("세이부성공");
     }
 
     // 데이터 읽기
@@ -114,12 +125,11 @@ public class DataIO : MonoBehaviour
                     StageInfo.endPassageIdx = int.Parse(child.Attributes.GetNamedItem("EndPassage").Value);
                     StageInfo.backgroundResources = child.Attributes.GetNamedItem("BackgroundName").Value;
                     StageInfo.minimapResources = child.Attributes.GetNamedItem("MinimapName").Value;
-                    StageInfo.FirstClear = false;
+                    StageInfo.FirstClear = bool.Parse(child.Attributes.GetNamedItem("Clear").Value);
 
                     for (int i = 0; i < 3; i++)
                     {
                         int temp = int.Parse(child.Attributes.GetNamedItem("MonsterNum_" + i.ToString()).Value);
-                        if (temp != -1)
                             StageInfo.MonsterList.Add(temp);
                     }
 

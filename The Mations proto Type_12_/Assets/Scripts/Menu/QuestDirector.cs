@@ -9,11 +9,13 @@ public class QuestDirector : MonoBehaviour
     public static int count;
     public GameObject QuestText;
     public GameObject QuestEffect;
+    public GameObject Ending;
 
 
     public void EndingGo()
     {
-        SceneManager.LoadScene("EndingCredit");
+        Ending.SetActive(true);
+        
     }
     // Start is called before the first frame update
     void Start()

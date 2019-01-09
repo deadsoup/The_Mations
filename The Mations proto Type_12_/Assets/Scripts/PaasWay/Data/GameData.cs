@@ -43,6 +43,7 @@ namespace DataInfo
         // 미니맵 이미지 리소스주소
         public string minimapResources;
 
+        // 해당맵 클리어 유무
         public bool FirstClear;
 
         // 몬스터 목록
