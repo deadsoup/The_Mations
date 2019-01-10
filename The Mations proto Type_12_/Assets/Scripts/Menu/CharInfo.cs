@@ -9,22 +9,6 @@ public class CharInfo : MonoBehaviour
     
     public GameObject Point;
 
-    public GameObject Point2;
-    public GameObject Point3;
-    public GameObject Str1;
-    public GameObject Wiz1;
-    public GameObject Hp1;
-    public GameObject Mp1;
-    public GameObject Hp2;
-    public GameObject Mp2;
-    public GameObject Hp3;
-    public GameObject Mp3;
-    
-    public GameObject Str2;
-    public GameObject Wiz2;
-    public GameObject Str3;
-    public GameObject Wiz3;
-
     public GameObject Hp;
     public GameObject Mp;
     public GameObject Str;
@@ -34,131 +18,67 @@ public class CharInfo : MonoBehaviour
 
 
     // Start is called before the first frame update
-    public void StatUP1()
+    public void StrUp()
     {
-        
-        if (npc.SkillPoint >= 1)
+        for (int i = 0; i < 10; i++)
         {
-            npc.Str[0]++;
-            this.Str1.GetComponent<Text>().text =""+(npc.Str[0]);
-            npc.SkillPoint += -1;
+            if (i == battle.c)
+            {
+                if (npc.SkillPoint >= 1)
+                {
+                    npc.Str[battle.c]++;
+                    npc.SkillPoint += -1;
+                }
+            }
         }
         
     }
-    public void StatUP2()
+    public void WisUP()
     {
 
-        if (npc.SkillPoint >= 1)
+        for (int i = 0; i < 10; i++)
         {
-            npc.Wis[0]++;
-            this.Wiz1.GetComponent<Text>().text = ""+(npc.Wis[0]);
-            npc.SkillPoint += -1;
+            if (i == battle.c)
+            {
+                if (npc.SkillPoint >= 1)
+                {
+                    npc.Wis[battle.c]++;
+                    npc.SkillPoint += -1;
+                }
+            }
         }
 
     }
-    public void StatUP21()
+    public void HpUP()
     {
-
-        if (npc.SkillPoint >= 1)
+        for (int i = 0; i < 10; i++)
         {
-            npc.Str[1]++;
-            this.Str2.GetComponent<Text>().text = "" + (npc.Str[1]);
-            npc.SkillPoint += -1;
+            if (i == battle.c)
+            {
+
+                if (npc.ArchivePoint[0] >= 1)
+                {
+                    npc.Hp[battle.c] += 10;
+                    npc.SkillPoint += -1;
+                }
+            }
         }
 
     }
-    public void StatUP22()
+    public void MpUP()
     {
 
-        if (npc.SkillPoint >= 1)
+        for (int i = 0; i < 10; i++)
         {
-            npc.Wis[1]++;
-            this.Wiz2.GetComponent<Text>().text = "" + (npc.Wis[1]);
-            npc.SkillPoint += -1;
-        }
-    }
-    public void StatUP31()
-    {
+            if (i == battle.c)
+            {
 
-        if (npc.SkillPoint >= 1)
-        {
-            npc.Str[2]++;
-            this.Str3.GetComponent<Text>().text = "" + (npc.Str[2]);
-            npc.SkillPoint += -1;
-        }
-
-    }
-    public void StatUP32()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Wis[2]++;
-            this.Wiz3.GetComponent<Text>().text = "" + (npc.Wis[2]);
-            npc.ArchivePoint[0] += -1;
-        }
-    }
-    public void HpUP1()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Hp[0]+=10;
-            this.Hp1.GetComponent<Text>().text = "" + (npc.Hp[0]);
-            npc.ArchivePoint[0] += -1;
-        }
-
-    }
-    public void MpUP1()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Mp[0]+=10;
-            this.Mp1.GetComponent<Text>().text = "" + (npc.Mp[0]);
-            npc.ArchivePoint[0] += -1;
-        }
-    }
-    public void HpUP2()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Hp[1] += 10;
-            this.Hp2.GetComponent<Text>().text = "" + (npc.Hp[1]);
-            npc.ArchivePoint[0] += -1;
-        }
-
-    }
-    public void MpUP2()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Mp[1] += 10;
-            this.Mp2.GetComponent<Text>().text = "" + (npc.Mp[1]);
-            npc.ArchivePoint[0] += -1;
-        }
-    }
-    public void HpUP3()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Hp[2] += 10;
-            this.Hp3.GetComponent<Text>().text = "" + (npc.Hp[2]);
-            npc.ArchivePoint[0] += -1;
-        }
-
-    }
-    public void MpUP3()
-    {
-
-        if (npc.ArchivePoint[0] >= 1)
-        {
-            npc.Mp[2] += 10;
-            this.Mp3.GetComponent<Text>().text = "" + (npc.Mp[2]);
-            npc.ArchivePoint[0] += -1;
+                if (npc.ArchivePoint[0] >= 1)
+                {
+                    npc.Mp[battle.c] += 10;
+                    npc.ArchivePoint[0] += -1;
+                }
+            }
         }
     }
 
@@ -173,19 +93,6 @@ public class CharInfo : MonoBehaviour
         Point = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Stat").GetChild(4).gameObject;
 
 
-        this.Str1.GetComponent<Text>().text = " "+2+0;
-        this.Wiz1.GetComponent<Text>().text = " "+5+0;
-        this.Str2.GetComponent<Text>().text = " "+3+0;
-        this.Wiz2.GetComponent<Text>().text = " "+3+0;
-        this.Str3.GetComponent<Text>().text = " " +2+0;
-        this.Wiz3.GetComponent<Text>().text = " " +1+0;
-        
-        this.Hp1.GetComponent<Text>().text = " " + 150;
-        this.Mp1.GetComponent<Text>().text = " " + 200;
-        this.Hp2.GetComponent<Text>().text = " " + 200;
-        this.Mp2.GetComponent<Text>().text = " " + 150;
-        this.Hp3.GetComponent<Text>().text = " " + 250;
-        this.Mp3.GetComponent<Text>().text = " " + 100;
 
         /*
         Hp.GetComponent<Text>().text = "체력 : " + (npc.Hp[slotChange.ChangeChar] + npc.Equip_MaxHp[slotChange.ChangeChar]);
@@ -201,9 +108,6 @@ public class CharInfo : MonoBehaviour
     void Update()
     {
 
-        this.Point.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";
-        this.Point2.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";
-        this.Point3.GetComponent<Text>().text = "    " + npc.ArchivePoint[0] + "    Point";
 
     }
 }

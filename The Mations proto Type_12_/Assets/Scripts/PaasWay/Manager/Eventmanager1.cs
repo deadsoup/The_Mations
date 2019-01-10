@@ -7,6 +7,7 @@ public class Eventmanager1 : MonoBehaviour
 {
     public List<GameObject> Event = new List<GameObject>();
 
+    SaveBattleScene saveBattleScene;
 
     public static Eventmanager1 instance = null;
 
@@ -14,6 +15,12 @@ public class Eventmanager1 : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        if (SceneManager.GetActiveScene().name == "Passway")
+        {
+            saveBattleScene = GameObject.Find("EventSystem").GetComponent<SaveBattleScene>();
+
+        }
     }
 
     public void EventText(int eventIdx)
@@ -23,6 +30,7 @@ public class Eventmanager1 : MonoBehaviour
 
     public void BatteEvent()
     {
+        saveBattleScene.saveJson();
         SceneManager.LoadScene("DH_Battle");
     }
 
@@ -30,46 +38,50 @@ public class Eventmanager1 : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            npc.Hp[i] += (int)((float)npc.MaxHp[i] * amount);
-            if(npc.Hp[i] > npc.MaxHp[i])
+            npc.Hp[battle.switching[i]] += (int)((float)npc.MaxHp[battle.switching[i]] * amount);
+            if(npc.Hp[battle.switching[i]] > npc.MaxHp[battle.switching[i]])
             {
-                npc.Hp[i] = npc.MaxHp[i];
+                npc.Hp[battle.switching[i]] = npc.MaxHp[battle.switching[i]];
             }
         }
+        saveBattleScene.saveJson();
     }
 
     public void MpRecovery(float amount)
     {
         for (int i = 0; i < 3; i++)
         {
-            npc.Mp[i] += (int)((float)npc.MaxMp[i] * amount);
-            if (npc.Mp[i] > npc.MaxMp[i])
+            npc.Mp[battle.switching[i]] += (int)((float)npc.MaxMp[battle.switching[i]] * amount);
+            if (npc.Mp[battle.switching[i]] > npc.MaxMp[battle.switching[i]])
             {
-                npc.Mp[i] = npc.MaxMp[i];
+                npc.Mp[battle.switching[i]] = npc.MaxMp[battle.switching[i]];
             }
         }
+        saveBattleScene.saveJson();
     }
 
     public void AddExp(int amount)
     {
         npc.ArchivePoint[0] += amount;
-        if(npc.ArchivePoint[0] >= 1000)
+        if(npc.ArchivePoint[0] >= 500)
         {
-            npc.ArchivePoint[0] -= 1000;
+            npc.ArchivePoint[0] -= 500;
             npc.SkillPoint += 1;
         }
+        saveBattleScene.saveJson();
     }
 
     public void Trap(float amount)
     {
         for (int i = 0; i < 3; i++)
         {
-            npc.Hp[i] -= (int)((float)npc.MaxHp[i] * amount);
-            if (npc.Hp[i] <= 0)
+            npc.Hp[battle.switching[i]] -= (int)((float)npc.MaxHp[battle.switching[i]] * amount);
+            if (npc.Hp[battle.switching[i]] <= 0)
             {
-                npc.Hp[i] = 1;
+                npc.Hp[battle.switching[i]] = 1;
             }
         }
+        saveBattleScene.saveJson();
     }
 }
 

@@ -33,6 +33,7 @@ public class MapManager : MonoBehaviour
     // 세이프존 체크
     //public bool IsSafe;
 
+    SaveBattleScene saveBattleScene;
 
     // 미니맵 초록불
     public GameObject clearPassage;
@@ -56,9 +57,11 @@ public class MapManager : MonoBehaviour
     // 나가기 버튼
     public GameObject ExitButton;
 
+    private int AddMonster;
+
     private void Awake()
     {
-
+        AddMonster = 10;
     }
 
     // Start is called before the first frame update
@@ -93,7 +96,11 @@ public class MapManager : MonoBehaviour
         // 백그라운드 할당
         bgSprite = Resources.Load<Sprite>(StageInfo.backgroundResources);
         bgRenderer.sprite = bgSprite;
+        if (SceneManager.GetActiveScene().name == "Passway")
+        {
+            saveBattleScene =  GameObject.Find("EventSystem").GetComponent<SaveBattleScene>();
 
+        }
         // 미니맵 리소스(이미지)할당
         newSprite = Resources.Load<Sprite>(StageInfo.minimapResources);
         minimapImage.overrideSprite = newSprite;
@@ -137,6 +144,21 @@ public class MapManager : MonoBehaviour
 
         // 전투, 이벤트 시작처리
         int rnd = Random.Range(0, 2);
+        if (currPassage == StageInfo.endPassageIdx)
+        {
+            switch (currStage)
+            {
+                case 4:
+                    rnd = 1;
+                    break;
+                case 7:
+                    rnd = 1;
+                    break;
+                case 12:
+                    rnd = 1;
+                    break;
+            }
+        }
         if (rnd == 0)
         {
             int SetEvent = 0;
@@ -167,13 +189,32 @@ public class MapManager : MonoBehaviour
             // 게임매니저한테 정보를 넘김 (중간정보 세이브기능)
             GameManager.instance.SaveData(StageInfo, currStage, currPassage);
 
+
             Move.mobIdx = StageInfo.MonsterList[Random.Range(0, StageInfo.MonsterList.Count)];
-            if(Move.mobIdx == -1)
+            if (Move.mobIdx == -1)
             {
                 Move.mobIdx = StageInfo.MonsterList[0];
             }
 
-            Move.mobIdx += 10;
+            Move.mobIdx += AddMonster;
+
+            // 4,7,12스테이지 일경우 몬스터 번호를 보스로 변경
+            if (currPassage == StageInfo.endPassageIdx)
+            {
+                switch (currStage)
+                {
+                    case 4:
+                        Move.mobIdx = 10 + AddMonster; // 보스번호5 + 적용할 몬스터번호 10
+                        break;
+                    case 7:
+                        Move.mobIdx = 5 + AddMonster;
+                        break;
+                    case 12:
+                        Move.mobIdx = 11 + AddMonster;
+                        break;
+                }
+            }
+
 
             Debug.Log("몬스터 번호 : " + Move.mobIdx.ToString());
             Eventmanager1.instance.BatteEvent();

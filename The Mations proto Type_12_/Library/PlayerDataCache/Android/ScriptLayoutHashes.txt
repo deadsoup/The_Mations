@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/zere4/Desktop/빽업/test.apk
+C:/Users/6kigs1_22/Desktop/모바일 빌드/모바일/Test2.apk
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 Assets/Scenes/StoryScene.unity
@@ -38,7 +38,6 @@ e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventH
 1a904a99aa2a56d9d0629824a0770aa3 Assembly-CSharp.dll:.Reward
 158aa53b26cedc80fe49bb071f28dadc Assembly-CSharp.dll:.CharUiDirector
 e9e28c2ff818dbbdc463d7ecf6988c7e Assembly-CSharp.dll:.BDoor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.Editor.dll:UnityEngine.Advertisements.Editor.Placeholder
 6403821a265905f705fd949a12caeaec Assembly-CSharp.dll:.SKillManager
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -143,8 +142,6 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 a8d32592a521ae44026a32d19489666d Assembly-CSharp.dll:.Testing2
 ebc138c09df388cd3d05944836ea248c Assembly-CSharp.dll:.Move
 0e454e97b3654e0691ea2206be09e5dc Assembly-CSharp.dll:.QuestDirector
-303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
-7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
 98d97c1db004cc7828f2fe975abd1a37 Assembly-CSharp.dll:.SkillData
 dab014554d60eea2beaf0ee415351848 Assembly-CSharp.dll:.MapInfomation
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
@@ -156,7 +153,6 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 e9e28c2ff818dbbdc463d7ecf6988c7e Assembly-CSharp.dll:.SDoor
 457de5d8c72e901b60bec957b2172a8c Assembly-CSharp.dll:.World
 7bfeb40c9887d51edfea7866b47fcd30 Assembly-CSharp.dll:.Option
-71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 369c2f64df82ae5fa948e2e268f2b0a4 Assembly-CSharp.dll:.Option1
 5d27c6e85ec89cfab8577e9e26695e88 Assembly-CSharp.dll:.CFX_AutoDestructShuriken
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
@@ -164,7 +160,7 @@ e9e28c2ff818dbbdc463d7ecf6988c7e Assembly-CSharp.dll:.SDoor
 bd84db0a50a82511dbe8d0c85c494a45 Assembly-CSharp.dll:.SaveUiDirector
 660deb0ce569359218f0ba85b7ce0e3a Assembly-CSharp.dll:.CFX_LightIntensityFade
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-3a5c57556af5560d4c1d7042a85c9206 Assembly-CSharp.dll:.battle
+5a4397c5a91c81290e36af774c860668 Assembly-CSharp.dll:.battle
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Tuto
 b9d77ef37764e5679f799c97d341fb0b Assembly-CSharp.dll:.MonsterData
 4b81b0be989d47dd6309198ee157d719 Assembly-CSharp.dll:.Player
@@ -193,7 +189,6 @@ aa82b3ce4c0c9b227036c0337315c5d3 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 2ecdbe75f54c8965e9d317f6c9a2e0e3 Assembly-CSharp.dll:.slot
 e51c09a4cc447f11db225afcd8e3e490 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GameResolution
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 259d013faac28e8ba0aa2a7542273735 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -215,7 +210,7 @@ f08d3cb9c7de6c38cd4b0df0ee38e4c1 Assembly-CSharp.dll:.FloatingText
 797db150cfaf24efedc16ed4273ce816 Assembly-CSharp.dll:.DataIO
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 1163c01ce8e539e29ae85d6625e6c464 Assembly-CSharp.dll:.SlotChange
-340028806c7146a7cead960bdd89f385 Assembly-CSharp.dll:.CharInfo
+4f07a48e74530fda11301ded1baac72a Assembly-CSharp.dll:.CharInfo
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 68d1a934693d39dcc16b173567da5b47 Assembly-CSharp.dll:.StageManager
@@ -241,3 +236,4 @@ e9e28c2ff818dbbdc463d7ecf6988c7e Assembly-CSharp.dll:.Door
 3dfdc57547dac81ed9e4ac74ff582be5 Assembly-CSharp.dll:.GameManager
 deca4ea9f8880826350452232be5bb71 Assembly-CSharp.dll:.PlayerSlot1
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Battle_Tuto
+a7068cf1c86f850d9304fe78517b3d3b Assembly-CSharp.dll:.SpriteSet

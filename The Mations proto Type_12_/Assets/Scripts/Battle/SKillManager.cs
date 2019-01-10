@@ -137,7 +137,7 @@ public class SKillManager : MonoBehaviour
 
         party = GameObject.Find("PartySystem").GetComponent<Party>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             playerSprite[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").transform.Find("Char1").gameObject;
             playerSprite[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Char2").gameObject;
@@ -306,6 +306,7 @@ public class SKillManager : MonoBehaviour
 
     public void UniqueSkill_Set(int num)
     {
+        Debug.Log( "캐릭터 번호");
         if (num == 0)
         {
             skillButton[0].onClick.RemoveAllListeners();
@@ -324,6 +325,7 @@ public class SKillManager : MonoBehaviour
 
         if (num == 2)
         {
+            Debug.Log("진입 성공 ");
             skillButton[0].onClick.RemoveAllListeners();
             skillButton[0].onClick.AddListener(Dog_UniqueSkill);
             skillButton[0].name = "개 고유스킬";

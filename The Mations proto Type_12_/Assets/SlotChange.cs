@@ -208,13 +208,6 @@ public class SlotChange : MonoBehaviour
 
         Status = GameObject.Find("Canvas").transform.Find("Status").gameObject;
 
-        Status.SetActive(false);
-
-
-        Char1.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/idoll");
-        Char2.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/JJintta");
-        Char3.GetComponent<Image>().sprite = Resources.Load<Sprite>("Charcter/CharFullShot/Dog");
-
     }
 
     // Update is called once per frame

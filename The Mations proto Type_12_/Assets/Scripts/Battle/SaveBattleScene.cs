@@ -27,7 +27,11 @@ public class SaveBattleScene : MonoBehaviour
     GameObject[] Skillslot = new GameObject[3];
     SKillManager skill;
     npc Npc;
+
+    SlotChange slotChange;
     //GameObject invenslot;
+    SpriteSet spriteSet;
+    
 
     int[] P1_skillID = new int[3];
     int[] P2_skillID = new int[3];
@@ -38,7 +42,7 @@ public class SaveBattleScene : MonoBehaviour
     bool[] P2_skilldata = new bool[15];
     bool[] P3_skilldata = new bool[15];
 
-
+    
 
     public void saveJson()
     {
@@ -401,12 +405,17 @@ public class SaveBattleScene : MonoBehaviour
 
         npc.SkillPoint = battleLoad[0].SkillPoint;
 
-        npc.Equip_Str[battle.switching[0]] = 0; // 장비의 능력치를 0으로 바꾼다.
-        npc.Equip_Wis[battle.switching[0]] = 0;
 
         Player1_ID = battleLoad[0].Id;
         Player2_ID = battleLoad[1].Id;
         Player3_ID = battleLoad[2].Id;
+
+        if (player[0].activeSelf == true)
+        {
+            npc.Equip_Str[battle.switching[0]] = 0; // 장비의 능력치를 0으로 바꾼다.
+            npc.Equip_Wis[battle.switching[0]] = 0;
+        }
+
 
         if (player[1].activeSelf == true)
         {
@@ -421,18 +430,82 @@ public class SaveBattleScene : MonoBehaviour
         }
 
 
-        for (int i = 0; i < battleLoad.Count; i++)
+
+
+        if (player[0].activeSelf == true)
         {
-            npc.Id[battle.switching[i]] = battleLoad[i].Id; // 능력치 호출
-            npc.MaxHp[battle.switching[i]] = battleLoad[i].MaxHp;
-            npc.Hp[battle.switching[i]] = battleLoad[i].Hp;
-            npc.MaxMp[battle.switching[i]] = battleLoad[i].MaxMp;
-            npc.Mp[battle.switching[i]] = battleLoad[i].Mp;
-            npc.Str[battle.switching[i]] = battleLoad[i].Str;
-            npc.Wis[battle.switching[i]] = battleLoad[i].Wis;
-            npc.ArchivePoint[i] = battleLoad[i].ArchivePoint;
+
+            npc.Id[battle.switching[0]] = battleLoad[0].Id; // 능력치 호출
+            npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
+            npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
+            npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
+            npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
+            npc.Str[battle.switching[0]] = battleLoad[0].Str;
+            npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
+            npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+
+            if (SceneManager.GetActiveScene().name == "DH_Battle")
+            {
+                player[0].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[battle.switching[0]];
+
+            }
+
+            if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
+                Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
+            }
         }
 
+        if (player[1].activeSelf == true)
+        {
+            npc.Id[battle.switching[1]] = battleLoad[1].Id; // 능력치 호출
+            npc.MaxHp[battle.switching[1]] = battleLoad[1].MaxHp;
+            npc.Hp[battle.switching[1]] = battleLoad[1].Hp;
+            npc.MaxMp[battle.switching[1]] = battleLoad[1].MaxMp;
+            npc.Mp[battle.switching[1]] = battleLoad[1].Mp;
+            npc.Str[battle.switching[1]] = battleLoad[1].Str;
+            npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
+            npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
+
+            if (SceneManager.GetActiveScene().name == "DH_Battle")
+            {
+                print(player[1].name);
+                player[1].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[battle.switching[1]];
+
+            }
+
+            if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
+                Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[1]];
+            }
+        }
+
+        if (player[2].activeSelf == true)
+        {
+            npc.Id[battle.switching[2]] = battleLoad[2].Id; // 능력치 호출
+            npc.MaxHp[battle.switching[2]] = battleLoad[2].MaxHp;
+            npc.Hp[battle.switching[2]] = battleLoad[2].Hp;
+            npc.MaxMp[battle.switching[2]] = battleLoad[2].MaxMp;
+            npc.Mp[battle.switching[2]] = battleLoad[2].Mp;
+            npc.Str[battle.switching[2]] = battleLoad[2].Str;
+            npc.Wis[battle.switching[2]] = battleLoad[2].Wis;
+            npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
+
+
+            if (SceneManager.GetActiveScene().name == "DH_Battle")
+            {
+                player[2].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[battle.switching[2]];
+
+            }
+
+            if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
+                Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[2]];
+            }
+        }
 
 
         for (int Num = 0; Num < battleLoad.Count; Num++) // 0번 1번 2번
@@ -442,7 +515,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven1_Amount; i++)
                 {
-                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
+                    if (Num == 0)  inven.AddItem(battleLoad[Num].Inven1); 
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                     Debug.Log("아이템 생성");
@@ -451,7 +524,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven1 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
+                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven1); 
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                 Debug.Log("아이템 생성");
@@ -463,7 +536,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven2_Amount; i++)
                 {
-                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
+                    if (Num == 0)  inven.AddItem(battleLoad[Num].Inven2); 
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                     Debug.Log("아이템 생성2");
@@ -472,7 +545,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven2 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
+                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven2); 
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                 Debug.Log("아이템 생성2");
@@ -494,7 +567,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven3 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0) inven.AddItem(battleLoad[Num].Inven3);
+                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven3); 
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven3); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven3); }
                 Debug.Log("아이템 생성3");
@@ -507,7 +580,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven4_Amount; i++)
                 {
-                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven4); 
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                     Debug.Log("아이템 생성4");
@@ -516,7 +589,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven4 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
+                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven4); 
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                 Debug.Log("아이템 생성4");
@@ -577,7 +650,13 @@ public class SaveBattleScene : MonoBehaviour
 
             }
         }
+        *
+        *
+        *
+        *
         */
+
+        Debug.Log("-------------------------세이브---------------------");
     }
 
     void load()
@@ -600,6 +679,37 @@ public class SaveBattleScene : MonoBehaviour
 
     public void playerSelect1(int Adebt)
     {
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
+
+            party.player[Adebt] = true;
+            if (Set.GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").transform.Find("Getta1").gameObject;
+                Image.SetActive(true);
+                Set.GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[0] = Adebt;
+
+                print(battle.switching[0]+"배틀스위칭은 현재 이거다 ");
+
+                Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
+
+                print(Set.transform.Find("Char1").GetComponent<Image>().sprite.name);
+
+                npc.Id[battle.switching[0]] = battleLoad[0].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
+                npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
+                npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
+                npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
+                npc.Str[battle.switching[0]] = battleLoad[0].Str;
+                npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
+                npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+
+
+                //Battle.chaneGetta1();
+            }
+        }
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
             party.player[Adebt] = true;
@@ -611,6 +721,18 @@ public class SaveBattleScene : MonoBehaviour
                 battle.switching[0] = Adebt;
                 player[0].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
 
+                battle.switching[0] = Adebt;
+
+                npc.Id[battle.switching[0]] = battleLoad[0].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
+                npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
+                npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
+                npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
+                npc.Str[battle.switching[0]] = battleLoad[0].Str;
+                npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
+                npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+
+
                 Battle.chaneGetta1();
             }
         }
@@ -618,54 +740,134 @@ public class SaveBattleScene : MonoBehaviour
 
     public void playerSelect2(int Adebt)
     {
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
+
+            if (Set.GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
+                Image.SetActive(true);
+                Set.GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[1] = Adebt;
+
+
+
+                Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[Adebt];
+
+                npc.Id[battle.switching[1]] = battleLoad[1].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[1]] = battleLoad[1].MaxHp;
+                npc.Hp[battle.switching[1]] = battleLoad[1].Hp;
+                npc.MaxMp[battle.switching[1]] = battleLoad[1].MaxMp;
+                npc.Mp[battle.switching[1]] = battleLoad[1].Mp;
+                npc.Str[battle.switching[1]] = battleLoad[1].Str;
+                npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
+                npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
+
+            }
+        }
+
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
             party.player[Adebt] = true;
             if (player[1].GetComponent<PlayerSlot1>().slotCharge == false)
             {
-                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta2").gameObject;
                 Image.SetActive(true);
                 player[1].GetComponent<PlayerSlot1>().slotCharge = true;
                 battle.switching[1] = Adebt;
-                player[1].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
+                player[1].transform.Find("Char2").GetComponent<Image>().sprite = party.CharSprite[Adebt];
 
-                Battle.chaneGetta1();
+                npc.Id[battle.switching[1]] = battleLoad[1].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[1]] = battleLoad[1].MaxHp;
+                npc.Hp[battle.switching[1]] = battleLoad[1].Hp;
+                npc.MaxMp[battle.switching[1]] = battleLoad[1].MaxMp;
+                npc.Mp[battle.switching[1]] = battleLoad[1].Mp;
+                npc.Str[battle.switching[1]] = battleLoad[1].Str;
+                npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
+                npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
+
+                Battle.chaneGetta2();
             }
         }
     }
 
     public void playerSelect3(int Adebt)
     {
+
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
+            party.player[Adebt] = true;
+            if (Set.GetComponent<PlayerSlot1>().slotCharge == false)
+            {
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").transform.Find("Getta3").gameObject;
+                Image.SetActive(true);
+                Set.GetComponent<PlayerSlot1>().slotCharge = true;
+                battle.switching[2] = Adebt;
+
+
+
+                Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[Adebt];
+
+
+                npc.Id[battle.switching[2]] = battleLoad[2].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[2]] = battleLoad[2].MaxHp;
+                npc.Hp[battle.switching[2]] = battleLoad[2].Hp;
+                npc.MaxMp[battle.switching[2]] = battleLoad[2].MaxMp;
+                npc.Mp[battle.switching[2]] = battleLoad[2].Mp;
+                npc.Str[battle.switching[2]] = battleLoad[2].Str;
+                npc.Wis[battle.switching[2]] = battleLoad[2].Wis;
+                npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
+
+                Battle.chaneGetta3();
+            }
+        }
+
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
-            party.player[Adebt] = true;
+
             if (player[2].GetComponent<PlayerSlot1>().slotCharge == false)
             {
-                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta1").gameObject;
+                GameObject Image = GameObject.Find("Canvas").transform.Find("Jin_Getta3").gameObject;
                 Image.SetActive(true);
                 player[2].GetComponent<PlayerSlot1>().slotCharge = true;
                 battle.switching[2] = Adebt;
-                player[2].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[Adebt];
+                player[2].transform.Find("Char3").GetComponent<Image>().sprite = party.CharSprite[Adebt];
 
-                Battle.chaneGetta1();
+
+                npc.Id[battle.switching[2]] = battleLoad[2].Id; // 능력치 호출
+                npc.MaxHp[battle.switching[2]] = battleLoad[2].MaxHp;
+                npc.Hp[battle.switching[2]] = battleLoad[2].Hp;
+                npc.MaxMp[battle.switching[2]] = battleLoad[2].MaxMp;
+                npc.Mp[battle.switching[2]] = battleLoad[2].Mp;
+                npc.Str[battle.switching[2]] = battleLoad[2].Str;
+                npc.Wis[battle.switching[2]] = battleLoad[2].Wis;
+                npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
+
+
+                Battle.chaneGetta3();
             }
         }
+        
     }
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             inven = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").GetComponent<Inven>();
             skill = GameObject.Find("SKillManager").GetComponent<SKillManager>();
             Npc = GameObject.Find("EventSystem").GetComponent<npc>();
+            spriteSet = GameObject.Find("EventSystem").GetComponent<SpriteSet>();
 
+            Battle = GameObject.Find("EventSystem").GetComponent<battle>();
 
             party = GameObject.Find("PartySystem").GetComponent<Party>();
 
-            player[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
-            player[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
-            player[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
+            player[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").transform.Find("Getta1").gameObject;
+            player[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
+            player[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").transform.Find("Getta3").gameObject;
 
 
             invenslot[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
@@ -690,7 +892,10 @@ public class SaveBattleScene : MonoBehaviour
             Skillslot[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
 
             GameObject Panel = GameObject.Find("Canvas").transform.Find("Status").gameObject;
-            //Panel.SetActive(false);
+
+
+
+            Panel.SetActive(false);
 
         }
 
@@ -760,29 +965,33 @@ public class SaveBattleScene : MonoBehaviour
         if (Directory.Exists(Application.persistentDataPath + "/Json") == true)
         {
             battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
-            //battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
-            //load();
-            loadJson();
+
+           
             print("현재 첫 캐릭터의 아이디는 무엇" + party.num);
 
-
-            print("발동");
+            loadJson();
             if (Player1_ID != 9)
             {
                 playerSelect1(Player1_ID);
+                print("발동");
+                print(Player1_ID + "발동");
             }
             if (Player2_ID != 9)
             {
                 playerSelect2(Player2_ID);
+                print(Player2_ID + "발동2");
             }
             if (Player3_ID != 9)
             {
                 playerSelect3(Player3_ID);
+                print(Player3_ID + "발동3");
             }
 
             if (Player1_ID == 9) { player[0].SetActive(false); }
             if (Player2_ID == 9) { player[1].SetActive(false); }
             if (Player3_ID == 9) { player[2].SetActive(false); }
+
+            Battle.chaneGetta1();
         }
         //Battle.chaneGetta1();
     }

@@ -55,7 +55,7 @@ public class Inven : MonoBehaviour
 
     private void Awake()
     {
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             Invenpanel = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").gameObject;
             Slotpanel = Invenpanel.transform.Find("Panel").gameObject;
