@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 80}
+  m_SizeDelta: {x: 60, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5473753109101831118
 CanvasRenderer:
@@ -91,6 +91,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill:
     Id: -1
+    Name: 
+    Need_MP: 0
+    Damage: 
+    Target: 
+    Attribute: 
+    Abnomal: 
+    Text: 
     sprite: {fileID: 0}
   slot: 0
 --- !u!114 &5739829166618226000

@@ -30,7 +30,7 @@ public class EndingManager : MonoBehaviour
                 obj[num].GetComponent<Image>().color = col;
                 yield return new WaitForSeconds(.1f);
             }
-            if (num < obj.Count)
+            if (num < obj.Count-1)
             {
                 obj[num++].SetActive(false);
                 obj[num].SetActive(true);

@@ -9,15 +9,17 @@ public class StartDirector : MonoBehaviour {
    public static bool count;
     public void LoadStoryScene()
 
-    {/*
-        if (!Directory.Exists(Application.persistentDataPath + "/Json"))
+    {
+        SceneManager.LoadScene("StoryScene");
+        /*ssif (!Directory.Exists(Application.persistentDataPath + "/Json"))
         {
+            SceneManager.LoadScene("StoryScene");
         }
         else
-        {*/
-     //SceneManager.LoadScene("GameScene");
-     //}
-        SceneManager.LoadScene("StoryScene");
+        {
+            SceneManager.LoadScene("GameScene");
+        }*/
+        
     }
      void Update()
     {

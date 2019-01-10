@@ -283,14 +283,15 @@ public class SaveBattleScene : MonoBehaviour
                         P1_skillID[0],
                         P1_skillID[1],
                         P1_skillID[2],
-                        npc.SkillPoint
+                        npc.SkillPoint,
+                        party.player[battle.switching[0]]
                         ));
         }
         else if (player[0].activeSelf == false)
         {
-            battleSave.Add(new BattleInfo(9, "없음", 0, 0,0,0,0,0,
+            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0,0,0 , 0,0,-1,0, 0, -1, 0, -1,0,0,0,0, npc.SkillPoint
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint, false
                         ));
 
         }
@@ -308,14 +309,15 @@ public class SaveBattleScene : MonoBehaviour
                                 P2_skillID[0],
                                 P2_skillID[1],
                                 P2_skillID[2],
-                                npc.SkillPoint
+                                npc.SkillPoint,
+                                party.player[battle.switching[1]]
                                 ));
         }
         else if (player[1].activeSelf == false)
         {
             battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint,false
                         ));
 
         }
@@ -334,14 +336,15 @@ public class SaveBattleScene : MonoBehaviour
                             P3_skillID[0],
                             P3_skillID[1],
                             P3_skillID[2],
-                            npc.SkillPoint
+                            npc.SkillPoint,
+                            party.player[battle.switching[2]]
                             ));
         }
         else if (player[2].activeSelf == false)
         {
             battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint,false
                         ));
 
         }
@@ -394,7 +397,8 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Skill1_ID"],
                     (int)battle_Load_System[i]["Skill2_ID"],
                     (int)battle_Load_System[i]["Skill3_ID"],
-                    (int)battle_Load_System[i]["SkillPoint"]
+                    (int)battle_Load_System[i]["SkillPoint"],
+                    (bool)battle_Load_System[i]["Player_Add"]
                     ));
         }
         //
@@ -455,6 +459,8 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
                 Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
             }
+
+            party.player[battle.switching[0]] = battleLoad[0].Player_Add;
         }
 
         if (player[1].activeSelf == true)
@@ -480,6 +486,8 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
                 Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[1]];
             }
+
+            party.player[battle.switching[1]] = battleLoad[1].Player_Add;
         }
 
         if (player[2].activeSelf == true)
@@ -505,6 +513,8 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
                 Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[2]];
             }
+
+            party.player[battle.switching[2]] = battleLoad[2].Player_Add;
         }
 
 
@@ -640,21 +650,6 @@ public class SaveBattleScene : MonoBehaviour
 
         }
 
-
-        /*
-        for (int Num = 0; Num < 10; Num++)
-        {
-            if (party.player[battle.switching[Num]] == true)
-            {
-                party.selectPlayer(battle.switching[Num]);
-
-            }
-        }
-        *
-        *
-        *
-        *
-        */
 
         Debug.Log("-------------------------세이브---------------------");
     }
@@ -1039,9 +1034,11 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
 
     public int SkillPoint;
 
+    public bool Player_Add;
+
     public BattleInfo(int id, string name, int maxhp, int hp, int maxmp, int mp, int str, int wis, int archivepoint, int equip_maxhp, int equip_maxmp, int equip_str, int equip_wis,
                     int inven1, int inven1_amount, int inven2, int inven2_amount, int inven3, int inven3_amount, int inven4, int inven4_amount,
-                    int skill1_id, int skill2_id, int skill3_id, int skillpoint)
+                    int skill1_id, int skill2_id, int skill3_id, int skillpoint, bool player_Add)
     {
         Id = id;
         Name = name;
@@ -1080,6 +1077,8 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
         //Skill3_Active = skill3_active;
 
         SkillPoint = skillpoint;
+
+        Player_Add = player_Add;
 
     }
 

@@ -20,7 +20,7 @@ public class Option : MonoBehaviour { // 타이틀화면 옵션창 관련
         {
             start = GameObject.Find("Canvas").transform.Find("Start").gameObject;
 
-            Load = GameObject.Find("Canvas").transform.Find("Load").gameObject;
+            
         }
         Close = OptionPopup.transform.Find("Close").gameObject;
         TitleGo = OptionPopup.transform.Find("TitleGo").gameObject;

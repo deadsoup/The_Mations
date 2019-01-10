@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class TypeWriterEffect : MonoBehaviour
 {
     public GameObject FadeOut;
+    public GameObject StoryBg;
+    public GameObject Cover1;
     //변경할 변수
 	public float delay;
     public float Skip_delay;
@@ -34,7 +36,10 @@ public class TypeWriterEffect : MonoBehaviour
         if(text_exit==true)
         {
             gameObject.SetActive(false);
-            
+            StoryBg.SetActive(true);
+            Cover1.SetActive(true);
+            FadeOut.SetActive(true);
+
         }
         
     }
@@ -101,13 +106,13 @@ public class TypeWriterEffect : MonoBehaviour
                 yield return new WaitForSeconds(delay);
             }
             //탈출시 모든 문자출력
-            Debug.Log("Typing 종료");
-            FadeOut.SetActive(true);
+           
+            
             this.GetComponent<Text>().text = _fullText[cnt];
             yield return new WaitForSeconds(Skip_delay);
 
             //스킵_지연후 종료
-            Debug.Log("Enter 대기");
+            
             text_full = true;
         }
     }
