@@ -31,7 +31,7 @@ public class SaveBattleScene : MonoBehaviour
     SlotChange slotChange;
     //GameObject invenslot;
     SpriteSet spriteSet;
-    
+
 
     int[] P1_skillID = new int[3];
     int[] P2_skillID = new int[3];
@@ -42,7 +42,7 @@ public class SaveBattleScene : MonoBehaviour
     bool[] P2_skilldata = new bool[15];
     bool[] P3_skilldata = new bool[15];
 
-    
+
 
     public void saveJson()
     {
@@ -267,7 +267,7 @@ public class SaveBattleScene : MonoBehaviour
                 }
             }
         }
-        
+
 
         Debug.Log("저장");
         if (player[0].activeSelf == true)
@@ -283,15 +283,14 @@ public class SaveBattleScene : MonoBehaviour
                         P1_skillID[0],
                         P1_skillID[1],
                         P1_skillID[2],
-                        npc.SkillPoint,
-                        party.player[battle.switching[0]]
+                        npc.SkillPoint
                         ));
         }
         else if (player[0].activeSelf == false)
         {
             battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint, false
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
                         ));
 
         }
@@ -309,15 +308,14 @@ public class SaveBattleScene : MonoBehaviour
                                 P2_skillID[0],
                                 P2_skillID[1],
                                 P2_skillID[2],
-                                npc.SkillPoint,
-                                party.player[battle.switching[1]]
+                                npc.SkillPoint
                                 ));
         }
         else if (player[1].activeSelf == false)
         {
             battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint,false
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
                         ));
 
         }
@@ -336,15 +334,14 @@ public class SaveBattleScene : MonoBehaviour
                             P3_skillID[0],
                             P3_skillID[1],
                             P3_skillID[2],
-                            npc.SkillPoint,
-                            party.player[battle.switching[2]]
+                            npc.SkillPoint
                             ));
         }
         else if (player[2].activeSelf == false)
         {
             battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
                         npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint,false
+                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
                         ));
 
         }
@@ -397,8 +394,7 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Skill1_ID"],
                     (int)battle_Load_System[i]["Skill2_ID"],
                     (int)battle_Load_System[i]["Skill3_ID"],
-                    (int)battle_Load_System[i]["SkillPoint"],
-                    (bool)battle_Load_System[i]["Player_Add"]
+                    (int)battle_Load_System[i]["SkillPoint"]
                     ));
         }
         //
@@ -459,8 +455,6 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
                 Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
             }
-
-            party.player[battle.switching[0]] = battleLoad[0].Player_Add;
         }
 
         if (player[1].activeSelf == true)
@@ -486,8 +480,6 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
                 Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[1]];
             }
-
-            party.player[battle.switching[1]] = battleLoad[1].Player_Add;
         }
 
         if (player[2].activeSelf == true)
@@ -513,8 +505,6 @@ public class SaveBattleScene : MonoBehaviour
                 GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
                 Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[2]];
             }
-
-            party.player[battle.switching[2]] = battleLoad[2].Player_Add;
         }
 
 
@@ -525,7 +515,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven1_Amount; i++)
                 {
-                    if (Num == 0)  inven.AddItem(battleLoad[Num].Inven1); 
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                     Debug.Log("아이템 생성");
@@ -534,7 +524,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven1 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven1); 
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven1);
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven1); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven1); }
                 Debug.Log("아이템 생성");
@@ -546,7 +536,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven2_Amount; i++)
                 {
-                    if (Num == 0)  inven.AddItem(battleLoad[Num].Inven2); 
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                     Debug.Log("아이템 생성2");
@@ -555,7 +545,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven2 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven2); 
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven2);
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven2); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven2); }
                 Debug.Log("아이템 생성2");
@@ -577,7 +567,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven3 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven3); 
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven3);
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven3); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven3); }
                 Debug.Log("아이템 생성3");
@@ -590,7 +580,7 @@ public class SaveBattleScene : MonoBehaviour
             {
                 for (int i = 0; i < battleLoad[Num].Inven4_Amount; i++)
                 {
-                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven4); 
+                    if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
                     if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
                     if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                     Debug.Log("아이템 생성4");
@@ -599,7 +589,7 @@ public class SaveBattleScene : MonoBehaviour
             else if (battleLoad[Num].Inven4 == -1) { Debug.Log("아이템 없음"); }
             else
             {
-                if (Num == 0)  inven.AddItem(battleLoad[Num].Inven4); 
+                if (Num == 0) inven.AddItem(battleLoad[Num].Inven4);
                 if (Num == 1) { inven.AddItem2(battleLoad[Num].Inven4); }
                 if (Num == 2) { inven.AddItem3(battleLoad[Num].Inven4); }
                 Debug.Log("아이템 생성4");
@@ -651,6 +641,21 @@ public class SaveBattleScene : MonoBehaviour
         }
 
 
+        /*
+        for (int Num = 0; Num < 10; Num++)
+        {
+            if (party.player[battle.switching[Num]] == true)
+            {
+                party.selectPlayer(battle.switching[Num]);
+
+            }
+        }
+        *
+        *
+        *
+        *
+        */
+
         Debug.Log("-------------------------세이브---------------------");
     }
 
@@ -686,7 +691,7 @@ public class SaveBattleScene : MonoBehaviour
                 Set.GetComponent<PlayerSlot1>().slotCharge = true;
                 battle.switching[0] = Adebt;
 
-                print(battle.switching[0]+"배틀스위칭은 현재 이거다 ");
+                print(battle.switching[0] + "배틀스위칭은 현재 이거다 ");
 
                 Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
 
@@ -844,7 +849,7 @@ public class SaveBattleScene : MonoBehaviour
                 Battle.chaneGetta3();
             }
         }
-        
+
     }
     // Start is called before the first frame update
     void Start()
@@ -961,7 +966,7 @@ public class SaveBattleScene : MonoBehaviour
         {
             battle_Load_System = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Json/battleSaveData.json"));
 
-           
+
             print("현재 첫 캐릭터의 아이디는 무엇" + party.num);
 
             loadJson();
@@ -1034,11 +1039,9 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
 
     public int SkillPoint;
 
-    public bool Player_Add;
-
     public BattleInfo(int id, string name, int maxhp, int hp, int maxmp, int mp, int str, int wis, int archivepoint, int equip_maxhp, int equip_maxmp, int equip_str, int equip_wis,
                     int inven1, int inven1_amount, int inven2, int inven2_amount, int inven3, int inven3_amount, int inven4, int inven4_amount,
-                    int skill1_id, int skill2_id, int skill3_id, int skillpoint, bool player_Add)
+                    int skill1_id, int skill2_id, int skill3_id, int skillpoint)
     {
         Id = id;
         Name = name;
@@ -1077,8 +1080,6 @@ public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것
         //Skill3_Active = skill3_active;
 
         SkillPoint = skillpoint;
-
-        Player_Add = player_Add;
 
     }
 

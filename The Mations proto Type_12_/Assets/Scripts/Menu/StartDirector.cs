@@ -10,16 +10,16 @@ public class StartDirector : MonoBehaviour {
     public void LoadStoryScene()
 
     {
-        SceneManager.LoadScene("StoryScene");
-        /*ssif (!Directory.Exists(Application.persistentDataPath + "/Json"))
+        //SceneManager.LoadScene("StoryScene");
+        if(!Directory.Exists(Application.persistentDataPath + "/Json"))
         {
             SceneManager.LoadScene("StoryScene");
         }
         else
         {
             SceneManager.LoadScene("GameScene");
-        }*/
-        
+        }
+
     }
      void Update()
     {

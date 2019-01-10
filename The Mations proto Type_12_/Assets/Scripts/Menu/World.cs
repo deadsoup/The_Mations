@@ -5,18 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class World : MonoBehaviour
 {
-    public GameObject WayTile;
+  
     public GameObject Character1;
     public GameObject Character6;
-    public GameObject Character2;
+    
     public GameObject Character3;
-    public GameObject Character4;
-    public GameObject Character5;
-
-    public void ClickWorld()
-    {
-        SceneManager.LoadScene("bin+yong");
-    }
+    
+  
     public void Start()
     {
        //테스트용 나중에 지워야됨 
