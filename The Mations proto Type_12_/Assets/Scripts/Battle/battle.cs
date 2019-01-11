@@ -169,7 +169,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("아이돌 모션 진입");
                     Char1.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char1.GetComponent<Animator>().runtimeAnimatorController = Idol;
-                    Player1.SetTrigger("Atk");
+                    Player1.SetTrigger("Atk1");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
 
 
@@ -179,7 +179,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("너드 모션 진입");
                     Char1.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char1.GetComponent<Animator>().runtimeAnimatorController = Nerd;
-                    Player1.SetTrigger("Atk");
+                    Player1.SetTrigger("Atk1");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
                 if (c == 2)
@@ -189,13 +189,13 @@ public class battle : MonoBehaviour {
                     {
                         Char1.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char1.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
-                        Player1.SetTrigger("Atk");
+                        Player1.SetTrigger("Atk1");
                     }
                     else
                     {
                         Char1.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char1.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                        Player1.SetTrigger("Atk");
+                        Player1.SetTrigger("Atk1");
                     }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
@@ -208,7 +208,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("모션 진입");
                     Char2.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char2.GetComponent<Animator>().runtimeAnimatorController = Idol;
-                    Player2.SetTrigger("Atk");
+                    Player2.SetTrigger("Atk2");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
 
                 }
@@ -217,7 +217,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("모션 진입");
                     Char2.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char2.GetComponent<Animator>().runtimeAnimatorController = Nerd;
-                    Player2.SetTrigger("Atk");
+                    Player2.SetTrigger("Atk2");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
                 if (c == 2)
@@ -227,13 +227,13 @@ public class battle : MonoBehaviour {
                     {
                         Char2.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char2.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
-                        Player2.SetTrigger("Atk");
+                        Player2.SetTrigger("Atk2");
                     }
                     else
                     {
                         Char2.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char2.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                        Player2.SetTrigger("Atk");
+                        Player2.SetTrigger("Atk2");
                     }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
@@ -246,7 +246,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("모션 진입");
                     Char3.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char3.GetComponent<Animator>().runtimeAnimatorController = Idol;
-                    Player3.SetTrigger("Atk");
+                    Player3.SetTrigger("Atk3");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
 
                 }
@@ -255,7 +255,7 @@ public class battle : MonoBehaviour {
                     Debug.Log("모션 진입");
                     Char3.GetComponent<Animator>().runtimeAnimatorController = null;
                     Char3.GetComponent<Animator>().runtimeAnimatorController = Nerd;
-                    Player3.SetTrigger("Atk");
+                    Player3.SetTrigger("Atk3");
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
                 if (c == 2)
@@ -265,18 +265,19 @@ public class battle : MonoBehaviour {
                     {
                         Char3.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char3.GetComponent<Animator>().runtimeAnimatorController = Dog_Trnas;
-                        Player3.SetTrigger("Atk");
+                        Player3.SetTrigger("Atk3");
                     }
                     else
                     {
                         Char3.GetComponent<Animator>().runtimeAnimatorController = null;
                         Char3.GetComponent<Animator>().runtimeAnimatorController = Dog;
-                        Player3.SetTrigger("Atk");
+                        Player3.SetTrigger("Atk3");
                     }
                     FloatingTextController.CreateFloatingText(pdamage.ToString(), transform);
                 }
             }
 
+            Monster.SetTrigger("Hit");
             EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
 
             if (npc.actiongage <= 0)
@@ -910,8 +911,12 @@ public class battle : MonoBehaviour {
         if (npc.Hp[switching[0]] <= 0)
         {
             npc.Hp[switching[0]] = 0;
-            Char1.GetComponent<Animator>().runtimeAnimatorController = null;
-            player1.SetActive(false);
+            Player1.SetTrigger("Dead");
+            if (Dice.transform.GetChild(1).GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idol_dead_Idle") == true)
+            {
+                Char1.GetComponent<Animator>().runtimeAnimatorController = null;
+                player1.SetActive(false);
+            }
 
         }
         if (npc.Hp[switching[1]] <= 0)
@@ -971,7 +976,9 @@ public class battle : MonoBehaviour {
 
             if (SceneManager.GetActiveScene().name == "GameScene")
             {
-
+                player1.transform.GetChild(1).gameObject.SetActive(true);
+                player2.transform.GetChild(1).gameObject.SetActive(false);
+                player3.transform.GetChild(1).gameObject.SetActive(false);
             }
 
 
@@ -1013,31 +1020,17 @@ public class battle : MonoBehaviour {
 
         if (npc.Hp[switching[1]] > 0 && playerDeactivate[1] == false) // 체인지 게타투
         {
-            /*
-            if (party.player[0] == true && player2.activeSelf == false && party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 0;
-                player2.SetActive(true);
-                party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            if (party.player[1] == true && player2.activeSelf == false && party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 1;
-                player2.SetActive(true);
-                party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            if (party.player[2] == true && player2.activeSelf == false && party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 2;
-                player2.SetActive(true);
-                party.playerSlot[1].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            */
 
             charActive[0] = false;
             charActive[1] = true;
             charActive[2] = false;
 
+            if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                player1.transform.GetChild(1).gameObject.SetActive(false);
+                player2.transform.GetChild(1).gameObject.SetActive(true);
+                player3.transform.GetChild(1).gameObject.SetActive(false);
+            }
 
             c = switching[1];
             Debug.Log(c + "캐릭터 번호");
@@ -1105,26 +1098,6 @@ public class battle : MonoBehaviour {
 
         if (npc.Hp[switching[2]] > 0 && playerDeactivate[2] == false) // 체인지 게타3
         {
-            /*
-            if (party.player[0] == true && player3.activeSelf == false && party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 0;
-                player3.SetActive(true);
-                party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            if (party.player[1] == true && player3.activeSelf == false && party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 1;
-                player3.SetActive(true);
-                party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            if (party.player[2] == true && player3.activeSelf == false && party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge == true)
-            {
-                c = 2;
-                player3.SetActive(true);
-                party.playerSlot[2].GetComponent<PlayerSlot1>().slotCharge = false;
-            }
-            */
 
             charActive[0] = false;
             charActive[1] = false;
@@ -1133,10 +1106,7 @@ public class battle : MonoBehaviour {
 
             c = switching[2];
             Debug.Log(c + "캐릭터 번호");
-            //switching[2] = c;
-            //Char2.SetActive(true);
-            //Char1.SetActive(false);
-            //Move.i = c;
+
             sKillManager.UniqueSkill_Set(c);
             sKillManager.resetSkill("skillSlot2");
             sKillManager.resetSkill("skillSlot3");
@@ -1161,6 +1131,15 @@ public class battle : MonoBehaviour {
             Invenpanel.transform.GetChild(12).gameObject.SetActive(true);
             Invenpanel.transform.GetChild(13).gameObject.SetActive(true);
             Invenpanel.transform.GetChild(14).gameObject.SetActive(true);
+
+            if (SceneManager.GetActiveScene().name == "GameScene")
+            {
+                player1.transform.GetChild(1).gameObject.SetActive(false);
+                player2.transform.GetChild(1).gameObject.SetActive(false);
+                player3.transform.GetChild(1).gameObject.SetActive(true);
+            }
+
+
 
             if (SceneManager.GetActiveScene().name == "DH_Battle")
             {
@@ -1230,7 +1209,6 @@ public class battle : MonoBehaviour {
 
         }
     }
-
     public IEnumerator player2_Status()
     {
         while (true)
@@ -1253,8 +1231,6 @@ public class battle : MonoBehaviour {
 
         }
     }
-
-
     public IEnumerator player3_Status()
     {
         while (true)
@@ -1277,9 +1253,6 @@ public class battle : MonoBehaviour {
 
         }
     }
-
-
-
 
 
     // Use this for initialization
@@ -1382,13 +1355,7 @@ public class battle : MonoBehaviour {
             {
                 
                 GameObject nomal = Dice.transform.GetChild(1).gameObject;
-                /*
-                Destroy(nomal);
 
-                GameObject Set = Instantiate(nomal);
-                Set.transform.SetParent(Dice.transform);
-                Set.name = "DiceAni";
-                */
                 DiceAni.runtimeAnimatorController = null;
                 diceTriger = false;
                 Dice.SetActive(false);
@@ -1846,13 +1813,40 @@ public class battle : MonoBehaviour {
 
                     reward.SetActive(true);
                     reItems = 1;
-                    Reward.reward1 = Random.Range(1, 6);
-                    Reward.reward2 = Random.Range(1, 6);
-                    Reward.reward3 = Random.Range(1, 6);
 
-                    Reward.skillreward1 = Random.Range(1, 6);
-                    Reward.skillreward2 = Random.Range(1, 6);
-                    Reward.skillreward3 = Random.Range(1, 6);
+                    /// 몬스터 ID에 따른 드랍 형태
+                    if (i == 1)
+                    {
+                        /*
+                        int per = 50; // 무기확률
+                        int per2 = 30; // 방어구 확률
+                        int per3 = 10; // 소비템 확률
+                        */
+                        Reward.reward1 = Random.Range(1, 3);
+                        Reward.reward2 = Random.Range(4, 8);
+                        Reward.reward3 = Random.Range(5, 9);
+
+                    }
+
+                    int per = 50;
+                    int per2 = 30;
+                    int per3 = 10;
+
+                    /// 스킬 드랍 확률
+                    if (per >= Random.Range(1, 101))
+                    {
+                        Reward.skillreward1 = Random.Range(1, 6);
+                        if (per2 >= Random.Range(1, 101))
+                        {
+                            Reward.skillreward2 = Random.Range(1, 6);
+
+                            if (per3 >= Random.Range(1, 101))
+                            {
+                                Reward.skillreward3 = Random.Range(1, 6);
+                            }
+                        }
+                        
+                    }
 
                     mob1.SetActive(false);
                     mob2.SetActive(false);

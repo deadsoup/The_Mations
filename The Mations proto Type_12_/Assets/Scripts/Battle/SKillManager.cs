@@ -476,7 +476,6 @@ public class SKillManager : MonoBehaviour
                     itemObj.name = itemToAdd.Name;
                     */
 
-
                 }
                 else if (npc.Hp[battle.switching[0]] == (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) && npc.Hp[battle.switching[1]] == (npc.MaxHp[battle.switching[1]] + npc.Equip_MaxHp[battle.switching[1]]) && npc.Hp[battle.switching[2]] == (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
@@ -627,6 +626,8 @@ public class SKillManager : MonoBehaviour
                         npc.actiongage -= 5f;
                         Debug.Log("불탐 성공");
                         FloatingTextController.CreateFloatingText("화상 !!", transform);
+
+
                     }
 
                 }

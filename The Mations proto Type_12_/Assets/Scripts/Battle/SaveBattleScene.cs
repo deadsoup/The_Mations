@@ -20,18 +20,21 @@ public class SaveBattleScene : MonoBehaviour
     int Player2_ID;
     int Player3_ID;
 
-    Party party;
-    battle Battle;
-    Inven inven;
-    GameObject[] invenslot = new GameObject[12];
-    GameObject[] Skillslot = new GameObject[3];
-    SKillManager skill;
-    npc Npc;
+    public Party party;
+    public battle Battle;
+    public Inven inven;
+    public GameObject[] invenslot = new GameObject[12];
+    public GameObject[] Skillslot = new GameObject[3];
+    public SKillManager skill;
+    public npc Npc;
 
-    SlotChange slotChange;
+    public SlotChange slotChange;
     //GameObject invenslot;
-    SpriteSet spriteSet;
+    public SpriteSet spriteSet;
 
+    public GameObject Set1;
+    public GameObject Set2;
+    public GameObject Set3;
 
     int[] P1_skillID = new int[3];
     int[] P2_skillID = new int[3];
@@ -452,8 +455,15 @@ public class SaveBattleScene : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "GameScene")
             {
-                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
-                Set.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
+                if (battle.switching[0] == 9)
+                {
+
+                }
+
+                else
+                {
+                    Set1.transform.Find("Char1").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[0]];
+                }
             }
         }
 
@@ -477,8 +487,15 @@ public class SaveBattleScene : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "GameScene")
             {
-                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
-                Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[1]];
+                if (battle.switching[1] == 9)
+                {
+
+                }
+
+                else
+                {
+                    Set2.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[1]];
+                }
             }
         }
 
@@ -502,8 +519,15 @@ public class SaveBattleScene : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "GameScene")
             {
-                GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
-                Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[2]];
+                if (battle.switching[2] == 9)
+                {
+
+                }
+
+                else
+                {
+                    Set3.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[battle.switching[2]];
+                }
             }
         }
 
@@ -606,35 +630,59 @@ public class SaveBattleScene : MonoBehaviour
         {
             if (Num == 0)
             {
-                if (battleLoad[Num].Skill1_ID > -1)
-                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
-                if (battleLoad[Num].Skill2_ID > -1)
-                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
-                if (battleLoad[Num].Skill3_ID > -1)
-                { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+                if (battle.switching[0] == 9)
+                {
+
+                }
+
+                else
+                {
+                    if (battleLoad[Num].Skill1_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
+                    if (battleLoad[Num].Skill2_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
+                    if (battleLoad[Num].Skill3_ID > -1)
+                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+                }
             }
             if (player[1].activeSelf == true)
             {
                 if (Num == 1)
                 {
-                    if (battleLoad[Num].Skill1_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
-                    if (battleLoad[Num].Skill2_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
-                    if (battleLoad[Num].Skill3_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    if (battle.switching[1] == 9)
+                    {
+
+                    }
+
+                    else
+                    {
+                        if (battleLoad[Num].Skill1_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
+                        if (battleLoad[Num].Skill2_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
+                        if (battleLoad[Num].Skill3_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    }
                 }
             }
             if (player[2].activeSelf == true)
             {
                 if (Num == 2)
                 {
-                    if (battleLoad[Num].Skill1_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
-                    if (battleLoad[Num].Skill2_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
-                    if (battleLoad[Num].Skill3_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    if (battle.switching[2] == 9)
+                    {
+
+                    }
+
+                    else
+                    {
+                        if (battleLoad[Num].Skill1_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
+                        if (battleLoad[Num].Skill2_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
+                        if (battleLoad[Num].Skill3_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    }
                 }
             }
 
@@ -706,6 +754,11 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
                 npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
 
+                if (npc.Hp[battle.switching[0]] <= 0)
+                {
+                    Set.SetActive(false);
+                }
+
 
                 //Battle.chaneGetta1();
             }
@@ -732,8 +785,16 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
                 npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
 
+                if (npc.Hp[battle.switching[0]] <= 0)
+                {
+                    Image.SetActive(false);
+                }
 
-                Battle.chaneGetta1();
+
+                if (npc.Hp[battle.switching[0]] > 0)
+                {
+                    Battle.chaneGetta1();
+                }
             }
         }
     }
@@ -764,6 +825,11 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
                 npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
 
+                if (npc.Hp[battle.switching[1]] <= 0)
+                {
+                    Set.SetActive(false);
+                }
+
             }
         }
 
@@ -787,7 +853,17 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
                 npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
 
-                Battle.chaneGetta2();
+
+                if (npc.Hp[battle.switching[1]] <= 0)
+                {
+                    Image.SetActive(false);
+                }
+
+
+                if (npc.Hp[battle.switching[1]] > 0)
+                {
+                    Battle.chaneGetta2();
+                }
             }
         }
     }
@@ -820,6 +896,12 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[2]] = battleLoad[2].Wis;
                 npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
 
+
+                if (npc.Hp[battle.switching[2]] <= 0)
+                {
+                    Set.SetActive(false);
+                }
+
                 Battle.chaneGetta3();
             }
         }
@@ -846,7 +928,18 @@ public class SaveBattleScene : MonoBehaviour
                 npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
 
 
-                Battle.chaneGetta3();
+                if (npc.Hp[battle.switching[2]] <= 0)
+                {
+                    Image.SetActive(false);
+                }
+
+
+                if (npc.Hp[battle.switching[2]] > 0)
+                {
+                    Battle.chaneGetta3();
+                }
+
+
             }
         }
 
@@ -869,6 +962,9 @@ public class SaveBattleScene : MonoBehaviour
             player[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
             player[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").transform.Find("Getta3").gameObject;
 
+            Set1 = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
+            Set2 = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
+            Set3 = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
 
             invenslot[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots0").gameObject;
             invenslot[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Inven").transform.Find("BackPanel").transform.Find("Panel").transform.Find("slots1").gameObject;
@@ -970,26 +1066,97 @@ public class SaveBattleScene : MonoBehaviour
             print("현재 첫 캐릭터의 아이디는 무엇" + party.num);
 
             loadJson();
-            if (Player1_ID != 9)
+            print(Player2_ID);
+            print(Player3_ID);
+            if (SceneManager.GetActiveScene().name == "GameScene")
             {
-                playerSelect1(Player1_ID);
-                print("발동");
-                print(Player1_ID + "발동");
-            }
-            if (Player2_ID != 9)
-            {
-                playerSelect2(Player2_ID);
-                print(Player2_ID + "발동2");
-            }
-            if (Player3_ID != 9)
-            {
-                playerSelect3(Player3_ID);
-                print(Player3_ID + "발동3");
-            }
+                if (Player1_ID != 9)
+                {
+                    playerSelect1(Player1_ID);
+                    print("발동");
+                    print(Player1_ID + "발동");
+                    Set1.SetActive(false);
+                }
+                if (Player2_ID != 9)
+                {
+                    playerSelect2(Player2_ID);
+                    print(Player2_ID + "발동2");
+                    Set2.SetActive(false);
+                }
+                if (Player3_ID != 9)
+                {
+                    playerSelect3(Player3_ID);
+                    print(Player3_ID + "발동3");
+                    Set3.SetActive(false);
+                }
 
-            if (Player1_ID == 9) { player[0].SetActive(false); }
-            if (Player2_ID == 9) { player[1].SetActive(false); }
-            if (Player3_ID == 9) { player[2].SetActive(false); }
+                if (Player1_ID == 9)
+                {
+                    if (npc.Hp[battle.switching[0]] <= 0)
+                    {
+                        Set1.SetActive(false);
+                    }
+                }
+                if (Player2_ID == 9)
+                {
+                    if (npc.Hp[battle.switching[1]] <= 0)
+                    {
+                        Set2.SetActive(false);
+                    }
+                }
+                if (Player3_ID == 9)
+                {
+                    if (npc.Hp[battle.switching[2]] <= 0)
+                    {
+                        Set3.SetActive(false);
+                    }
+                }
+
+            }
+            else
+            {
+                if (Player1_ID != 9)
+                {
+                    playerSelect1(Player1_ID);
+                    print("발동");
+                    print(Player1_ID + "발동");
+                }
+                if (Player2_ID != 9)
+                {
+                    playerSelect2(Player2_ID);
+                    print(Player2_ID + "발동2");
+                }
+                if (Player3_ID != 9)
+                {
+                    playerSelect3(Player3_ID);
+                    print(Player3_ID + "발동3");
+                }
+
+                if (Player1_ID == 9)
+                {
+                    player[0].SetActive(false);
+                    if (npc.Hp[battle.switching[0]] <= 0)
+                    {
+                        Set1.SetActive(false);
+                    }
+                }
+                if (Player2_ID == 9)
+                {
+                    player[1].SetActive(false);
+                    if (npc.Hp[battle.switching[1]] <= 0)
+                    {
+                        Set2.SetActive(false);
+                    }
+                }
+                if (Player3_ID == 9)
+                {
+                    player[2].SetActive(false);
+                    if (npc.Hp[battle.switching[2]] <= 0)
+                    {
+                        Set3.SetActive(false);
+                    }
+                }
+            }
 
             Battle.chaneGetta1();
         }
