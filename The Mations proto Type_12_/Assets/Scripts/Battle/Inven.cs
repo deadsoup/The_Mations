@@ -153,6 +153,7 @@ public class Inven : MonoBehaviour
     private void Update()
     {
         // 아이템추가
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             AddItem(51);
@@ -174,6 +175,7 @@ public class Inven : MonoBehaviour
             AddItem3(53);
             AddItem3(54);
         }
+        */
     }
     // 아이템 삭제 - 문자열을 사용한다 - "slots0, slots1" 이걸 삭제함
     public void deleteItem(string name)

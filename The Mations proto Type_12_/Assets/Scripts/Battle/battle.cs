@@ -974,7 +974,7 @@ public class battle : MonoBehaviour {
             Invenpanel.transform.GetChild(13).gameObject.SetActive(false);
             Invenpanel.transform.GetChild(14).gameObject.SetActive(false);
 
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
                 player1.transform.GetChild(1).gameObject.SetActive(true);
                 player2.transform.GetChild(1).gameObject.SetActive(false);
@@ -1025,7 +1025,7 @@ public class battle : MonoBehaviour {
             charActive[1] = true;
             charActive[2] = false;
 
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
                 player1.transform.GetChild(1).gameObject.SetActive(false);
                 player2.transform.GetChild(1).gameObject.SetActive(true);
@@ -1192,13 +1192,17 @@ public class battle : MonoBehaviour {
         while (true)
         {
             int playerHp = npc.Hp[switching[0]] + npc.Equip_MaxHp[switching[0]];
+            int playerMaxHp = npc.MaxHp[switching[0]] + npc.Equip_MaxHp[switching[0]];
+
             int playerMp = npc.Mp[switching[0]] + npc.Equip_MaxMp[switching[0]];
+            int playerMaxMp = npc.MaxMp[switching[0]] + npc.Equip_MaxHp[switching[0]];
+
             int playerStr = npc.Str[switching[0]] + npc.Equip_Str[switching[0]];
             int playerWis = npc.Wis[switching[0]] + npc.Equip_Wis[switching[0]];
 
 
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp + " / " + playerMaxHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp + " / " + playerMaxMp;
             Str1.GetComponent<Text>().text = "힘 : " + playerStr;
             Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
             if (SceneManager.GetActiveScene().name == "GameScene" )
@@ -1214,13 +1218,17 @@ public class battle : MonoBehaviour {
         while (true)
         {
             int playerHp = npc.Hp[switching[1]] + npc.Equip_MaxHp[switching[1]];
+            int playerMaxHp = npc.MaxHp[switching[1]] + npc.Equip_MaxHp[switching[1]];
+
             int playerMp = npc.Mp[switching[1]] + npc.Equip_MaxMp[switching[1]];
+            int playerMaxMp = npc.MaxMp[switching[1]] + npc.Equip_MaxHp[switching[1]];
+
             int playerStr = npc.Str[switching[1]] + npc.Equip_Str[switching[1]];
             int playerWis = npc.Wis[switching[1]] + npc.Equip_Wis[switching[1]];
 
 
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp + " / " + playerMaxHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp + " / " + playerMaxMp;
             Str1.GetComponent<Text>().text = "힘 : " + playerStr;
             Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
             if (SceneManager.GetActiveScene().name == "GameScene")
@@ -1236,13 +1244,17 @@ public class battle : MonoBehaviour {
         while (true)
         {
             int playerHp = npc.Hp[switching[2]] + npc.Equip_MaxHp[switching[2]];
+            int playerMaxHp = npc.MaxHp[switching[2]] + npc.Equip_MaxHp[switching[2]];
+
             int playerMp = npc.Mp[switching[2]] + npc.Equip_MaxMp[switching[2]];
+            int playerMaxMp = npc.MaxMp[switching[2]] + npc.Equip_MaxHp[switching[2]];
+
             int playerStr = npc.Str[switching[2]] + npc.Equip_Str[switching[2]];
             int playerWis = npc.Wis[switching[2]] + npc.Equip_Wis[switching[2]];
 
 
-            Hp1.GetComponent<Text>().text = "체력 : " + playerHp;
-            Mp1.GetComponent<Text>().text = "마나 : " + playerMp;
+            Hp1.GetComponent<Text>().text = "체력 : " + playerHp + " / " + playerMaxHp;
+            Mp1.GetComponent<Text>().text = "마나 : " + playerMp + " / " + playerMaxMp;
             Str1.GetComponent<Text>().text = "힘 : " + playerStr;
             Wis1.GetComponent<Text>().text = "지능 : " + playerWis;
             if (SceneManager.GetActiveScene().name == "GameScene")

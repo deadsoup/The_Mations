@@ -17,6 +17,8 @@ public class movecontroller : MonoBehaviour {
     // 넣어줄 애니메이션 목록
     public RuntimeAnimatorController[] animatorClips;
 
+    public SaveBattleScene saveBattleScene;
+
     // 이동 애니메이션 헤쉬값
     private readonly int hashMove = Animator.StringToHash("IsMove");
 
@@ -26,7 +28,7 @@ public class movecontroller : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        ChangeSprite(CharCount.Charcount);
+        ChangeSprite();
 
     }
     public void LButtonDown()
@@ -67,12 +69,42 @@ public class movecontroller : MonoBehaviour {
 	}
 
     // 애니메이션 교체 함수
-    public void ChangeSprite(int charIdx)
+    public void ChangeSprite()
     {
-        spriteRenderer.sprite = sprite[charIdx];
-        animator.runtimeAnimatorController = animatorClips[charIdx];
+        for (int i = 0; i < 3; i++)
+        {
+            if (saveBattleScene.Player1_ID == i)
+            {
+                spriteRenderer.sprite = sprite[i];
+                animator.runtimeAnimatorController = animatorClips[i];
+            }
+        }
     }
 
+
+    public void ChangeSprite2()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (saveBattleScene.Player2_ID == i)
+            {
+                spriteRenderer.sprite = sprite[i];
+                animator.runtimeAnimatorController = animatorClips[i];
+            }
+        }
+    }
+
+    public void ChangeSprite3()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (saveBattleScene.Player3_ID == i)
+            {
+                spriteRenderer.sprite = sprite[i];
+                animator.runtimeAnimatorController = animatorClips[i];
+            }
+        }
+    }
     /*
     private void OnTriggerEnter2D(Collider2D collision)
     {

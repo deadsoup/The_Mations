@@ -14,11 +14,13 @@ public class SaveBattleScene : MonoBehaviour
 
     private JsonData battle_Load_System;
 
-    GameObject[] player = new GameObject[3];
+    public GameObject[] player = new GameObject[3];
 
-    int Player1_ID;
-    int Player2_ID;
-    int Player3_ID;
+    Player player_stat;
+
+    public int Player1_ID;
+    public int Player2_ID;
+    public int Player3_ID;
 
     public Party party;
     public battle Battle;
@@ -272,82 +274,176 @@ public class SaveBattleScene : MonoBehaviour
         }
 
 
-        Debug.Log("저장");
-        if (player[0].activeSelf == true)
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
-            battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
-                        npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
-                        npc.ArchivePoint[0],
-                        npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
-                        invenslots1_ID, invenslots1_Amount,
-                        invenslots2_ID, invenslots2_Amount,
-                        invenslots3_ID, invenslots3_Amount,
-                        invenslots4_ID, invenslots4_Amount,
-                        P1_skillID[0],
-                        P1_skillID[1],
-                        P1_skillID[2],
-                        npc.SkillPoint
-                        ));
-        }
-        else if (player[0].activeSelf == false)
-        {
-            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
-                        npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
-                        ));
-
-        }
-
-        if (player[1].activeSelf == true)
-        {
-            battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
-                                npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
-                                npc.ArchivePoint[0],
-                                npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
-                                P2_invenslots1_ID, P2_invenslots1_Amount,
-                                P2_invenslots2_ID, P2_invenslots2_Amount,
-                                P2_invenslots3_ID, P2_invenslots3_Amount,
-                                P2_invenslots4_ID, P2_invenslots4_Amount,
-                                P2_skillID[0],
-                                P2_skillID[1],
-                                P2_skillID[2],
-                                npc.SkillPoint
-                                ));
-        }
-        else if (player[1].activeSelf == false)
-        {
-            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
-                        npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
-                        ));
-
-        }
 
 
-        if (player[2].activeSelf == true)
-        {
-            battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
-                            npc.MaxMp[battle.switching[2]], npc.Mp[battle.switching[2]], npc.Str[battle.switching[2]], npc.Wis[battle.switching[2]],
+            if (player[0].activeSelf == true)
+            {
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
+                            npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
                             npc.ArchivePoint[0],
-                            npc.Equip_MaxHp[battle.switching[2]], npc.Equip_MaxMp[battle.switching[2]], npc.Equip_Str[battle.switching[2]], npc.Equip_Wis[battle.switching[2]],
-                            P3_invenslots1_ID, P3_invenslots1_Amount,
-                            P3_invenslots2_ID, P3_invenslots2_Amount,
-                            P3_invenslots3_ID, P3_invenslots3_Amount,
-                            P3_invenslots4_ID, P3_invenslots4_Amount,
-                            P3_skillID[0],
-                            P3_skillID[1],
-                            P3_skillID[2],
+                            npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
+                            invenslots1_ID, invenslots1_Amount,
+                            invenslots2_ID, invenslots2_Amount,
+                            invenslots3_ID, invenslots3_Amount,
+                            invenslots4_ID, invenslots4_Amount,
+                            P1_skillID[0],
+                            P1_skillID[1],
+                            P1_skillID[2],
                             npc.SkillPoint
                             ));
+            }
+            else if (player[0].activeSelf == false)
+            {
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
+
+            if (player[1].activeSelf == true)
+            {
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
+                                    npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
+                                    npc.ArchivePoint[0],
+                                    npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
+                                    P2_invenslots1_ID, P2_invenslots1_Amount,
+                                    P2_invenslots2_ID, P2_invenslots2_Amount,
+                                    P2_invenslots3_ID, P2_invenslots3_Amount,
+                                    P2_invenslots4_ID, P2_invenslots4_Amount,
+                                    P2_skillID[0],
+                                    P2_skillID[1],
+                                    P2_skillID[2],
+                                    npc.SkillPoint
+                                    ));
+            }
+            else if (player[1].activeSelf == false)
+            {
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
+
+
+            if (player[2].activeSelf == true)
+            {
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
+                                npc.MaxMp[battle.switching[2]], npc.Mp[battle.switching[2]], npc.Str[battle.switching[2]], npc.Wis[battle.switching[2]],
+                                npc.ArchivePoint[0],
+                                npc.Equip_MaxHp[battle.switching[2]], npc.Equip_MaxMp[battle.switching[2]], npc.Equip_Str[battle.switching[2]], npc.Equip_Wis[battle.switching[2]],
+                                P3_invenslots1_ID, P3_invenslots1_Amount,
+                                P3_invenslots2_ID, P3_invenslots2_Amount,
+                                P3_invenslots3_ID, P3_invenslots3_Amount,
+                                P3_invenslots4_ID, P3_invenslots4_Amount,
+                                P3_skillID[0],
+                                P3_skillID[1],
+                                P3_skillID[2],
+                                npc.SkillPoint
+                                ));
+            }
+            else if (player[2].activeSelf == false)
+            {
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
         }
-        else if (player[2].activeSelf == false)
+
+
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
-            battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
-                        npc.ArchivePoint[0],
-                        0, 0, 0, 0, 0, -1, 0, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
-                        ));
+            Debug.Log("게임신 저장 발동");
+
+            if (Set1.activeSelf == true)
+            {
+                Debug.Log("플레이어 1 저장 발동");
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[0]], npc.name[battle.switching[0]], npc.MaxHp[battle.switching[0]], npc.Hp[battle.switching[0]],
+                            npc.MaxMp[battle.switching[0]], npc.Mp[battle.switching[0]], npc.Str[battle.switching[0]], npc.Wis[battle.switching[0]],
+                            npc.ArchivePoint[0],
+                            npc.Equip_MaxHp[battle.switching[0]], npc.Equip_MaxMp[battle.switching[0]], npc.Equip_Str[battle.switching[0]], npc.Equip_Wis[battle.switching[0]],
+                            invenslots1_ID, invenslots1_Amount,
+                            invenslots2_ID, invenslots2_Amount,
+                            invenslots3_ID, invenslots3_Amount,
+                            invenslots4_ID, invenslots4_Amount,
+                            P1_skillID[0],
+                            P1_skillID[1],
+                            P1_skillID[2],
+                            npc.SkillPoint
+                            ));
+            }
+            else if (Set1.activeSelf == false)
+            {
+                Debug.Log("플레이어1  초기값 저장 발동");
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
+
+            if (Set2.activeSelf == true)
+            {
+                Debug.Log("플레이어 2 저장 발동");
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[1]], npc.name[battle.switching[1]], npc.MaxHp[battle.switching[1]], npc.Hp[battle.switching[1]],
+                                    npc.MaxMp[battle.switching[1]], npc.Mp[battle.switching[1]], npc.Str[battle.switching[1]], npc.Wis[battle.switching[1]],
+                                    npc.ArchivePoint[0],
+                                    npc.Equip_MaxHp[battle.switching[1]], npc.Equip_MaxMp[battle.switching[1]], npc.Equip_Str[battle.switching[1]], npc.Equip_Wis[battle.switching[1]],
+                                    P2_invenslots1_ID, P2_invenslots1_Amount,
+                                    P2_invenslots2_ID, P2_invenslots2_Amount,
+                                    P2_invenslots3_ID, P2_invenslots3_Amount,
+                                    P2_invenslots4_ID, P2_invenslots4_Amount,
+                                    P2_skillID[0],
+                                    P2_skillID[1],
+                                    P2_skillID[2],
+                                    npc.SkillPoint
+                                    ));
+            }
+            else if (Set2.activeSelf == false)
+            {
+                Debug.Log("플레이어 2  초기값 저장 발동");
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
+
+
+            if (Set3.activeSelf == true)
+            {
+                Debug.Log("플레이어 3 저장 발동");
+                battleSave.Add(new BattleInfo(npc.Id[battle.switching[2]], npc.name[battle.switching[2]], npc.MaxHp[battle.switching[2]], npc.Hp[battle.switching[2]],
+                                npc.MaxMp[battle.switching[2]], npc.Mp[battle.switching[2]], npc.Str[battle.switching[2]], npc.Wis[battle.switching[2]],
+                                npc.ArchivePoint[0],
+                                npc.Equip_MaxHp[battle.switching[2]], npc.Equip_MaxMp[battle.switching[2]], npc.Equip_Str[battle.switching[2]], npc.Equip_Wis[battle.switching[2]],
+                                P3_invenslots1_ID, P3_invenslots1_Amount,
+                                P3_invenslots2_ID, P3_invenslots2_Amount,
+                                P3_invenslots3_ID, P3_invenslots3_Amount,
+                                P3_invenslots4_ID, P3_invenslots4_Amount,
+                                P3_skillID[0],
+                                P3_skillID[1],
+                                P3_skillID[2],
+                                npc.SkillPoint
+                                ));
+            }
+            else if (Set3.activeSelf == false)
+            {
+                Debug.Log("플레이어 3 초기값  저장 발동");
+                battleSave.Add(new BattleInfo(9, "없음", 0, 0, 0, 0, 0, 0,
+                            npc.ArchivePoint[0],
+                            0, 0, 0, 0, -1, 0, -1, 0, -1, 0, -1, 0, 0, 0, 0, npc.SkillPoint
+                            ));
+
+            }
 
         }
+
 
         if (!Directory.Exists(Application.persistentDataPath + "/Json"))
         {
@@ -360,6 +456,9 @@ public class SaveBattleScene : MonoBehaviour
 
 
         // 통로맵씬 전환
+        Debug.Log("-------------------------세이브 완료 ---------------------");
+
+
     }
     public void Loadway()
     {
@@ -399,6 +498,9 @@ public class SaveBattleScene : MonoBehaviour
                     (int)battle_Load_System[i]["Skill3_ID"],
                     (int)battle_Load_System[i]["SkillPoint"]
                     ));
+
+            print(battleLoad[i].Id+"로드된 캐릭터의 ID");
+
         }
         //
         /// 
@@ -432,6 +534,12 @@ public class SaveBattleScene : MonoBehaviour
             npc.Equip_Wis[battle.switching[2]] = 0;
         }
 
+        print(player[0].activeSelf+"플레이어 0의 슬롯 상태");
+        print(battle.switching[0]);
+        print(player[1].activeSelf + "플레이어 1의 슬롯 상태");
+        print(battle.switching[1]);
+        print(player[2].activeSelf + "플레이어 2의 슬롯 상태");
+        print(battle.switching[2]);
 
 
 
@@ -447,17 +555,18 @@ public class SaveBattleScene : MonoBehaviour
             npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
             npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
 
+
             if (SceneManager.GetActiveScene().name == "DH_Battle")
             {
                 player[0].transform.Find("Char1").GetComponent<Image>().sprite = party.CharSprite[battle.switching[0]];
 
             }
 
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
                 if (battle.switching[0] == 9)
                 {
-
+                    player[0].SetActive(false);
                 }
 
                 else
@@ -478,6 +587,10 @@ public class SaveBattleScene : MonoBehaviour
             npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
             npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
 
+            battle.switching[1] = battleLoad[1].Id;
+
+            Debug.Log("------------------------------------------------");
+
             if (SceneManager.GetActiveScene().name == "DH_Battle")
             {
                 print(player[1].name);
@@ -485,11 +598,11 @@ public class SaveBattleScene : MonoBehaviour
 
             }
 
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
-                if (battle.switching[1] == 9)
+                if (npc.Id[battle.switching[1]] == 9)
                 {
-
+                    player[1].SetActive(false);
                 }
 
                 else
@@ -517,11 +630,11 @@ public class SaveBattleScene : MonoBehaviour
 
             }
 
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
-                if (battle.switching[2] == 9)
+                if (npc.Id[battle.switching[2]] == 9)
                 {
-
+                    player[2].SetActive(false);
                 }
 
                 else
@@ -704,7 +817,7 @@ public class SaveBattleScene : MonoBehaviour
         *
         */
 
-        Debug.Log("-------------------------세이브---------------------");
+        Debug.Log("-------------------------로드 완료 ---------------------");
     }
 
     void load()
@@ -727,7 +840,7 @@ public class SaveBattleScene : MonoBehaviour
 
     public void playerSelect1(int Adebt)
     {
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").gameObject;
 
@@ -785,6 +898,9 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
                 npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
 
+
+                Debug.Log(battle.switching[0]);
+
                 if (npc.Hp[battle.switching[0]] <= 0)
                 {
                     Image.SetActive(false);
@@ -801,7 +917,7 @@ public class SaveBattleScene : MonoBehaviour
 
     public void playerSelect2(int Adebt)
     {
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").gameObject;
 
@@ -812,7 +928,7 @@ public class SaveBattleScene : MonoBehaviour
                 Set.GetComponent<PlayerSlot1>().slotCharge = true;
                 battle.switching[1] = Adebt;
 
-
+                Debug.Log("캐릭터 슬롯 2 여입");
 
                 Set.transform.Find("Char2").GetComponent<Image>().sprite = spriteSet.CharSprite[Adebt];
 
@@ -824,6 +940,21 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Str[battle.switching[1]] = battleLoad[1].Str;
                 npc.Wis[battle.switching[1]] = battleLoad[1].Wis;
                 npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
+                if (battleLoad[1].Id == 9)
+                {
+
+                    npc.Id[battle.switching[1]] = player_stat.player.data[Adebt].Id;// 능력치 호출
+                    npc.MaxHp[battle.switching[1]] = player_stat.player.data[Adebt].MaxHp;
+                    npc.Hp[battle.switching[1]] = player_stat.player.data[Adebt].Hp;
+                    npc.MaxMp[battle.switching[1]] = player_stat.player.data[Adebt].MaxMp;
+                    npc.Mp[battle.switching[1]] = player_stat.player.data[Adebt].Mp;
+                    npc.Str[battle.switching[1]] = player_stat.player.data[Adebt].Str;
+                    npc.Wis[battle.switching[1]] = player_stat.player.data[Adebt].Wis;
+                    npc.ArchivePoint[1] = npc.ArchivePoint[1];
+
+                    Debug.Log("캐릭터 슬롯 2 여입" + npc.MaxHp[battle.switching[1]]);
+
+                }
 
                 if (npc.Hp[battle.switching[1]] <= 0)
                 {
@@ -854,6 +985,8 @@ public class SaveBattleScene : MonoBehaviour
                 npc.ArchivePoint[1] = battleLoad[1].ArchivePoint;
 
 
+                Debug.Log(battle.switching[0]);
+
                 if (npc.Hp[battle.switching[1]] <= 0)
                 {
                     Image.SetActive(false);
@@ -871,7 +1004,7 @@ public class SaveBattleScene : MonoBehaviour
     public void playerSelect3(int Adebt)
     {
 
-        if (SceneManager.GetActiveScene().name == "GameScene")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
         {
             GameObject Set = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta3").gameObject;
             party.player[Adebt] = true;
@@ -882,7 +1015,7 @@ public class SaveBattleScene : MonoBehaviour
                 Set.GetComponent<PlayerSlot1>().slotCharge = true;
                 battle.switching[2] = Adebt;
 
-
+                Debug.Log("캐릭터 슬롯 3 여입");
 
                 Set.transform.Find("Char3").GetComponent<Image>().sprite = spriteSet.CharSprite[Adebt];
 
@@ -895,6 +1028,18 @@ public class SaveBattleScene : MonoBehaviour
                 npc.Str[battle.switching[2]] = battleLoad[2].Str;
                 npc.Wis[battle.switching[2]] = battleLoad[2].Wis;
                 npc.ArchivePoint[2] = battleLoad[2].ArchivePoint;
+
+                if (battleLoad[2].Id == 9)
+                {
+                    npc.Id[battle.switching[2]] = player_stat.player.data[Adebt].Id;// 능력치 호출
+                    npc.MaxHp[battle.switching[2]] = player_stat.player.data[Adebt].MaxHp;
+                    npc.Hp[battle.switching[2]] = player_stat.player.data[Adebt].Hp;
+                    npc.MaxMp[battle.switching[2]] = player_stat.player.data[Adebt].MaxMp;
+                    npc.Mp[battle.switching[2]] = player_stat.player.data[Adebt].Mp;
+                    npc.Str[battle.switching[2]] = player_stat.player.data[Adebt].Str;
+                    npc.Wis[battle.switching[2]] = player_stat.player.data[Adebt].Wis;
+                    npc.ArchivePoint[2] = npc.ArchivePoint[1];
+                }
 
 
                 if (npc.Hp[battle.switching[2]] <= 0)
@@ -957,6 +1102,7 @@ public class SaveBattleScene : MonoBehaviour
             Battle = GameObject.Find("EventSystem").GetComponent<battle>();
 
             party = GameObject.Find("PartySystem").GetComponent<Party>();
+            player_stat = GameObject.Find("EventSystem").GetComponent<Player>();
 
             player[0] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta1").transform.Find("Getta1").gameObject;
             player[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("Jin_Getta2").transform.Find("Getta2").gameObject;
@@ -987,11 +1133,9 @@ public class SaveBattleScene : MonoBehaviour
             Skillslot[1] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot3").gameObject;
             Skillslot[2] = GameObject.Find("Canvas").transform.Find("Status").transform.Find("SkillSlot").transform.Find("Panel").transform.Find("slotPanel").transform.Find("skillSlot4").gameObject;
 
-            GameObject Panel = GameObject.Find("Canvas").transform.Find("Status").gameObject;
+            GameObject panal = GameObject.Find("Canvas").transform.Find("Status").gameObject;
+            panal.SetActive(false);
 
-
-
-            Panel.SetActive(false);
 
         }
 
@@ -1068,51 +1212,55 @@ public class SaveBattleScene : MonoBehaviour
             loadJson();
             print(Player2_ID);
             print(Player3_ID);
-            if (SceneManager.GetActiveScene().name == "GameScene")
+            if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
                 if (Player1_ID != 9)
                 {
                     playerSelect1(Player1_ID);
                     print("발동");
                     print(Player1_ID + "발동");
-                    Set1.SetActive(false);
-                }
-                if (Player2_ID != 9)
-                {
-                    playerSelect2(Player2_ID);
-                    print(Player2_ID + "발동2");
-                    Set2.SetActive(false);
-                }
-                if (Player3_ID != 9)
-                {
-                    playerSelect3(Player3_ID);
-                    print(Player3_ID + "발동3");
-                    Set3.SetActive(false);
-                }
-
-                if (Player1_ID == 9)
-                {
                     if (npc.Hp[battle.switching[0]] <= 0)
                     {
                         Set1.SetActive(false);
                     }
                 }
-                if (Player2_ID == 9)
+                if (Player2_ID != 9)
                 {
+                    playerSelect2(Player2_ID);
+                    print(Player2_ID + "발동2");
                     if (npc.Hp[battle.switching[1]] <= 0)
                     {
                         Set2.SetActive(false);
                     }
                 }
-                if (Player3_ID == 9)
+                if (Player3_ID != 9)
                 {
+                    playerSelect3(Player3_ID);
+                    print(Player3_ID + "발동3");
                     if (npc.Hp[battle.switching[2]] <= 0)
                     {
                         Set3.SetActive(false);
                     }
                 }
 
+                if (Player1_ID == 9)
+                {
+                    Set1.SetActive(false);
+
+                }
+                if (Player2_ID == 9)
+                {
+                    Set2.SetActive(false);
+
+                }
+                if (Player3_ID == 9)
+                {
+                    Set3.SetActive(false);
+
+                }
+
             }
+
             else
             {
                 if (Player1_ID != 9)
@@ -1120,50 +1268,71 @@ public class SaveBattleScene : MonoBehaviour
                     playerSelect1(Player1_ID);
                     print("발동");
                     print(Player1_ID + "발동");
+                    if (npc.Hp[battle.switching[0]] <= 0)
+                    {
+                        player[0].SetActive(false);
+                    }
                 }
                 if (Player2_ID != 9)
                 {
                     playerSelect2(Player2_ID);
                     print(Player2_ID + "발동2");
+                    if (npc.Hp[battle.switching[1]] <= 0)
+                    {
+                        player[1].SetActive(false);
+                    }
                 }
                 if (Player3_ID != 9)
                 {
                     playerSelect3(Player3_ID);
                     print(Player3_ID + "발동3");
+                    if (npc.Hp[battle.switching[2]] <= 0)
+                    {
+                        player[2].SetActive(false);
+                    }
                 }
 
                 if (Player1_ID == 9)
                 {
                     player[0].SetActive(false);
-                    if (npc.Hp[battle.switching[0]] <= 0)
-                    {
-                        Set1.SetActive(false);
-                    }
+
                 }
                 if (Player2_ID == 9)
                 {
                     player[1].SetActive(false);
-                    if (npc.Hp[battle.switching[1]] <= 0)
-                    {
-                        Set2.SetActive(false);
-                    }
                 }
                 if (Player3_ID == 9)
                 {
                     player[2].SetActive(false);
-                    if (npc.Hp[battle.switching[2]] <= 0)
-                    {
-                        Set3.SetActive(false);
-                    }
                 }
-            }
 
-            Battle.chaneGetta1();
+                Battle.chaneGetta1();
+            }
+            //Battle.chaneGetta1();
         }
-        //Battle.chaneGetta1();
+
+
     }
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            //player[1].SetActive(true);
+            playerSelect2(1);
+            Set2.SetActive(true);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+
+            //player[2].SetActive(true);
+            playerSelect3(0);
+            Set3.SetActive(true);
+
+        }
+    }
 }
 [System.Serializable]
 public class BattleInfo // 캐릭터 슬롯칸에 저장시킬 것

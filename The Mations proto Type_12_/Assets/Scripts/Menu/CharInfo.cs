@@ -58,7 +58,7 @@ public class CharInfo : MonoBehaviour
 
                 if (npc.ArchivePoint[0] >= 1)
                 {
-                    npc.Hp[battle.c] += 10;
+                    npc.MaxHp[battle.c] += 10;
                     npc.SkillPoint += -1;
                 }
             }
@@ -75,7 +75,7 @@ public class CharInfo : MonoBehaviour
 
                 if (npc.ArchivePoint[0] >= 1)
                 {
-                    npc.Mp[battle.c] += 10;
+                    npc.MaxMp[battle.c] += 10;
                     npc.ArchivePoint[0] += -1;
                 }
             }
