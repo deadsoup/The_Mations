@@ -928,14 +928,30 @@ public class SaveBattleScene : MonoBehaviour
 
                 print(Set.transform.Find("Char1").GetComponent<Image>().sprite.name);
 
-                npc.Id[battle.switching[0]] = battleLoad[0].Id; // 능력치 호출
-                npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
-                npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
-                npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
-                npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
-                npc.Str[battle.switching[0]] = battleLoad[0].Str;
-                npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
-                npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+                if (!Directory.Exists(Application.persistentDataPath + "/Json"))
+                {
+                    npc.Id[battle.switching[0]] = player_stat.player.data[Adebt].Id; // 능력치 호출
+                    npc.MaxHp[battle.switching[0]] = player_stat.player.data[Adebt].MaxHp;
+                    npc.Hp[battle.switching[0]] = player_stat.player.data[Adebt].Hp;
+                    npc.MaxMp[battle.switching[0]] = player_stat.player.data[Adebt].MaxMp;
+                    npc.Mp[battle.switching[0]] = player_stat.player.data[Adebt].Mp;
+                    npc.Str[battle.switching[0]] = player_stat.player.data[Adebt].Str;
+                    npc.Wis[battle.switching[0]] = player_stat.player.data[Adebt].Wis;
+                }
+
+                if (Directory.Exists(Application.persistentDataPath + "/Json") == true)
+                {
+                    npc.Id[battle.switching[0]] = battleLoad[0].Id; // 능력치 호출
+                    npc.MaxHp[battle.switching[0]] = battleLoad[0].MaxHp;
+                    npc.Hp[battle.switching[0]] = battleLoad[0].Hp;
+                    npc.MaxMp[battle.switching[0]] = battleLoad[0].MaxMp;
+                    npc.Mp[battle.switching[0]] = battleLoad[0].Mp;
+                    npc.Str[battle.switching[0]] = battleLoad[0].Str;
+                    npc.Wis[battle.switching[0]] = battleLoad[0].Wis;
+                    npc.ArchivePoint[0] = battleLoad[0].ArchivePoint;
+                }
+
+
 
                 if (npc.Hp[battle.switching[0]] <= 0)
                 {
@@ -1269,6 +1285,12 @@ public class SaveBattleScene : MonoBehaviour
             {
                 print("1번 캐릭 생성");
                 playerSelect1(party.num);
+                if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
+                {
+                    print("캐릭터 버튼 오프 시키기 ");
+                    Set2.SetActive(false);
+                    Set3.SetActive(false);
+                }
             }
         }
 

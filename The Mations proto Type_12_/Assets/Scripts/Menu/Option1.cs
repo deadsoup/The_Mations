@@ -36,16 +36,21 @@ public class Option1 : MonoBehaviour
 
     private void Update()
     {
-        if(isFIrst == false)
+        if (SceneManager.GetActiveScene().name == "GameScene")
         {
-            // 파티 스크립트 할당
-            party = GameObject.Find("PartySystem").GetComponent<Party>();
-            saveBS = GameObject.Find("EventSystem").GetComponent<SaveBattleScene>();
+            if (isFIrst == false)
+            {
+                // 파티 스크립트 할당
+                party = GameObject.Find("PartySystem").GetComponent<Party>();
+                saveBS = GameObject.Find("EventSystem").GetComponent<SaveBattleScene>();
 
-            // 캐릭터 획득
-            addCharProcess();
+                // 캐릭터 획득
 
-            isFIrst = true;
+                addCharProcess();
+
+                isFIrst = true;
+
+            }
         }
     }
 
@@ -53,7 +58,7 @@ public class Option1 : MonoBehaviour
     {
         checkCount = 0;
         onChar = false;
-
+        Debug.Log("캐릭터 추가 체크");
         for (int i = 0; i < buttons.Length; i++)
         {
             if (party.player[i] == true)
