@@ -276,6 +276,7 @@ public class SaveBattleScene : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
+            Debug.Log("전투신 저장 발동");
 
 
             if (player[0].activeSelf == true)
@@ -741,25 +742,31 @@ public class SaveBattleScene : MonoBehaviour
 
         for (int Num = 0; Num < battleLoad.Count; Num++)
         {
-            if (Num == 0)
+            if (player[0].activeSelf == true)
             {
-                if (battle.switching[0] == 9)
+                Debug.Log("플레이어1 스킬 로드 입장");
+                if (Num == 0)
                 {
+                    if (battle.switching[0] == 9)
+                    {
 
-                }
+                    }
 
-                else
-                {
-                    if (battleLoad[Num].Skill1_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
-                    if (battleLoad[Num].Skill2_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
-                    if (battleLoad[Num].Skill3_ID > -1)
-                    { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    else
+                    {
+                        if (battleLoad[Num].Skill1_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
+                        if (battleLoad[Num].Skill2_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
+                        if (battleLoad[Num].Skill3_ID > -1)
+                        { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+                    }
                 }
             }
+
             if (player[1].activeSelf == true)
             {
+                Debug.Log("플레이어 2 스킬 로드 입장");
                 if (Num == 1)
                 {
                     if (battle.switching[1] == 9)
@@ -775,11 +782,16 @@ public class SaveBattleScene : MonoBehaviour
                         { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
                         if (battleLoad[Num].Skill3_ID > -1)
                         { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+
+                        Debug.Log("플레이어 2 스킬 로드 완료");
                     }
                 }
             }
+
+
             if (player[2].activeSelf == true)
             {
+                Debug.Log("플레이어3 스킬 로드 입장");
                 if (Num == 2)
                 {
                     if (battle.switching[2] == 9)
@@ -795,29 +807,87 @@ public class SaveBattleScene : MonoBehaviour
                         { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
                         if (battleLoad[Num].Skill3_ID > -1)
                         { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                        Debug.Log("플레이어 3 스킬 로드 완료");
                     }
                 }
             }
 
         }
 
-
-        /*
-        for (int Num = 0; Num < 10; Num++)
+        if (SceneManager.GetActiveScene().name == "DH_Battle")
         {
-            if (party.player[battle.switching[Num]] == true)
-            {
-                party.selectPlayer(battle.switching[Num]);
+            for (int Num = 0; Num < battleLoad.Count; Num++)
+            {  Debug.Log("플레이어1 스킬 로드 입장");
+                    if (Num == 0)
+                    {
+                        if (battle.switching[0] == 9)
+                        {
+
+                        }
+
+                        else
+                        {
+                            if (battleLoad[Num].Skill1_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill1_ID] = true; }
+                            if (battleLoad[Num].Skill2_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill2_ID] = true; }
+                            if (battleLoad[Num].Skill3_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[0]].skill[battleLoad[Num].Skill3_ID] = true; }
+                        }
+                    }
+                
+
+                
+                    Debug.Log("플레이어 2 스킬 로드 입장");
+                    if (Num == 1)
+                    {
+                        if (battle.switching[1] == 9)
+                        {
+
+                        }
+
+                        else
+                        {
+                            if (battleLoad[Num].Skill1_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill1_ID] = true; }
+                            if (battleLoad[Num].Skill2_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill2_ID] = true; }
+                            if (battleLoad[Num].Skill3_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[1]].skill[battleLoad[Num].Skill3_ID] = true; }
+
+                            Debug.Log("플레이어 2 스킬 로드 완료");
+                        }
+                    }
+                
+
+
+                
+                    Debug.Log("플레이어3 스킬 로드 입장");
+                    if (Num == 2)
+                    {
+                        if (battle.switching[2] == 9)
+                        {
+
+                        }
+
+                        else
+                        {
+                            if (battleLoad[Num].Skill1_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill1_ID] = true; }
+                            if (battleLoad[Num].Skill2_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill2_ID] = true; }
+                            if (battleLoad[Num].Skill3_ID > -1)
+                            { Npc.SkillTriggers[battle.switching[2]].skill[battleLoad[Num].Skill3_ID] = true; }
+                            Debug.Log("플레이어 3 스킬 로드 완료");
+                        }
+                    }
+                
 
             }
-        }
-        *
-        *
-        *
-        *
-        */
 
-        Debug.Log("-------------------------로드 완료 ---------------------");
+        }
+
+            Debug.Log("-------------------------로드 완료 ---------------------");
     }
 
     void load()

@@ -44,7 +44,6 @@ public class Eventmanager1 : MonoBehaviour
                 npc.Hp[battle.switching[i]] = npc.MaxHp[battle.switching[i]];
             }
         }
-        saveBattleScene.saveJson();
     }
 
     public void MpRecovery(float amount)
@@ -57,7 +56,6 @@ public class Eventmanager1 : MonoBehaviour
                 npc.Mp[battle.switching[i]] = npc.MaxMp[battle.switching[i]];
             }
         }
-        saveBattleScene.saveJson();
     }
 
     public void AddExp(int amount)
@@ -68,7 +66,6 @@ public class Eventmanager1 : MonoBehaviour
             npc.ArchivePoint[0] -= 500;
             npc.SkillPoint += 1;
         }
-        saveBattleScene.saveJson();
     }
 
     public void Trap(float amount)
@@ -81,7 +78,6 @@ public class Eventmanager1 : MonoBehaviour
                 npc.Hp[battle.switching[i]] = 1;
             }
         }
-        saveBattleScene.saveJson();
     }
 }
 

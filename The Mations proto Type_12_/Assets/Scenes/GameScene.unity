@@ -4208,6 +4208,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleSave: []
   battleLoad: []
+  player:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Player1_ID: 0
+  Player2_ID: 0
+  Player3_ID: 0
   party: {fileID: 0}
   Battle: {fileID: 466292730}
   inven: {fileID: 835829031}
@@ -4358,6 +4365,7 @@ MonoBehaviour:
   playerAbnomal_burn: 000000
   monsterAbnomal_sleep: 0
   monsterAbnomal_burn: 0
+  Effect_Check: 0
   Char1: {fileID: 1829860769}
   Char2: {fileID: 802466278}
   Char3: {fileID: 1066766350}
@@ -8439,6 +8447,20 @@ MonoBehaviour:
   skill: {fileID: 1599935161838256075, guid: 6a15fa55ed511cf4889faa2f17157898, type: 3}
   SkillList: []
   SkillList2_save: []
+  EffectSystem: {fileID: 0}
+  char1: {fileID: 0}
+  char2: {fileID: 0}
+  char3: {fileID: 0}
+  Dark_berserker: {fileID: 0}
+  Hearts_Skill: {fileID: 0}
+  Awake_burning: {fileID: 0}
+  Infinite_manaring: {fileID: 0}
+  Loving_you: {fileID: 0}
+  Nightmare_lolubai: {fileID: 0}
+  only_one: {fileID: 0}
+  Pyrokinesis: {fileID: 0}
+  Rainpos_power: {fileID: 0}
+  Weidog_Skill: {fileID: 0}
   skills: []
   slots:
   - {fileID: 1384200332}
@@ -13935,17 +13957,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 466292722}
-        m_MethodName: saveJson
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1697086680}
         m_MethodName: SetActive
         m_Mode: 6
@@ -16058,6 +16069,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 686808777}
         m_MethodName: Instage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 466292722}
+        m_MethodName: saveJson
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

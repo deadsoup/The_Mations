@@ -50,6 +50,29 @@ public class SKillManager : MonoBehaviour
 
     internal GameObject[] playerSprite = new GameObject[3];
 
+    /// <summary>
+    /// 이펙트 관련
+    /// </summary>
+    public GameObject EffectSystem;
+    public GameObject char1;
+    public GameObject char2;
+    public GameObject char3;
+
+
+    public GameObject Dark_berserker;
+    public GameObject Hearts_Skill;
+    public GameObject Awake_burning;
+    public GameObject Infinite_manaring;
+    public GameObject Loving_you;
+    public GameObject Nightmare_lolubai;
+    public GameObject only_one;
+    public GameObject Pyrokinesis;
+    public GameObject Rainpos_power;
+    public GameObject Weidog_Skill;
+
+
+
+
     GameObject InfoPanel;
     Image SkillIcon;
     Text Title;
@@ -135,6 +158,7 @@ public class SKillManager : MonoBehaviour
         
         stun_per = 20;
 
+        
         party = GameObject.Find("PartySystem").GetComponent<Party>();
         Npc = GameObject.Find("EventSystem").GetComponent<npc>();
         if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
@@ -225,20 +249,22 @@ public class SKillManager : MonoBehaviour
         {
             if (slots[i].name == name)
             {
-                SkillIcon.sprite = skills[i].sprite;
-                Title.text = skills[i].Name;
 
-                Need_Mp.text = "소모 마나량 " + skills[i].Need_MP.ToString();
-                Damage.text = skills[i].Damage;
-                Target.text = skills[i].Target;
-                Attribute.text = skills[i].Attribute;
-                Text.text = skills[i].Text;
+                    SkillIcon.sprite = skills[i].sprite;
+                    Title.text = skills[i].Name;
 
-                InfoPanel.transform.Find("Delete").gameObject.SetActive(true);
-                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.RemoveAllListeners();
-                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(delegate () { deleteSkill(name); });
-                InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(Off);
-                break;
+                    Need_Mp.text = "소모 마나량 " + skills[i].Need_MP.ToString();
+                    Damage.text = skills[i].Damage;
+                    Target.text = skills[i].Target;
+                    Attribute.text = skills[i].Attribute;
+                    Text.text = skills[i].Text;
+
+                    InfoPanel.transform.Find("Delete").gameObject.SetActive(true);
+                    InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.RemoveAllListeners();
+                    InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(delegate () { deleteSkill(name); });
+                    InfoPanel.transform.Find("Delete").GetComponent<Button>().onClick.AddListener(Off);
+                    break;
+                
             }
 
 
@@ -583,15 +609,29 @@ public class SKillManager : MonoBehaviour
 
     public void Dog_UniqueSkill2()
     {
-        if (npc.Mp[2] >= 0)
+        if (npc.Mp[2] >= 40)
         {
+            burn_per = 60;
             if (npc.actiongage >= 5f)
             {
-                Debug.Log("개 스킬 발동");
-                npc.Mp[2] -= 0;
-                actionGage.GetComponent<Image>().fillAmount -= 0.5f;
-                npc.actiongage -= 5f;
-                npc.Hp[battle.i] -= 40;
+                if (burn_per >= Random.Range(1, 101))
+                {
+                    npc.Mp[2] -= 40;
+                    Battle.monsterAbnomal_burn = true;
+                    npc.unitCondition[battle.i].condition_Burn = true;
+                    npc.unitCondition[battle.i].left_Burn = 2;
+                    actionGage.GetComponent<Image>().fillAmount -= 0.5f;
+                    npc.actiongage -= 5f;
+                    Debug.Log("불탐 성공");
+                    FloatingTextController.CreateFloatingText("출혈 !!", transform);
+
+                    GameObject Effect = Instantiate(Weidog_Skill);
+
+                    Effect.transform.SetParent(EffectSystem.transform);
+
+                    Effect.transform.position = EffectSystem.transform.position;
+                }
+
             }
             else
             {
@@ -609,15 +649,19 @@ public class SKillManager : MonoBehaviour
 
     public void Skill_Noname(int id)
     {
-        if (id == 1)
+        if (id == 0) // 파이로키네시스
         {
+            Debug.Log("스킬 사용 진입");
             if (npc.Mp[battle.c] >= 40)
             {
+                Debug.Log("마나 보유 확인");
                 burn_per = 100;
                 if (npc.actiongage >= 5f)
                 {
                     if (burn_per >= Random.Range(1, 101))
                     {
+                        Debug.Log("스킬 발도");
+
                         npc.Mp[battle.c] -= 40;
                         Battle.monsterAbnomal_burn = true;
                         npc.unitCondition[battle.i].condition_Burn = true;
@@ -626,6 +670,12 @@ public class SKillManager : MonoBehaviour
                         npc.actiongage -= 5f;
                         Debug.Log("불탐 성공");
                         FloatingTextController.CreateFloatingText("화상 !!", transform);
+
+                        GameObject Effect = Instantiate(Pyrokinesis);
+
+                        Effect.transform.SetParent(EffectSystem.transform);
+
+                        Effect.transform.position = EffectSystem.transform.position;
 
 
                     }
@@ -644,7 +694,7 @@ public class SKillManager : MonoBehaviour
         }
 
 
-        if (id == 2)
+        if (id == 1) //레인포스 파워
         {
             if (npc.Mp[battle.c] >= 30)
             {
@@ -656,6 +706,26 @@ public class SKillManager : MonoBehaviour
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.BuffStr[battle.c] = 20;
                     FloatingTextController.CreateFloatingText2("공격력 증가", transform);
+
+                    if (Battle.Effect_Check == 0)
+                    {
+                        GameObject Effect = Instantiate(Rainpos_power);
+                        Effect.transform.SetParent(char1.transform);
+                        Effect.transform.position = char1.transform.position;
+                    }
+                    if (Battle.Effect_Check == 1)
+                    {
+                        GameObject Effect = Instantiate(Rainpos_power);
+                        Effect.transform.SetParent(char2.transform);
+                        Effect.transform.position = char2.transform.position;
+                    }
+                    if (Battle.Effect_Check == 2)
+                    {
+                        GameObject Effect = Instantiate(Rainpos_power);
+                        Effect.transform.SetParent(char3.transform);
+                        Effect.transform.position = char3.transform.position;
+                    }
+
                 }
                 else if (npc.BuffStr[battle.c] == 20)
                 {
@@ -675,7 +745,7 @@ public class SKillManager : MonoBehaviour
         }
 
 
-        if (id == 3)
+        if (id == 2) // 악몽
         {
             if (npc.Mp[battle.c] >= 80)
             {
@@ -691,6 +761,14 @@ public class SKillManager : MonoBehaviour
                         npc.actiongage -= 5f;
                         Debug.Log("수면 성공");
                         FloatingTextController.CreateFloatingText("수면 !!" + 40.ToString(), transform);
+
+                        GameObject Effect = Instantiate(Nightmare_lolubai);
+
+                        Effect.transform.SetParent(EffectSystem.transform);
+
+                        Effect.transform.position = EffectSystem.transform.position;
+
+
                     }
                     else
                     {
@@ -713,9 +791,9 @@ public class SKillManager : MonoBehaviour
 
 
 
-        if (id == 4)
+        if (id == 3)//마나링
         {
-            if (npc.Mp[0] >= 150)
+            if (npc.Mp[battle.c] >= 150)
             {
                 if (npc.actiongage >= 5f)
                 {
@@ -723,7 +801,7 @@ public class SKillManager : MonoBehaviour
                         || npc.Mp[battle.switching[1]] < (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]])
                         || npc.Mp[battle.switching[2]] < (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
                     {
-                        npc.Mp[0] -= 150;
+                        npc.Mp[battle.c] -= 150;
                         npc.Mp[battle.switching[0]] += 50;
                         npc.Mp[battle.switching[1]] += 50;
                         npc.Mp[battle.switching[2]] += 50;
@@ -739,6 +817,23 @@ public class SKillManager : MonoBehaviour
 
                         if (npc.Mp[battle.switching[2]] >= (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
                         { npc.Mp[battle.switching[2]] = (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]); }
+
+
+
+                        GameObject Effect = Instantiate(Infinite_manaring);
+                        Effect.transform.SetParent(char1.transform);
+                        Effect.transform.position = char1.transform.position;
+
+                        GameObject Effect2 = Instantiate(Infinite_manaring);
+                        Effect2.transform.SetParent(char2.transform);
+                        Effect2.transform.position = char2.transform.position;
+
+                        GameObject Effect3 = Instantiate(Infinite_manaring);
+                        Effect3.transform.SetParent(char3.transform);
+                        Effect3.transform.position = char3.transform.position;
+                        
+
+
 
                     }
                     else if (npc.Mp[battle.switching[0]] == (npc.MaxMp[battle.switching[0]] + npc.Equip_MaxMp[battle.switching[0]]) && npc.Mp[battle.switching[1]] == (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]]) && npc.Mp[battle.switching[2]] == (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
@@ -758,10 +853,11 @@ public class SKillManager : MonoBehaviour
         }
 
 
-        if (id == 5)
+        if (id == 4) //어웨이크 버닝
         {
             if (npc.Mp[battle.c] >= 200)
             {
+                //battle.switching[Battle.Effect_Check]
                 if (npc.actiongage >= 5f)
                 {
                     npc.Mp[battle.c] -= 200;
@@ -774,6 +870,18 @@ public class SKillManager : MonoBehaviour
                     FloatingTextController.CreateFloatingText2("전 능력 강화", transform);
                     FloatingTextController.CreateFloatingText3("전 능력 강화", transform);
                     FloatingTextController.CreateFloatingText4("전 능력 강화", transform);
+
+                    GameObject Effect = Instantiate(Awake_burning);
+                    Effect.transform.SetParent(char1.transform);
+                    Effect.transform.position = char1.transform.position;
+
+                    GameObject Effect2 = Instantiate(Awake_burning);
+                    Effect2.transform.SetParent(char2.transform);
+                    Effect2.transform.position = char2.transform.position;
+
+                    GameObject Effect3 = Instantiate(Awake_burning);
+                    Effect3.transform.SetParent(char3.transform);
+                    Effect3.transform.position = char3.transform.position;
 
 
                 }
@@ -793,7 +901,7 @@ public class SKillManager : MonoBehaviour
         }
 
 
-        if (id == 6)
+        if (id == 5)
         {
             if (npc.Mp[battle.c] >= 100)
             {
@@ -803,8 +911,16 @@ public class SKillManager : MonoBehaviour
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
                     npc.Hp[battle.i] -= 150;
-                    Debug.Log("수면 성공");
                     FloatingTextController.CreateFloatingText("싱귤러 스크라이크" + 150.ToString(), transform);
+
+
+                    GameObject Effect = Instantiate(only_one);
+
+                    Effect.transform.SetParent(EffectSystem.transform);
+
+                    Effect.transform.position = EffectSystem.transform.position;
+
+
                 }
                 else
                 {

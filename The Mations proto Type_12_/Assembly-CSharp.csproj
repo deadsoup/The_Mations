@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AudioMG.cs" />
     <Compile Include="Assets\EndingManager.cs" />
     <Compile Include="Assets\Resources\Battle_Resource\Effect\Skill effect\Skill effect\Loving_you\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\Resources\Battle_Resource\Effect\Skill effect\Skill effect\only_one\CFX_LightIntensityFade.cs" />

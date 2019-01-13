@@ -5188,6 +5188,24 @@ MonoBehaviour:
   skill: {fileID: 5223175290577177927, guid: 1b163c12e4d93244bb4bd9303a80ed72, type: 3}
   SkillList: []
   SkillList2_save: []
+  EffectSystem: {fileID: 513117366}
+  char1: {fileID: 1763633025}
+  char2: {fileID: 1360092490}
+  char3: {fileID: 484895449}
+  Dark_berserker: {fileID: 1727626132299242, guid: b0bc1b6b391734647b9bb142bafc0819,
+    type: 3}
+  Hearts_Skill: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  Awake_burning: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744,
+    type: 3}
+  Infinite_manaring: {fileID: 100000, guid: 18204b98237ccb540808f2cd2d78c2c8, type: 3}
+  Loving_you: {fileID: 100004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
+  Nightmare_lolubai: {fileID: 100002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+  only_one: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  Pyrokinesis: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+  Rainpos_power: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e,
+    type: 3}
+  Weidog_Skill: {fileID: 1280141305896002, guid: e473029e4c70ad543a6879b82a732f4f,
+    type: 3}
   skills: []
   slots:
   - {fileID: 1777057761}
@@ -11812,6 +11830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1044736488}
+  - component: {fileID: 1044736489}
   - component: {fileID: 1044736487}
   m_Layer: 0
   m_Name: AudioMG
@@ -11930,6 +11949,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044736489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044736486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8961cc7167209446810027471b60620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackSE: {fileID: 0}
+  Unique_SkillSE:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  SkillSE:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  DiceSE: {fileID: 0}
+  ButtonSE: {fileID: 0}
+  DeadSE: {fileID: 0}
 --- !u!1 &1045153247
 GameObject:
   m_ObjectHideFlags: 0
@@ -12058,6 +12104,7 @@ MonoBehaviour:
   playerAbnomal_burn: 000000
   monsterAbnomal_sleep: 0
   monsterAbnomal_burn: 0
+  Effect_Check: 0
   Char1: {fileID: 1763633025}
   Char2: {fileID: 1360092490}
   Char3: {fileID: 484895449}

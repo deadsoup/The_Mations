@@ -102,15 +102,51 @@ public class Reward : MonoBehaviour
     {
         if (battle.reItems == 1)
         {
-            AddItem(reward1);
-            AddItem(reward2);
-            AddItem(reward3);
-            add1.SetActive(true);
-            add2.SetActive(true);
-            add3.SetActive(true);
-            AddSkill(skillreward1);
-            AddSkill(skillreward2);
-            AddSkill(skillreward3);
+            if (battle.i == 1)
+            {
+                /*
+                int per = 50; // 무기확률
+                int per2 = 30; // 방어구 확률
+                int per3 = 10; // 소비템 확률
+                */
+                Reward.reward1 = Random.Range(1, 3);
+                Reward.reward2 = Random.Range(4, 8);
+                Reward.reward3 = Random.Range(5, 9);
+
+                AddItem(reward1);
+                AddItem(reward2);
+                AddItem(reward3);
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+            }
+
+            int per = 100;
+            int per2 = 90;
+            int per3 = 80;
+
+            /// 스킬 드랍 확률
+            if (per >= Random.Range(1, 101))
+            {
+                Reward.skillreward1 = Random.Range(1, 6);
+                AddSkill(skillreward1);
+                if (per2 >= Random.Range(1, 101))
+                {
+                    Reward.skillreward2 = Random.Range(1, 6);
+                    AddSkill(skillreward2);
+
+                    if (per3 >= Random.Range(1, 101))
+                    {
+                        Reward.skillreward3 = Random.Range(1, 6);
+                        AddSkill(skillreward3);
+                    }
+                }
+
+            }
+            
+            
+            
             AchievementsText.GetComponent<Text>().text = "획득 업적포인트 : " + npc.ArchivePoint[battle.i];
 
             battle.reItems = 0;

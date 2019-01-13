@@ -35,6 +35,7 @@ public class battle : MonoBehaviour {
 
     public static int[] switching = new int[3]; // 캐릭터 전환
 
+    public int Effect_Check;
 
     public static int reItems;
 
@@ -278,7 +279,7 @@ public class battle : MonoBehaviour {
             }
 
             Monster.SetTrigger("Hit");
-            EffectSystem.GetComponentInChildren<Animator>().SetTrigger("Active");
+            EffectSystem.transform.Find("30_0").GetComponent<Animator>().SetTrigger("Active");
 
             if (npc.actiongage <= 0)
             {
@@ -944,6 +945,8 @@ public class battle : MonoBehaviour {
             charActive[1] = false;
             charActive[2] = false;
 
+            Effect_Check = 0;
+
             c = switching[0];
             //switching[0] = c;
             //Char1.SetActive(true);
@@ -1025,6 +1028,8 @@ public class battle : MonoBehaviour {
             charActive[1] = true;
             charActive[2] = false;
 
+            Effect_Check = 1;
+
             if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Passway")
             {
                 player1.transform.GetChild(1).gameObject.SetActive(false);
@@ -1103,6 +1108,7 @@ public class battle : MonoBehaviour {
             charActive[1] = false;
             charActive[2] = true;
 
+            Effect_Check = 2;
 
             c = switching[2];
             Debug.Log(c + "캐릭터 번호");
@@ -1351,7 +1357,7 @@ public class battle : MonoBehaviour {
         {
             Player_Dead();
 
-            if (EffectSystem.transform.GetChild(0).GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Exit") == true)
+            if (EffectSystem.transform.Find("30_0").GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Exit") == true)
             {
                 GameObject nomal = EffectSystem.transform.GetChild(0).gameObject;
                 Destroy(nomal);
@@ -1827,38 +1833,7 @@ public class battle : MonoBehaviour {
                     reItems = 1;
 
                     /// 몬스터 ID에 따른 드랍 형태
-                    if (i == 1)
-                    {
-                        /*
-                        int per = 50; // 무기확률
-                        int per2 = 30; // 방어구 확률
-                        int per3 = 10; // 소비템 확률
-                        */
-                        Reward.reward1 = Random.Range(1, 3);
-                        Reward.reward2 = Random.Range(4, 8);
-                        Reward.reward3 = Random.Range(5, 9);
-
-                    }
-
-                    int per = 50;
-                    int per2 = 30;
-                    int per3 = 10;
-
-                    /// 스킬 드랍 확률
-                    if (per >= Random.Range(1, 101))
-                    {
-                        Reward.skillreward1 = Random.Range(1, 6);
-                        if (per2 >= Random.Range(1, 101))
-                        {
-                            Reward.skillreward2 = Random.Range(1, 6);
-
-                            if (per3 >= Random.Range(1, 101))
-                            {
-                                Reward.skillreward3 = Random.Range(1, 6);
-                            }
-                        }
-                        
-                    }
+                    
 
                     mob1.SetActive(false);
                     mob2.SetActive(false);
