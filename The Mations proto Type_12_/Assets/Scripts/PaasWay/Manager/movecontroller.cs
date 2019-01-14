@@ -52,6 +52,11 @@ public class movecontroller : MonoBehaviour {
         rbutton = false;
     }
 
+    private void Awake()
+    {
+        Screen.SetResolution(1280, 720, true);
+    }
+
     // Update is called once per frame
     void Update () {
 

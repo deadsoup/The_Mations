@@ -102,51 +102,489 @@ public class Reward : MonoBehaviour
     {
         if (battle.reItems == 1)
         {
-            if (battle.i == 1)
+            //몬스터 수 만큼 설정한다.
+            if (battle.i == 0)
             {
-                /*
-                int per = 50; // 무기확률
-                int per2 = 30; // 방어구 확률
-                int per3 = 10; // 소비템 확률
-                */
-                Reward.reward1 = Random.Range(1, 3);
-                Reward.reward2 = Random.Range(4, 8);
-                Reward.reward3 = Random.Range(5, 9);
+                int item_per = 30;
+                int item_per2 = 30;
+                int item_per3 = 15;
 
-                AddItem(reward1);
-                AddItem(reward2);
-                AddItem(reward3);
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(0);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(1);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(54);
+                }
 
                 add1.SetActive(true);
                 add2.SetActive(true);
                 add3.SetActive(true);
-            }
 
-            int per = 100;
-            int per2 = 90;
-            int per3 = 80;
+                int per = 5;
+                int per2 = 5;
+                int per3 = 0;
 
-            /// 스킬 드랍 확률
-            if (per >= Random.Range(1, 101))
-            {
-                Reward.skillreward1 = Random.Range(1, 6);
-                AddSkill(skillreward1);
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
                 if (per2 >= Random.Range(1, 101))
                 {
-                    Reward.skillreward2 = Random.Range(1, 6);
-                    AddSkill(skillreward2);
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(skillreward3);
+                }
+            }
+            if (battle.i == 1)
+            {
+                int item_per = 30;
+                int item_per2 = 30;
+                int item_per3 = 15;
 
-                    if (per3 >= Random.Range(1, 101))
-                    {
-                        Reward.skillreward3 = Random.Range(1, 6);
-                        AddSkill(skillreward3);
-                    }
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(31);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(32);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
                 }
 
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 5;
+                int per2 = 5;
+                int per3 = 0;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(skillreward3);
+                }
             }
-            
-            
-            
+            if (battle.i == 2)
+            {
+                int item_per = 15;
+                int item_per2 = 15;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(4);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(54);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 5;
+                int per2 = 5;
+                int per3 = 0;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(skillreward3);
+                }
+            }
+            if (battle.i == 3)
+            {
+                int item_per = 20;
+                int item_per2 = 15;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(5);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(53);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 8;
+                int per2 = 8;
+                int per3 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(2);
+                }
+            }
+            if (battle.i == 4)
+            {
+                int item_per = 25;
+                int item_per2 = 20;
+                int item_per3 = 20;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(34);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(52);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(54);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 5;
+                int per2 = 5;
+                int per3 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(3);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(4);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(5);
+                }
+            }
+            if (battle.i == 5)
+            {
+                int item_per = 30;
+                int item_per2 = 20;
+                int item_per3 = 30;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(6);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(35);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(37);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 13;
+                int per2 = 10;
+                int per3 = 8;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(8);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(3);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(5);
+                }
+            }
+            if (battle.i == 6)
+            {
+                int item_per = 15;
+                int item_per2 = 15;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(2);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(53);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 5;
+                int per2 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+            }
+            if (battle.i == 7)
+            {
+                int item_per = 20;
+                int item_per2 = 15;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(1);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(53);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 5;
+                int per2 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+            }
+            if (battle.i == 8)
+            {
+                int item_per = 20;
+                int item_per2 = 15;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(3);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(53);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 8;
+                int per2 = 8;
+                int per3 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(2);
+                }
+            }
+            if (battle.i == 9)
+            {
+                int item_per = 20;
+                int item_per2 = 20;
+                int item_per3 = 20;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(7);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(52);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(54);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 8;
+                int per2 = 5;
+                int per3 = 5;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(2);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(3);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(4);
+                }
+            }
+            if (battle.i == 10)
+            {
+                int item_per = 10;
+                int item_per2 = 20;
+                int item_per3 = 15;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(4);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(33);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(51);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 10;
+                int per2 = 10;
+                int per3 = 8;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(0);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(1);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(5);
+                }
+            }
+            if (battle.i == 11)
+            {
+                int item_per = 20;
+                int item_per2 = 25;
+                int item_per3 = 20;
+
+                if (item_per >= Random.Range(1, 101))
+                {
+                    AddItem(34);
+                }
+                if (item_per2 >= Random.Range(1, 101))
+                {
+                    AddItem(36);
+                }
+                if (item_per3 >= Random.Range(1, 101))
+                {
+                    AddItem(35);
+                }
+
+                add1.SetActive(true);
+                add2.SetActive(true);
+                add3.SetActive(true);
+
+                int per = 20;
+                int per2 = 10;
+                int per3 = 10;
+
+                /// 스킬 드랍 확률
+                if (per >= Random.Range(1, 101))
+                {
+                    AddSkill(2);
+                }
+                if (per2 >= Random.Range(1, 101))
+                {
+                    AddSkill(3);
+                }
+                if (per3 >= Random.Range(1, 101))
+                {
+                    AddSkill(5);
+                }
+            }
             AchievementsText.GetComponent<Text>().text = "획득 업적포인트 : " + npc.ArchivePoint[battle.i];
 
             battle.reItems = 0;

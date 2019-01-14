@@ -24,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/TutorialScene.unity
     guid: a02cec14bca003f41a1135ae9d357fb5
   - enabled: 1
-    path: Assets/Scenes/PassWayScenes/TestWorldMap.unity
-    guid: 802c59ecbb918754db6adf570c447618
+    path: Assets/Scenes/YJ_Battle_Tuto.unity
+    guid: eb1e2eff4e49af24eadde17c3b4a9547
   - enabled: 1
     path: Assets/Scenes/PassWayScenes/Passway.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -38,10 +38,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndingCredit.unity
     guid: e0b71efad87ee634eb722afb219f5827
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}

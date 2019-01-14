@@ -853,8 +853,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.33929726}
   m_AnchorMax: {x: 0.94500005, y: 0.73200005}
-  m_AnchoredPosition: {x: 11.24, y: 4060.6}
-  m_SizeDelta: {x: -56.1, y: -2893.7}
+  m_AnchoredPosition: {x: 11.24, y: 3830.8}
+  m_SizeDelta: {x: -56.1, y: -2434.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508935267
 MonoBehaviour:
@@ -893,7 +893,9 @@ MonoBehaviour:
     \uAC1C\uBC1C\n\uC774\uB3D9\uD604\n\nUI \uAC1C\uBC1C\n\uBC15\uC6A9\uC8FC\n\n\uB808\uBCA8
     \uB514\uC790\uC778\n\uAC15 \uBE48\n\n\uC544\uD2B8 \uB514\uB809\uD130 & \uC5F0\uCD9C\n\uAE40\uC740\uD61C\n\n\uD504\uB85C\uADF8\uB798\uBC0D
     \uBA58\uD1A0\n\uBC15\uD64D\uADFC\n\n\uB3C4\uC6C0 \uC8FC\uC2E0 \uBD84\uB4E4\n\nTY
-    \uB2D8\n\uC774\uD0DC\uB77C \uB2D8\n\uD55C\uC131\uBBFC \uB2D8\n\n\n\n"
+    \uB2D8\n\uC774\uD0DC\uB77C \uB2D8\n\uD55C\uC131\uBBFC \uB2D8\n\n\uC74C\uC6D0 \uCD9C\uCC98\n\nAttribution
+    \n\uB77C\uC774\uC120\uC2A4 \uC8FC\uC18C\ncreativecommons.org/licenses/by/4.0/\n\n\uC544\uD2F0\uC2A4\uD2B8
+    \naudionautix.com\n\n\n\n"
 --- !u!222 &1508935268
 CanvasRenderer:
   m_ObjectHideFlags: 0

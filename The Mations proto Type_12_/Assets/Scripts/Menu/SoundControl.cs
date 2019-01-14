@@ -56,17 +56,19 @@ public class SoundControl : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        /*
         Bgmamount = GameObject.Find("Bgmamount");
-        Seamount = GameObject.Find("Seamount");
+        Seamount = GameObject.Find("Seamount");*/
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        /*
         this.Bgmamount.GetComponent<Text>().text = Bgmcount.ToString();
         this.Bgmamount.GetComponent<Text>().fontSize = 35;
         this.Seamount.GetComponent<Text>().text = Secount.ToString();
-        this.Seamount.GetComponent<Text>().fontSize = 35;
+        this.Seamount.GetComponent<Text>().fontSize = 35;*/
 
     }
 }

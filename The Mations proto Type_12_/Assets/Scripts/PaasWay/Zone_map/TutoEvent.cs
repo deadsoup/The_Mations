@@ -20,7 +20,7 @@ public class TutoEvent : MonoBehaviour
     {
         if (TutoDirector.Tuto == 1)
         {
-            SceneManager.LoadScene("DH_Battle");
+            SceneManager.LoadScene("YJ_Battle_Tuto");
             Destroy(gameObject);
         }
     }

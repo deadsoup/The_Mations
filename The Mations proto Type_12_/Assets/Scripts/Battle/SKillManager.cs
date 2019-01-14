@@ -70,7 +70,7 @@ public class SKillManager : MonoBehaviour
     public GameObject Rainpos_power;
     public GameObject Weidog_Skill;
 
-
+    public GameObject AudioMG;
 
 
     GameObject InfoPanel;
@@ -281,14 +281,14 @@ public class SKillManager : MonoBehaviour
         {
             if (skillButton[0].name == "아이돌 고유스킬")
             {
-                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
-                Title.text = skills[i].Name;
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_idoll");
+                Title.text = "러빙 유";
 
-                Need_Mp.text = skills[i].Need_MP.ToString();
-                Damage.text = skills[i].Damage;
-                Target.text = skills[i].Target;
-                Attribute.text = skills[i].Attribute;
-                Text.text = skills[i].Text;
+                Need_Mp.text = "50";
+                Damage.text = "0";
+                Target.text = "아군";
+                Attribute.text = "광역";
+                Text.text = "사랑스러운 노래로 \r\n팀원들을 복돋아 \r\n체력을 50 회복시킨다.";
 
                 InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
                 break;
@@ -296,14 +296,14 @@ public class SKillManager : MonoBehaviour
 
             if (skillButton[0].name == "힘숨찐 고유스킬")
             {
-                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
-                Title.text = skills[i].Name;
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_JJintta");
+                Title.text = "다크 버서커";
 
-                Need_Mp.text = skills[i].Need_MP.ToString();
-                Damage.text = skills[i].Damage;
-                Target.text = skills[i].Target;
-                Attribute.text = skills[i].Attribute;
-                Text.text = skills[i].Text;
+                Need_Mp.text = "60";
+                Damage.text = "40";
+                Target.text = "적군";
+                Attribute.text = "단일";
+                Text.text = "흑염룡의 힘으로 \r\n적에게 40의 데미지를 입히고 \r\n 50%의 확률로 2턴간 기절 시킨다.";
 
                 InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
                 break;
@@ -311,17 +311,32 @@ public class SKillManager : MonoBehaviour
 
             if (skillButton[0].name == "개 고유스킬")
             {
-                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
-                Title.text = skills[i].Name;
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Hartz_Transform");
+                Title.text = "변신 : 하울링";
 
-                Need_Mp.text = skills[i].Need_MP.ToString();
-                Damage.text = skills[i].Damage;
-                Target.text = skills[i].Target;
-                Attribute.text = skills[i].Attribute;
-                Text.text = skills[i].Text;
+                Need_Mp.text = "0";
+                Damage.text = "0";
+                Target.text = "자신";
+                Attribute.text = "단일";
+                Text.text = "변신을 하여 큰 성채로 진화한다.";
 
                 InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
                 break;
+            }
+            if (skillButton[0].name == "개 고유스킬2")
+            {
+                SkillIcon.sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_BigHartz_strike");
+                Title.text = "후려치기";
+
+                Need_Mp.text = "50";
+                Damage.text = "40";
+                Target.text = "적군";
+                Attribute.text = "단일";
+                Text.text = "발톱을 사용하여 상대를 강타한다.\r\n 40의 데미지를 입히고 60%의 확률로 \r\n 출혈을 일으킨다. ";
+
+                InfoPanel.transform.Find("Delete").gameObject.SetActive(false);
+                break;
+
             }
 
         }
@@ -338,7 +353,7 @@ public class SKillManager : MonoBehaviour
             skillButton[0].onClick.RemoveAllListeners();
             skillButton[0].onClick.AddListener(Idol_UniqueSkill);
             skillButton[0].name = "아이돌 고유스킬";
-            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_idoll");
         }
 
         if (num == 1)
@@ -346,7 +361,7 @@ public class SKillManager : MonoBehaviour
             skillButton[0].onClick.RemoveAllListeners();
             skillButton[0].onClick.AddListener(Nerd_UniqueSkill);
             skillButton[0].name = "힘숨찐 고유스킬";
-            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_JJintta");
         }
 
         if (num == 2)
@@ -355,7 +370,7 @@ public class SKillManager : MonoBehaviour
             skillButton[0].onClick.RemoveAllListeners();
             skillButton[0].onClick.AddListener(Dog_UniqueSkill);
             skillButton[0].name = "개 고유스킬";
-            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Nightmare lullaby");
+            skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Hartz_Transform");
         }
 
 
@@ -468,6 +483,8 @@ public class SKillManager : MonoBehaviour
     {
         if (npc.Mp[0] >= 50)
         {
+            int damage = 50 * (1 + (int)(npc.Wis[0] * 0.03) + (int)(npc.Mp[0] / 100));
+
             if (npc.actiongage >= 5f)
             {
                 if (npc.Hp[battle.switching[0]] < (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) 
@@ -475,9 +492,9 @@ public class SKillManager : MonoBehaviour
                     || npc.Hp[battle.switching[2]] < (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
                     npc.Mp[0] -= 50;
-                    npc.Hp[battle.switching[0]] += 50;
-                    npc.Hp[battle.switching[1]] += 50;
-                    npc.Hp[battle.switching[2]] += 50;
+                    npc.Hp[battle.switching[0]] += damage;
+                    npc.Hp[battle.switching[1]] += damage;
+                    npc.Hp[battle.switching[2]] += damage;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
 
@@ -492,17 +509,36 @@ public class SKillManager : MonoBehaviour
                     if (npc.Hp[battle.switching[2]] >= (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                     { npc.Hp[battle.switching[2]] = (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]); }
 
-                    GameObject itemObj = Instantiate(Effect[0]);
-                    /*
-                    itemObj.transform.SetParent(slots[i].transform);
 
-                    itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
-                    //itemObj.transform.position = new Vector2(511, 249.6f);
-                    itemObj.transform.position = slots[i].transform.position;
-                    itemObj.name = itemToAdd.Name;
-                    */
+                    GameObject Effect = Instantiate(Loving_you);
+                    Effect.transform.SetParent(char1.transform);
+                    Effect.transform.position = char1.transform.position;
 
-                }
+                    GameObject Effect2 = Instantiate(Loving_you);
+                    Effect2.transform.SetParent(char2.transform);
+                    Effect2.transform.position = char2.transform.position;
+
+                    GameObject Effect3 = Instantiate(Loving_you);
+                    Effect3.transform.SetParent(char3.transform);
+                    Effect3.transform.position = char3.transform.position;
+
+
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Unique_Skill(0);
+                    }
+
+                        /*
+                        itemObj.transform.SetParent(slots[i].transform);
+
+                        itemObj.GetComponent<Image>().sprite = itemToAdd.sprite;
+                        //itemObj.transform.position = new Vector2(511, 249.6f);
+                        itemObj.transform.position = slots[i].transform.position;
+                        itemObj.name = itemToAdd.Name;
+                        */
+
+                    }
                 else if (npc.Hp[battle.switching[0]] == (npc.MaxHp[battle.switching[0]] + npc.Equip_MaxHp[battle.switching[0]]) && npc.Hp[battle.switching[1]] == (npc.MaxHp[battle.switching[1]] + npc.Equip_MaxHp[battle.switching[1]]) && npc.Hp[battle.switching[2]] == (npc.MaxHp[battle.switching[2]] + npc.Equip_MaxHp[battle.switching[2]]))
                 {
                     Debug.Log("모든 캐릭터 풀피");
@@ -521,29 +557,48 @@ public class SKillManager : MonoBehaviour
 
     public void Nerd_UniqueSkill()
     {
-        if (npc.Mp[1] >= 100)
+        if (npc.Mp[1] >= 60)
         {
-            stun_per = 100;
+            stun_per = 50;
             if (npc.actiongage >= 5f)
             {
+                int damage = 40 * (1 + (int)(npc.Wis[1] * 0.03) + (int)(npc.Mp[1] / 100));
+
                 if (stun_per >= Random.Range(1, 101))
                 {
+
                     npc.Mp[1] -= 100;
                     npc.unitCondition[battle.i].condition_Stun = true;
                     npc.unitCondition[battle.i].left_Stun = 2;
-                    npc.Hp[battle.i] -= 40;
+                    npc.Hp[battle.i] -= damage;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
                     Debug.Log("스턴 성공");
                     FloatingTextController.CreateFloatingText("스턴 !!"+40.ToString(), transform);
+
+                    
+                        GameObject Effect = Instantiate(Dark_berserker);
+                        Effect.transform.SetParent(EffectSystem.transform);
+                        Effect.transform.position = EffectSystem.transform.position;
+                    
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Unique_Skill(1);
+                    }
                 }
                 else
                 {
                     npc.Mp[1] -= 100;
-                    npc.Hp[battle.i] -= 40;
+                    npc.Hp[battle.i] -= damage;
                     npc.actiongage -= 5f;
                     Debug.Log("스턴 실패");
                     FloatingTextController.CreateFloatingText(40.ToString(), transform);
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Unique_Skill(1);
+                    }
                 }
 
                 SkillScene2.SetTrigger("Atk");
@@ -562,12 +617,12 @@ public class SKillManager : MonoBehaviour
 
     public void Dog_UniqueSkill()
     {
-        if (npc.Mp[2] >= 100)
+        if (npc.Mp[2] >= 0)
         {
             if (npc.actiongage >= 5f)
             {
 
-                npc.Mp[2] -= 100;
+                npc.Mp[2] -= 0;
                 actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                 npc.actiongage -= 5f;
                 FloatingTextController.CreateFloatingText4("변신", transform);
@@ -590,10 +645,16 @@ public class SKillManager : MonoBehaviour
                 skillButton[0].onClick.RemoveAllListeners();
                 skillButton[0].onClick.AddListener(Dog_UniqueSkill2);
                 skillButton[0].name = "개 고유스킬2";
-                skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_Pyrokinesis");
+                skillButton[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("Battle_Resource/SkillImage/Skill_BigHartz_strike");
 
                 Battle.Dog_TransForm = true;
                 SkillScene3.SetTrigger("Atk");
+
+                if (SceneManager.GetActiveScene().name == "DH_Battle")
+                {
+                    AudioMG.GetComponent<AudioMG>().play_Unique_Skill(2);
+                }
+
 
             }
             else
@@ -609,28 +670,51 @@ public class SKillManager : MonoBehaviour
 
     public void Dog_UniqueSkill2()
     {
-        if (npc.Mp[2] >= 40)
+        if (npc.Mp[2] >= 50)
         {
             burn_per = 60;
             if (npc.actiongage >= 5f)
             {
                 if (burn_per >= Random.Range(1, 101))
                 {
-                    npc.Mp[2] -= 40;
+
+                    int damage = 40 * (1 + (int)(npc.Wis[2] * 0.03) + (int)(npc.Mp[2] / 100));
+
+                    npc.Hp[battle.i] -= damage;
+                    npc.Mp[2] -= 50;
+
                     Battle.monsterAbnomal_burn = true;
                     npc.unitCondition[battle.i].condition_Burn = true;
                     npc.unitCondition[battle.i].left_Burn = 2;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
-                    Debug.Log("불탐 성공");
-                    FloatingTextController.CreateFloatingText("출혈 !!", transform);
+                    FloatingTextController.CreateFloatingText("출혈 !!" + 40.ToString(), transform);
 
                     GameObject Effect = Instantiate(Weidog_Skill);
 
                     Effect.transform.SetParent(EffectSystem.transform);
 
                     Effect.transform.position = EffectSystem.transform.position;
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Unique_Skill(3);
+                    }
+
                 }
+                else
+                {
+                    npc.Mp[2] -= 100;
+                    npc.Hp[battle.i] -= 40;
+                    npc.actiongage -= 5f;
+                    Debug.Log("스턴 실패");
+                    FloatingTextController.CreateFloatingText( 40.ToString(), transform);
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Unique_Skill(3);
+                    }
+                }
+
 
             }
             else
@@ -662,6 +746,7 @@ public class SKillManager : MonoBehaviour
                     {
                         Debug.Log("스킬 발도");
 
+
                         npc.Mp[battle.c] -= 40;
                         Battle.monsterAbnomal_burn = true;
                         npc.unitCondition[battle.i].condition_Burn = true;
@@ -676,6 +761,11 @@ public class SKillManager : MonoBehaviour
                         Effect.transform.SetParent(EffectSystem.transform);
 
                         Effect.transform.position = EffectSystem.transform.position;
+
+                        if (SceneManager.GetActiveScene().name == "DH_Battle")
+                        {
+                            AudioMG.GetComponent<AudioMG>().play_Skill(0);
+                        }
 
 
                     }
@@ -700,11 +790,14 @@ public class SKillManager : MonoBehaviour
             {
                 if (npc.actiongage >= 5f)
                 {
+
+                    int damage = 20 * (1 + (int)(npc.Wis[battle.c] * 0.03) + (int)(npc.Mp[battle.c] / 100));
+
                     npc.Mp[battle.c] -= 30;
                     npc.unitCondition[battle.c].condition_StrBuff = true;
                     npc.unitCondition[battle.c].left_StrBuff = 2;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
-                    npc.BuffStr[battle.c] = 20;
+                    npc.BuffStr[battle.c] = damage;
                     FloatingTextController.CreateFloatingText2("공격력 증가", transform);
 
                     if (Battle.Effect_Check == 0)
@@ -725,6 +818,12 @@ public class SKillManager : MonoBehaviour
                         Effect.transform.SetParent(char3.transform);
                         Effect.transform.position = char3.transform.position;
                     }
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Skill(1);
+                    }
+
 
                 }
                 else if (npc.BuffStr[battle.c] == 20)
@@ -754,6 +853,7 @@ public class SKillManager : MonoBehaviour
                 {
                     if (sleep_per >= Random.Range(1, 101))
                     {
+
                         npc.Mp[battle.c] -= 80;
                         npc.unitCondition[battle.i].condition_Sleep = true;
                         npc.unitCondition[battle.i].left_Sleep = 2;
@@ -769,12 +869,23 @@ public class SKillManager : MonoBehaviour
                         Effect.transform.position = EffectSystem.transform.position;
 
 
+                        if (SceneManager.GetActiveScene().name == "DH_Battle")
+                        {
+                            AudioMG.GetComponent<AudioMG>().play_Skill(2);
+                        }
+
                     }
                     else
                     {
                         npc.Mp[battle.c] -= 100;
                         npc.actiongage -= 5f;
                         Debug.Log("수면 실패");
+
+                        if (SceneManager.GetActiveScene().name == "DH_Battle")
+                        {
+                            AudioMG.GetComponent<AudioMG>().play_Skill(2);
+                        }
+
                     }
 
                 }
@@ -801,10 +912,12 @@ public class SKillManager : MonoBehaviour
                         || npc.Mp[battle.switching[1]] < (npc.MaxMp[battle.switching[1]] + npc.Equip_MaxMp[battle.switching[1]])
                         || npc.Mp[battle.switching[2]] < (npc.MaxMp[battle.switching[2]] + npc.Equip_MaxMp[battle.switching[2]]))
                     {
+                        int damage = 50 * (1 + (int)(npc.Wis[battle.c] * 0.03) + (int)(npc.Mp[battle.c] / 100));
+
                         npc.Mp[battle.c] -= 150;
-                        npc.Mp[battle.switching[0]] += 50;
-                        npc.Mp[battle.switching[1]] += 50;
-                        npc.Mp[battle.switching[2]] += 50;
+                        npc.Mp[battle.switching[0]] += damage;
+                        npc.Mp[battle.switching[1]] += damage;
+                        npc.Mp[battle.switching[2]] += damage;
                         actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                         npc.actiongage -= 5f;
 
@@ -831,8 +944,11 @@ public class SKillManager : MonoBehaviour
                         GameObject Effect3 = Instantiate(Infinite_manaring);
                         Effect3.transform.SetParent(char3.transform);
                         Effect3.transform.position = char3.transform.position;
-                        
 
+                        if (SceneManager.GetActiveScene().name == "DH_Battle")
+                        {
+                            AudioMG.GetComponent<AudioMG>().play_Skill(3);
+                        }
 
 
                     }
@@ -860,13 +976,15 @@ public class SKillManager : MonoBehaviour
                 //battle.switching[Battle.Effect_Check]
                 if (npc.actiongage >= 5f)
                 {
+                    int damage = 20 * (1 + (int)(npc.Wis[battle.c] * 0.03) + (int)(npc.Mp[battle.c] / 100));
+
                     npc.Mp[battle.c] -= 200;
                     npc.unitCondition[battle.c].condition_AllBuff = true;
                     npc.unitCondition[battle.c].left_AllBuff = 2;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
-                    npc.Allbuff[battle.switching[0]] = 20;
-                    npc.Allbuff[battle.switching[1]] = 20;
-                    npc.Allbuff[battle.switching[2]] = 20;
+                    npc.Allbuff[battle.switching[0]] = damage;
+                    npc.Allbuff[battle.switching[1]] = damage;
+                    npc.Allbuff[battle.switching[2]] = damage;
                     FloatingTextController.CreateFloatingText2("전 능력 강화", transform);
                     FloatingTextController.CreateFloatingText3("전 능력 강화", transform);
                     FloatingTextController.CreateFloatingText4("전 능력 강화", transform);
@@ -883,6 +1001,10 @@ public class SKillManager : MonoBehaviour
                     Effect3.transform.SetParent(char3.transform);
                     Effect3.transform.position = char3.transform.position;
 
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Skill(4);
+                    }
 
                 }
                 else if (npc.Allbuff[battle.c] == 20)
@@ -907,10 +1029,12 @@ public class SKillManager : MonoBehaviour
             {
                 if (npc.actiongage >= 5f)
                 {
+                    int damage = 150 * (1 + (int)(npc.Wis[battle.c] * 0.03) + (int)(npc.Mp[battle.c] / 100));
+
                     npc.Mp[battle.c] -= 100;
                     actionGage.GetComponent<Image>().fillAmount -= 0.5f;
                     npc.actiongage -= 5f;
-                    npc.Hp[battle.i] -= 150;
+                    npc.Hp[battle.i] -= damage;
                     FloatingTextController.CreateFloatingText("싱귤러 스크라이크" + 150.ToString(), transform);
 
 
@@ -920,6 +1044,10 @@ public class SKillManager : MonoBehaviour
 
                     Effect.transform.position = EffectSystem.transform.position;
 
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().play_Skill(5);
+                    }
 
                 }
                 else

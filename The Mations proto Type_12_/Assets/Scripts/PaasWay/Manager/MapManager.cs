@@ -163,8 +163,7 @@ public class MapManager : MonoBehaviour
         {
             int SetEvent = 0;
 
-            /*
-            //####################
+            
             // 이벤트 트리거 완성되면
             // 주석풀어야함
 
@@ -178,7 +177,7 @@ public class MapManager : MonoBehaviour
             {
               SetEvent = Random.Range(5, 10); // 이벤트 번호 5 ~ 9
             }
-            */
+            
             Eventmanager1.instance.EventText(SetEvent);
             Debug.Log("이벤트 출력" + SetEvent.ToString());
         }

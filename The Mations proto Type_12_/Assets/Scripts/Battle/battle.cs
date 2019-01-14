@@ -52,7 +52,7 @@ public class battle : MonoBehaviour {
 
     public GameObject reward;
 
-
+    public GameObject AudioMG;
 
     public GameObject Dice;
     public GameObject actionGage;
@@ -104,6 +104,7 @@ public class battle : MonoBehaviour {
     internal GameObject[] touchProtect = new GameObject[3];
 
     internal GameObject[] playerSlot = new GameObject[3];
+
 
 
     bool[] charActive = new bool[3];
@@ -280,6 +281,11 @@ public class battle : MonoBehaviour {
 
             Monster.SetTrigger("Hit");
             EffectSystem.transform.Find("30_0").GetComponent<Animator>().SetTrigger("Active");
+
+            if (SceneManager.GetActiveScene().name == "DH_Battle")
+            {
+                AudioMG.GetComponent<AudioMG>().playAttack();
+            }
 
             if (npc.actiongage <= 0)
             {
@@ -869,6 +875,12 @@ public class battle : MonoBehaviour {
                     }
                 }
                 FloatingTextController.CreateFloatingText4(edamage.ToString(), transform);
+                if (SceneManager.GetActiveScene().name == "DH_Battle")
+                {
+                    AudioMG.GetComponent<AudioMG>().playAttack();
+                }
+
+
             }
 
 
@@ -1802,6 +1814,11 @@ public class battle : MonoBehaviour {
                     npc.action = false;
                     npc.eAction = false;
                     battleaction = false;
+
+                    if (SceneManager.GetActiveScene().name == "DH_Battle")
+                    {
+                        AudioMG.GetComponent<AudioMG>().playVictorySE();
+                    }
 
 
                     npc.ArchivePoint[0] += npc.ArchivePoint[i];

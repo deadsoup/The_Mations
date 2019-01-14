@@ -20,6 +20,9 @@ public class UI_Passway : MonoBehaviour
 
     public movecontroller Movecontroller;
 
+    public GameObject[] UI_Button_Check;
+
+
     public void setting(int num)
     {
         int[] player = new int[3];
@@ -27,12 +30,14 @@ public class UI_Passway : MonoBehaviour
         player[1] = saveBattleScene.Player2_ID;
         player[2] = saveBattleScene.Player3_ID;
 
+
         if (saveBattleScene.player[num] == true)
         {
             for (int i = 0; i < 3; i++)
             {
                 if (player[num] == i)
                 {
+                    Debug.Log("버튼 호출");
                     UI_change[num].GetComponent<Image>().sprite = UI_charSlot[i];
                     if (SceneManager.GetActiveScene().name == "Passway")
                     {
@@ -41,9 +46,15 @@ public class UI_Passway : MonoBehaviour
                 }
             }
         }
-        else
+
+
+        if (SceneManager.GetActiveScene().name == "Passway")
         {
-            UI_change[num].SetActive(false);
+            if (player[num] == 9)
+            {
+                Debug.Log("버튼 호출 취소");
+                UI_change[num].SetActive(false);
+            }
         }
     }
     
